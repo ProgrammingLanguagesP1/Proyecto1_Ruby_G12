@@ -1,0 +1,151 @@
+====================================================================================================
+ANALIZADOR LÉXICO PARA RUBY
+====================================================================================================
+
+Usuario: aszurita
+Fecha: 02/11/2025 23:12:39
+Archivo analizado: Algorithms/Algorithm1_AngeloZurita.rb
+====================================================================================================
+
+TOKENS RECONOCIDOS:
+----------------------------------------------------------------------------------------------------
+Tipo                      Valor                          Línea      Posición  
+----------------------------------------------------------------------------------------------------
+VARIABLE_LOCAL            nombre                         5          71        
+ASIGNACION                =                              5          78        
+STRING                    Juan                           5          80        
+VARIABLE_LOCAL            edad                           6          87        
+ASIGNACION                =                              6          92        
+INTEGER                   25                             6          94        
+VARIABLE_LOCAL            altura                         7          97        
+ASIGNACION                =                              7          104       
+FLOAT                     1.75                           7          106       
+VARIABLE_GLOBAL           $contador                      10         133       
+ASIGNACION                =                              10         143       
+INTEGER                   0                              10         145       
+VARIABLE_GLOBAL           $total_usuarios                11         147       
+ASIGNACION                =                              11         163       
+INTEGER                   100                            11         165       
+CONSTANTE                 PI                             14         183       
+ASIGNACION                =                              14         186       
+FLOAT                     3.1416                         14         188       
+CONSTANTE                 E                              15         195       
+VARIABLE_LOCAL            jemplo                         15         196       
+ASIGNACION                =                              15         203       
+FLOAT                     0.15                           15         205       
+VARIABLE_LOCAL            suma                           18         237       
+ASIGNACION                =                              18         242       
+INTEGER                   5                              18         244       
+SUMA                      +                              18         246       
+INTEGER                   3                              18         248       
+VARIABLE_LOCAL            resta                          19         250       
+ASIGNACION                =                              19         256       
+INTEGER                   10                             19         258       
+RESTA                     -                              19         261       
+INTEGER                   2                              19         263       
+VARIABLE_LOCAL            multiplicacion                 20         265       
+ASIGNACION                =                              20         280       
+INTEGER                   4                              20         282       
+MULTIPLICACION            *                              20         284       
+INTEGER                   2                              20         286       
+VARIABLE_LOCAL            division                       21         288       
+ASIGNACION                =                              21         297       
+INTEGER                   10                             21         299       
+DIVISION                  /                              21         302       
+INTEGER                   2                              21         304       
+VARIABLE_LOCAL            modulo                         22         306       
+ASIGNACION                =                              22         313       
+INTEGER                   10                             22         315       
+MODULO                    %                              22         318       
+INTEGER                   3                              22         320       
+VARIABLE_LOCAL            resultado                      25         348       
+ASIGNACION                =                              25         358       
+PARENTESIS_IZQ            (                              25         360       
+INTEGER                   5                              25         361       
+SUMA                      +                              25         363       
+INTEGER                   3                              25         365       
+PARENTESIS_DER            )                              25         366       
+MULTIPLICACION            *                              25         368       
+INTEGER                   2                              25         370       
+RESTA                     -                              25         372       
+INTEGER                   4                              25         374       
+DIVISION                  /                              25         376       
+INTEGER                   2                              25         378       
+VARIABLE_LOCAL            contador                       28         408       
+ASIGNACION                =                              28         417       
+INTEGER                   0                              28         419       
+VARIABLE_LOCAL            contador                       29         421       
+SUMA_ASIG                 +=                             29         430       
+INTEGER                   1                              29         433       
+VARIABLE_LOCAL            contador                       30         435       
+RESTA_ASIG                -=                             30         444       
+INTEGER                   1                              30         447       
+VARIABLE_LOCAL            contador                       31         449       
+MULT_ASIG                 *=                             31         458       
+INTEGER                   2                              31         461       
+VARIABLE_LOCAL            contador                       32         463       
+DIV_ASIG                  /=                             32         472       
+INTEGER                   2                              32         475       
+VARIABLE_LOCAL            es_mayor                       35         494       
+ASIGNACION                =                              35         503       
+VARIABLE_LOCAL            edad                           35         505       
+MAYOR                     >                              35         510       
+INTEGER                   18                             35         512       
+VARIABLE_LOCAL            es_igual                       36         515       
+ASIGNACION                =                              36         524       
+VARIABLE_LOCAL            suma                           36         526       
+IGUAL                     ==                             36         531       
+INTEGER                   8                              36         534       
+VARIABLE_LOCAL            es_diferente                   37         536       
+ASIGNACION                =                              37         549       
+VARIABLE_LOCAL            resta                          37         551       
+DIFERENTE                 !=                             37         557       
+INTEGER                   5                              37         560       
+VARIABLE_LOCAL            condicion1                     40         584       
+ASIGNACION                =                              40         595       
+PARENTESIS_IZQ            (                              40         597       
+VARIABLE_LOCAL            edad                           40         598       
+MAYOR_IGUAL               >=                             40         603       
+INTEGER                   18                             40         606       
+PARENTESIS_DER            )                              40         608       
+AND                       &&                             40         610       
+PARENTESIS_IZQ            (                              40         613       
+VARIABLE_LOCAL            edad                           40         614       
+MENOR_IGUAL               <=                             40         619       
+INTEGER                   65                             40         622       
+PARENTESIS_DER            )                              40         624       
+VARIABLE_LOCAL            condicion2                     41         626       
+ASIGNACION                =                              41         637       
+PARENTESIS_IZQ            (                              41         639       
+VARIABLE_LOCAL            nombre                         41         640       
+IGUAL                     ==                             41         647       
+STRING                    Juan                           41         650       
+PARENTESIS_DER            )                              41         656       
+OR                        ||                             41         658       
+PARENTESIS_IZQ            (                              41         661       
+VARIABLE_LOCAL            nombre                         41         662       
+IGUAL                     ==                             41         669       
+STRING                    Maria                          41         672       
+PARENTESIS_DER            )                              41         679       
+VARIABLE_LOCAL            condicion3                     42         681       
+ASIGNACION                =                              42         692       
+NOT                       !                              42         694       
+VARIABLE_LOCAL            es_mayor                       42         695       
+IF                        if                             45         730       
+VARIABLE_LOCAL            edad                           45         733       
+MAYOR                     >                              45         738       
+INTEGER                   18                             45         740       
+PUTS                      puts                           46         745       
+STRING                    Mayor de edad                  46         750       
+END                       end                            47         766       
+PUTS                      puts                           50         783       
+STRING                    Hola Mundo                     50         788       
+PRINT                     print                          51         801       
+STRING                    Resultado:                     51         807       
+----------------------------------------------------------------------------------------------------
+Total de tokens: 131
+
+
+ ANÁLISIS COMPLETADO SIN ERRORES
+
+====================================================================================================
