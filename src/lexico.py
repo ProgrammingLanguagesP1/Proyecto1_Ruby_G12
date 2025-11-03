@@ -1,5 +1,7 @@
 import ply.lex as lex
 from datetime import datetime
+import sys
+import os
 
 reserved = {
     # Jose Marin (@JoseM0lina)
@@ -140,6 +142,12 @@ t_PUNTO_COMA = r';'
 t_DOS_PUNTOS = r':'
 t_PUNTO = r'\.'
 
+
+# ============================================
+# Ignorar espacios y tabs Angelo Zurita (@aszurita)
+# ============================================
+t_ignore = ' \t'
+
 # ============================================
 # Tipos de datos  Jose Marin (@JoseM0lina)
 # ============================================
@@ -198,6 +206,22 @@ def t_COMENTARIO_LINEA(t):
     r'\#.*'
     pass
 
+
+# ============================================
+# Manejo de saltos de línea Angelo Zurita (@aszurita)
+# ============================================
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+
+# ============================================
+# Manejo de errores léxicos Angelo Zurita (@aszurita)
+# ============================================
+def t_error(t):
+    print(f"Caracter ilegal '{t.value[0]}'")
+    t.lexer.skip(1)
+
+
 # ============================================
 # Crear log Angelo Zurita (@aszurita)
 # ============================================
@@ -206,7 +230,11 @@ def crear_log(tokens, errores, usuario, archivo_entrada):
     Crea un archivo log
     """
     fecha = datetime.now().strftime("%d-%m-%Y-%Hh%M")
-    nombre_log = f"../logs/lexico-{usuario}-{fecha}.txt"
+
+    carpeta_logs = os.path.join(os.path.dirname(__file__), "../logs")
+    os.makedirs(carpeta_logs, exist_ok=True) 
+
+    nombre_log = os.path.join(carpeta_logs, f"lexico-{usuario}-{fecha}.txt")
     
     with open(nombre_log, 'w', encoding='utf-8') as f:
         f.write("="*100 + "\n")
@@ -324,7 +352,7 @@ def analizar_archivo(archivo_entrada, usuario_git):
 # ============================================
 # Main Inicial  Jose Marin (@JoseM0lina)
 # ============================================
-if _name_ == '_main_':
+if __name__ == '__main__':
     if len(sys.argv) > 2:
         archivo = sys.argv[1]
         usuario = sys.argv[2]
