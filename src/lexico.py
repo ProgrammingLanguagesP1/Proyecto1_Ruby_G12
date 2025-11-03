@@ -206,7 +206,7 @@ def crear_log(tokens, errores, usuario, archivo_entrada):
     Crea un archivo log
     """
     fecha = datetime.now().strftime("%d-%m-%Y-%Hh%M")
-    nombre_log = f"logs/lexico-{usuario}-{fecha}.txt"
+    nombre_log = f"../logs/lexico-{usuario}-{fecha}.txt"
     
     with open(nombre_log, 'w', encoding='utf-8') as f:
         f.write("="*100 + "\n")
@@ -240,9 +240,9 @@ def crear_log(tokens, errores, usuario, archivo_entrada):
             f.write(f"Total de errores: {len(errores)}\n\n")
         
         if not errores:
-            f.write("\n✓ ANÁLISIS COMPLETADO SIN ERRORES\n")
+            f.write("\n ANÁLISIS COMPLETADO SIN ERRORES\n")
         else:
-            f.write("\n✗ ANÁLISIS COMPLETADO CON ERRORES\n")
+            f.write("\n ANÁLISIS COMPLETADO CON ERRORES\n")
         
         f.write("\n" + "="*100 + "\n")
     
