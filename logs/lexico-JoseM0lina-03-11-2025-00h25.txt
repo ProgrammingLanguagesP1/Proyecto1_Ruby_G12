@@ -1,0 +1,200 @@
+====================================================================================================
+ANALIZADOR LÉXICO PARA RUBY
+====================================================================================================
+
+Usuario: JoseM0lina
+Fecha: 03/11/2025 00:25:51
+Archivo analizado: Algorithms/Algorithm3_JoseMarin.rb
+====================================================================================================
+
+TOKENS RECONOCIDOS:
+----------------------------------------------------------------------------------------------------
+Tipo                      Valor                          Línea      Posición  
+----------------------------------------------------------------------------------------------------
+COMENTARIO_LINEA          # Algoritmo 3                  1          0         
+COMENTARIO_LINEA          # Tester: Jose Marín (@JoseM0lina) 2          14        
+COMENTARIO_LINEA          # Variables locales            4          50        
+VARIABLE_LOCAL            producto                       5          70        
+ASIGNACION                =                              5          79        
+STRING                    Laptop                         5          81        
+VARIABLE_LOCAL            precio                         6          90        
+ASIGNACION                =                              6          97        
+FLOAT                     799.99                         6          99        
+VARIABLE_LOCAL            cantidad                       7          106       
+ASIGNACION                =                              7          115       
+INTEGER                   5                              7          117       
+COMENTARIO_LINEA          # Variables globales           9          120       
+VARIABLE_GLOBAL           $total_compras                 10         141       
+ASIGNACION                =                              10         156       
+INTEGER                   0                              10         158       
+VARIABLE_GLOBAL           $iva                           11         160       
+ASIGNACION                =                              11         165       
+FLOAT                     0.12                           11         167       
+COMENTARIO_LINEA          # Constantes                   13         173       
+CONSTANTE                 DESCUENTO                      14         186       
+ASIGNACION                =                              14         196       
+FLOAT                     0.1                            14         198       
+CONSTANTE                 TASA_INTERES                   15         203       
+ASIGNACION                =                              15         216       
+FLOAT                     0.05                           15         218       
+COMENTARIO_LINEA          # Operaciones aritméticas      17         224       
+VARIABLE_LOCAL            subtotal                       18         250       
+ASIGNACION                =                              18         259       
+VARIABLE_LOCAL            precio                         18         261       
+MULTIPLICACION            *                              18         268       
+VARIABLE_LOCAL            cantidad                       18         270       
+VARIABLE_LOCAL            impuesto                       19         279       
+ASIGNACION                =                              19         288       
+VARIABLE_LOCAL            subtotal                       19         290       
+MULTIPLICACION            *                              19         299       
+VARIABLE_GLOBAL           $iva                           19         301       
+VARIABLE_LOCAL            total                          20         306       
+ASIGNACION                =                              20         312       
+VARIABLE_LOCAL            subtotal                       20         314       
+SUMA                      +                              20         323       
+VARIABLE_LOCAL            impuesto                       20         325       
+VARIABLE_LOCAL            descuento                      21         334       
+ASIGNACION                =                              21         344       
+VARIABLE_LOCAL            total                          21         346       
+MULTIPLICACION            *                              21         352       
+CONSTANTE                 DESCUENTO                      21         354       
+COMENTARIO_LINEA          # Operaciones combinadas       23         365       
+VARIABLE_LOCAL            total_final                    24         390       
+ASIGNACION                =                              24         402       
+PARENTESIS_IZQ            (                              24         404       
+VARIABLE_LOCAL            subtotal                       24         405       
+SUMA                      +                              24         414       
+VARIABLE_LOCAL            impuesto                       24         416       
+PARENTESIS_DER            )                              24         424       
+RESTA                     -                              24         426       
+VARIABLE_LOCAL            descuento                      24         428       
+DIVISION                  /                              24         438       
+INTEGER                   2                              24         440       
+COMENTARIO_LINEA          # Operadores de asignación     26         443       
+VARIABLE_LOCAL            contador                       27         470       
+ASIGNACION                =                              27         479       
+INTEGER                   10                             27         481       
+VARIABLE_LOCAL            contador                       28         484       
+SUMA_ASIG                 +=                             28         493       
+INTEGER                   5                              28         496       
+VARIABLE_LOCAL            contador                       29         498       
+RESTA_ASIG                -=                             29         507       
+INTEGER                   3                              29         510       
+VARIABLE_LOCAL            contador                       30         512       
+MULT_ASIG                 *=                             30         521       
+INTEGER                   2                              30         524       
+VARIABLE_LOCAL            contador                       31         526       
+DIV_ASIG                  /=                             31         535       
+INTEGER                   4                              31         538       
+VARIABLE_LOCAL            contador                       32         540       
+MODULO                    %                              32         549       
+ASIGNACION                =                              32         550       
+INTEGER                   3                              32         552       
+COMENTARIO_LINEA          # Comparaciones                34         555       
+VARIABLE_LOCAL            es_caro                        35         571       
+ASIGNACION                =                              35         579       
+VARIABLE_LOCAL            precio                         35         581       
+MAYOR                     >                              35         588       
+INTEGER                   500                            35         590       
+VARIABLE_LOCAL            tiene_descuento                36         594       
+ASIGNACION                =                              36         610       
+VARIABLE_LOCAL            descuento                      36         612       
+MAYOR                     >                              36         622       
+INTEGER                   0                              36         624       
+VARIABLE_LOCAL            es_igual                       37         626       
+ASIGNACION                =                              37         635       
+VARIABLE_LOCAL            cantidad                       37         637       
+IGUAL                     ==                             37         646       
+INTEGER                   5                              37         649       
+VARIABLE_LOCAL            es_diferente                   38         651       
+ASIGNACION                =                              38         664       
+VARIABLE_LOCAL            producto                       38         666       
+DIFERENTE                 !=                             38         675       
+STRING                    Celular                        38         678       
+COMENTARIO_LINEA          # Operadores lógicos           40         689       
+VARIABLE_LOCAL            condicion1                     41         710       
+ASIGNACION                =                              41         721       
+PARENTESIS_IZQ            (                              41         723       
+VARIABLE_LOCAL            precio                         41         724       
+MAYOR_IGUAL               >=                             41         731       
+INTEGER                   100                            41         734       
+PARENTESIS_DER            )                              41         737       
+AND                       &&                             41         739       
+PARENTESIS_IZQ            (                              41         742       
+VARIABLE_LOCAL            cantidad                       41         743       
+MENOR_IGUAL               <=                             41         752       
+INTEGER                   10                             41         755       
+PARENTESIS_DER            )                              41         757       
+VARIABLE_LOCAL            condicion2                     42         759       
+ASIGNACION                =                              42         770       
+PARENTESIS_IZQ            (                              42         772       
+VARIABLE_LOCAL            producto                       42         773       
+IGUAL                     ==                             42         782       
+STRING                    Laptop                         42         785       
+PARENTESIS_DER            )                              42         793       
+OR                        ||                             42         795       
+PARENTESIS_IZQ            (                              42         798       
+VARIABLE_LOCAL            producto                       42         799       
+IGUAL                     ==                             42         808       
+STRING                    Tablet                         42         811       
+PARENTESIS_DER            )                              42         819       
+VARIABLE_LOCAL            condicion3                     43         821       
+ASIGNACION                =                              43         832       
+NOT                       !                              43         834       
+VARIABLE_LOCAL            es_caro                        43         835       
+COMENTARIO_LINEA          # Condicional de ejemplo       45         844       
+IF                        if                             46         869       
+VARIABLE_LOCAL            total_final                    46         872       
+MAYOR                     >                              46         884       
+INTEGER                   1000                           46         886       
+PUTS                      puts                           47         893       
+STRING                    Compra grande                  47         898       
+ELSIF                     elsif                          48         914       
+VARIABLE_LOCAL            total_final                    48         920       
+MAYOR                     >                              48         932       
+INTEGER                   500                            48         934       
+PUTS                      puts                           49         940       
+STRING                    Compra media                   49         945       
+ELSE                      else                           50         960       
+PUTS                      puts                           51         967       
+STRING                    Compra pequeña                 51         972       
+END                       end                            52         989       
+COMENTARIO_LINEA          # Estructura repetitiva        54         994       
+FOR                       for                            55         1018      
+VARIABLE_LOCAL            i                              55         1022      
+IN                        in                             55         1024      
+INTEGER                   1                              55         1027      
+PUNTO                     .                              55         1028      
+PUNTO                     .                              55         1029      
+INTEGER                   3                              55         1030      
+PUTS                      puts                           56         1034      
+STRING                    Iteración número #{i}          56         1039      
+END                       end                            57         1063      
+COMENTARIO_LINEA          # Estructura while             59         1068      
+VARIABLE_LOCAL            indice                         60         1087      
+ASIGNACION                =                              60         1094      
+INTEGER                   0                              60         1096      
+WHILE                     while                          61         1098      
+VARIABLE_LOCAL            indice                         61         1104      
+MENOR                     <                              61         1111      
+INTEGER                   3                              61         1113      
+PRINT                     print                          62         1117      
+STRING                    Procesando #{indice}           62         1123      
+VARIABLE_LOCAL            indice                         63         1149      
+SUMA_ASIG                 +=                             63         1156      
+INTEGER                   1                              63         1159      
+END                       end                            64         1161      
+COMENTARIO_LINEA          # Impresiones finales          66         1166      
+PUTS                      puts                           67         1188      
+STRING                    \nProducto: #{producto}        67         1193      
+PUTS                      puts                           68         1219      
+STRING                    Precio unitario: #{precio}     68         1224      
+PUTS                      puts                           69         1253      
+STRING                    Total final: #{total_final.round(2)} 69         1258      
+----------------------------------------------------------------------------------------------------
+Total de tokens: 180
+
+
+ ANÁLISIS COMPLETADO SIN ERRORES
+
+====================================================================================================
