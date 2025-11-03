@@ -1,4 +1,5 @@
 import ply.lex as lex
+from datetime import datetime
 
 reserved = {
     # Jose Marin (@JoseM0lina)
@@ -66,6 +67,27 @@ tokens = [
     'MENOR',
     'MAYOR_IGUAL',
     'MENOR_IGUAL',
+    # Operadores lógicos
+    'AND',
+    'OR',
+    'NOT',
+
+    # Delimitadores
+    'PARENTESIS_IZQ',
+    'PARENTESIS_DER',
+    'LLAVE_IZQ',
+    'LLAVE_DER',
+    'CORCHETE_IZQ',
+    'CORCHETE_DER',
+    'COMA',
+    'PUNTO_COMA',
+    'DOS_PUNTOS',
+    'PUNTO',
+    'FLECHA',
+    
+    # Comentarios
+    'COMENTARIO_LINEA',
+    'COMENTARIO_MULTILINEA',
 ] + list(reserved.values())
 
 # ============================================
@@ -95,6 +117,28 @@ t_DIFERENTE = r'!='
 t_MAYOR = r'>'
 t_MENOR = r'<'
 t_ASIGNACION = r'='
+
+# ============================================
+# Operadores lógicos Dhamar Quishpe (@dquishpe)
+# ============================================
+t_AND = r'&&'
+t_OR = r'\|\|'
+t_NOT = r'!'
+
+# ============================================
+# Delimitadores Dhamar Quishpe (@dquishpe)
+# ============================================
+t_FLECHA = r'=>'
+t_PARENTESIS_IZQ = r'\('
+t_PARENTESIS_DER = r'\)'
+t_LLAVE_IZQ = r'\{'
+t_LLAVE_DER = r'\}'
+t_CORCHETE_IZQ = r'\['
+t_CORCHETE_DER = r'\]'
+t_COMA = r','
+t_PUNTO_COMA = r';'
+t_DOS_PUNTOS = r':'
+t_PUNTO = r'\.'
 
 # ============================================
 # Tipos de datos  Jose Marin (@JoseM0lina)
@@ -141,6 +185,18 @@ def t_VARIABLE_LOCAL(t):
     t.type = reserved.get(t.value, 'VARIABLE_LOCAL')
     return t
 
+# ============================================================================
+# Comentarios Dhamar Quishpe (@dquishpe)
+# ============================================================================
+
+def t_COMENTARIO_MULTILINEA(t):
+    r'=begin(.|\n)*?=end'
+    t.lexer.lineno += t.value.count('\n')
+    pass
+
+def t_COMENTARIO_LINEA(t):
+    r'\#.*'
+    pass
 
 # ============================================
 # Crear log Angelo Zurita (@aszurita)
@@ -191,3 +247,76 @@ def crear_log(tokens, errores, usuario, archivo_entrada):
         f.write("\n" + "="*100 + "\n")
     
     return nombre_log
+
+# ============================================
+# Analizar archivo Dhamar Quishpe (@dquishpe)
+# ============================================
+def analizar_archivo(archivo_entrada, usuario_git):
+    """
+    Analiza un archivo Ruby y genera el log correspondiente
+    """
+    try:
+        with open(archivo_entrada, 'r', encoding='utf-8') as f:
+            data = f.read()
+    except FileNotFoundError:
+        print(f"Error: No se encontró el archivo '{archivo_entrada}'")
+        return
+    
+    # Construir el lexer
+    lexer = lex.lex()
+    lexer.input(data)
+    
+    # Tokenizar
+    tokens = []
+    errores = []
+    
+    print("\n" + "="*100)
+    print(f"{'ANALIZADOR LÉXICO PARA RUBY':^100}")
+    print("="*100)
+    print(f"\n{'Usuario:':<20} {usuario_git}")
+    print(f"{'Archivo analizado:':<20} {archivo_entrada}")
+    print(f"{'Fecha:':<20} {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}")
+    print("\n" + "="*100)
+    print("TOKENS RECONOCIDOS:")
+    print("-"*100)
+    print(f"{'TIPO':<30} {'VALOR':<35} {'LÍNEA':<10} {'POSICIÓN':<10}")
+    print("-"*100)
+    
+    while True:
+        try:
+            tok = lexer.token()
+            if not tok:
+                break
+            tokens.append(tok)
+            tipo = tok.type
+            valor = str(tok.value)
+            # Textos largos
+            if len(valor) > 32:
+                valor = valor[:29] + "..."
+            linea = tok.lineno
+            pos = tok.lexpos
+            print(f"{tipo:<30} {valor:<35} {linea:<10} {pos:<10}")
+        except Exception as e:
+            error_msg = f"Error en línea {lexer.lineno}: {str(e)}"
+            errores.append(error_msg)
+            print(f"\n{error_msg}\n")
+    
+    if errores:
+        print("\n" + "="*100)
+        print("ERRORES LÉXICOS ENCONTRADOS:")
+        print("-"*100)
+        for i, error in enumerate(errores, 1):
+            print(f"{i}. {error}")
+        print("-"*100)
+        print("\n ANÁLISIS COMPLETADO CON ERRORES")
+    else:
+        print("\n ANÁLISIS COMPLETADO SIN ERRORES")
+    
+    print("="*100)
+    
+    # Crear log
+    nombre_log = crear_log(tokens, errores, usuario_git, archivo_entrada)
+    print(f"\n Log guardado en: {nombre_log}")
+    print("="*100 + "\n")
+    
+    return tokens, errores
