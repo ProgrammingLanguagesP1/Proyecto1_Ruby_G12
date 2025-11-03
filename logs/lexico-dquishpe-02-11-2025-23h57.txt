@@ -1,0 +1,147 @@
+====================================================================================================
+ANALIZADOR LÉXICO PARA RUBY
+====================================================================================================
+
+Usuario: dquishpe
+Fecha: 02/11/2025 23:57:14
+Archivo analizado: Algorithms/Algorithm2_DhamarQuishpe.rb
+====================================================================================================
+
+TOKENS RECONOCIDOS:
+----------------------------------------------------------------------------------------------------
+Tipo                      Valor                          Línea      Posición  
+----------------------------------------------------------------------------------------------------
+COMENTARIO_LINEA          # Algoritmo 2                  1          0         
+COMENTARIO_LINEA          # Tester: Dhamar Quishpe (@dquishpe) 2          14        
+COMENTARIO_LINEA          # =============================================== 4          52        
+COMENTARIO_LINEA          # Ejemplo de comentarios       5          102       
+COMENTARIO_LINEA          # =============================================== 6          127       
+COMENTARIO_LINEA          # Esto es un comentario de una sola línea 8          178       
+COMENTARIO_MULTILINEA     =begin Este es un comentario multilínea en Ruby. Debe ser reconocido por el lexer como COMENTARIO_MULTILINEA. =end 10         221       
+COMENTARIO_LINEA          # =============================================== 17         337       
+COMENTARIO_LINEA          # Ejemplo de operadores lógicos 18         387       
+COMENTARIO_LINEA          # =============================================== 19         419       
+VARIABLE_LOCAL            activo                         21         470       
+ASIGNACION                =                              21         477       
+TRUE                      true                           21         479       
+VARIABLE_LOCAL            autorizado                     22         484       
+ASIGNACION                =                              22         495       
+FALSE                     false                          22         497       
+COMENTARIO_LINEA          # Operadores lógicos           24         504       
+VARIABLE_LOCAL            resultado1                     25         525       
+ASIGNACION                =                              25         536       
+VARIABLE_LOCAL            activo                         25         538       
+AND                       &&                             25         545       
+VARIABLE_LOCAL            autorizado                     25         548       
+VARIABLE_LOCAL            resultado2                     26         559       
+ASIGNACION                =                              26         570       
+VARIABLE_LOCAL            activo                         26         572       
+OR                        ||                             26         579       
+VARIABLE_LOCAL            autorizado                     26         582       
+VARIABLE_LOCAL            resultado3                     27         593       
+ASIGNACION                =                              27         604       
+NOT                       !                              27         606       
+VARIABLE_LOCAL            activo                         27         607       
+COMENTARIO_LINEA          # Combinación de expresiones lógicas 29         615       
+IF                        if                             30         652       
+PARENTESIS_IZQ            (                              30         655       
+VARIABLE_LOCAL            activo                         30         656       
+AND                       &&                             30         663       
+NOT                       !                              30         666       
+VARIABLE_LOCAL            autorizado                     30         667       
+PARENTESIS_DER            )                              30         677       
+OR                        ||                             30         679       
+PARENTESIS_IZQ            (                              30         682       
+VARIABLE_LOCAL            autorizado                     30         683       
+AND                       &&                             30         694       
+NOT                       !                              30         697       
+VARIABLE_LOCAL            activo                         30         698       
+PARENTESIS_DER            )                              30         704       
+PUTS                      puts                           31         708       
+STRING                    Condición lógica compuesta evaluada 31         713       
+END                       end                            32         751       
+COMENTARIO_LINEA          # =============================================== 34         756       
+COMENTARIO_LINEA          # Ejemplo de delimitadores     35         806       
+COMENTARIO_LINEA          # =============================================== 36         833       
+COMENTARIO_LINEA          # Paréntesis, llaves y corchetes 38         884       
+VARIABLE_LOCAL            numeros                        39         917       
+ASIGNACION                =                              39         925       
+CORCHETE_IZQ              [                              39         927       
+INTEGER                   1                              39         928       
+COMA                      ,                              39         929       
+INTEGER                   2                              39         931       
+COMA                      ,                              39         932       
+INTEGER                   3                              39         934       
+COMA                      ,                              39         935       
+INTEGER                   4                              39         937       
+CORCHETE_DER              ]                              39         938       
+VARIABLE_LOCAL            persona                        40         940       
+ASIGNACION                =                              40         948       
+LLAVE_IZQ                 {                              40         950       
+VARIABLE_LOCAL            nombre                         40         952       
+DOS_PUNTOS                :                              40         958       
+STRING                    Ana                            40         960       
+COMA                      ,                              40         965       
+VARIABLE_LOCAL            edad                           40         967       
+DOS_PUNTOS                :                              40         971       
+INTEGER                   22                             40         973       
+LLAVE_DER                 }                              40         976       
+VARIABLE_LOCAL            suma                           41         978       
+ASIGNACION                =                              41         983       
+PARENTESIS_IZQ            (                              41         985       
+INTEGER                   10                             41         986       
+SUMA                      +                              41         989       
+INTEGER                   5                              41         991       
+PARENTESIS_DER            )                              41         992       
+MULTIPLICACION            *                              41         994       
+PARENTESIS_IZQ            (                              41         996       
+INTEGER                   3                              41         997       
+RESTA                     -                              41         999       
+INTEGER                   1                              41         1001      
+PARENTESIS_DER            )                              41         1002      
+COMENTARIO_LINEA          # Uso de coma, punto y punto y coma 43         1005      
+PUTS                      puts                           44         1041      
+STRING                    Números:                       44         1046      
+COMA                      ,                              44         1056      
+VARIABLE_LOCAL            numeros                        44         1058      
+PUTS                      puts                           45         1066      
+STRING                    Nombre: #{persona[:nombre]}    45         1071      
+COMA                      ,                              45         1100      
+STRING                    Edad: #{persona[:edad]}        45         1102      
+PUNTO_COMA                ;                              45         1127      
+COMENTARIO_LINEA          # Flecha (=>) en hash estilo antiguo 47         1130      
+VARIABLE_LOCAL            datos                          48         1167      
+ASIGNACION                =                              48         1173      
+LLAVE_IZQ                 {                              48         1175      
+STRING                    pais                           48         1177      
+FLECHA                    =>                             48         1184      
+STRING                    Ecuador                        48         1187      
+COMA                      ,                              48         1196      
+STRING                    ciudad                         48         1198      
+FLECHA                    =>                             48         1207      
+STRING                    Guayaquil                      48         1210      
+LLAVE_DER                 }                              48         1222      
+COMENTARIO_LINEA          # Dos puntos en símbolos y pares clave-valor 50         1225      
+VARIABLE_LOCAL            coordenadas                    51         1270      
+ASIGNACION                =                              51         1282      
+LLAVE_IZQ                 {                              51         1284      
+VARIABLE_LOCAL            x                              51         1286      
+DOS_PUNTOS                :                              51         1287      
+INTEGER                   10                             51         1289      
+COMA                      ,                              51         1291      
+VARIABLE_LOCAL            y                              51         1293      
+DOS_PUNTOS                :                              51         1294      
+INTEGER                   20                             51         1296      
+LLAVE_DER                 }                              51         1299      
+COMENTARIO_LINEA          # =============================================== 53         1302      
+COMENTARIO_LINEA          # Resultado final              54         1352      
+COMENTARIO_LINEA          # =============================================== 55         1370      
+PUTS                      puts                           56         1420      
+STRING                    Prueba completada con éxito    56         1425      
+----------------------------------------------------------------------------------------------------
+Total de tokens: 127
+
+
+ ANÁLISIS COMPLETADO SIN ERRORES
+
+====================================================================================================

@@ -200,11 +200,11 @@ def t_VARIABLE_LOCAL(t):
 def t_COMENTARIO_MULTILINEA(t):
     r'=begin(.|\n)*?=end'
     t.lexer.lineno += t.value.count('\n')
-    pass
+    return t #Se puede usar pass si no se quiere retornar el token (usado para ignorar comentarios)
 
 def t_COMENTARIO_LINEA(t):
     r'\#.*'
-    pass
+    return t
 
 
 # ============================================
@@ -255,6 +255,8 @@ def crear_log(tokens, errores, usuario, archivo_entrada):
                 valor = str(tok.value)
                 linea = tok.lineno
                 pos = tok.lexpos
+                if len(valor) > 30 and tipo == 'COMENTARIO_MULTILINEA':
+                    valor = valor.replace('\n', ' ')
                 f.write(f"{tipo:<25} {valor:<30} {linea:<10} {pos:<10}\n")
             f.write("-"*100 + "\n")
             f.write(f"Total de tokens: {len(tokens)}\n\n")
