@@ -320,3 +320,14 @@ def analizar_archivo(archivo_entrada, usuario_git):
     print("="*100 + "\n")
     
     return tokens, errores
+
+# ============================================
+# Main Inicial  Jose Marin (@JoseM0lina)
+# ============================================
+if _name_ == '_main_':
+    if len(sys.argv) > 2:
+        archivo = sys.argv[1]
+        usuario = sys.argv[2]
+        analizar_archivo(archivo, usuario)
+    else:
+        print("Error al ejecutar el programa")
