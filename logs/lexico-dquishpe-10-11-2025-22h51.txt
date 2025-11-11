@@ -1,0 +1,292 @@
+====================================================================================================
+ANALIZADOR LÉXICO PARA RUBY
+====================================================================================================
+
+Usuario: dquishpe
+Fecha: 10/11/2025 22:51:03
+Archivo analizado: Algorithms/Algorithm3_DhamarQuishpe_conErrores.rb
+====================================================================================================
+
+TOKENS RECONOCIDOS:
+----------------------------------------------------------------------------------------------------
+Tipo                      Valor                          Línea      Posición  
+----------------------------------------------------------------------------------------------------
+COMENTARIO_LINEA          # ============================================================================ 1          0         
+COMENTARIO_LINEA          # ALGORITMO 3 - TEST DE ERRORES SINTÁCTICOS (adaptado a la gramática del parser) 2          79        
+COMENTARIO_LINEA          # Tester: Dhamar Quishpe (@dquishpe) 3          160       
+COMENTARIO_LINEA          # Descripción: Casos diseñados para que el parser detecte errores. 4          197       
+COMENTARIO_LINEA          # ============================================================================ 5          264       
+COMENTARIO_LINEA          # --- ASIGNACIÓN Y EXPRESIONES --- 7          344       
+VARIABLE_LOCAL            x                              8          379       
+ASIGNACION                =                              8          381       
+INTEGER                   10                             8          383       
+SUMA                      +                              8          386       
+VARIABLE_LOCAL            y                              9          388       
+ASIGNACION                =                              9          390       
+PARENTESIS_IZQ            (                              9          392       
+INTEGER                   5                              9          393       
+MULTIPLICACION            *                              9          395       
+INTEGER                   3                              9          397       
+VARIABLE_LOCAL            z                              10         399       
+ASIGNACION                =                              10         401       
+INTEGER                   2                              10         403       
+MULTIPLICACION            *                              10         405       
+MULTIPLICACION            *                              10         406       
+INTEGER                   3                              10         408       
+COMENTARIO_LINEA          # operador no permitido en esta gramática 10         412       
+VARIABLE_LOCAL            resultado                      11         454       
+ASIGNACION                =                              11         464       
+VARIABLE_LOCAL            x                              11         466       
+SUMA                      +                              11         468       
+VARIABLE_LOCAL            y                              11         470       
+MULTIPLICACION            *                              11         472       
+VARIABLE_LOCAL            valor                          12         474       
+ASIGNACION                =                              12         480       
+PARENTESIS_IZQ            (                              12         482       
+INTEGER                   10                             12         483       
+SUMA                      +                              12         486       
+INTEGER                   5                              12         488       
+PARENTESIS_DER            )                              12         489       
+PARENTESIS_DER            )                              12         490       
+COMENTARIO_LINEA          # paréntesis extra             12         492       
+VARIABLE_LOCAL            numero                         13         511       
+ASIGNACION                =                              13         518       
+INTEGER                   7                              13         520       
+DIVISION                  /                              13         522       
+PARENTESIS_IZQ            (                              13         524       
+INTEGER                   2                              13         525       
+RESTA                     -                              13         527       
+PARENTESIS_DER            )                              13         529       
+COMENTARIO_LINEA          # expresión incompleta         13         531       
+COMENTARIO_LINEA          # --- STRINGS Y CONCATENACIONES --- 15         555       
+VARIABLE_LOCAL            mensaje                        16         591       
+ASIGNACION                =                              16         599       
+STRING                    Hola #{nombre                  16         601       
+COMENTARIO_LINEA          # falta cierre de interpolación 16         619       
+VARIABLE_LOCAL            texto                          17         651       
+ASIGNACION                =                              17         657       
+STRING                    Hola #{nombre}                 17         659       
+COMENTARIO_LINEA          # uso incorrecto de comillas simples 17         679       
+VARIABLE_LOCAL            cadena                         18         716       
+ASIGNACION                =                              18         723       
+STRING                    Esto es un texto sin cerrar
+
+# --- ESTRUCTURA IF ---
+if x > 5
+  puts  18         725       
+CONSTANTE                 Mayor                          18         796       
+VARIABLE_LOCAL            que                            18         802       
+VARIABLE_LOCAL            cinco                          18         806       
+STRING                    
+elsif x < 2
+  puts            18         811       
+CONSTANTE                 Menor                          18         833       
+VARIABLE_LOCAL            que                            18         839       
+VARIABLE_LOCAL            dos                            18         843       
+STRING                    
+else
+  puts                   18         846       
+CONSTANTE                 Otro                           18         861       
+VARIABLE_LOCAL            valor                          18         866       
+STRING                    
+# falta el END aquí para provocar error
+
+# --- CONDICIONES LÓGICAS ---
+if (x &&) || (y)
+  puts  18         871       
+VARIABLE_LOCAL            condici                        18         969       
+VARIABLE_LOCAL            n                              18         977       
+VARIABLE_LOCAL            mal                            18         979       
+VARIABLE_LOCAL            formada                        18         983       
+STRING                    
+end
+
+if x > 0 and or y < 5
+  puts  18         990       
+VARIABLE_LOCAL            doble                          18         1027      
+VARIABLE_LOCAL            operador                       18         1033      
+VARIABLE_LOCAL            l                              18         1042      
+VARIABLE_LOCAL            gico                           18         1044      
+STRING                    
+end
+
+# --- WHILE ---
+while x < 10 do
+  x += 1
+  puts x
+endd   # palabra mal escrita (error leve)
+
+while do
+  puts  18         1048      
+VARIABLE_LOCAL            falta                          18         1165      
+VARIABLE_LOCAL            condici                        18         1171      
+VARIABLE_LOCAL            n                              18         1179      
+STRING                    
+end
+
+# --- UNTIL ---
+until contador > 
+  puts  18         1180      
+VARIABLE_LOCAL            error                          18         1229      
+VARIABLE_LOCAL            en                             18         1235      
+VARIABLE_LOCAL            condici                        18         1238      
+VARIABLE_LOCAL            n                              18         1246      
+STRING                    
+end
+
+# --- FUNCIONES ---
+def suma(a, b,)
+  return a + b
+end
+
+def sin_end(a)
+  puts a + 2
+# falta el END
+
+def sin_nombre()
+  puts  18         1247      
+VARIABLE_LOCAL            no                             18         1379      
+VARIABLE_LOCAL            tiene                          18         1382      
+VARIABLE_LOCAL            identificador                  18         1388      
+STRING                    
+end
+
+# --- CLASES ---
+class Persona
+  def initialize(nombre)
+    @nombre = nombre
+  end
+  def saludar()
+    puts  18         1401      
+CONSTANTE                 Hola                           18         1517      
+COMA                      ,                              18         1521      
+COMENTARIO_LINEA          #{@nombre}"                    18         1523      
+END                       end                            19         1537      
+COMENTARIO_LINEA          # falta END de clase           20         1541      
+CLASS                     class                          22         1563      
+VARIABLE_LOCAL            miClase                        22         1569      
+PUTS                      puts                           23         1579      
+STRING                    nombre inválido (no constante) 23         1584      
+END                       end                            24         1617      
+COMENTARIO_LINEA          # --- MÓDULO ---               26         1622      
+MODULE                    module                         27         1639      
+CONSTANTE                 Herramientas                   27         1646      
+DEF                       def                            28         1661      
+VARIABLE_LOCAL            self                           28         1665      
+PUNTO                     .                              28         1669      
+VARIABLE_LOCAL            ayuda                          28         1670      
+PUTS                      puts                           29         1680      
+STRING                    módulo sin END                 29         1685      
+COMENTARIO_LINEA          # falta END del módulo         30         1702      
+COMENTARIO_LINEA          # --- HASHES Y ARREGLOS ---    32         1726      
+VARIABLE_LOCAL            datos                          33         1754      
+ASIGNACION                =                              33         1760      
+LLAVE_IZQ                 {                              33         1762      
+VARIABLE_LOCAL            nombre                         33         1763      
+DOS_PUNTOS                :                              33         1769      
+STRING                    Ana                            33         1771      
+COMA                      ,                              33         1776      
+VARIABLE_LOCAL            edad                           33         1778      
+FLECHA                    =>                             33         1783      
+INTEGER                   22                             33         1786      
+LLAVE_DER                 }                              33         1788      
+COMENTARIO_LINEA          # operador => mal ubicado      33         1792      
+VARIABLE_LOCAL            valores                        34         1818      
+ASIGNACION                =                              34         1826      
+CORCHETE_IZQ              [                              34         1828      
+INTEGER                   1                              34         1829      
+COMA                      ,                              34         1830      
+INTEGER                   2                              34         1832      
+COMA                      ,                              34         1833      
+INTEGER                   3                              34         1835      
+COMA                      ,                              34         1836      
+COMA                      ,                              34         1838      
+INTEGER                   5                              34         1840      
+CORCHETE_DER              ]                              34         1841      
+COMENTARIO_LINEA          # coma doble                   34         1857      
+VARIABLE_LOCAL            pares                          35         1870      
+ASIGNACION                =                              35         1876      
+LLAVE_IZQ                 {                              35         1878      
+SIMBOLO                   :ok                            35         1880      
+FLECHA                    =>                             35         1884      
+INTEGER                   1                              35         1887      
+COMA                      ,                              35         1888      
+SIMBOLO                   :fail                          35         1890      
+DOS_PUNTOS                :                              35         1895      
+FLECHA                    =>                             35         1897      
+INTEGER                   2                              35         1900      
+LLAVE_DER                 }                              35         1902      
+COMENTARIO_LINEA          # símbolo mal formado          35         1909      
+VARIABLE_LOCAL            lista                          36         1931      
+ASIGNACION                =                              36         1937      
+CORCHETE_IZQ              [                              36         1939      
+INTEGER                   10                             36         1940      
+COMA                      ,                              36         1942      
+PARENTESIS_IZQ            (                              36         1944      
+INTEGER                   20                             36         1945      
+SUMA                      +                              36         1948      
+PARENTESIS_DER            )                              36         1950      
+COMA                      ,                              36         1951      
+INTEGER                   30                             36         1953      
+CORCHETE_DER              ]                              36         1955      
+COMENTARIO_LINEA          # expresión incompleta         36         1970      
+COMENTARIO_LINEA          # --- RANGOS Y FOR ---         38         1994      
+FOR                       for                            39         2017      
+VARIABLE_LOCAL            i                              39         2021      
+IN                        in                             39         2023      
+INTEGER                   1                              39         2026      
+PUNTO                     .                              39         2027      
+PUNTO                     .                              39         2028      
+PUTS                      puts                           40         2032      
+VARIABLE_LOCAL            i                              40         2037      
+END                       end                            41         2039      
+FOR                       for                            43         2044      
+IN                        in                             43         2048      
+INTEGER                   1                              43         2051      
+PUNTO                     .                              43         2052      
+PUNTO                     .                              43         2053      
+INTEGER                   5                              43         2054      
+PUTS                      puts                           44         2058      
+STRING                    sin variable                   44         2063      
+END                       end                            45         2078      
+FOR                       for                            47         2083      
+VARIABLE_LOCAL            x                              47         2087      
+IN                        in                             47         2089      
+PARENTESIS_IZQ            (                              47         2092      
+INTEGER                   1                              47         2093      
+SUMA                      +                              47         2095      
+INTEGER                   2                              47         2097      
+PARENTESIS_DER            )                              47         2098      
+PUTS                      puts                           48         2102      
+VARIABLE_LOCAL            x                              48         2107      
+COMENTARIO_LINEA          # falta END                    49         2109      
+COMENTARIO_LINEA          # --- RETURN Y BLOQUES ---     51         2122      
+RETURN                    return                         52         2149      
+SUMA                      +                              52         2156      
+INTEGER                   5                              52         2158      
+COMENTARIO_LINEA          # fuera de función             52         2161      
+VARIABLE_LOCAL            items                          54         2181      
+PUNTO                     .                              54         2186      
+VARIABLE_LOCAL            each                           54         2187      
+DO                        do                             54         2192      
+VARIABLE_LOCAL            x                              54         2196      
+PUTS                      puts                           55         2200      
+VARIABLE_LOCAL            x                              55         2205      
+END                       end                            56         2207      
+COMENTARIO_LINEA          # --- REQUIRES Y OTROS ---     58         2212      
+REQUIRE                   require                        59         2239      
+VARIABLE_LOCAL            archivo_sin_comillas           59         2247      
+VARIABLE_LOCAL            include                        60         2268      
+VARIABLE_LOCAL            sin_nombre                     60         2276      
+COMENTARIO_LINEA          # --- FIN EXTRA ---            62         2288      
+PUTS                      puts                           63         2308      
+STRING                    fin del test                   63         2313      
+END                       end                            64         2328      
+COMENTARIO_LINEA          # END sobrante                 64         2333      
+----------------------------------------------------------------------------------------------------
+Total de tokens: 218
+
+
+ ANÁLISIS COMPLETADO SIN ERRORES
+
+====================================================================================================

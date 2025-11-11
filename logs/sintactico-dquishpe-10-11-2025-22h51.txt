@@ -1,0 +1,61 @@
+====================================================================================================
+ANALIZADOR SINTÁCTICO PARA RUBY
+====================================================================================================
+
+Usuario: dquishpe
+Fecha: 10/11/2025 22:51:03
+Archivo analizado: Algorithms/Algorithm3_DhamarQuishpe_conErrores.rb
+====================================================================================================
+
+[OK] ANÁLISIS SINTÁCTICO EXITOSO
+
+ESTRUCTURA DEL PROGRAMA:
+----------------------------------------------------------------------------------------------------
+('programa', ['# END sobrante'])
+----------------------------------------------------------------------------------------------------
+
+CONSTRUCCIONES SINTÁCTICAS RECONOCIDAS:
+----------------------------------------------------------------------------------------------------
+1. Operación aritmética: *
+2. Operación aritmética: +
+3. Asignación: ('variable', 'mensaje') = [expresión]
+4. Asignación: ('variable', 'texto') = [expresión]
+5. Asignación: ('variable', 'cadena') = [expresión]
+6. Instrucción de impresión: puts
+7. Instrucción de impresión: puts
+8. Hash con 2 par(es) clave-valor
+9. Asignación: ('variable', 'datos') = [expresión]
+10. Instrucción de impresión: puts
+11. Operación aritmética: +
+12. Instrucción de impresión: puts
+13. Instrucción de impresión: puts
+14. Require: archivo_sin_comillas
+15. Instrucción de impresión: puts
+16. Programa reconocido con 1 sentencia(s)
+----------------------------------------------------------------------------------------------------
+Total de construcciones: 16
+
+ERRORES SINTÁCTICOS ENCONTRADOS:
+----------------------------------------------------------------------------------------------------
+1. Error sintáctico en línea 73: Token inesperado '=' (tipo: ASIGNACION)
+2. Error sintáctico en línea 74: Token inesperado 'z' (tipo: VARIABLE_LOCAL)
+3. Error sintáctico en línea 76: Token inesperado '=' (tipo: ASIGNACION)
+4. Error sintáctico en línea 76: Token inesperado ')' (tipo: PARENTESIS_DER)
+5. Error sintáctico en línea 77: Token inesperado ')' (tipo: PARENTESIS_DER)
+6. Error sintáctico en línea 82: Token inesperado ',' (tipo: COMA)
+7. Error sintáctico en línea 98: Token inesperado ',' (tipo: COMA)
+8. Error sintáctico en línea 99: Token inesperado ':' (tipo: DOS_PUNTOS)
+9. Error sintáctico en línea 100: Token inesperado ')' (tipo: PARENTESIS_DER)
+10. Error sintáctico en línea 104: Token inesperado 'puts' (tipo: PUTS)
+11. Error sintáctico en línea 109: Token inesperado 'end' (tipo: END)
+12. Error sintáctico en línea 116: Token inesperado '+' (tipo: SUMA)
+13. Error sintáctico en línea 118: Token inesperado '.' (tipo: PUNTO)
+14. Error sintáctico en línea 120: Token inesperado 'end' (tipo: END)
+15. Error sintáctico en línea 128: Token inesperado 'end' (tipo: END)
+----------------------------------------------------------------------------------------------------
+Total de errores: 15
+
+
+[ERROR] ANÁLISIS COMPLETADO CON ERRORES SINTÁCTICOS
+
+====================================================================================================
