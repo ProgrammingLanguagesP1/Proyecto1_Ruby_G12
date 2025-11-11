@@ -1,0 +1,338 @@
+====================================================================================================
+ANALIZADOR LÉXICO PARA RUBY
+====================================================================================================
+
+Usuario: JoseM0lina
+Fecha: 10/11/2025 22:27:19
+Archivo analizado: Algorithms/Algorithm2_JoseMarin_conErrores.rb
+====================================================================================================
+
+TOKENS RECONOCIDOS:
+----------------------------------------------------------------------------------------------------
+Tipo                      Valor                          Línea      Posición  
+----------------------------------------------------------------------------------------------------
+COMENTARIO_LINEA          # ============================================================================ 1          0         
+COMENTARIO_LINEA          # ALGORITMO 2 - TEST DE ERRORES SINTÁCTICOS 2          79        
+COMENTARIO_LINEA          # Tester: Jose Marin (@JoseM0lina) 3          123       
+COMENTARIO_LINEA          # Descripción: Algoritmo diseñado para probar reglas sintácticas adicionales  4          158       
+COMENTARIO_LINEA          #              complementando Algorithm1 5          236       
+COMENTARIO_LINEA          # ============================================================================ 6          277       
+COMENTARIO_LINEA          # Error 1: Operador de asignación compuesta incompleto 8          357       
+VARIABLE_LOCAL            x                              9          412       
+SUMA_ASIG                 +=                             9          414       
+COMENTARIO_LINEA          # Error 2: Asignación múltiple sin valores 11         419       
+VARIABLE_LOCAL            a                              12         462       
+COMA                      ,                              12         463       
+VARIABLE_LOCAL            b                              12         465       
+COMA                      ,                              12         466       
+VARIABLE_LOCAL            c                              12         468       
+ASIGNACION                =                              12         470       
+COMENTARIO_LINEA          # Error 3: Asignación con operador compuesto mal formado 14         474       
+VARIABLE_LOCAL            y                              15         531       
+ASIGNACION                =                              15         533       
+SUMA                      +                              15         534       
+INTEGER                   10                             15         536       
+COMENTARIO_LINEA          # Error 4: División asignación sin operando 17         540       
+VARIABLE_LOCAL            total                          18         584       
+DIV_ASIG                  /=                             18         590       
+COMENTARIO_LINEA          # Error 5: Multiplicación asignación con operador adicional 20         595       
+VARIABLE_LOCAL            contador                       21         655       
+MULT_ASIG                 *=                             21         664       
+MULTIPLICACION            *                              21         667       
+INTEGER                   2                              21         669       
+COMENTARIO_LINEA          # Error 6: UNTIL sin END       23         672       
+UNTIL                     until                          24         697       
+VARIABLE_LOCAL            contador                       24         703       
+MAYOR                     >                              24         712       
+INTEGER                   100                            24         714       
+VARIABLE_LOCAL            contador                       25         720       
+SUMA_ASIG                 +=                             25         729       
+INTEGER                   1                              25         732       
+COMENTARIO_LINEA          # Error 7: UNTIL sin condición 27         735       
+UNTIL                     until                          28         766       
+PUTS                      puts                           29         774       
+STRING                    Loop infinito                  29         779       
+END                       end                            30         795       
+COMENTARIO_LINEA          # Error 8: UNTIL con DO pero sin END 32         800       
+UNTIL                     until                          33         837       
+VARIABLE_LOCAL            x                              33         843       
+MENOR                     <                              33         845       
+INTEGER                   0                              33         847       
+DO                        do                             33         849       
+VARIABLE_LOCAL            x                              34         854       
+RESTA_ASIG                -=                             34         856       
+INTEGER                   1                              34         859       
+COMENTARIO_LINEA          # Error 9: Rango inclusivo incompleto (falta valor final) 36         862       
+FOR                       for                            37         920       
+VARIABLE_LOCAL            i                              37         924       
+IN                        in                             37         926       
+INTEGER                   1                              37         929       
+PUNTO                     .                              37         930       
+PUNTO                     .                              37         931       
+PUTS                      puts                           38         935       
+VARIABLE_LOCAL            i                              38         940       
+END                       end                            39         942       
+COMENTARIO_LINEA          # Error 10: Rango exclusivo mal formado 41         947       
+VARIABLE_LOCAL            rango                          42         987       
+ASIGNACION                =                              42         993       
+INTEGER                   5                              42         995       
+PUNTO                     .                              42         996       
+PUNTO                     .                              42         997       
+PUNTO                     .                              42         998       
+COMENTARIO_LINEA          # Error 11: Rango con operadores inválidos 44         1001      
+VARIABLE_LOCAL            numeros                        45         1044      
+ASIGNACION                =                              45         1052      
+INTEGER                   1                              45         1054      
+PUNTO                     .                              45         1055      
+PUNTO                     .                              45         1056      
+PUNTO                     .                              45         1057      
+PUNTO                     .                              45         1058      
+INTEGER                   10                             45         1059      
+COMENTARIO_LINEA          # Error 12: FOR con rango sin valor inicial 47         1063      
+FOR                       for                            48         1107      
+VARIABLE_LOCAL            x                              48         1111      
+IN                        in                             48         1113      
+PUNTO                     .                              48         1116      
+PUNTO                     .                              48         1117      
+INTEGER                   100                            48         1118      
+DO                        do                             48         1122      
+PUTS                      puts                           49         1127      
+VARIABLE_LOCAL            x                              49         1132      
+END                       end                            50         1134      
+COMENTARIO_LINEA          # Error 13: MODULE sin nombre  52         1139      
+MODULE                    module                         53         1169      
+DEF                       def                            54         1178      
+VARIABLE_LOCAL            metodo_modulo                  54         1182      
+PUTS                      puts                           55         1200      
+STRING                    test                           55         1205      
+END                       end                            56         1214      
+END                       end                            57         1218      
+COMENTARIO_LINEA          # Error 14: MODULE sin END     59         1223      
+MODULE                    module                         60         1250      
+CONSTANTE                 MiModulo                       60         1257      
+DEF                       def                            61         1268      
+VARIABLE_LOCAL            utilidad                       61         1272      
+RETURN                    return                         62         1285      
+TRUE                      true                           62         1292      
+END                       end                            63         1299      
+COMENTARIO_LINEA          # Error 15: MODULE con nombre en minúscula (variable local en vez de constante) 65         1304      
+MODULE                    module                         66         1384      
+VARIABLE_LOCAL            mi_modulo                      66         1391      
+DEF                       def                            67         1403      
+VARIABLE_LOCAL            helper                         67         1407      
+PUTS                      puts                           68         1418      
+STRING                    ayuda                          68         1423      
+END                       end                            69         1433      
+END                       end                            70         1437      
+COMENTARIO_LINEA          # Error 16: RETURN con expresión incompleta 72         1442      
+DEF                       def                            73         1486      
+VARIABLE_LOCAL            calcular                       73         1490      
+RETURN                    return                         74         1501      
+VARIABLE_LOCAL            x                              74         1508      
+SUMA                      +                              74         1510      
+END                       end                            75         1512      
+COMENTARIO_LINEA          # Error 17: NEXT con expresión inválida 77         1517      
+FOR                       for                            78         1557      
+VARIABLE_LOCAL            i                              78         1561      
+IN                        in                             78         1563      
+INTEGER                   1                              78         1566      
+PUNTO                     .                              78         1567      
+PUNTO                     .                              78         1568      
+INTEGER                   10                             78         1569      
+NEXT                      next                           79         1574      
+IF                        if                             79         1579      
+VARIABLE_LOCAL            i                              79         1582      
+MAYOR                     >                              79         1584      
+END                       end                            80         1586      
+COMENTARIO_LINEA          # Error 18: REDO sin estar en un ciclo 82         1591      
+REDO                      redo                           83         1630      
+COMENTARIO_LINEA          # Error 19: ELSIF sin condición 85         1636      
+IF                        if                             86         1668      
+VARIABLE_LOCAL            x                              86         1671      
+MAYOR                     >                              86         1673      
+INTEGER                   5                              86         1675      
+PUTS                      puts                           87         1679      
+STRING                    Mayor que 5                    87         1684      
+ELSIF                     elsif                          88         1698      
+PUTS                      puts                           89         1706      
+STRING                    Error                          89         1711      
+END                       end                            90         1719      
+COMENTARIO_LINEA          # Error 20: ELSIF sin THEN ni sentencias 92         1724      
+IF                        if                             93         1765      
+VARIABLE_LOCAL            x                              93         1768      
+MAYOR                     >                              93         1770      
+INTEGER                   10                             93         1772      
+PUTS                      puts                           94         1777      
+STRING                    Diez                           94         1782      
+ELSIF                     elsif                          95         1789      
+VARIABLE_LOCAL            x                              95         1795      
+MAYOR                     >                              95         1797      
+INTEGER                   5                              95         1799      
+THEN                      then                           95         1801      
+END                       end                            96         1806      
+COMENTARIO_LINEA          # Error 21: Múltiples ELSIF con último sin condición 98         1811      
+IF                        if                             99         1864      
+VARIABLE_LOCAL            x                              99         1867      
+MENOR                     <                              99         1869      
+INTEGER                   0                              99         1871      
+PUTS                      puts                           100        1875      
+STRING                    Negativo                       100        1880      
+ELSIF                     elsif                          101        1891      
+VARIABLE_LOCAL            x                              101        1897      
+IGUAL                     ==                             101        1899      
+INTEGER                   0                              101        1902      
+PUTS                      puts                           102        1906      
+STRING                    Cero                           102        1911      
+ELSIF                     elsif                          103        1918      
+PUTS                      puts                           104        1926      
+STRING                    Error                          104        1931      
+END                       end                            105        1939      
+COMENTARIO_LINEA          # Error 22: Llamada a función con coma adicional al final 107        1944      
+VARIABLE_LOCAL            resultado                      108        2002      
+ASIGNACION                =                              108        2012      
+VARIABLE_LOCAL            sumar                          108        2014      
+PARENTESIS_IZQ            (                              108        2019      
+INTEGER                   1                              108        2020      
+COMA                      ,                              108        2021      
+INTEGER                   2                              108        2023      
+COMA                      ,                              108        2024      
+INTEGER                   3                              108        2026      
+COMA                      ,                              108        2027      
+PARENTESIS_DER            )                              108        2028      
+COMENTARIO_LINEA          # Error 23: Llamada a función con operador en vez de argumento 110        2031      
+VARIABLE_LOCAL            valor                          111        2094      
+ASIGNACION                =                              111        2100      
+VARIABLE_LOCAL            multiplicar                    111        2102      
+PARENTESIS_IZQ            (                              111        2113      
+INTEGER                   10                             111        2114      
+COMA                      ,                              111        2116      
+MULTIPLICACION            *                              111        2118      
+COMA                      ,                              111        2119      
+INTEGER                   5                              111        2121      
+PARENTESIS_DER            )                              111        2122      
+COMENTARIO_LINEA          # Error 24: Método de clase sin el punto 113        2125      
+VARIABLE_LOCAL            resultado                      114        2166      
+ASIGNACION                =                              114        2176      
+CONSTANTE                 MiClase                        114        2178      
+VARIABLE_LOCAL            metodo                         114        2186      
+PARENTESIS_IZQ            (                              114        2192      
+PARENTESIS_DER            )                              114        2193      
+COMENTARIO_LINEA          # Error 25: Arreglo con corchetes desbalanceados 116        2196      
+VARIABLE_LOCAL            matriz                         117        2245      
+ASIGNACION                =                              117        2252      
+CORCHETE_IZQ              [                              117        2254      
+CORCHETE_IZQ              [                              117        2255      
+INTEGER                   1                              117        2256      
+COMA                      ,                              117        2257      
+INTEGER                   2                              117        2259      
+COMA                      ,                              117        2260      
+INTEGER                   3                              117        2262      
+CORCHETE_DER              ]                              117        2263      
+COMA                      ,                              117        2264      
+CORCHETE_IZQ              [                              117        2266      
+INTEGER                   4                              117        2267      
+COMA                      ,                              117        2268      
+INTEGER                   5                              117        2270      
+COMA                      ,                              117        2271      
+INTEGER                   6                              117        2273      
+CORCHETE_DER              ]                              117        2274      
+COMENTARIO_LINEA          # Error 26: Arreglo con coma doble 119        2277      
+VARIABLE_LOCAL            lista                          120        2312      
+ASIGNACION                =                              120        2318      
+CORCHETE_IZQ              [                              120        2320      
+INTEGER                   1                              120        2321      
+COMA                      ,                              120        2322      
+INTEGER                   2                              120        2324      
+COMA                      ,                              120        2325      
+COMA                      ,                              120        2326      
+INTEGER                   3                              120        2328      
+COMA                      ,                              120        2329      
+INTEGER                   4                              120        2331      
+CORCHETE_DER              ]                              120        2332      
+COMENTARIO_LINEA          # Error 27: Hash con flecha pero sin valor 122        2335      
+VARIABLE_LOCAL            config                         123        2378      
+ASIGNACION                =                              123        2385      
+LLAVE_IZQ                 {                              123        2387      
+VARIABLE_LOCAL            nombre                         123        2389      
+DOS_PUNTOS                :                              123        2395      
+STRING                    Juan                           123        2397      
+COMA                      ,                              123        2403      
+VARIABLE_LOCAL            edad                           123        2405      
+FLECHA                    =>                             123        2410      
+LLAVE_DER                 }                              123        2413      
+COMENTARIO_LINEA          # Error 28: Hash con clave duplicada pero sintaxis rota 125        2416      
+VARIABLE_LOCAL            datos                          126        2472      
+ASIGNACION                =                              126        2478      
+LLAVE_IZQ                 {                              126        2480      
+VARIABLE_LOCAL            x                              126        2482      
+DOS_PUNTOS                :                              126        2483      
+INTEGER                   1                              126        2485      
+COMA                      ,                              126        2486      
+VARIABLE_LOCAL            y                              126        2488      
+DOS_PUNTOS                :                              126        2489      
+INTEGER                   2                              126        2491      
+COMA                      ,                              126        2492      
+VARIABLE_LOCAL            x                              126        2494      
+DOS_PUNTOS                :                              126        2495      
+LLAVE_DER                 }                              126        2497      
+COMENTARIO_LINEA          # Error 29: Hash con mezcla incorrecta de sintaxis 128        2500      
+VARIABLE_LOCAL            opciones                       129        2551      
+ASIGNACION                =                              129        2560      
+LLAVE_IZQ                 {                              129        2562      
+STRING                    a                              129        2564      
+FLECHA                    =>                             129        2568      
+INTEGER                   1                              129        2571      
+COMA                      ,                              129        2572      
+VARIABLE_LOCAL            b                              129        2574      
+DOS_PUNTOS                :                              129        2575      
+COMA                      ,                              129        2576      
+STRING                    c                              129        2578      
+FLECHA                    =>                             129        2582      
+INTEGER                   3                              129        2585      
+LLAVE_DER                 }                              129        2587      
+COMENTARIO_LINEA          # Error 30: AND sin operando derecho 131        2590      
+IF                        if                             132        2627      
+VARIABLE_LOCAL            x                              132        2630      
+MAYOR                     >                              132        2632      
+INTEGER                   5                              132        2634      
+VARIABLE_LOCAL            and                            132        2636      
+PUTS                      puts                           133        2642      
+STRING                    Error                          133        2647      
+END                       end                            134        2655      
+COMENTARIO_LINEA          # Error 31: OR con paréntesis sin cerrar 136        2660      
+IF                        if                             137        2701      
+PARENTESIS_IZQ            (                              137        2704      
+VARIABLE_LOCAL            a                              137        2705      
+MAYOR                     >                              137        2707      
+VARIABLE_LOCAL            b                              137        2709      
+VARIABLE_LOCAL            or                             137        2711      
+VARIABLE_LOCAL            c                              137        2714      
+MENOR                     <                              137        2716      
+VARIABLE_LOCAL            d                              137        2718      
+PUTS                      puts                           138        2722      
+STRING                    Comparación                    138        2727      
+END                       end                            139        2741      
+COMENTARIO_LINEA          # Error 32: NOT sin expresión  141        2746      
+VARIABLE_LOCAL            resultado                      142        2776      
+ASIGNACION                =                              142        2786      
+VARIABLE_LOCAL            not                            142        2788      
+COMENTARIO_LINEA          # Error 33: Operadores lógicos consecutivos 144        2793      
+IF                        if                             145        2837      
+VARIABLE_LOCAL            x                              145        2840      
+MAYOR                     >                              145        2842      
+INTEGER                   5                              145        2844      
+VARIABLE_LOCAL            and                            145        2846      
+VARIABLE_LOCAL            or                             145        2850      
+VARIABLE_LOCAL            y                              145        2853      
+MENOR                     <                              145        2855      
+INTEGER                   10                             145        2857      
+PUTS                      puts                           146        2862      
+STRING                    Error                          146        2867      
+END                       end                            147        2875      
+----------------------------------------------------------------------------------------------------
+Total de tokens: 318
+
+
+ ANÁLISIS COMPLETADO SIN ERRORES
+
+====================================================================================================

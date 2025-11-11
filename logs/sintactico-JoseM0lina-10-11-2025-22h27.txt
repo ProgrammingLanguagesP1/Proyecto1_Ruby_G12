@@ -1,0 +1,92 @@
+====================================================================================================
+ANALIZADOR SINTÁCTICO PARA RUBY
+====================================================================================================
+
+Usuario: JoseM0lina
+Fecha: 10/11/2025 22:27:19
+Archivo analizado: Algorithms/Algorithm2_JoseMarin_conErrores.rb
+====================================================================================================
+
+[OK] ANÁLISIS SINTÁCTICO EXITOSO
+
+ESTRUCTURA DEL PROGRAMA:
+----------------------------------------------------------------------------------------------------
+('programa', ['# Error 32: NOT sin expresión', ('asignacion', ('variable', 'resultado'), '=', ('valor', ('variable', 'not'))), '# Error 33: Operadores lógicos consecutivos', ('if', ('comparacion', '>', ('valor', ('variable', 'x')), ('valor', 5)), [('valor', ('variable', 'and')), ('valor', ('variable', 'or')), ('comparacion', '<', ('valor', ('variable', 'y')), ('valor', 10)), ('impresion', 'puts', [('valor', 'Error')])])])
+----------------------------------------------------------------------------------------------------
+
+CONSTRUCCIONES SINTÁCTICAS RECONOCIDAS:
+----------------------------------------------------------------------------------------------------
+1. Comparación: >
+2. Asignación: ('variable', 'contador') += [expresión]
+3. Comparación: <
+4. Asignación: ('variable', 'x') -= [expresión]
+5. Instrucción de impresión: puts
+6. Instrucción de impresión: puts
+7. RETURN con valor
+8. Definición de función: utilidad sin parámetros
+9. Instrucción de impresión: puts
+10. Definición de función: helper sin parámetros
+11. Rango inclusivo (..)
+12. Control de flujo: next
+13. Control de flujo: redo
+14. Comparación: >
+15. Instrucción de impresión: puts
+16. Comparación: >
+17. Instrucción de impresión: puts
+18. Comparación: >
+19. Comparación: <
+20. Instrucción de impresión: puts
+21. Comparación: ==
+22. Instrucción de impresión: puts
+23. Asignación: ('variable', 'resultado') = [expresión]
+24. Llamada a función: metodo sin argumentos
+25. Arreglo con 3 elemento(s)
+26. Arreglo con 3 elemento(s)
+27. Comparación: >
+28. Instrucción de impresión: puts
+29. Estructura IF completa
+30. Comparación: >
+31. Comparación: <
+32. Instrucción de impresión: puts
+33. Asignación: ('variable', 'resultado') = [expresión]
+34. Comparación: >
+35. Comparación: <
+36. Instrucción de impresión: puts
+37. Estructura IF completa
+38. Programa reconocido con 4 sentencia(s)
+----------------------------------------------------------------------------------------------------
+Total de construcciones: 38
+
+ERRORES SINTÁCTICOS ENCONTRADOS:
+----------------------------------------------------------------------------------------------------
+1. Error sintáctico en línea 157: Token inesperado '# Error 2: Asignación múltiple sin valores' (tipo: COMENTARIO_LINEA)
+2. Error sintáctico en línea 166: Token inesperado '# Error 5: Multiplicación asignación con operador adicional' (tipo: COMENTARIO_LINEA)
+3. Error sintáctico en línea 175: Token inesperado 'puts' (tipo: PUTS)
+4. Error sintáctico en línea 184: Token inesperado 'puts' (tipo: PUTS)
+5. Error sintáctico en línea 188: Token inesperado '.' (tipo: PUNTO)
+6. Error sintáctico en línea 191: Token inesperado '.' (tipo: PUNTO)
+7. Error sintáctico en línea 194: Token inesperado '.' (tipo: PUNTO)
+8. Error sintáctico en línea 202: Token inesperado 'end' (tipo: END)
+9. Error sintáctico en línea 212: Token inesperado 'module' (tipo: MODULE)
+10. Error sintáctico en línea 216: Token inesperado 'end' (tipo: END)
+11. Error sintáctico en línea 221: Token inesperado 'end' (tipo: END)
+12. Error sintáctico en línea 226: Token inesperado 'end' (tipo: END)
+13. Error sintáctico en línea 235: Token inesperado 'puts' (tipo: PUTS)
+14. Error sintáctico en línea 242: Token inesperado 'end' (tipo: END)
+15. Error sintáctico en línea 250: Token inesperado 'puts' (tipo: PUTS)
+16. Error sintáctico en línea 254: Token inesperado ')' (tipo: PARENTESIS_DER)
+17. Error sintáctico en línea 257: Token inesperado '*' (tipo: MULTIPLICACION)
+18. Error sintáctico en línea 265: Token inesperado '# Error 26: Arreglo con coma doble' (tipo: COMENTARIO_LINEA)
+19. Error sintáctico en línea 266: Token inesperado ',' (tipo: COMA)
+20. Error sintáctico en línea 269: Token inesperado '}' (tipo: LLAVE_DER)
+21. Error sintáctico en línea 272: Token inesperado '}' (tipo: LLAVE_DER)
+22. Error sintáctico en línea 275: Token inesperado ',' (tipo: COMA)
+23. Error sintáctico en línea 283: Token inesperado 'or' (tipo: VARIABLE_LOCAL)
+24. Error sintáctico en línea 285: Token inesperado 'end' (tipo: END)
+----------------------------------------------------------------------------------------------------
+Total de errores: 24
+
+
+[ERROR] ANÁLISIS COMPLETADO CON ERRORES SINTÁCTICOS
+
+====================================================================================================

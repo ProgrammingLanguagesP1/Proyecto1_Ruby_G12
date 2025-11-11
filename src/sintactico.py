@@ -303,6 +303,95 @@ def p_while_loop(p):
     tokens_parseados.append("Estructura WHILE")
 
 # ============================================================================
+# ESTRUCTURA DE CONTROL FOR Y UNTIL
+# Jose Marín (@JoseM0lina)
+# ============================================================================
+def p_for_loop(p):
+    '''for_loop : FOR VARIABLE_LOCAL IN rango sentencias END
+                | FOR VARIABLE_LOCAL IN rango DO sentencias END
+                | FOR VARIABLE_LOCAL IN expresion sentencias END
+                | FOR VARIABLE_LOCAL IN expresion DO sentencias END'''
+    if len(p) == 7:
+        p[0] = ('for', p[2], p[4], p[5])
+    else:
+        p[0] = ('for', p[2], p[4], p[6])
+    tokens_parseados.append(f"Estructura FOR con variable: {p[2]}")
+
+def p_until_loop(p):
+    '''until_loop : UNTIL expresion sentencias END
+                  | UNTIL expresion DO sentencias END'''
+    if len(p) == 5:
+        p[0] = ('until', p[2], p[3])
+    else:
+        p[0] = ('until', p[2], p[4])
+    tokens_parseados.append("Estructura UNTIL")
+
+# ============================================================================
+# RANGOS
+# Jose Marín (@JoseM0lina)
+# ============================================================================
+def p_rango(p):
+    '''rango : expresion PUNTO PUNTO expresion
+             | expresion PUNTO PUNTO PUNTO expresion'''
+    if len(p) == 5:
+        p[0] = ('rango_inclusivo', p[1], p[4])
+        tokens_parseados.append("Rango inclusivo (..)")
+    else:
+        p[0] = ('rango_exclusivo', p[1], p[5])
+        tokens_parseados.append("Rango exclusivo (...)")
+
+# ============================================================================
+# CONTROL DE FLUJO (BREAK, NEXT, REDO, RETURN)
+# Jose Marín (@JoseM0lina)
+# ============================================================================
+def p_control_flujo(p):
+    '''sentencia : BREAK
+                 | NEXT
+                 | REDO
+                 | RETURN
+                 | RETURN expresion'''
+    if len(p) == 2:
+        p[0] = ('control_flujo', p[1])
+        tokens_parseados.append(f"Control de flujo: {p[1]}")
+    else:
+        p[0] = ('return_valor', p[2])
+        tokens_parseados.append("RETURN con valor")
+
+# ============================================================================
+# DEFINICIÓN DE FUNCIONES
+# Jose Marín (@JoseM0lina)
+# ============================================================================
+def p_definicion_funcion(p):
+    '''definicion_funcion : DEF nombre_funcion sentencias END
+                          | DEF nombre_funcion PARENTESIS_IZQ parametros PARENTESIS_DER sentencias END
+                          | DEF nombre_funcion PARENTESIS_IZQ PARENTESIS_DER sentencias END'''
+    if len(p) == 5:
+        p[0] = ('funcion', p[2], [], p[3])
+        tokens_parseados.append(f"Definición de función: {p[2]} sin parámetros")
+    elif len(p) == 7:
+        p[0] = ('funcion', p[2], [], p[5])
+        tokens_parseados.append(f"Definición de función: {p[2]} sin parámetros (con paréntesis)")
+    else:
+        p[0] = ('funcion', p[2], p[4], p[6])
+        tokens_parseados.append(f"Definición de función: {p[2]} con {len(p[4])} parámetro(s)")
+
+def p_nombre_funcion(p):
+    '''nombre_funcion : VARIABLE_LOCAL
+                      | VARIABLE_LOCAL PUNTO VARIABLE_LOCAL'''
+    if len(p) == 2:
+        p[0] = p[1]
+    else:
+        p[0] = f"{p[1]}.{p[3]}"
+
+def p_parametros(p):
+    '''parametros : parametros COMA VARIABLE_LOCAL
+                  | VARIABLE_LOCAL'''
+    if len(p) == 4:
+        p[0] = p[1] + [p[3]]
+    else:
+        p[0] = [p[1]]
+
+# ============================================================================
 # LLAMADAS A FUNCIONES
 # Dhamar Quishpe (@dquishpe)
 # ============================================================================
@@ -325,6 +414,86 @@ def p_llamada_funcion(p):
         nombre = f"{p[1]}.{p[3]}"
         p[0] = ('llamada_funcion', nombre, [])
         tokens_parseados.append(f"Llamada a función: {nombre} sin argumentos")
+
+# ============================================================================
+# ARGUMENTOS Y ELEMENTOS (FUNCIONES AUXILIARES)
+# José Marín (@JoseM0lina)
+# ============================================================================
+def p_argumentos(p):
+    '''argumentos : argumentos COMA expresion
+                  | expresion'''
+    if len(p) == 4:
+        p[0] = p[1] + [p[3]]
+    else:
+        p[0] = [p[1]]
+
+# ============================================================================
+# DEFINICIÓN DE CLASES
+# Jose Marín (@JoseM0lina)
+# ============================================================================
+def p_definicion_clase(p):
+    '''definicion_clase : CLASS CONSTANTE sentencias_clase END
+                        | CLASS CONSTANTE END'''
+    if len(p) == 5:
+        p[0] = ('clase', p[2], p[3])
+        tokens_parseados.append(f"Definición de clase: {p[2]} con contenido")
+    else:
+        p[0] = ('clase', p[2], [])
+        tokens_parseados.append(f"Definición de clase: {p[2]} vacía")
+
+def p_sentencias_clase(p):
+    '''sentencias_clase : sentencias_clase sentencia_clase
+                        | sentencia_clase'''
+    if len(p) == 3:
+        p[0] = p[1] + [p[2]]
+    else:
+        p[0] = [p[1]]
+
+def p_sentencia_clase(p):
+    '''sentencia_clase : definicion_funcion
+                       | asignacion
+                       | COMENTARIO_LINEA
+                       | COMENTARIO_MULTILINEA'''
+    p[0] = p[1]
+
+# ============================================================================
+# DEFINICIÓN DE MÓDULOS
+# Jose Marín (@JoseM0lina)
+# ============================================================================
+def p_definicion_modulo(p):
+    '''definicion_modulo : MODULE CONSTANTE sentencias_clase END
+                         | MODULE CONSTANTE END'''
+    if len(p) == 5:
+        p[0] = ('modulo', p[2], p[3])
+        tokens_parseados.append(f"Definición de módulo: {p[2]} con contenido")
+    else:
+        p[0] = ('modulo', p[2], [])
+        tokens_parseados.append(f"Definición de módulo: {p[2]} vacío")
+
+# ============================================================================
+# REQUIRE
+# Jose Marín (@JoseM0lina)
+# ============================================================================
+def p_require(p):
+    '''sentencia : REQUIRE STRING
+                 | REQUIRE VARIABLE_LOCAL'''
+    p[0] = ('require', p[2])
+    tokens_parseados.append(f"Require: {p[2]}")
+
+# ============================================================================
+# MANEJO DE ERRORES SINTÁCTICOS
+# Jose Marín (@JoseM0lina)
+# ============================================================================
+def p_error(p):
+    global errores_sintacticos
+    if p:
+        error_msg = f"Error sintáctico en línea {p.lineno}: Token inesperado '{p.value}' (tipo: {p.type})"
+        errores_sintacticos.append(error_msg)
+        print(f"  [ERROR] {error_msg}")
+    else:
+        error_msg = "Error sintáctico: fin de archivo inesperado"
+        errores_sintacticos.append(error_msg)
+        print(f"  [ERROR] {error_msg}")
 
 # ============================================================================
 # CREAR LOG DE ANÁLISIS SINTÁCTICO
@@ -439,3 +608,29 @@ def analizar_sintaxis(archivo_entrada, usuario_git):
     print("="*100 + "\n")
     
     return resultado, errores_sintacticos
+
+# ============================================================================
+# MAIN
+# Jose Marín (@JoseM0lina)
+# ============================================================================
+if __name__ == '__main__':
+    if len(sys.argv) > 2:
+        archivo = sys.argv[1]
+        usuario = sys.argv[2]
+        
+        # Primero ejecutar análisis léxico
+        print("\n[FASE 1] ANÁLISIS LÉXICO")
+        print("="*100)
+        from lexico import analizar_archivo
+        tokens_lex, errores_lex = analizar_archivo(archivo, usuario)
+
+        if not errores_lex:
+            print("\n[FASE 2] ANÁLISIS SINTÁCTICO")
+            print("="*100)
+            analizar_sintaxis(archivo, usuario)
+        else:
+            print("\n[ADVERTENCIA] No se puede continuar con el análisis sintáctico debido a errores léxicos")
+    else:
+        print("[ERROR] Uso incorrecto del programa")
+        print("   Uso: python sintactico.py <archivo_ruby> <usuario_git>")
+        print("   Ejemplo: python sintactico.py Algorithms/Algorithm1_AngeloZurita.rb aszurita")
