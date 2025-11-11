@@ -152,12 +152,12 @@ t_ignore = ' \t'
 # Tipos de datos  Jose Marin (@JoseM0lina)
 # ============================================
 def t_FLOAT(t):
-    r'\d+\.\d+'
+    r'-?\d+\.\d+'
     t.value = float(t.value)
     return t
 
 def t_INTEGER(t):
-    r'\d+'
+    r'-?\d+'
     t.value = int(t.value)
     return t
 
