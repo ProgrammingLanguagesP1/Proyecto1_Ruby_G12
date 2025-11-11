@@ -1,0 +1,166 @@
+====================================================================================================
+ANALIZADOR LÉXICO PARA RUBY
+====================================================================================================
+
+Usuario: aszurita
+Fecha: 10/11/2025 22:37:06
+Archivo analizado: Algorithms/Algorithm1_AngeloZurita_conErrores.rb
+====================================================================================================
+
+TOKENS RECONOCIDOS:
+----------------------------------------------------------------------------------------------------
+Tipo                      Valor                          Línea      Posición  
+----------------------------------------------------------------------------------------------------
+COMENTARIO_LINEA          # ============================================================================ 1          0         
+COMENTARIO_LINEA          # ALGORITMO 1 - TEST DE ERRORES SINTÁCTICOS 2          79        
+COMENTARIO_LINEA          # Tester: Angelo Zurita (@aszurita) 3          123       
+COMENTARIO_LINEA          # Descripción: Algoritmo diseñado para probar el manejo de errores del 4          159       
+COMENTARIO_LINEA          #              analizador sintáctico 5          230       
+COMENTARIO_LINEA          # ============================================================================ 6          267       
+COMENTARIO_LINEA          # Error 1: IF sin END          8          347       
+IF                        if                             9          369       
+VARIABLE_LOCAL            x                              9          372       
+MAYOR                     >                              9          374       
+INTEGER                   10                             9          376       
+PUTS                      puts                           10         381       
+STRING                    Mayor que 10                   10         386       
+COMENTARIO_LINEA          # Error 2: Paréntesis sin cerrar en llamada a función 12         402       
+VARIABLE_LOCAL            resultado                      13         456       
+ASIGNACION                =                              13         466       
+VARIABLE_LOCAL            calcular                       13         468       
+PARENTESIS_IZQ            (                              13         476       
+INTEGER                   5                              13         477       
+COMA                      ,                              13         478       
+INTEGER                   10                             13         480       
+COMENTARIO_LINEA          # Error 3: Operador inválido al inicio de línea 15         484       
+SUMA                      +                              16         532       
+ASIGNACION                =                              16         534       
+INTEGER                   5                              16         536       
+COMENTARIO_LINEA          # Error 4: FOR con sintaxis incorrecta (falta IN) 18         539       
+FOR                       for                            19         589       
+VARIABLE_LOCAL            i                              19         593       
+INTEGER                   1                              19         595       
+PUNTO                     .                              19         596       
+PUNTO                     .                              19         597       
+INTEGER                   10                             19         598       
+PUTS                      puts                           20         603       
+VARIABLE_LOCAL            i                              20         608       
+END                       end                            21         610       
+COMENTARIO_LINEA          # Error 5: Asignación con operador incorrecto 23         615       
+VARIABLE_LOCAL            x                              24         661       
+ASIGNACION                =                              24         663       
+MENOR                     <                              24         664       
+INTEGER                   5                              24         666       
+COMENTARIO_LINEA          # Error 6: DEF sin END         26         669       
+DEF                       def                            27         692       
+VARIABLE_LOCAL            mi_funcion                     27         696       
+PUTS                      puts                           28         709       
+STRING                    Hola                           28         714       
+COMENTARIO_LINEA          # Error 7: Expresión aritmética incompleta 30         722       
+VARIABLE_LOCAL            y                              31         765       
+ASIGNACION                =                              31         767       
+INTEGER                   10                             31         769       
+SUMA                      +                              31         772       
+COMENTARIO_LINEA          # Error 8: Hash con sintaxis incorrecta (falta clave) 33         775       
+VARIABLE_LOCAL            hash                           34         829       
+ASIGNACION                =                              34         834       
+LLAVE_IZQ                 {                              34         836       
+VARIABLE_LOCAL            a                              34         838       
+DOS_PUNTOS                :                              34         839       
+INTEGER                   1                              34         841       
+COMA                      ,                              34         842       
+DOS_PUNTOS                :                              34         844       
+INTEGER                   2                              34         846       
+LLAVE_DER                 }                              34         848       
+COMENTARIO_LINEA          # Error 9: WHILE sin condición 36         851       
+WHILE                     while                          37         882       
+PUTS                      puts                           38         890       
+STRING                    Loop                           38         895       
+END                       end                            39         902       
+COMENTARIO_LINEA          # Error 10: Arreglo sin cerrar corchete 41         907       
+VARIABLE_LOCAL            numeros                        42         947       
+ASIGNACION                =                              42         955       
+CORCHETE_IZQ              [                              42         957       
+INTEGER                   1                              42         958       
+COMA                      ,                              42         959       
+INTEGER                   2                              42         961       
+COMA                      ,                              42         962       
+INTEGER                   3                              42         964       
+COMA                      ,                              42         965       
+INTEGER                   4                              42         967       
+COMENTARIO_LINEA          # Error 11: Comparación incompleta en condicional 44         970       
+IF                        if                             45         1020      
+VARIABLE_LOCAL            x                              45         1023      
+MAYOR                     >                              45         1025      
+PUTS                      puts                           46         1029      
+STRING                    Error                          46         1034      
+END                       end                            47         1042      
+COMENTARIO_LINEA          # Error 12: Clase sin nombre   49         1047      
+CLASS                     class                          50         1076      
+DEF                       def                            51         1084      
+VARIABLE_LOCAL            metodo                         51         1088      
+PUTS                      puts                           52         1099      
+STRING                    test                           52         1104      
+END                       end                            53         1113      
+END                       end                            54         1117      
+COMENTARIO_LINEA          # Error 13: Operadores consecutivos inválidos 56         1122      
+VARIABLE_LOCAL            z                              57         1168      
+ASIGNACION                =                              57         1170      
+INTEGER                   10                             57         1172      
+SUMA                      +                              57         1175      
+SUMA                      +                              57         1176      
+INTEGER                   5                              57         1178      
+COMENTARIO_LINEA          # Error 14: ELSIF sin IF previo 59         1181      
+ELSIF                     elsif                          60         1213      
+VARIABLE_LOCAL            x                              60         1219      
+MAYOR                     >                              60         1221      
+INTEGER                   5                              60         1223      
+PUTS                      puts                           61         1227      
+STRING                    Mayor que 5                    61         1232      
+COMENTARIO_LINEA          # Error 15: END sin estructura correspondiente 63         1247      
+PUTS                      puts                           64         1294      
+STRING                    Hola Mundo                     64         1299      
+END                       end                            65         1312      
+COMENTARIO_LINEA          # Error 16: Llamada a función con paréntesis sin cerrar 67         1317      
+VARIABLE_LOCAL            funcion                        68         1373      
+PARENTESIS_IZQ            (                              68         1380      
+INTEGER                   1                              68         1381      
+COMA                      ,                              68         1382      
+INTEGER                   2                              68         1384      
+COMA                      ,                              68         1385      
+INTEGER                   3                              68         1387      
+COMENTARIO_LINEA          # Error 17: String sin cerrar comillas 70         1390      
+VARIABLE_LOCAL            mensaje                        71         1429      
+ASIGNACION                =                              71         1437      
+STRING                    Esto es un error
+
+# Error 18: Operador lógico sin operando derecho
+if x > 5 and
+  puts  71         1439      
+CONSTANTE                 Error                          71         1528      
+END                       end                            72         1535      
+COMENTARIO_LINEA          # Error 19: FOR sin palabra clave IN 74         1540      
+FOR                       for                            75         1577      
+VARIABLE_LOCAL            contador                       75         1581      
+INTEGER                   1                              75         1590      
+PUNTO                     .                              75         1591      
+PUNTO                     .                              75         1592      
+INTEGER                   100                            75         1593      
+DO                        do                             75         1597      
+PUTS                      puts                           76         1602      
+VARIABLE_LOCAL            contador                       76         1607      
+END                       end                            77         1616      
+COMENTARIO_LINEA          # Error 20: Return con expresión inválida 79         1621      
+DEF                       def                            80         1663      
+VARIABLE_LOCAL            test                           80         1667      
+RETURN                    return                         81         1674      
+SUMA                      +                              81         1681      
+INTEGER                   5                              81         1683      
+END                       end                            82         1685      
+----------------------------------------------------------------------------------------------------
+Total de tokens: 142
+
+
+ ANÁLISIS COMPLETADO SIN ERRORES
+
+====================================================================================================

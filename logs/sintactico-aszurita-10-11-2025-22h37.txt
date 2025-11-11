@@ -1,0 +1,48 @@
+====================================================================================================
+ANALIZADOR SINTÁCTICO PARA RUBY
+====================================================================================================
+
+Usuario: aszurita
+Fecha: 10/11/2025 22:37:06
+Archivo analizado: Algorithms/Algorithm1_AngeloZurita_conErrores.rb
+====================================================================================================
+
+CONSTRUCCIONES SINTÁCTICAS RECONOCIDAS:
+----------------------------------------------------------------------------------------------------
+1. Comparación: >
+2. Instrucción de impresión: puts
+3. Instrucción de impresión: puts
+4. Instrucción de impresión: puts
+5. Instrucción de impresión: puts
+6. Comparación: >
+7. Instrucción de impresión: puts
+8. Instrucción de impresión: puts
+9. Asignación: ('variable', 'mensaje') = [expresión]
+10. Instrucción de impresión: puts
+----------------------------------------------------------------------------------------------------
+Total de construcciones: 10
+
+ERRORES SINTÁCTICOS ENCONTRADOS:
+----------------------------------------------------------------------------------------------------
+1. Error sintáctico en línea 97: Token inesperado '# Error 3: Operador inválido al inicio de línea' (tipo: COMENTARIO_LINEA)
+2. Error sintáctico en línea 101: Token inesperado '1' (tipo: INTEGER)
+3. Error sintáctico en línea 103: Token inesperado 'end' (tipo: END)
+4. Error sintáctico en línea 106: Token inesperado '<' (tipo: MENOR)
+5. Error sintáctico en línea 115: Token inesperado '# Error 8: Hash con sintaxis incorrecta (falta clave)' (tipo: COMENTARIO_LINEA)
+6. Error sintáctico en línea 116: Token inesperado ':' (tipo: DOS_PUNTOS)
+7. Error sintáctico en línea 126: Token inesperado '# Error 11: Comparación incompleta en condicional' (tipo: COMENTARIO_LINEA)
+8. Error sintáctico en línea 128: Token inesperado 'puts' (tipo: PUTS)
+9. Error sintáctico en línea 135: Token inesperado 'end' (tipo: END)
+10. Error sintáctico en línea 139: Token inesperado '+' (tipo: SUMA)
+11. Error sintáctico en línea 147: Token inesperado 'end' (tipo: END)
+12. Error sintáctico en línea 152: Token inesperado '# Error 17: String sin cerrar comillas' (tipo: COMENTARIO_LINEA)
+13. Error sintáctico en línea 154: Token inesperado 'end' (tipo: END)
+14. Error sintáctico en línea 157: Token inesperado '1' (tipo: INTEGER)
+15. Error sintáctico en línea 163: Token inesperado '+' (tipo: SUMA)
+----------------------------------------------------------------------------------------------------
+Total de errores: 15
+
+
+[ERROR] ANÁLISIS COMPLETADO CON ERRORES SINTÁCTICOS
+
+====================================================================================================
