@@ -37,6 +37,11 @@ Para ejecutar el analizador léxico:
 ```bash
 python src/lexico.py <archivo_ruby> <usuario_git>
 ```
+Para ejecutar el analizador sintáctico:
+
+```bash
+python src/sintactico.py <archivo_ruby> <usuario_git>
+```
 
 ### Ejemplos:
 
@@ -49,6 +54,9 @@ python src/lexico.py Algorithms/Algorithm2_DhamarQuishpe.rb dquishpe
 
 # Analizar Algorithm3 con usuario JoseM0lina
 python src/lexico.py Algorithms/Algorithm3_JoseMarin.rb JoseM0lina
+
+# Analizar Algorithm1 con Errores con usuario dquishpe
+python src/sintactico.py Algorithms/Algorithm3_DhamarQuishpe_conErrores.rb dquishpe
 ```
 
 ## 📂 Estructura del Proyecto
@@ -57,10 +65,14 @@ python src/lexico.py Algorithms/Algorithm3_JoseMarin.rb JoseM0lina
 Proyecto1_Ruby_G12/
 ├── src/
 │   └── lexico.py           # Analizador léxico principal
+│   └── sintactico.py           # Analizador sintáctico principal
 ├── Algorithms/
 │   ├── Algorithm1_AngeloZurita.rb
 │   ├── Algorithm2_DhamarQuishpe.rb
 │   └── Algorithm3_JoseMarin.rb
+│   ├── Algorithm1_AngeloZurita_conErrores.rb
+│   ├── Algorithm2_DhamarQuishpe_conErrores.rb
+│   └── Algorithm3_JoseMarin_conErrores.rb
 ├── logs/                    # Logs generados automáticamente
 └── README.md
 ```
@@ -103,15 +115,17 @@ El analizador reconoce los siguientes tipos de tokens:
 
 El programa genera:
 1. **Salida en consola**: Tabla formateada con todos los tokens encontrados
-2. **Archivo log**: Guardado en `logs/` con formato `lexico-{usuario}-{fecha}.txt`
+2. **Archivo log**: Guardado en `logs/` con formato `lexico-{usuario}-{fecha}.txt` o `sintactico-{usuario}-{fecha}.txt`
 
-Cada log contiene:
+Cada log contiene respectivamente:
 - Información del análisis (usuario, fecha, archivo)
 - Lista completa de tokens con tipo, valor, línea y posición
 - Resumen de errores (si los hay)
 - Total de tokens reconocidos
+- Total de construcciones
+- Total de errores sintácticos
 
-## 📝 Ejemplo de Salida
+## 📝 Ejemplo de Salida (Analizador léxico)
 
 ```
 ====================================================================================================
@@ -135,4 +149,46 @@ Total de tokens: 131
 
  ANÁLISIS COMPLETADO SIN ERRORES
 ====================================================================================================
+```
+## 📝 Ejemplo de Salida (Analizador sintáctico)
+
+```
+====================================================================================================
+ANALIZADOR SINTÁCTICO PARA RUBY
+====================================================================================================
+
+Usuario: dquishpe
+Fecha: 10/11/2025 22:51:03
+Archivo analizado: Algorithms/Algorithm3_DhamarQuishpe_conErrores.rb
+====================================================================================================
+
+[OK] ANÁLISIS SINTÁCTICO EXITOSO
+
+ESTRUCTURA DEL PROGRAMA:
+----------------------------------------------------------------------------------------------------
+('programa', ['# END sobrante'])
+----------------------------------------------------------------------------------------------------
+
+CONSTRUCCIONES SINTÁCTICAS RECONOCIDAS:
+----------------------------------------------------------------------------------------------------
+1. Operación aritmética: *
+2. Operación aritmética: +
+...
+----------------------------------------------------------------------------------------------------
+Total de construcciones: 16
+
+ERRORES SINTÁCTICOS ENCONTRADOS:
+----------------------------------------------------------------------------------------------------
+1. Error sintáctico en línea 73: Token inesperado '=' (tipo: ASIGNACION)
+2. Error sintáctico en línea 74: Token inesperado 'z' (tipo: VARIABLE_LOCAL)
+3. Error sintáctico en línea 76: Token inesperado '=' (tipo: ASIGNACION)
+...
+----------------------------------------------------------------------------------------------------
+Total de errores: 15
+
+
+[ERROR] ANÁLISIS COMPLETADO CON ERRORES SINTÁCTICOS
+
+====================================================================================================
+
 ```
