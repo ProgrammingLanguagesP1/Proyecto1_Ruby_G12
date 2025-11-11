@@ -40,7 +40,8 @@ tokens = [
     'INTEGER',
     'FLOAT',
     'STRING',
-    
+    'SIMBOLO',
+
     # Variables y constantes
     'VARIABLE_LOCAL',
     'VARIABLE_GLOBAL',
@@ -167,6 +168,10 @@ def t_STRING(t):
     t.value = t.value[1:-1]
     return t
 
+def t_SIMBOLO(t):
+    r':[a-zA-Z_][a-zA-Z0-9_]*'
+    return t
+
 # ============================================
 # Variables y constantes  Jose Marin (@JoseM0lina)
 # ============================================
@@ -184,7 +189,7 @@ def t_VARIABLE_GLOBAL(t):
     return t
 
 def t_CONSTANTE(t):
-    r'[A-Z][A-Z0-9_]*'
+    r'[A-Z][a-zA-Z0-9_]*'
     return t
 
 def t_VARIABLE_LOCAL(t):
