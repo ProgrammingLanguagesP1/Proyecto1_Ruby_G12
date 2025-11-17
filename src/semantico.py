@@ -109,7 +109,44 @@ def verificar_asignacion_palabra_reservada(nombre, linea=0):
         return False
     return True
 
+# ============================================
+# REGLAS SEMÁNTICAS - OPERACIONES PERMITIDAS
+# José Marin (@JoseM0lina)
+# ============================================
 
+def verificar_operador_incompatible(operador, tipo_izq, tipo_der, linea=0):
+    """
+    Regla 5: Operador incompatible
+    Verifica que los operadores sean compatibles con los tipos de datos
+    """
+    operaciones_validas = {
+        '+': [('integer', 'integer'), ('float', 'float'), ('integer', 'float'), 
+              ('float', 'integer'), ('string', 'string')],
+        '-': [('integer', 'integer'), ('float', 'float'), ('integer', 'float'), ('float', 'integer')],
+        '*': [('integer', 'integer'), ('float', 'float'), ('integer', 'float'), 
+              ('float', 'integer'), ('string', 'integer')],
+        '/': [('integer', 'integer'), ('float', 'float'), ('integer', 'float'), ('float', 'integer')],
+        '%': [('integer', 'integer')]
+    }
+    
+    if operador in operaciones_validas:
+        combinaciones = operaciones_validas[operador]
+        if (tipo_izq, tipo_der) not in combinaciones:
+            error = f"Error semántico en línea {linea}: Operador '{operador}' incompatible entre tipos '{tipo_izq}' y '{tipo_der}'"
+            errores_semanticos.append(error)
+            return False
+    return True
+
+def verificar_division_por_cero(divisor, linea=0):
+    """
+    Regla 6: División por cero
+    Detecta operaciones que produzcan división entre cero
+    """
+    if divisor == 0:
+        error = f"Error semántico en línea {linea}: División por cero detectada"
+        errores_semanticos.append(error)
+        return False
+    return True
 
 # ============================================
 # REGLAS SEMÁNTICAS - ESTRUCTURAS DE CONTROL
@@ -165,6 +202,33 @@ def verificar_conversion_perdida_datos(tipo_origen, tipo_destino, linea=0):
     """
     if tipo_origen == 'float' and tipo_destino == 'integer':
         warning = f"Advertencia semántica en línea {linea}: Conversión de '{tipo_origen}' a '{tipo_destino}' puede causar pérdida de precisión"
+        warnings_semanticos.append(warning)
+    return True
+
+# ============================================
+# REGLAS SEMÁNTICAS - RETORNO DE FUNCIONES
+# José Marin (@JoseM0lina)
+# ============================================
+
+def verificar_retorno_valido(tipo_retorno, linea=0):
+    """
+    Regla 11: Retorno válido
+    Verifica que la función devuelva un valor coherente
+    """
+    global en_funcion
+    if not en_funcion:
+        error = f"Error semántico en línea {linea}: 'return' usado fuera de una función"
+        errores_semanticos.append(error)
+        return False
+    return True
+
+def verificar_retorno_incompatible(nombre_funcion, tipo_retorno, linea=0):
+    """
+    Regla 12: Retorno incompatible
+    Comprueba que el valor retornado coincida con el tipo de operación
+    """
+    if tipo_retorno == 'string' and nombre_funcion in ['suma', 'resta', 'multiplicacion', 'division']:
+        warning = f"Advertencia semántica en línea {linea}: Función '{nombre_funcion}' retorna '{tipo_retorno}' cuando se esperaría un valor numérico"
         warnings_semanticos.append(warning)
     return True
 
@@ -471,3 +535,169 @@ def crear_log_semantico(errores, warnings, tabla, usuario, archivo_entrada):
         
     
     return nombre_log
+
+# ============================================
+# ANÁLISIS SEMÁNTICO PRINCIPAL
+# José Marin @JoseM0lina
+# ============================================
+
+def analizar_semantica(archivo_entrada, usuario_git, mostrar_sintactico=True):
+    """
+    Realiza el análisis semántico completo de un archivo Ruby
+    utilizando el árbol sintáctico generado por sintactico.py
+    """
+    reiniciar_analisis()
+    
+    print("\n" + "="*100)
+    print(f"{'ANALIZADOR SEMÁNTICO PARA RUBY':^100}")
+    print("="*100)
+    print(f"\n{'Usuario:':<20} {usuario_git}")
+    print(f"{'Archivo analizado:':<20} {archivo_entrada}")
+    print(f"{'Fecha:':<20} {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}")
+    print("\n" + "="*100)
+    print("OBTENIENDO ÁRBOL SINTÁCTICO...")
+    print("-"*100)
+    
+    # Obtener el árbol sintáctico del analizador sintáctico
+    resultado_sintactico, errores_sint = analizar_sintaxis(archivo_entrada, usuario_git)
+    
+    if errores_sint:
+        print("\n[ADVERTENCIA] Errores sintácticos encontrados, pero continuando con análisis semántico...")
+        print("="*100)
+        # NO retornar, continuar con lo que se pudo parsear
+    
+    print("\n[OK] Árbol sintáctico obtenido correctamente")
+    print("="*100)
+    print("\nREALIZANDO ANÁLISIS SEMÁNTICO...")
+    print("-"*100)
+    
+    # Analizar el árbol sintáctico
+    if resultado_sintactico:
+        analizar_nodo(resultado_sintactico)
+    
+    print("-"*100)
+    
+    # Mostrar tabla de símbolos
+    print("\nTABLA DE SÍMBOLOS:")
+    print("="*100)
+    
+    if tabla_simbolos["variables"]:
+        print("\nVARIABLES:")
+        print("-"*100)
+        print(f"{'Nombre':<30} {'Tipo':<20} {'Línea':<15}")
+        print("-"*100)
+        for nombre, info in tabla_simbolos["variables"].items():
+            print(f"{nombre:<30} {info['tipo']:<20} {info['linea']:<15}")
+        print("-"*100)
+        print(f"Total: {len(tabla_simbolos['variables'])}\n")
+    
+    if tabla_simbolos["constantes"]:
+        print("CONSTANTES:")
+        print("-"*100)
+        print(f"{'Nombre':<30} {'Tipo':<20} {'Línea':<15}")
+        print("-"*100)
+        for nombre, info in tabla_simbolos["constantes"].items():
+            print(f"{nombre:<30} {info['tipo']:<20} {info['linea']:<15}")
+        print("-"*100)
+        print(f"Total: {len(tabla_simbolos['constantes'])}\n")
+    
+    if tabla_simbolos["funciones"]:
+        print("FUNCIONES:")
+        print("-"*100)
+        print(f"{'Nombre':<30} {'Parámetros':<35} {'Línea':<15}")
+        print("-"*100)
+        for nombre, info in tabla_simbolos["funciones"].items():
+            params = ", ".join(info['parametros']) if info['parametros'] else "sin parámetros"
+            print(f"{nombre:<30} {params:<35} {info['linea']:<15}")
+        print("-"*100)
+        print(f"Total: {len(tabla_simbolos['funciones'])}\n")
+    
+    # Mostrar errores
+    if errores_semanticos:
+        print("\nERRORES SEMÁNTICOS:")
+        print("="*100)
+        for i, error in enumerate(errores_semanticos, 1):
+            print(f"{i}. {error}")
+        print("="*100)
+    
+    # Mostrar advertencias
+    if warnings_semanticos:
+        print("\nADVERTENCIAS:")
+        print("="*100)
+        for i, warning in enumerate(warnings_semanticos, 1):
+            print(f"{i}. {warning}")
+        print("="*100)
+    
+    # Resumen
+    print("\nRESUMEN:")
+    print("="*100)
+    print(f"Variables declaradas:    {len(tabla_simbolos['variables'])}")
+    print(f"Constantes declaradas:   {len(tabla_simbolos['constantes'])}")
+    print(f"Funciones declaradas:    {len(tabla_simbolos['funciones'])}")
+    print(f"Errores encontrados:     {len(errores_semanticos)}")
+    print(f"Advertencias:            {len(warnings_semanticos)}")
+    print("="*100)
+    
+    if not errores_semanticos:
+        print("\n[OK] ANÁLISIS SEMÁNTICO COMPLETADO SIN ERRORES")
+    else:
+        print(f"\n[ERROR] ANÁLISIS SEMÁNTICO COMPLETADO CON {len(errores_semanticos)} ERROR(ES)")
+    
+    print("="*100)
+    
+    # Crear log
+    try:
+        nombre_log = crear_log_semantico(errores_semanticos, warnings_semanticos, 
+                                         tabla_simbolos, usuario_git, archivo_entrada)
+        print(f"\n[LOG] Archivo guardado en: {nombre_log}")
+    except Exception as e:
+        print(f"\n[ERROR] No se pudo crear el log: {e}")
+        print(f"Carpeta actual: {os.getcwd()}")
+        print(f"Intentando crear en: {os.path.join(os.path.dirname(__file__), '../logs')}")
+    
+    print("="*100 + "\n")
+    
+    return resultado_sintactico, errores_semanticos
+
+# ============================================
+# MAIN
+# José Marin (@JoseM0lina)
+# ============================================
+
+if __name__ == '__main__':
+    if len(sys.argv) > 2:
+        archivo = sys.argv[1]
+        usuario = sys.argv[2]
+        
+        print("\n" + "="*100)
+        print(f"{'COMPILADOR RUBY - ANÁLISIS COMPLETO':^100}")
+        print("="*100)
+        
+        print("\n[FASE 1] ANÁLISIS LÉXICO")
+        print("="*100)
+        try:
+            tokens_lex, errores_lex = analizar_archivo(archivo, usuario)
+        except Exception as e:
+            print(f"[ERROR] Error en análisis léxico: {e}")
+            errores_lex = [str(e)]
+        
+        # Continuar aunque haya errores léxicos
+        print("\n[FASE 2] ANÁLISIS SINTÁCTICO")
+        print("="*100)
+        
+        print("\n[FASE 3] ANÁLISIS SEMÁNTICO")
+        print("="*100)
+        try:
+            analizar_semantica(archivo, usuario)
+        except Exception as e:
+            print(f"[ERROR] Error en análisis semántico: {e}")
+            print(f"Detalles: {type(e).__name__}")
+            import traceback
+            traceback.print_exc()
+    else:
+        print("\n" + "="*100)
+        print("[ERROR] Uso incorrecto del programa")
+        print("="*100)
+        print("\n   Uso: python semantico.py <archivo_ruby> <usuario_git>")
+        print("   Ejemplo: python semantico.py test.rb dquishpe\n")
+        print("="*100)
