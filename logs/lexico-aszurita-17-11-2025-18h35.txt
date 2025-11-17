@@ -1,0 +1,821 @@
+====================================================================================================
+ANALIZADOR LÉXICO PARA RUBY
+====================================================================================================
+
+Usuario: aszurita
+Fecha: 17/11/2025 18:35:32
+Archivo analizado: Algorithms/Algorithm_AngeloZurita_Semantico.rb
+====================================================================================================
+
+TOKENS RECONOCIDOS:
+----------------------------------------------------------------------------------------------------
+Tipo                      Valor                          Línea      Posición  
+----------------------------------------------------------------------------------------------------
+COMENTARIO_LINEA          # ============================================================================ 1          0         
+COMENTARIO_LINEA          # ALGORITMO - Sistema de Gestión de Inventario de Librería 2          79        
+COMENTARIO_LINEA          # Tester: Angelo Zurita (@aszurita) 3          138       
+COMENTARIO_LINEA          # Descripción: Sistema para gestionar inventario, ventas y estadísticas 4          174       
+COMENTARIO_LINEA          #              de una librería. Contiene errores semánticos intencionales. 5          246       
+COMENTARIO_LINEA          # ============================================================================ 6          321       
+COMENTARIO_LINEA          # Variables globales y constantes 8          401       
+CONSTANTE                 MAX_LIBROS                     9          435       
+ASIGNACION                =                              9          446       
+INTEGER                   100                            9          448       
+CONSTANTE                 MIN_PRECIO                     10         452       
+ASIGNACION                =                              10         463       
+INTEGER                   5                              10         465       
+CONSTANTE                 DESCUENTO_ESTUDIANTE           11         467       
+ASIGNACION                =                              11         488       
+FLOAT                     0.15                           11         490       
+VARIABLE_GLOBAL           $total_ventas                  12         495       
+ASIGNACION                =                              12         509       
+INTEGER                   0                              12         511       
+VARIABLE_GLOBAL           $libros_vendidos               13         513       
+ASIGNACION                =                              13         530       
+INTEGER                   0                              13         532       
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Modificación de constante 15         535       
+CONSTANTE                 MAX_LIBROS                     16         580       
+ASIGNACION                =                              16         591       
+INTEGER                   150                            16         593       
+COMENTARIO_LINEA          # Clase Libro                  18         598       
+CLASS                     class                          19         612       
+CONSTANTE                 Libro                          19         618       
+DEF                       def                            20         626       
+VARIABLE_LOCAL            initialize                     20         630       
+PARENTESIS_IZQ            (                              20         640       
+VARIABLE_LOCAL            titulo                         20         641       
+COMA                      ,                              20         647       
+VARIABLE_LOCAL            autor                          20         649       
+COMA                      ,                              20         654       
+VARIABLE_LOCAL            precio                         20         656       
+COMA                      ,                              20         662       
+VARIABLE_LOCAL            cantidad                       20         664       
+PARENTESIS_DER            )                              20         672       
+VARIABLE_INSTANCIA        @titulo                        21         678       
+ASIGNACION                =                              21         686       
+VARIABLE_LOCAL            titulo                         21         688       
+VARIABLE_INSTANCIA        @autor                         22         699       
+ASIGNACION                =                              22         706       
+VARIABLE_LOCAL            autor                          22         708       
+VARIABLE_INSTANCIA        @precio                        23         718       
+ASIGNACION                =                              23         726       
+VARIABLE_LOCAL            precio                         23         728       
+VARIABLE_INSTANCIA        @cantidad                      24         739       
+ASIGNACION                =                              24         749       
+VARIABLE_LOCAL            cantidad                       24         751       
+VARIABLE_INSTANCIA        @ventas                        25         764       
+ASIGNACION                =                              25         772       
+INTEGER                   0                              25         774       
+END                       end                            26         778       
+DEF                       def                            28         785       
+VARIABLE_LOCAL            calcular_valor_inventario      28         789       
+PARENTESIS_IZQ            (                              28         814       
+PARENTESIS_DER            )                              28         815       
+VARIABLE_LOCAL            valor                          29         821       
+ASIGNACION                =                              29         827       
+VARIABLE_INSTANCIA        @precio                        29         829       
+MULTIPLICACION            *                              29         837       
+VARIABLE_INSTANCIA        @cantidad                      29         839       
+RETURN                    return                         30         853       
+VARIABLE_LOCAL            valor                          30         860       
+END                       end                            31         868       
+DEF                       def                            33         875       
+VARIABLE_LOCAL            aplicar_descuento              33         879       
+PARENTESIS_IZQ            (                              33         896       
+VARIABLE_LOCAL            porcentaje                     33         897       
+PARENTESIS_DER            )                              33         907       
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Operación incompatible (string - float) 34         913       
+VARIABLE_LOCAL            descuento                      35         976       
+ASIGNACION                =                              35         986       
+STRING                    precio                         35         988       
+RESTA                     -                              35         997       
+VARIABLE_LOCAL            porcentaje                     35         999       
+VARIABLE_LOCAL            precio_nuevo                   36         1014      
+ASIGNACION                =                              36         1027      
+VARIABLE_INSTANCIA        @precio                        36         1029      
+MULTIPLICACION            *                              36         1037      
+VARIABLE_LOCAL            descuento                      36         1039      
+RETURN                    return                         37         1053      
+VARIABLE_LOCAL            precio_nuevo                   37         1060      
+END                       end                            38         1075      
+DEF                       def                            40         1082      
+VARIABLE_LOCAL            vender                         40         1086      
+PARENTESIS_IZQ            (                              40         1092      
+VARIABLE_LOCAL            cantidad_venta                 40         1093      
+PARENTESIS_DER            )                              40         1107      
+IF                        if                             41         1113      
+VARIABLE_LOCAL            cantidad_venta                 41         1116      
+MENOR_IGUAL               <=                             41         1131      
+VARIABLE_INSTANCIA        @cantidad                      41         1134      
+VARIABLE_INSTANCIA        @cantidad                      42         1150      
+RESTA_ASIG                -=                             42         1160      
+VARIABLE_LOCAL            cantidad_venta                 42         1163      
+VARIABLE_INSTANCIA        @ventas                        43         1184      
+SUMA_ASIG                 +=                             43         1192      
+VARIABLE_LOCAL            cantidad_venta                 43         1195      
+RETURN                    return                         44         1216      
+TRUE                      true                           44         1223      
+ELSE                      else                           45         1232      
+RETURN                    return                         46         1243      
+FALSE                     false                          46         1250      
+END                       end                            47         1260      
+END                       end                            48         1266      
+DEF                       def                            50         1273      
+VARIABLE_LOCAL            necesita_reabastecimiento      50         1277      
+PARENTESIS_IZQ            (                              50         1302      
+PARENTESIS_DER            )                              50         1303      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Condición con string (warning) 51         1309      
+IF                        if                             52         1363      
+VARIABLE_INSTANCIA        @titulo                        52         1366      
+VARIABLE_LOCAL            limite                         53         1380      
+ASIGNACION                =                              53         1387      
+INTEGER                   10                             53         1389      
+RETURN                    return                         54         1398      
+VARIABLE_INSTANCIA        @cantidad                      54         1405      
+MENOR                     <                              54         1415      
+VARIABLE_LOCAL            limite                         54         1417      
+END                       end                            55         1428      
+END                       end                            56         1434      
+END                       end                            57         1438      
+COMENTARIO_LINEA          # Funciones auxiliares         59         1443      
+DEF                       def                            60         1466      
+VARIABLE_LOCAL            validar_precio                 60         1470      
+PARENTESIS_IZQ            (                              60         1484      
+VARIABLE_LOCAL            precio                         60         1485      
+PARENTESIS_DER            )                              60         1491      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Variable no declarada 61         1495      
+VARIABLE_LOCAL            valido                         62         1538      
+ASIGNACION                =                              62         1545      
+VARIABLE_LOCAL            precio                         62         1547      
+MAYOR_IGUAL               >=                             62         1554      
+CONSTANTE                 MIN_PRECIO                     62         1557      
+AND                       &&                             62         1568      
+VARIABLE_LOCAL            precio                         62         1571      
+MENOR_IGUAL               <=                             62         1578      
+VARIABLE_LOCAL            precio_maximo                  62         1581      
+RETURN                    return                         63         1597      
+VARIABLE_LOCAL            valido                         63         1604      
+END                       end                            64         1611      
+DEF                       def                            66         1616      
+VARIABLE_LOCAL            calcular_total_inventario      66         1620      
+PARENTESIS_IZQ            (                              66         1645      
+VARIABLE_LOCAL            libros                         66         1646      
+PARENTESIS_DER            )                              66         1652      
+VARIABLE_LOCAL            total                          67         1656      
+ASIGNACION                =                              67         1662      
+INTEGER                   0                              67         1664      
+VARIABLE_LOCAL            contador                       68         1668      
+ASIGNACION                =                              68         1677      
+INTEGER                   0                              68         1679      
+FOR                       for                            70         1684      
+VARIABLE_LOCAL            libro                          70         1688      
+IN                        in                             70         1694      
+VARIABLE_LOCAL            libros                         70         1697      
+VARIABLE_LOCAL            total                          71         1708      
+SUMA_ASIG                 +=                             71         1714      
+VARIABLE_LOCAL            libro                          71         1717      
+VARIABLE_LOCAL            contador                       72         1727      
+SUMA_ASIG                 +=                             72         1736      
+INTEGER                   1                              72         1739      
+END                       end                            73         1743      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: División por cero 75         1750      
+VARIABLE_LOCAL            promedio                       76         1789      
+ASIGNACION                =                              76         1798      
+VARIABLE_LOCAL            total                          76         1800      
+DIVISION                  /                              76         1806      
+INTEGER                   0                              76         1808      
+RETURN                    return                         78         1813      
+VARIABLE_LOCAL            total                          78         1820      
+END                       end                            79         1826      
+DEF                       def                            81         1831      
+VARIABLE_LOCAL            generar_reporte_ventas         81         1835      
+PARENTESIS_IZQ            (                              81         1857      
+VARIABLE_LOCAL            ventas_mes                     81         1858      
+PARENTESIS_DER            )                              81         1868      
+VARIABLE_LOCAL            suma                           82         1872      
+ASIGNACION                =                              82         1877      
+INTEGER                   0                              82         1879      
+VARIABLE_LOCAL            maximo                         83         1883      
+ASIGNACION                =                              83         1890      
+INTEGER                   0                              83         1892      
+VARIABLE_LOCAL            minimo                         84         1896      
+ASIGNACION                =                              84         1903      
+INTEGER                   1000                           84         1905      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Conversión implícita inválida 86         1913      
+VARIABLE_LOCAL            mes_texto                      87         1964      
+ASIGNACION                =                              87         1974      
+STRING                    Enero                          87         1976      
+VARIABLE_LOCAL            total_con_mes                  88         1986      
+ASIGNACION                =                              88         2000      
+VARIABLE_LOCAL            suma                           88         2002      
+SUMA                      +                              88         2007      
+VARIABLE_LOCAL            mes_texto                      88         2009      
+FOR                       for                            90         2022      
+VARIABLE_LOCAL            venta                          90         2026      
+IN                        in                             90         2032      
+VARIABLE_LOCAL            ventas_mes                     90         2035      
+VARIABLE_LOCAL            suma                           91         2050      
+SUMA_ASIG                 +=                             91         2055      
+VARIABLE_LOCAL            venta                          91         2058      
+IF                        if                             92         2068      
+VARIABLE_LOCAL            venta                          92         2071      
+MAYOR                     >                              92         2077      
+VARIABLE_LOCAL            maximo                         92         2079      
+VARIABLE_LOCAL            maximo                         93         2092      
+ASIGNACION                =                              93         2099      
+VARIABLE_LOCAL            venta                          93         2101      
+END                       end                            94         2111      
+IF                        if                             95         2119      
+VARIABLE_LOCAL            venta                          95         2122      
+MENOR                     <                              95         2128      
+VARIABLE_LOCAL            minimo                         95         2130      
+VARIABLE_LOCAL            minimo                         96         2143      
+ASIGNACION                =                              96         2150      
+VARIABLE_LOCAL            venta                          96         2152      
+END                       end                            97         2162      
+END                       end                            98         2168      
+VARIABLE_LOCAL            reporte                        100        2175      
+ASIGNACION                =                              100        2183      
+LLAVE_IZQ                 {                              100        2185      
+VARIABLE_LOCAL            total                          101        2191      
+DOS_PUNTOS                :                              101        2196      
+VARIABLE_LOCAL            suma                           101        2198      
+COMA                      ,                              101        2202      
+VARIABLE_LOCAL            maximo                         102        2208      
+DOS_PUNTOS                :                              102        2214      
+VARIABLE_LOCAL            maximo                         102        2216      
+COMA                      ,                              102        2222      
+VARIABLE_LOCAL            minimo                         103        2228      
+DOS_PUNTOS                :                              103        2234      
+VARIABLE_LOCAL            minimo                         103        2236      
+LLAVE_DER                 }                              104        2245      
+RETURN                    return                         106        2250      
+VARIABLE_LOCAL            reporte                        106        2257      
+END                       end                            107        2265      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Return fuera de función 109        2270      
+RETURN                    return                         110        2313      
+STRING                    inicializacion                 110        2320      
+COMENTARIO_LINEA          # Programa principal           112        2338      
+PUTS                      puts                           113        2359      
+STRING                    Sistema de Gestión de Inventario 113        2364      
+PUTS                      puts                           114        2399      
+STRING                    ================================== 114        2404      
+COMENTARIO_LINEA          # Inicialización de inventario 116        2442      
+VARIABLE_LOCAL            titulos                        117        2473      
+ASIGNACION                =                              117        2481      
+CORCHETE_IZQ              [                              117        2483      
+STRING                    Cien años de soledad           117        2484      
+COMA                      ,                              117        2506      
+STRING                    Don Quijote                    117        2508      
+COMA                      ,                              117        2521      
+STRING                    El Principito                  117        2523      
+COMA                      ,                              117        2538      
+STRING                    1984                           117        2540      
+COMA                      ,                              117        2546      
+STRING                    Rayuela                        117        2548      
+CORCHETE_DER              ]                              117        2557      
+VARIABLE_LOCAL            autores                        118        2559      
+ASIGNACION                =                              118        2567      
+CORCHETE_IZQ              [                              118        2569      
+STRING                    García Márquez                 118        2570      
+COMA                      ,                              118        2586      
+STRING                    Cervantes                      118        2588      
+COMA                      ,                              118        2599      
+STRING                    Saint-Exupéry                  118        2601      
+COMA                      ,                              118        2616      
+STRING                    Orwell                         118        2618      
+COMA                      ,                              118        2626      
+STRING                    Cortázar                       118        2628      
+CORCHETE_DER              ]                              118        2638      
+VARIABLE_LOCAL            precios                        119        2640      
+ASIGNACION                =                              119        2648      
+CORCHETE_IZQ              [                              119        2650      
+FLOAT                     25.99                          119        2651      
+COMA                      ,                              119        2656      
+FLOAT                     30.5                           119        2658      
+COMA                      ,                              119        2663      
+FLOAT                     15.75                          119        2665      
+COMA                      ,                              119        2670      
+FLOAT                     22.0                           119        2672      
+COMA                      ,                              119        2677      
+FLOAT                     28.5                           119        2679      
+CORCHETE_DER              ]                              119        2684      
+VARIABLE_LOCAL            cantidades                     120        2686      
+ASIGNACION                =                              120        2697      
+CORCHETE_IZQ              [                              120        2699      
+INTEGER                   50                             120        2700      
+COMA                      ,                              120        2702      
+INTEGER                   30                             120        2704      
+COMA                      ,                              120        2706      
+INTEGER                   45                             120        2708      
+COMA                      ,                              120        2710      
+INTEGER                   25                             120        2712      
+COMA                      ,                              120        2714      
+INTEGER                   35                             120        2716      
+CORCHETE_DER              ]                              120        2718      
+VARIABLE_LOCAL            libros_inventario              122        2721      
+ASIGNACION                =                              122        2739      
+CORCHETE_IZQ              [                              122        2741      
+CORCHETE_DER              ]                              122        2742      
+VARIABLE_LOCAL            total_libros                   123        2744      
+ASIGNACION                =                              123        2757      
+INTEGER                   0                              123        2759      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Asignación a palabra reservada 125        2762      
+PUTS                      puts                           126        2812      
+ASIGNACION                =                              126        2817      
+STRING                    Mensaje del sistema            126        2819      
+COMENTARIO_LINEA          # Registro de libros           128        2842      
+FOR                       for                            129        2863      
+VARIABLE_LOCAL            i                              129        2867      
+IN                        in                             129        2869      
+INTEGER                   0                              129        2872      
+PUNTO                     .                              129        2873      
+PUNTO                     .                              129        2874      
+INTEGER                   4                              129        2875      
+VARIABLE_LOCAL            titulo                         130        2879      
+ASIGNACION                =                              130        2886      
+VARIABLE_LOCAL            titulos                        130        2888      
+VARIABLE_LOCAL            autor                          131        2898      
+ASIGNACION                =                              131        2904      
+VARIABLE_LOCAL            autores                        131        2906      
+VARIABLE_LOCAL            precio                         132        2916      
+ASIGNACION                =                              132        2923      
+VARIABLE_LOCAL            precios                        132        2925      
+VARIABLE_LOCAL            cantidad                       133        2935      
+ASIGNACION                =                              133        2944      
+VARIABLE_LOCAL            cantidades                     133        2946      
+IF                        if                             135        2960      
+VARIABLE_LOCAL            validar_precio                 135        2963      
+PARENTESIS_IZQ            (                              135        2977      
+VARIABLE_LOCAL            precio                         135        2978      
+PARENTESIS_DER            )                              135        2984      
+VARIABLE_LOCAL            total_libros                   136        2990      
+SUMA_ASIG                 +=                             136        3003      
+INTEGER                   1                              136        3006      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Cambio de tipo (warning) 137        3012      
+VARIABLE_LOCAL            total_libros                   138        3060      
+ASIGNACION                =                              138        3073      
+STRING                    muchos libros                  138        3075      
+END                       end                            139        3093      
+END                       end                            140        3097      
+COMENTARIO_LINEA          # Simulación de ventas         142        3102      
+VARIABLE_LOCAL            ventas_enero                   143        3125      
+ASIGNACION                =                              143        3138      
+CORCHETE_IZQ              [                              143        3140      
+INTEGER                   120                            143        3141      
+COMA                      ,                              143        3144      
+INTEGER                   95                             143        3146      
+COMA                      ,                              143        3148      
+INTEGER                   150                            143        3150      
+COMA                      ,                              143        3153      
+INTEGER                   80                             143        3155      
+COMA                      ,                              143        3157      
+INTEGER                   110                            143        3159      
+CORCHETE_DER              ]                              143        3162      
+VARIABLE_LOCAL            ventas_febrero                 144        3164      
+ASIGNACION                =                              144        3179      
+CORCHETE_IZQ              [                              144        3181      
+INTEGER                   100                            144        3182      
+COMA                      ,                              144        3185      
+INTEGER                   105                            144        3187      
+COMA                      ,                              144        3190      
+INTEGER                   130                            144        3192      
+COMA                      ,                              144        3195      
+INTEGER                   90                             144        3197      
+COMA                      ,                              144        3199      
+INTEGER                   115                            144        3201      
+CORCHETE_DER              ]                              144        3204      
+VARIABLE_LOCAL            ventas_marzo                   145        3206      
+ASIGNACION                =                              145        3219      
+CORCHETE_IZQ              [                              145        3221      
+INTEGER                   140                            145        3222      
+COMA                      ,                              145        3225      
+INTEGER                   120                            145        3227      
+COMA                      ,                              145        3230      
+INTEGER                   160                            145        3232      
+COMA                      ,                              145        3235      
+INTEGER                   100                            145        3237      
+COMA                      ,                              145        3240      
+INTEGER                   125                            145        3242      
+CORCHETE_DER              ]                              145        3245      
+COMENTARIO_LINEA          # Cálculo de estadísticas      147        3248      
+VARIABLE_LOCAL            stats_enero                    148        3274      
+ASIGNACION                =                              148        3286      
+VARIABLE_LOCAL            generar_reporte_ventas         148        3288      
+PARENTESIS_IZQ            (                              148        3310      
+VARIABLE_LOCAL            ventas_enero                   148        3311      
+PARENTESIS_DER            )                              148        3323      
+VARIABLE_LOCAL            stats_febrero                  149        3325      
+ASIGNACION                =                              149        3339      
+VARIABLE_LOCAL            generar_reporte_ventas         149        3341      
+PARENTESIS_IZQ            (                              149        3363      
+VARIABLE_LOCAL            ventas_febrero                 149        3364      
+PARENTESIS_DER            )                              149        3378      
+VARIABLE_LOCAL            stats_marzo                    150        3380      
+ASIGNACION                =                              150        3392      
+VARIABLE_LOCAL            generar_reporte_ventas         150        3394      
+PARENTESIS_IZQ            (                              150        3416      
+VARIABLE_LOCAL            ventas_marzo                   150        3417      
+PARENTESIS_DER            )                              150        3429      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Modificación de constante 152        3432      
+CONSTANTE                 DESCUENTO_ESTUDIANTE           153        3477      
+ASIGNACION                =                              153        3498      
+FLOAT                     0.2                            153        3500      
+COMENTARIO_LINEA          # Aplicación de descuentos     155        3506      
+VARIABLE_LOCAL            descuento_aplicado             156        3533      
+ASIGNACION                =                              156        3552      
+CONSTANTE                 DESCUENTO_ESTUDIANTE           156        3554      
+MULTIPLICACION            *                              156        3575      
+INTEGER                   100                            156        3577      
+VARIABLE_LOCAL            precio_con_descuento           157        3581      
+ASIGNACION                =                              157        3602      
+VARIABLE_LOCAL            precios                        157        3604      
+RESTA                     -                              157        3612      
+VARIABLE_LOCAL            descuento_aplicado             157        3614      
+COMENTARIO_LINEA          # Cálculo de ventas totales con WHILE 159        3634      
+VARIABLE_LOCAL            contador_mes                   160        3672      
+ASIGNACION                =                              160        3685      
+INTEGER                   0                              160        3687      
+VARIABLE_LOCAL            suma_ventas                    161        3689      
+ASIGNACION                =                              161        3701      
+INTEGER                   0                              161        3703      
+WHILE                     while                          162        3705      
+VARIABLE_LOCAL            contador_mes                   162        3711      
+MENOR                     <                              162        3724      
+INTEGER                   3                              162        3726      
+IF                        if                             163        3730      
+VARIABLE_LOCAL            contador_mes                   163        3733      
+IGUAL                     ==                             163        3746      
+INTEGER                   0                              163        3749      
+VARIABLE_LOCAL            suma_ventas                    164        3755      
+SUMA_ASIG                 +=                             164        3767      
+VARIABLE_LOCAL            stats_enero                    164        3770      
+ELSIF                     elsif                          165        3784      
+VARIABLE_LOCAL            contador_mes                   165        3790      
+IGUAL                     ==                             165        3803      
+INTEGER                   1                              165        3806      
+VARIABLE_LOCAL            suma_ventas                    166        3812      
+SUMA_ASIG                 +=                             166        3824      
+VARIABLE_LOCAL            stats_febrero                  166        3827      
+ELSE                      else                           167        3843      
+VARIABLE_LOCAL            suma_ventas                    168        3852      
+SUMA_ASIG                 +=                             168        3864      
+VARIABLE_LOCAL            stats_marzo                    168        3867      
+END                       end                            169        3881      
+VARIABLE_LOCAL            contador_mes                   170        3887      
+SUMA_ASIG                 +=                             170        3900      
+INTEGER                   1                              170        3903      
+END                       end                            171        3905      
+VARIABLE_GLOBAL           $total_ventas                  173        3910      
+ASIGNACION                =                              173        3924      
+VARIABLE_LOCAL            suma_ventas                    173        3926      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Break fuera de loop 175        3939      
+IF                        if                             176        3978      
+VARIABLE_GLOBAL           $total_ventas                  176        3981      
+MAYOR                     >                              176        3995      
+INTEGER                   500                            176        3997      
+BREAK                     break                          177        4003      
+END                       end                            178        4009      
+COMENTARIO_LINEA          # Verificación con UNTIL       180        4014      
+VARIABLE_LOCAL            verificacion                   181        4039      
+ASIGNACION                =                              181        4052      
+INTEGER                   0                              181        4054      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Condición con array (warning) 182        4056      
+UNTIL                     until                          183        4105      
+VARIABLE_LOCAL            cantidades                     183        4111      
+VARIABLE_LOCAL            verificacion                   184        4124      
+SUMA_ASIG                 +=                             184        4137      
+INTEGER                   1                              184        4140      
+VARIABLE_GLOBAL           $libros_vendidos               185        4144      
+SUMA_ASIG                 +=                             185        4161      
+INTEGER                   5                              185        4164      
+END                       end                            186        4166      
+COMENTARIO_LINEA          # Análisis de resultados       188        4171      
+VARIABLE_LOCAL            promedio_ventas                189        4196      
+ASIGNACION                =                              189        4212      
+VARIABLE_GLOBAL           $total_ventas                  189        4214      
+DIVISION                  /                              189        4228      
+INTEGER                   3                              189        4230      
+VARIABLE_LOCAL            meta_cumplida                  190        4232      
+ASIGNACION                =                              190        4246      
+VARIABLE_LOCAL            promedio_ventas                190        4248      
+MAYOR_IGUAL               >=                             190        4264      
+INTEGER                   100                            190        4267      
+AND                       &&                             190        4271      
+VARIABLE_LOCAL            total_libros                   190        4274      
+MAYOR                     >                              190        4287      
+INTEGER                   0                              190        4289      
+VARIABLE_LOCAL            necesita_promocion             191        4291      
+ASIGNACION                =                              191        4310      
+NOT                       !                              191        4312      
+VARIABLE_LOCAL            meta_cumplida                  191        4313      
+OR                        ||                             191        4327      
+VARIABLE_LOCAL            promedio_ventas                191        4330      
+MENOR                     <                              191        4346      
+INTEGER                   120                            191        4348      
+COMENTARIO_LINEA          # Función para calcular ganancia 193        4353      
+DEF                       def                            194        4386      
+VARIABLE_LOCAL            calcular_ganancia              194        4390      
+PARENTESIS_IZQ            (                              194        4407      
+VARIABLE_LOCAL            precio_venta                   194        4408      
+COMA                      ,                              194        4420      
+VARIABLE_LOCAL            precio_costo                   194        4422      
+COMA                      ,                              194        4434      
+VARIABLE_LOCAL            cantidad                       194        4436      
+PARENTESIS_DER            )                              194        4444      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Variable no declarada usada en operación 195        4448      
+VARIABLE_LOCAL            ganancia_unitaria              196        4510      
+ASIGNACION                =                              196        4528      
+VARIABLE_LOCAL            precio_venta                   196        4530      
+RESTA                     -                              196        4543      
+VARIABLE_LOCAL            costo_base                     196        4545      
+VARIABLE_LOCAL            ganancia_total                 197        4558      
+ASIGNACION                =                              197        4573      
+VARIABLE_LOCAL            ganancia_unitaria              197        4575      
+MULTIPLICACION            *                              197        4593      
+VARIABLE_LOCAL            cantidad                       197        4595      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Next fuera de loop 199        4607      
+IF                        if                             200        4647      
+VARIABLE_LOCAL            ganancia_total                 200        4650      
+MENOR                     <                              200        4665      
+INTEGER                   0                              200        4667      
+NEXT                      next                           201        4673      
+END                       end                            202        4680      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Return con tipo incompatible (warning) 204        4687      
+RETURN                    return                         205        4747      
+STRING                    ganancia positiva              205        4754      
+END                       end                            206        4774      
+COMENTARIO_LINEA          # Procesamiento de reabastecimiento 208        4779      
+VARIABLE_LOCAL            cantidad_reabastecer           209        4815      
+ASIGNACION                =                              209        4836      
+INTEGER                   0                              209        4838      
+FOR                       for                            210        4840      
+VARIABLE_LOCAL            i                              210        4844      
+IN                        in                             210        4846      
+INTEGER                   0                              210        4849      
+PUNTO                     .                              210        4850      
+PUNTO                     .                              210        4851      
+INTEGER                   4                              210        4852      
+VARIABLE_LOCAL            stock_actual                   211        4856      
+ASIGNACION                =                              211        4869      
+VARIABLE_LOCAL            cantidades                     211        4871      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Conversión con pérdida de datos (warning) 213        4885      
+VARIABLE_LOCAL            precio_decimal                 214        4948      
+ASIGNACION                =                              214        4963      
+VARIABLE_LOCAL            precios                        214        4965      
+VARIABLE_LOCAL            precio_entero                  215        4975      
+ASIGNACION                =                              215        4989      
+VARIABLE_LOCAL            precio_decimal                 215        4991      
+PUNTO                     .                              215        5005      
+VARIABLE_LOCAL            to_i                           215        5006      
+IF                        if                             217        5014      
+VARIABLE_LOCAL            stock_actual                   217        5017      
+MENOR                     <                              217        5030      
+INTEGER                   20                             217        5032      
+VARIABLE_LOCAL            cantidad_reabastecer           218        5039      
+SUMA_ASIG                 +=                             218        5060      
+INTEGER                   1                              218        5063      
+END                       end                            219        5067      
+END                       end                            220        5071      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Asignación a palabra reservada 222        5076      
+IF                        if                             223        5126      
+ASIGNACION                =                              223        5129      
+INTEGER                   100                            223        5131      
+ELSE                      else                           224        5135      
+ASIGNACION                =                              224        5140      
+INTEGER                   200                            224        5142      
+COMENTARIO_LINEA          # Categorización de libros     226        5147      
+VARIABLE_LOCAL            categoria_ficcion              227        5174      
+ASIGNACION                =                              227        5192      
+INTEGER                   0                              227        5194      
+VARIABLE_LOCAL            categoria_no_ficcion           228        5196      
+ASIGNACION                =                              228        5217      
+INTEGER                   0                              228        5219      
+VARIABLE_LOCAL            contador                       230        5222      
+ASIGNACION                =                              230        5231      
+INTEGER                   0                              230        5233      
+WHILE                     while                          231        5235      
+VARIABLE_LOCAL            contador                       231        5241      
+MENOR                     <                              231        5250      
+INTEGER                   5                              231        5252      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Operación incompatible (string * integer) 232        5256      
+VARIABLE_LOCAL            categoria                      233        5319      
+ASIGNACION                =                              233        5329      
+STRING                    Ficcion                        233        5331      
+MULTIPLICACION            *                              233        5341      
+VARIABLE_LOCAL            contador                       233        5343      
+IF                        if                             235        5355      
+VARIABLE_LOCAL            contador                       235        5358      
+MODULO                    %                              235        5367      
+INTEGER                   2                              235        5369      
+IGUAL                     ==                             235        5371      
+INTEGER                   0                              235        5374      
+VARIABLE_LOCAL            categoria_ficcion              236        5380      
+SUMA_ASIG                 +=                             236        5398      
+INTEGER                   1                              236        5401      
+ELSE                      else                           237        5405      
+VARIABLE_LOCAL            categoria_no_ficcion           238        5414      
+SUMA_ASIG                 +=                             238        5435      
+INTEGER                   1                              238        5438      
+END                       end                            239        5442      
+VARIABLE_LOCAL            contador                       240        5448      
+SUMA_ASIG                 +=                             240        5457      
+INTEGER                   1                              240        5460      
+END                       end                            241        5462      
+COMENTARIO_LINEA          # Función para generar recomendaciones 243        5467      
+DEF                       def                            244        5506      
+VARIABLE_LOCAL            generar_recomendaciones        244        5510      
+PARENTESIS_IZQ            (                              244        5533      
+VARIABLE_LOCAL            ventas_historial               244        5534      
+PARENTESIS_DER            )                              244        5550      
+VARIABLE_LOCAL            recomendaciones                245        5554      
+ASIGNACION                =                              245        5570      
+CORCHETE_IZQ              [                              245        5572      
+CORCHETE_DER              ]                              245        5573      
+VARIABLE_LOCAL            total                          246        5577      
+ASIGNACION                =                              246        5583      
+INTEGER                   0                              246        5585      
+FOR                       for                            248        5590      
+VARIABLE_LOCAL            venta                          248        5594      
+IN                        in                             248        5600      
+VARIABLE_LOCAL            ventas_historial               248        5603      
+VARIABLE_LOCAL            total                          249        5624      
+SUMA_ASIG                 +=                             249        5630      
+VARIABLE_LOCAL            venta                          249        5633      
+END                       end                            250        5641      
+VARIABLE_LOCAL            promedio                       252        5648      
+ASIGNACION                =                              252        5657      
+VARIABLE_LOCAL            total                          252        5659      
+DIVISION                  /                              252        5665      
+VARIABLE_LOCAL            ventas_historial               252        5667      
+PUNTO                     .                              252        5683      
+VARIABLE_LOCAL            length                         252        5684      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: División por cero en expresión 254        5694      
+VARIABLE_LOCAL            factor                         255        5746      
+ASIGNACION                =                              255        5753      
+VARIABLE_LOCAL            promedio                       255        5755      
+DIVISION                  /                              255        5764      
+PARENTESIS_IZQ            (                              255        5766      
+INTEGER                   5                              255        5767      
+RESTA                     -                              255        5769      
+INTEGER                   5                              255        5771      
+PARENTESIS_DER            )                              255        5772      
+IF                        if                             257        5777      
+VARIABLE_LOCAL            promedio                       257        5780      
+MAYOR                     >                              257        5789      
+INTEGER                   100                            257        5791      
+VARIABLE_LOCAL            recomendaciones                258        5799      
+ASIGNACION                =                              258        5815      
+CORCHETE_IZQ              [                              258        5817      
+STRING                    Aumentar stock                 258        5818      
+COMA                      ,                              258        5834      
+STRING                    Promocionar                    258        5836      
+CORCHETE_DER              ]                              258        5849      
+ELSE                      else                           259        5853      
+VARIABLE_LOCAL            recomendaciones                260        5862      
+ASIGNACION                =                              260        5878      
+CORCHETE_IZQ              [                              260        5880      
+STRING                    Mantener                       260        5881      
+COMA                      ,                              260        5891      
+STRING                    Descuento                      260        5893      
+CORCHETE_DER              ]                              260        5904      
+END                       end                            261        5908      
+RETURN                    return                         263        5915      
+VARIABLE_LOCAL            recomendaciones                263        5922      
+END                       end                            264        5938      
+COMENTARIO_LINEA          # Cálculo de impuestos         266        5943      
+CONSTANTE                 TASA_IMPUESTO                  267        5966      
+ASIGNACION                =                              267        5980      
+FLOAT                     0.12                           267        5982      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Modificación de constante recién creada 268        5987      
+CONSTANTE                 TASA_IMPUESTO                  269        6046      
+ASIGNACION                =                              269        6060      
+FLOAT                     0.15                           269        6062      
+VARIABLE_LOCAL            impuesto_total                 271        6068      
+ASIGNACION                =                              271        6083      
+VARIABLE_GLOBAL           $total_ventas                  271        6085      
+MULTIPLICACION            *                              271        6099      
+CONSTANTE                 TASA_IMPUESTO                  271        6101      
+COMENTARIO_LINEA          # Análisis de rentabilidad     273        6116      
+VARIABLE_LOCAL            costo_operativo                274        6143      
+ASIGNACION                =                              274        6159      
+INTEGER                   200                            274        6161      
+VARIABLE_LOCAL            ingresos                       275        6165      
+ASIGNACION                =                              275        6174      
+VARIABLE_GLOBAL           $total_ventas                  275        6176      
+VARIABLE_LOCAL            utilidad                       276        6190      
+ASIGNACION                =                              276        6199      
+VARIABLE_LOCAL            ingresos                       276        6201      
+RESTA                     -                              276        6210      
+VARIABLE_LOCAL            costo_operativo                276        6212      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Variable no declarada en expresión compleja 278        6229      
+VARIABLE_LOCAL            margen_ganancia                279        6292      
+ASIGNACION                =                              279        6308      
+PARENTESIS_IZQ            (                              279        6310      
+VARIABLE_LOCAL            utilidad                       279        6311      
+DIVISION                  /                              279        6320      
+VARIABLE_LOCAL            ventas_proyectadas             279        6322      
+PARENTESIS_DER            )                              279        6340      
+MULTIPLICACION            *                              279        6342      
+INTEGER                   100                            279        6344      
+COMENTARIO_LINEA          # Bucle para verificar stock crítico 281        6349      
+VARIABLE_LOCAL            libros_criticos                282        6386      
+ASIGNACION                =                              282        6402      
+INTEGER                   0                              282        6404      
+FOR                       for                            283        6406      
+VARIABLE_LOCAL            cantidad                       283        6410      
+IN                        in                             283        6419      
+VARIABLE_LOCAL            cantidades                     283        6422      
+IF                        if                             284        6435      
+VARIABLE_LOCAL            cantidad                       284        6438      
+MENOR                     <                              284        6447      
+INTEGER                   15                             284        6449      
+VARIABLE_LOCAL            libros_criticos                285        6456      
+SUMA_ASIG                 +=                             285        6472      
+INTEGER                   1                              285        6475      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Break dentro de if (correcto), pero agregamos otro caso 286        6481      
+END                       end                            287        6558      
+END                       end                            288        6562      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Break fuera de loop (segunda instancia) 290        6567      
+IF                        if                             291        6626      
+VARIABLE_LOCAL            libros_criticos                291        6629      
+MAYOR                     >                              291        6645      
+INTEGER                   0                              291        6647      
+PUTS                      puts                           292        6651      
+STRING                    Alerta de stock bajo           292        6656      
+BREAK                     break                          293        6681      
+END                       end                            294        6687      
+COMENTARIO_LINEA          # Generación de proyecciones   296        6692      
+VARIABLE_LOCAL            proyeccion_trimestre           297        6721      
+ASIGNACION                =                              297        6742      
+VARIABLE_GLOBAL           $total_ventas                  297        6744      
+MULTIPLICACION            *                              297        6758      
+INTEGER                   3                              297        6760      
+COMENTARIO_LINEA          # ERROR SEMÁNTICO: Conversión implícita inválida 298        6762      
+VARIABLE_LOCAL            meta_anual                     299        6811      
+ASIGNACION                =                              299        6822      
+STRING                    12 meses                       299        6824      
+SUMA                      +                              299        6835      
+VARIABLE_LOCAL            proyeccion_trimestre           299        6837      
+COMENTARIO_LINEA          # Reporte final                301        6859      
+PUTS                      puts                           302        6875      
+STRING                    ================================== 302        6880      
+PUTS                      puts                           303        6917      
+STRING                    REPORTE FINAL DE INVENTARIO    303        6922      
+PUTS                      puts                           304        6952      
+STRING                    ================================== 304        6957      
+PRINT                     print                          305        6994      
+STRING                    Total de libros en sistema:    305        7000      
+PUTS                      puts                           306        7031      
+VARIABLE_LOCAL            total_libros                   306        7036      
+PRINT                     print                          307        7049      
+STRING                    Total de ventas:               307        7055      
+PUTS                      puts                           308        7075      
+VARIABLE_GLOBAL           $total_ventas                  308        7080      
+PRINT                     print                          309        7094      
+STRING                    Promedio mensual:              309        7100      
+PUTS                      puts                           310        7121      
+VARIABLE_LOCAL            promedio_ventas                310        7126      
+PRINT                     print                          311        7142      
+STRING                    Libros vendidos:               311        7148      
+PUTS                      puts                           312        7168      
+VARIABLE_GLOBAL           $libros_vendidos               312        7173      
+IF                        if                             314        7191      
+VARIABLE_LOCAL            meta_cumplida                  314        7194      
+AND                       &&                             314        7208      
+NOT                       !                              314        7211      
+VARIABLE_LOCAL            necesita_promocion             314        7212      
+PUTS                      puts                           315        7233      
+STRING                    Estado: Excelente desempeño    315        7238      
+ELSIF                     elsif                          316        7268      
+VARIABLE_LOCAL            meta_cumplida                  316        7274      
+PUTS                      puts                           317        7290      
+STRING                    Estado: Buen desempeño         317        7295      
+ELSE                      else                           318        7320      
+PUTS                      puts                           319        7327      
+STRING                    Estado: Requiere estrategias de mejora 319        7332      
+END                       end                            320        7373      
+IF                        if                             322        7378      
+VARIABLE_LOCAL            libros_criticos                322        7381      
+MAYOR                     >                              322        7397      
+INTEGER                   0                              322        7399      
+PRINT                     print                          323        7403      
+STRING                    Libros con stock crítico:      323        7409      
+PUTS                      puts                           324        7440      
+VARIABLE_LOCAL            libros_criticos                324        7445      
+PUTS                      puts                           325        7463      
+STRING                    Acción requerida: Reabastecer inventario 325        7468      
+END                       end                            326        7511      
+PUTS                      puts                           328        7516      
+STRING                    ================================== 328        7521      
+PUTS                      puts                           329        7558      
+STRING                    Sistema de inventario finalizado 329        7563      
+PUTS                      puts                           330        7598      
+STRING                    ================================== 330        7603      
+----------------------------------------------------------------------------------------------------
+Total de tokens: 801
+
+
+ ANÁLISIS COMPLETADO SIN ERRORES
+
+====================================================================================================

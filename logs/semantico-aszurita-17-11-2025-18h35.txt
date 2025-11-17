@@ -1,0 +1,64 @@
+====================================================================================================
+ANALIZADOR SEMÁNTICO PARA RUBY
+====================================================================================================
+
+Usuario: aszurita
+Fecha: 17/11/2025 18:35:32
+Archivo analizado: Algorithms/Algorithm_AngeloZurita_Semantico.rb
+====================================================================================================
+
+TABLA DE SÍMBOLOS:
+====================================================================================================
+
+VARIABLES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+impuesto_total                 float                1              
+costo_operativo                integer              1              
+ingresos                       any                  1              
+utilidad                       any                  1              
+margen_ganancia                any                  1              
+libros_criticos                integer              3              
+proyeccion_trimestre           any                  1              
+meta_anual                     any                  1              
+----------------------------------------------------------------------------------------------------
+Total de variables: 8
+
+CONSTANTES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+TASA_IMPUESTO                  float                1              
+----------------------------------------------------------------------------------------------------
+Total de constantes: 1
+
+
+ERRORES SEMÁNTICOS ENCONTRADOS:
+====================================================================================================
+1. Error semántico en línea 1: Constante 'TASA_IMPUESTO' no puede ser modificada (ya fue declarada en línea 1)
+2. Error semántico en línea 1: Operador '*' incompatible entre tipos 'any' y 'float'
+3. Error semántico en línea 1: Variable '$total_ventas' no declarada antes de su uso
+4. Error semántico en línea 1: Variable '$total_ventas' no declarada antes de su uso
+5. Error semántico en línea 1: Operador '-' incompatible entre tipos 'any' y 'integer'
+6. Error semántico en línea 1: Operador '*' incompatible entre tipos 'any' y 'integer'
+7. Error semántico en línea 2: 'break' usado fuera de un bucle
+8. Error semántico en línea 1: Operador '*' incompatible entre tipos 'any' y 'integer'
+9. Error semántico en línea 1: Variable '$total_ventas' no declarada antes de su uso
+10. Error semántico en línea 1: Operador '+' incompatible entre tipos 'string' y 'any'
+====================================================================================================
+Total de errores: 10
+
+
+RESUMEN DEL ANÁLISIS:
+====================================================================================================
+Variables declaradas:    8
+Constantes declaradas:   1
+Funciones declaradas:    0
+Errores encontrados:     10
+Advertencias:            0
+====================================================================================================
+
+[ERROR] ANÁLISIS SEMÁNTICO COMPLETADO CON ERRORES
+
+====================================================================================================

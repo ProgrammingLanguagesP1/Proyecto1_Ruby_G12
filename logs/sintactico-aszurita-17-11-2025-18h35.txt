@@ -1,0 +1,268 @@
+====================================================================================================
+ANALIZADOR SINTÁCTICO PARA RUBY
+====================================================================================================
+
+Usuario: aszurita
+Fecha: 17/11/2025 18:35:32
+Archivo analizado: Algorithms/Algorithm_AngeloZurita_Semantico.rb
+====================================================================================================
+
+[OK] ANÁLISIS SINTÁCTICO EXITOSO
+
+ESTRUCTURA DEL PROGRAMA:
+----------------------------------------------------------------------------------------------------
+('programa', ['# Cálculo de impuestos', ('asignacion', ('variable', 'TASA_IMPUESTO'), '=', ('valor', 0.12)), '# ERROR SEMÁNTICO: Modificación de constante recién creada', ('asignacion', ('variable', 'TASA_IMPUESTO'), '=', ('valor', 0.15)), ('asignacion', ('variable', 'impuesto_total'), '=', ('operacion_binaria', '*', ('valor', ('variable', '$total_ventas')), ('valor', ('variable', 'TASA_IMPUESTO')))), '# Análisis de rentabilidad', ('asignacion', ('variable', 'costo_operativo'), '=', ('valor', 200)), ('asignacion', ('variable', 'ingresos'), '=', ('valor', ('variable', '$total_ventas'))), ('asignacion', ('variable', 'utilidad'), '=', ('operacion_binaria', '-', ('valor', ('variable', 'ingresos')), ('valor', ('variable', 'costo_operativo')))), '# ERROR SEMÁNTICO: Variable no declarada en expresión compleja', ('asignacion', ('variable', 'margen_ganancia'), '=', ('operacion_binaria', '*', ('parentesis', ('operacion_binaria', '/', ('valor', ('variable', 'utilidad')), ('valor', ('variable', 'ventas_proyectadas')))), ('valor', 100))), '# Bucle para verificar stock crítico', ('asignacion', ('variable', 'libros_criticos'), '=', ('valor', 0)), ('for', 'cantidad', ('valor', ('variable', 'cantidades')), [('if', ('comparacion', '<', ('valor', ('variable', 'cantidad')), ('valor', 15)), [('asignacion', ('variable', 'libros_criticos'), '+=', ('valor', 1)), '# ERROR SEMÁNTICO: Break dentro de if (correcto), pero agregamos otro caso'])]), '# ERROR SEMÁNTICO: Break fuera de loop (segunda instancia)', ('if', ('comparacion', '>', ('valor', ('variable', 'libros_criticos')), ('valor', 0)), [('impresion', 'puts', [('valor', 'Alerta de stock bajo')]), ('control_flujo', 'break')]), '# Generación de proyecciones', ('asignacion', ('variable', 'proyeccion_trimestre'), '=', ('operacion_binaria', '*', ('valor', ('variable', '$total_ventas')), ('valor', 3))), '# ERROR SEMÁNTICO: Conversión implícita inválida', ('asignacion', ('variable', 'meta_anual'), '=', ('operacion_binaria', '+', ('valor', '12 meses'), ('valor', ('variable', 'proyeccion_trimestre')))), '# Reporte final', ('impresion', 'puts', [('valor', '==================================')]), ('impresion', 'puts', [('valor', 'REPORTE FINAL DE INVENTARIO')]), ('impresion', 'puts', [('valor', '==================================')]), ('impresion', 'print', [('valor', 'Total de libros en sistema: ')]), ('impresion', 'puts', [('valor', ('variable', 'total_libros'))]), ('impresion', 'print', [('valor', 'Total de ventas: ')]), ('impresion', 'puts', [('valor', ('variable', '$total_ventas'))]), ('impresion', 'print', [('valor', 'Promedio mensual: ')]), ('impresion', 'puts', [('valor', ('variable', 'promedio_ventas'))]), ('impresion', 'print', [('valor', 'Libros vendidos: ')]), ('impresion', 'puts', [('valor', ('variable', '$libros_vendidos'))]), ('if_elsif_else', ('operacion_logica', '&&', ('valor', ('variable', 'meta_cumplida')), ('not', ('valor', ('variable', 'necesita_promocion')))), [('impresion', 'puts', [('valor', 'Estado: Excelente desempeño')])], [('elsif', ('valor', ('variable', 'meta_cumplida')), [('impresion', 'puts', [('valor', 'Estado: Buen desempeño')])])], [('impresion', 'puts', [('valor', 'Estado: Requiere estrategias de mejora')])]), ('if', ('comparacion', '>', ('valor', ('variable', 'libros_criticos')), ('valor', 0)), [('impresion', 'print', [('valor', 'Libros con stock crítico: ')]), ('impresion', 'puts', [('valor', ('variable', 'libros_criticos'))]), ('impresion', 'puts', [('valor', 'Acción requerida: Reabastecer inventario')])]), ('impresion', 'puts', [('valor', '==================================')]), ('impresion', 'puts', [('valor', 'Sistema de inventario finalizado')]), ('impresion', 'puts', [('valor', '==================================')])])
+----------------------------------------------------------------------------------------------------
+
+CONSTRUCCIONES SINTÁCTICAS RECONOCIDAS:
+----------------------------------------------------------------------------------------------------
+1. Asignación: ('variable', 'MAX_LIBROS') = [expresión]
+2. Asignación: ('variable', 'MIN_PRECIO') = [expresión]
+3. Asignación: ('variable', 'DESCUENTO_ESTUDIANTE') = [expresión]
+4. Asignación: ('variable', '$total_ventas') = [expresión]
+5. Asignación: ('variable', '$libros_vendidos') = [expresión]
+6. Asignación: ('variable', 'MAX_LIBROS') = [expresión]
+7. Asignación: ('variable', '@titulo') = [expresión]
+8. Asignación: ('variable', '@autor') = [expresión]
+9. Asignación: ('variable', '@precio') = [expresión]
+10. Asignación: ('variable', '@cantidad') = [expresión]
+11. Asignación: ('variable', '@ventas') = [expresión]
+12. Definición de función: initialize con 4 parámetro(s)
+13. Operación aritmética: *
+14. Asignación: ('variable', 'valor') = [expresión]
+15. RETURN con valor
+16. Definición de función: calcular_valor_inventario sin parámetros (con paréntesis)
+17. Operación aritmética: -
+18. Asignación: ('variable', 'descuento') = [expresión]
+19. Operación aritmética: *
+20. Asignación: ('variable', 'precio_nuevo') = [expresión]
+21. RETURN con valor
+22. Definición de función: aplicar_descuento sin parámetros
+23. Comparación: <=
+24. Asignación: ('variable', '@cantidad') -= [expresión]
+25. Asignación: ('variable', '@ventas') += [expresión]
+26. RETURN con valor
+27. RETURN con valor
+28. Estructura IF completa
+29. Definición de función: vender sin parámetros
+30. Asignación: ('variable', 'limite') = [expresión]
+31. Comparación: <
+32. RETURN con valor
+33. Estructura IF completa
+34. Definición de función: necesita_reabastecimiento sin parámetros (con paréntesis)
+35. Definición de clase: Libro con contenido
+36. Comparación: >=
+37. Comparación: <=
+38. Operación lógica: &&
+39. Asignación: ('variable', 'valido') = [expresión]
+40. RETURN con valor
+41. Definición de función: validar_precio sin parámetros
+42. Asignación: ('variable', 'total') = [expresión]
+43. Asignación: ('variable', 'contador') = [expresión]
+44. Asignación: ('variable', 'total') += [expresión]
+45. Asignación: ('variable', 'contador') += [expresión]
+46. Estructura FOR con variable: libro
+47. Operación aritmética: /
+48. Asignación: ('variable', 'promedio') = [expresión]
+49. RETURN con valor
+50. Definición de función: calcular_total_inventario sin parámetros
+51. Asignación: ('variable', 'suma') = [expresión]
+52. Asignación: ('variable', 'maximo') = [expresión]
+53. Asignación: ('variable', 'minimo') = [expresión]
+54. Asignación: ('variable', 'mes_texto') = [expresión]
+55. Operación aritmética: +
+56. Asignación: ('variable', 'total_con_mes') = [expresión]
+57. Asignación: ('variable', 'suma') += [expresión]
+58. Comparación: >
+59. Asignación: ('variable', 'maximo') = [expresión]
+60. Estructura IF completa
+61. Comparación: <
+62. Asignación: ('variable', 'minimo') = [expresión]
+63. Estructura IF completa
+64. Estructura FOR con variable: venta
+65. Hash con 3 par(es) clave-valor
+66. Asignación: ('variable', 'reporte') = [expresión]
+67. RETURN con valor
+68. Definición de función: generar_reporte_ventas sin parámetros
+69. RETURN con valor
+70. Instrucción de impresión: puts
+71. Instrucción de impresión: puts
+72. Arreglo con 5 elemento(s)
+73. Asignación: ('variable', 'titulos') = [expresión]
+74. Arreglo con 5 elemento(s)
+75. Asignación: ('variable', 'autores') = [expresión]
+76. Arreglo con 5 elemento(s)
+77. Asignación: ('variable', 'precios') = [expresión]
+78. Arreglo con 5 elemento(s)
+79. Asignación: ('variable', 'cantidades') = [expresión]
+80. Arreglo vacío
+81. Asignación: ('variable', 'libros_inventario') = [expresión]
+82. Asignación: ('variable', 'total_libros') = [expresión]
+83. Rango inclusivo (..)
+84. Asignación: ('variable', 'titulo') = [expresión]
+85. Asignación: ('variable', 'autor') = [expresión]
+86. Asignación: ('variable', 'precio') = [expresión]
+87. Asignación: ('variable', 'cantidad') = [expresión]
+88. Llamada a función: validar_precio con 1 argumento(s)
+89. Asignación: ('variable', 'total_libros') += [expresión]
+90. Asignación: ('variable', 'total_libros') = [expresión]
+91. Estructura IF completa
+92. Estructura FOR con variable: i
+93. Arreglo con 5 elemento(s)
+94. Asignación: ('variable', 'ventas_enero') = [expresión]
+95. Arreglo con 5 elemento(s)
+96. Asignación: ('variable', 'ventas_febrero') = [expresión]
+97. Arreglo con 5 elemento(s)
+98. Asignación: ('variable', 'ventas_marzo') = [expresión]
+99. Llamada a función: generar_reporte_ventas con 1 argumento(s)
+100. Asignación: ('variable', 'stats_enero') = [expresión]
+101. Llamada a función: generar_reporte_ventas con 1 argumento(s)
+102. Asignación: ('variable', 'stats_febrero') = [expresión]
+103. Llamada a función: generar_reporte_ventas con 1 argumento(s)
+104. Asignación: ('variable', 'stats_marzo') = [expresión]
+105. Asignación: ('variable', 'DESCUENTO_ESTUDIANTE') = [expresión]
+106. Operación aritmética: *
+107. Asignación: ('variable', 'descuento_aplicado') = [expresión]
+108. Operación aritmética: -
+109. Asignación: ('variable', 'precio_con_descuento') = [expresión]
+110. Asignación: ('variable', 'contador_mes') = [expresión]
+111. Asignación: ('variable', 'suma_ventas') = [expresión]
+112. Comparación: <
+113. Comparación: ==
+114. Asignación: ('variable', 'suma_ventas') += [expresión]
+115. Comparación: ==
+116. Asignación: ('variable', 'suma_ventas') += [expresión]
+117. Asignación: ('variable', 'suma_ventas') += [expresión]
+118. Estructura IF completa
+119. Asignación: ('variable', 'contador_mes') += [expresión]
+120. Estructura WHILE
+121. Asignación: ('variable', '$total_ventas') = [expresión]
+122. Comparación: >
+123. Control de flujo: break
+124. Estructura IF completa
+125. Asignación: ('variable', 'verificacion') = [expresión]
+126. Asignación: ('variable', 'verificacion') += [expresión]
+127. Asignación: ('variable', '$libros_vendidos') += [expresión]
+128. Estructura UNTIL
+129. Operación aritmética: /
+130. Asignación: ('variable', 'promedio_ventas') = [expresión]
+131. Comparación: >=
+132. Comparación: >
+133. Operación lógica: &&
+134. Asignación: ('variable', 'meta_cumplida') = [expresión]
+135. Operación lógica: NOT
+136. Comparación: <
+137. Operación lógica: ||
+138. Asignación: ('variable', 'necesita_promocion') = [expresión]
+139. Operación aritmética: -
+140. Asignación: ('variable', 'ganancia_unitaria') = [expresión]
+141. Operación aritmética: *
+142. Asignación: ('variable', 'ganancia_total') = [expresión]
+143. Comparación: <
+144. Control de flujo: next
+145. Estructura IF completa
+146. RETURN con valor
+147. Definición de función: calcular_ganancia con 3 parámetro(s)
+148. Asignación: ('variable', 'cantidad_reabastecer') = [expresión]
+149. Rango inclusivo (..)
+150. Asignación: ('variable', 'stock_actual') = [expresión]
+151. Asignación: ('variable', 'precio_decimal') = [expresión]
+152. Comparación: <
+153. Asignación: ('variable', 'cantidad_reabastecer') += [expresión]
+154. Estructura IF completa
+155. Asignación: ('variable', 'categoria_ficcion') = [expresión]
+156. Asignación: ('variable', 'categoria_no_ficcion') = [expresión]
+157. Asignación: ('variable', 'contador') = [expresión]
+158. Comparación: <
+159. Operación aritmética: *
+160. Asignación: ('variable', 'categoria') = [expresión]
+161. Operación aritmética: %
+162. Comparación: ==
+163. Asignación: ('variable', 'categoria_ficcion') += [expresión]
+164. Asignación: ('variable', 'categoria_no_ficcion') += [expresión]
+165. Estructura IF completa
+166. Asignación: ('variable', 'contador') += [expresión]
+167. Estructura WHILE
+168. Arreglo vacío
+169. Asignación: ('variable', 'recomendaciones') = [expresión]
+170. Asignación: ('variable', 'total') = [expresión]
+171. Asignación: ('variable', 'total') += [expresión]
+172. Estructura FOR con variable: venta
+173. Operación aritmética: /
+174. Operación aritmética: -
+175. Operación aritmética: /
+176. Asignación: ('variable', 'factor') = [expresión]
+177. Comparación: >
+178. Arreglo con 2 elemento(s)
+179. Asignación: ('variable', 'recomendaciones') = [expresión]
+180. Arreglo con 2 elemento(s)
+181. Asignación: ('variable', 'recomendaciones') = [expresión]
+182. Estructura IF completa
+183. RETURN con valor
+184. Asignación: ('variable', 'TASA_IMPUESTO') = [expresión]
+185. Asignación: ('variable', 'TASA_IMPUESTO') = [expresión]
+186. Operación aritmética: *
+187. Asignación: ('variable', 'impuesto_total') = [expresión]
+188. Asignación: ('variable', 'costo_operativo') = [expresión]
+189. Asignación: ('variable', 'ingresos') = [expresión]
+190. Operación aritmética: -
+191. Asignación: ('variable', 'utilidad') = [expresión]
+192. Operación aritmética: /
+193. Operación aritmética: *
+194. Asignación: ('variable', 'margen_ganancia') = [expresión]
+195. Asignación: ('variable', 'libros_criticos') = [expresión]
+196. Comparación: <
+197. Asignación: ('variable', 'libros_criticos') += [expresión]
+198. Estructura IF completa
+199. Estructura FOR con variable: cantidad
+200. Comparación: >
+201. Instrucción de impresión: puts
+202. Control de flujo: break
+203. Estructura IF completa
+204. Operación aritmética: *
+205. Asignación: ('variable', 'proyeccion_trimestre') = [expresión]
+206. Operación aritmética: +
+207. Asignación: ('variable', 'meta_anual') = [expresión]
+208. Instrucción de impresión: puts
+209. Instrucción de impresión: puts
+210. Instrucción de impresión: puts
+211. Instrucción de impresión: print
+212. Instrucción de impresión: puts
+213. Instrucción de impresión: print
+214. Instrucción de impresión: puts
+215. Instrucción de impresión: print
+216. Instrucción de impresión: puts
+217. Instrucción de impresión: print
+218. Instrucción de impresión: puts
+219. Operación lógica: NOT
+220. Operación lógica: &&
+221. Instrucción de impresión: puts
+222. Instrucción de impresión: puts
+223. Instrucción de impresión: puts
+224. Estructura IF completa
+225. Comparación: >
+226. Instrucción de impresión: print
+227. Instrucción de impresión: puts
+228. Instrucción de impresión: puts
+229. Estructura IF completa
+230. Instrucción de impresión: puts
+231. Instrucción de impresión: puts
+232. Instrucción de impresión: puts
+233. Programa reconocido con 37 sentencia(s)
+----------------------------------------------------------------------------------------------------
+Total de construcciones: 233
+
+ERRORES SINTÁCTICOS ENCONTRADOS:
+----------------------------------------------------------------------------------------------------
+1. Error sintáctico en línea 456: Token inesperado '=' (tipo: ASIGNACION)
+2. Error sintáctico en línea 545: Token inesperado '.' (tipo: PUNTO)
+3. Error sintáctico en línea 550: Token inesperado 'end' (tipo: END)
+4. Error sintáctico en línea 582: Token inesperado '.' (tipo: PUNTO)
+5. Error sintáctico en línea 594: Token inesperado 'end' (tipo: END)
+----------------------------------------------------------------------------------------------------
+Total de errores: 5
+
+
+[ERROR] ANÁLISIS COMPLETADO CON ERRORES SINTÁCTICOS
+
+====================================================================================================
