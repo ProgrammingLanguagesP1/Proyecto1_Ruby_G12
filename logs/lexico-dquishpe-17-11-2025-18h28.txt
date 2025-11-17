@@ -1,0 +1,816 @@
+====================================================================================================
+ANALIZADOR LÉXICO PARA RUBY
+====================================================================================================
+
+Usuario: dquishpe
+Fecha: 17/11/2025 18:28:42
+Archivo analizado: Algorithms/Algorithm_DhamarQuishpe_Semantico.rb
+====================================================================================================
+
+TOKENS RECONOCIDOS:
+----------------------------------------------------------------------------------------------------
+Tipo                      Valor                          Línea      Posición  
+----------------------------------------------------------------------------------------------------
+COMENTARIO_LINEA          # ========================================== 1          0         
+COMENTARIO_LINEA          # ALGORITMO 2 - TEST DE ERRORES SEMÁNTICOS 2          45        
+COMENTARIO_LINEA          # Tester: Dhamar Quishpe (@dquishpe) 3          88        
+COMENTARIO_LINEA          # Descripción: Casos diseñados para que el analizador semántico detecte errores. 4          125       
+COMENTARIO_LINEA          # ========================================== 5          206       
+COMENTARIO_LINEA          # Constantes matemáticas (CORRECTO) 7          252       
+CONSTANTE                 PI                             8          288       
+ASIGNACION                =                              8          291       
+FLOAT                     3.14159                        8          293       
+CONSTANTE                 E                              9          301       
+ASIGNACION                =                              9          303       
+FLOAT                     2.71828                        9          305       
+CONSTANTE                 GRAVEDAD                       10         313       
+ASIGNACION                =                              10         322       
+FLOAT                     9.8                            10         324       
+CONSTANTE                 VELOCIDAD_LUZ                  11         328       
+ASIGNACION                =                              11         342       
+INTEGER                   300000                         11         344       
+COMENTARIO_LINEA          # Variables globales de configuración (CORRECTO) 13         352       
+VARIABLE_GLOBAL           $debug_mode                    14         401       
+ASIGNACION                =                              14         413       
+TRUE                      true                           14         415       
+VARIABLE_GLOBAL           $contador_operaciones          15         420       
+ASIGNACION                =                              15         442       
+INTEGER                   0                              15         444       
+VARIABLE_GLOBAL           $precision                     16         446       
+ASIGNACION                =                              16         457       
+INTEGER                   2                              16         459       
+COMENTARIO_LINEA          # ========================================== 18         462       
+COMENTARIO_LINEA          # ERROR 1: Constante modificada  19         507       
+COMENTARIO_LINEA          # ========================================== 20         540       
+CONSTANTE                 PI                             21         585       
+ASIGNACION                =                              21         588       
+FLOAT                     3.14                           21         590       
+COMENTARIO_LINEA          # Función para calcular área de círculo (CORRECTO) 23         596       
+DEF                       def                            24         647       
+VARIABLE_LOCAL            area_circulo                   24         651       
+PARENTESIS_IZQ            (                              24         663       
+VARIABLE_LOCAL            radio                          24         664       
+PARENTESIS_DER            )                              24         669       
+VARIABLE_LOCAL            area                           25         673       
+ASIGNACION                =                              25         678       
+CONSTANTE                 PI                             25         680       
+MULTIPLICACION            *                              25         683       
+VARIABLE_LOCAL            radio                          25         685       
+MULTIPLICACION            *                              25         691       
+VARIABLE_LOCAL            radio                          25         693       
+RETURN                    return                         26         701       
+VARIABLE_LOCAL            area                           26         708       
+END                       end                            27         713       
+COMENTARIO_LINEA          # Función para calcular volumen de esfera (CORRECTO) 29         718       
+DEF                       def                            30         771       
+VARIABLE_LOCAL            volumen_esfera                 30         775       
+PARENTESIS_IZQ            (                              30         789       
+VARIABLE_LOCAL            radio                          30         790       
+PARENTESIS_DER            )                              30         795       
+VARIABLE_LOCAL            volumen                        31         799       
+ASIGNACION                =                              31         807       
+INTEGER                   4                              31         809       
+MULTIPLICACION            *                              31         811       
+CONSTANTE                 PI                             31         813       
+MULTIPLICACION            *                              31         816       
+VARIABLE_LOCAL            radio                          31         818       
+MULTIPLICACION            *                              31         824       
+VARIABLE_LOCAL            radio                          31         826       
+MULTIPLICACION            *                              31         832       
+VARIABLE_LOCAL            radio                          31         834       
+DIVISION                  /                              31         840       
+INTEGER                   3                              31         842       
+RETURN                    return                         32         846       
+VARIABLE_LOCAL            volumen                        32         853       
+END                       end                            33         861       
+COMENTARIO_LINEA          # Inicialización de variables (CORRECTO) 35         866       
+VARIABLE_LOCAL            radio1                         36         907       
+ASIGNACION                =                              36         914       
+INTEGER                   5                              36         916       
+VARIABLE_LOCAL            radio2                         37         918       
+ASIGNACION                =                              37         925       
+INTEGER                   10                             37         927       
+VARIABLE_LOCAL            radio3                         38         930       
+ASIGNACION                =                              38         937       
+INTEGER                   15                             38         939       
+COMENTARIO_LINEA          # Cálculos de áreas (CORRECTO) 40         943       
+VARIABLE_LOCAL            area1                          41         974       
+ASIGNACION                =                              41         980       
+VARIABLE_LOCAL            area_circulo                   41         982       
+PARENTESIS_IZQ            (                              41         994       
+VARIABLE_LOCAL            radio1                         41         995       
+PARENTESIS_DER            )                              41         1001      
+VARIABLE_LOCAL            area2                          42         1003      
+ASIGNACION                =                              42         1009      
+VARIABLE_LOCAL            area_circulo                   42         1011      
+PARENTESIS_IZQ            (                              42         1023      
+VARIABLE_LOCAL            radio2                         42         1024      
+PARENTESIS_DER            )                              42         1030      
+VARIABLE_LOCAL            area3                          43         1032      
+ASIGNACION                =                              43         1038      
+VARIABLE_LOCAL            area_circulo                   43         1040      
+PARENTESIS_IZQ            (                              43         1052      
+VARIABLE_LOCAL            radio3                         43         1053      
+PARENTESIS_DER            )                              43         1059      
+PUTS                      puts                           45         1062      
+VARIABLE_LOCAL            area1                          45         1067      
+PUTS                      puts                           46         1073      
+VARIABLE_LOCAL            area2                          46         1078      
+PUTS                      puts                           47         1084      
+VARIABLE_LOCAL            area3                          47         1089      
+COMENTARIO_LINEA          # ========================================== 49         1096      
+COMENTARIO_LINEA          # ERROR 2: Variable no declarada  50         1141      
+COMENTARIO_LINEA          # ========================================== 51         1175      
+DEF                       def                            52         1220      
+VARIABLE_LOCAL            mostrar_resultados             52         1224      
+PUTS                      puts                           53         1245      
+VARIABLE_LOCAL            variable_inexistente           53         1250      
+RETURN                    return                         54         1273      
+INTEGER                   0                              54         1280      
+END                       end                            55         1282      
+COMENTARIO_LINEA          # Cálculos de volúmenes (CORRECTO) 57         1287      
+VARIABLE_LOCAL            vol1                           58         1322      
+ASIGNACION                =                              58         1327      
+VARIABLE_LOCAL            volumen_esfera                 58         1329      
+PARENTESIS_IZQ            (                              58         1343      
+VARIABLE_LOCAL            radio1                         58         1344      
+PARENTESIS_DER            )                              58         1350      
+VARIABLE_LOCAL            vol2                           59         1352      
+ASIGNACION                =                              59         1357      
+VARIABLE_LOCAL            volumen_esfera                 59         1359      
+PARENTESIS_IZQ            (                              59         1373      
+VARIABLE_LOCAL            radio2                         59         1374      
+PARENTESIS_DER            )                              59         1380      
+VARIABLE_LOCAL            vol3                           60         1382      
+ASIGNACION                =                              60         1387      
+VARIABLE_LOCAL            volumen_esfera                 60         1389      
+PARENTESIS_IZQ            (                              60         1403      
+VARIABLE_LOCAL            radio3                         60         1404      
+PARENTESIS_DER            )                              60         1410      
+COMENTARIO_LINEA          # ========================================== 62         1413      
+COMENTARIO_LINEA          # ERROR 3: Operador incompatible  63         1458      
+COMENTARIO_LINEA          # ========================================== 64         1492      
+VARIABLE_LOCAL            texto_area                     65         1537      
+ASIGNACION                =                              65         1548      
+STRING                    El área es:                    65         1550      
+VARIABLE_LOCAL            resultado_invalido             66         1565      
+ASIGNACION                =                              66         1584      
+VARIABLE_LOCAL            texto_area                     66         1586      
+RESTA                     -                              66         1597      
+INTEGER                   100                            66         1599      
+COMENTARIO_LINEA          # Función para sumar arreglo (CORRECTO) 68         1604      
+DEF                       def                            69         1644      
+VARIABLE_LOCAL            sumar_elementos                69         1648      
+PARENTESIS_IZQ            (                              69         1663      
+VARIABLE_LOCAL            arr                            69         1664      
+PARENTESIS_DER            )                              69         1667      
+VARIABLE_LOCAL            total                          70         1671      
+ASIGNACION                =                              70         1677      
+INTEGER                   0                              70         1679      
+FOR                       for                            71         1683      
+VARIABLE_LOCAL            elemento                       71         1687      
+IN                        in                             71         1696      
+VARIABLE_LOCAL            arr                            71         1699      
+DO                        do                             71         1703      
+VARIABLE_LOCAL            total                          72         1710      
+ASIGNACION                =                              72         1716      
+VARIABLE_LOCAL            total                          72         1718      
+SUMA                      +                              72         1724      
+VARIABLE_LOCAL            elemento                       72         1726      
+END                       end                            73         1737      
+RETURN                    return                         74         1743      
+VARIABLE_LOCAL            total                          74         1750      
+END                       end                            75         1756      
+COMENTARIO_LINEA          # Crear arreglos de datos (CORRECTO) 77         1761      
+VARIABLE_LOCAL            numeros                        78         1798      
+ASIGNACION                =                              78         1806      
+CORCHETE_IZQ              [                              78         1808      
+INTEGER                   10                             78         1809      
+COMA                      ,                              78         1811      
+INTEGER                   20                             78         1813      
+COMA                      ,                              78         1815      
+INTEGER                   30                             78         1817      
+COMA                      ,                              78         1819      
+INTEGER                   40                             78         1821      
+COMA                      ,                              78         1823      
+INTEGER                   50                             78         1825      
+CORCHETE_DER              ]                              78         1827      
+VARIABLE_LOCAL            temperaturas                   79         1829      
+ASIGNACION                =                              79         1842      
+CORCHETE_IZQ              [                              79         1844      
+INTEGER                   18                             79         1845      
+COMA                      ,                              79         1847      
+INTEGER                   22                             79         1849      
+COMA                      ,                              79         1851      
+INTEGER                   25                             79         1853      
+COMA                      ,                              79         1855      
+INTEGER                   19                             79         1857      
+COMA                      ,                              79         1859      
+INTEGER                   21                             79         1861      
+CORCHETE_DER              ]                              79         1863      
+VARIABLE_LOCAL            distancias                     80         1865      
+ASIGNACION                =                              80         1876      
+CORCHETE_IZQ              [                              80         1878      
+INTEGER                   100                            80         1879      
+COMA                      ,                              80         1882      
+INTEGER                   250                            80         1884      
+COMA                      ,                              80         1887      
+INTEGER                   175                            80         1889      
+COMA                      ,                              80         1892      
+INTEGER                   300                            80         1894      
+COMA                      ,                              80         1897      
+INTEGER                   425                            80         1899      
+CORCHETE_DER              ]                              80         1902      
+COMENTARIO_LINEA          # Procesar arreglos (CORRECTO) 82         1905      
+VARIABLE_LOCAL            suma_numeros                   83         1936      
+ASIGNACION                =                              83         1949      
+VARIABLE_LOCAL            sumar_elementos                83         1951      
+PARENTESIS_IZQ            (                              83         1966      
+VARIABLE_LOCAL            numeros                        83         1967      
+PARENTESIS_DER            )                              83         1974      
+VARIABLE_LOCAL            suma_temperaturas              84         1976      
+ASIGNACION                =                              84         1994      
+VARIABLE_LOCAL            sumar_elementos                84         1996      
+PARENTESIS_IZQ            (                              84         2011      
+VARIABLE_LOCAL            temperaturas                   84         2012      
+PARENTESIS_DER            )                              84         2024      
+VARIABLE_LOCAL            suma_distancias                85         2026      
+ASIGNACION                =                              85         2042      
+VARIABLE_LOCAL            sumar_elementos                85         2044      
+PARENTESIS_IZQ            (                              85         2059      
+VARIABLE_LOCAL            distancias                     85         2060      
+PARENTESIS_DER            )                              85         2070      
+PUTS                      puts                           87         2073      
+VARIABLE_LOCAL            suma_numeros                   87         2078      
+PUTS                      puts                           88         2091      
+VARIABLE_LOCAL            suma_temperaturas              88         2096      
+PUTS                      puts                           89         2114      
+VARIABLE_LOCAL            suma_distancias                89         2119      
+COMENTARIO_LINEA          # ========================================== 91         2136      
+COMENTARIO_LINEA          # ERROR 4: Conversión implícita inválida  92         2181      
+COMENTARIO_LINEA          # ========================================== 93         2223      
+VARIABLE_LOCAL            mensaje                        94         2268      
+ASIGNACION                =                              94         2276      
+STRING                    Total:                         94         2278      
+SUMA                      +                              94         2288      
+VARIABLE_LOCAL            suma_numeros                   94         2290      
+COMENTARIO_LINEA          # Calcular promedios (CORRECTO) 96         2304      
+VARIABLE_LOCAL            promedio_numeros               97         2336      
+ASIGNACION                =                              97         2353      
+VARIABLE_LOCAL            suma_numeros                   97         2355      
+DIVISION                  /                              97         2368      
+INTEGER                   5                              97         2370      
+VARIABLE_LOCAL            promedio_temperaturas          98         2372      
+ASIGNACION                =                              98         2394      
+VARIABLE_LOCAL            suma_temperaturas              98         2396      
+DIVISION                  /                              98         2414      
+INTEGER                   5                              98         2416      
+VARIABLE_LOCAL            promedio_distancias            99         2418      
+ASIGNACION                =                              99         2438      
+VARIABLE_LOCAL            suma_distancias                99         2440      
+DIVISION                  /                              99         2456      
+INTEGER                   5                              99         2458      
+COMENTARIO_LINEA          # ========================================== 101        2461      
+COMENTARIO_LINEA          # ERROR 5: Cambio de tipo      102        2506      
+COMENTARIO_LINEA          # ========================================== 103        2533      
+VARIABLE_LOCAL            promedio_numeros               104        2578      
+ASIGNACION                =                              104        2595      
+STRING                    cincuenta                      104        2597      
+COMENTARIO_LINEA          # Función para encontrar máximo (CORRECTO) 106        2610      
+DEF                       def                            107        2653      
+VARIABLE_LOCAL            encontrar_maximo               107        2657      
+PARENTESIS_IZQ            (                              107        2673      
+VARIABLE_LOCAL            a                              107        2674      
+COMA                      ,                              107        2675      
+VARIABLE_LOCAL            b                              107        2677      
+COMA                      ,                              107        2678      
+VARIABLE_LOCAL            c                              107        2680      
+PARENTESIS_DER            )                              107        2681      
+VARIABLE_LOCAL            max                            108        2685      
+ASIGNACION                =                              108        2689      
+VARIABLE_LOCAL            a                              108        2691      
+IF                        if                             109        2695      
+VARIABLE_LOCAL            b                              109        2698      
+MAYOR                     >                              109        2700      
+VARIABLE_LOCAL            max                            109        2702      
+THEN                      then                           109        2706      
+VARIABLE_LOCAL            max                            110        2715      
+ASIGNACION                =                              110        2719      
+VARIABLE_LOCAL            b                              110        2721      
+END                       end                            111        2725      
+IF                        if                             112        2731      
+VARIABLE_LOCAL            c                              112        2734      
+MAYOR                     >                              112        2736      
+VARIABLE_LOCAL            max                            112        2738      
+THEN                      then                           112        2742      
+VARIABLE_LOCAL            max                            113        2751      
+ASIGNACION                =                              113        2755      
+VARIABLE_LOCAL            c                              113        2757      
+END                       end                            114        2761      
+RETURN                    return                         115        2767      
+VARIABLE_LOCAL            max                            115        2774      
+END                       end                            116        2778      
+COMENTARIO_LINEA          # Buscar valores máximos (CORRECTO) 118        2783      
+VARIABLE_LOCAL            max_area                       119        2819      
+ASIGNACION                =                              119        2828      
+VARIABLE_LOCAL            encontrar_maximo               119        2830      
+PARENTESIS_IZQ            (                              119        2846      
+VARIABLE_LOCAL            area1                          119        2847      
+COMA                      ,                              119        2852      
+VARIABLE_LOCAL            area2                          119        2854      
+COMA                      ,                              119        2859      
+VARIABLE_LOCAL            area3                          119        2861      
+PARENTESIS_DER            )                              119        2866      
+VARIABLE_LOCAL            max_volumen                    120        2868      
+ASIGNACION                =                              120        2880      
+VARIABLE_LOCAL            encontrar_maximo               120        2882      
+PARENTESIS_IZQ            (                              120        2898      
+VARIABLE_LOCAL            vol1                           120        2899      
+COMA                      ,                              120        2903      
+VARIABLE_LOCAL            vol2                           120        2905      
+COMA                      ,                              120        2909      
+VARIABLE_LOCAL            vol3                           120        2911      
+PARENTESIS_DER            )                              120        2915      
+PUTS                      puts                           122        2918      
+VARIABLE_LOCAL            max_area                       122        2923      
+PUTS                      puts                           123        2932      
+VARIABLE_LOCAL            max_volumen                    123        2937      
+COMENTARIO_LINEA          # ========================================== 125        2950      
+COMENTARIO_LINEA          # ERROR 6: Break fuera de loop  126        2995      
+COMENTARIO_LINEA          # ========================================== 127        3027      
+DEF                       def                            128        3072      
+VARIABLE_LOCAL            procesar_datos                 128        3076      
+VARIABLE_LOCAL            valor                          129        3093      
+ASIGNACION                =                              129        3099      
+INTEGER                   100                            129        3101      
+BREAK                     break                          130        3107      
+RETURN                    return                         131        3115      
+VARIABLE_LOCAL            valor                          131        3122      
+END                       end                            132        3128      
+COMENTARIO_LINEA          # Operaciones con potencias (CORRECTO) 134        3133      
+VARIABLE_LOCAL            base                           135        3172      
+ASIGNACION                =                              135        3177      
+INTEGER                   2                              135        3179      
+VARIABLE_LOCAL            exponente                      136        3181      
+ASIGNACION                =                              136        3191      
+INTEGER                   3                              136        3193      
+VARIABLE_LOCAL            resultado_potencia             137        3195      
+ASIGNACION                =                              137        3214      
+INTEGER                   1                              137        3216      
+FOR                       for                            139        3219      
+VARIABLE_LOCAL            i                              139        3223      
+IN                        in                             139        3225      
+INTEGER                   1                              139        3228      
+PUNTO                     .                              139        3229      
+PUNTO                     .                              139        3230      
+VARIABLE_LOCAL            exponente                      139        3231      
+DO                        do                             139        3241      
+VARIABLE_LOCAL            resultado_potencia             140        3246      
+ASIGNACION                =                              140        3265      
+VARIABLE_LOCAL            resultado_potencia             140        3267      
+MULTIPLICACION            *                              140        3286      
+VARIABLE_LOCAL            base                           140        3288      
+END                       end                            141        3293      
+PUTS                      puts                           143        3298      
+VARIABLE_LOCAL            resultado_potencia             143        3303      
+COMENTARIO_LINEA          # Crear matriz de datos (CORRECTO) 145        3323      
+VARIABLE_LOCAL            matriz                         146        3358      
+ASIGNACION                =                              146        3365      
+CORCHETE_IZQ              [                              146        3367      
+CORCHETE_IZQ              [                              147        3371      
+INTEGER                   1                              147        3372      
+COMA                      ,                              147        3373      
+INTEGER                   2                              147        3375      
+COMA                      ,                              147        3376      
+INTEGER                   3                              147        3378      
+CORCHETE_DER              ]                              147        3379      
+COMA                      ,                              147        3380      
+CORCHETE_IZQ              [                              148        3384      
+INTEGER                   4                              148        3385      
+COMA                      ,                              148        3386      
+INTEGER                   5                              148        3388      
+COMA                      ,                              148        3389      
+INTEGER                   6                              148        3391      
+CORCHETE_DER              ]                              148        3392      
+COMA                      ,                              148        3393      
+CORCHETE_IZQ              [                              149        3397      
+INTEGER                   7                              149        3398      
+COMA                      ,                              149        3399      
+INTEGER                   8                              149        3401      
+COMA                      ,                              149        3402      
+INTEGER                   9                              149        3404      
+CORCHETE_DER              ]                              149        3405      
+CORCHETE_DER              ]                              150        3407      
+COMENTARIO_LINEA          # ========================================== 152        3410      
+COMENTARIO_LINEA          # ERROR 7: Condición no booleana  153        3455      
+COMENTARIO_LINEA          # ========================================== 154        3489      
+IF                        if                             155        3534      
+VARIABLE_LOCAL            numeros                        155        3537      
+THEN                      then                           155        3545      
+PUTS                      puts                           156        3552      
+STRING                    Arreglo existe                 156        3557      
+END                       end                            157        3574      
+COMENTARIO_LINEA          # Procesar matriz (CORRECTO)   159        3579      
+VARIABLE_LOCAL            suma_matriz                    160        3608      
+ASIGNACION                =                              160        3620      
+INTEGER                   0                              160        3622      
+FOR                       for                            161        3624      
+VARIABLE_LOCAL            fila                           161        3628      
+IN                        in                             161        3633      
+VARIABLE_LOCAL            matriz                         161        3636      
+DO                        do                             161        3643      
+FOR                       for                            162        3648      
+VARIABLE_LOCAL            elemento                       162        3652      
+IN                        in                             162        3661      
+VARIABLE_LOCAL            fila                           162        3664      
+DO                        do                             162        3669      
+VARIABLE_LOCAL            suma_matriz                    163        3676      
+ASIGNACION                =                              163        3688      
+VARIABLE_LOCAL            suma_matriz                    163        3690      
+SUMA                      +                              163        3702      
+VARIABLE_LOCAL            elemento                       163        3704      
+END                       end                            164        3715      
+END                       end                            165        3719      
+PUTS                      puts                           167        3724      
+VARIABLE_LOCAL            suma_matriz                    167        3729      
+COMENTARIO_LINEA          # ========================================== 169        3742      
+COMENTARIO_LINEA          # ERROR 8: Return fuera de función  170        3787      
+COMENTARIO_LINEA          # ========================================== 171        3823      
+RETURN                    return                         172        3868      
+VARIABLE_LOCAL            suma_matriz                    172        3875      
+COMENTARIO_LINEA          # Función para calcular factorial (CORRECTO) 174        3888      
+DEF                       def                            175        3933      
+VARIABLE_LOCAL            factorial                      175        3937      
+PARENTESIS_IZQ            (                              175        3946      
+VARIABLE_LOCAL            n                              175        3947      
+PARENTESIS_DER            )                              175        3948      
+IF                        if                             176        3952      
+VARIABLE_LOCAL            n                              176        3955      
+MENOR_IGUAL               <=                             176        3957      
+INTEGER                   1                              176        3960      
+THEN                      then                           176        3962      
+RETURN                    return                         177        3971      
+INTEGER                   1                              177        3978      
+ELSE                      else                           178        3982      
+VARIABLE_LOCAL            resultado                      179        3991      
+ASIGNACION                =                              179        4001      
+INTEGER                   1                              179        4003      
+VARIABLE_LOCAL            contador                       180        4009      
+ASIGNACION                =                              180        4018      
+INTEGER                   2                              180        4020      
+WHILE                     while                          181        4026      
+VARIABLE_LOCAL            contador                       181        4032      
+MENOR_IGUAL               <=                             181        4041      
+VARIABLE_LOCAL            n                              181        4044      
+DO                        do                             181        4046      
+VARIABLE_LOCAL            resultado                      182        4055      
+ASIGNACION                =                              182        4065      
+VARIABLE_LOCAL            resultado                      182        4067      
+MULTIPLICACION            *                              182        4077      
+VARIABLE_LOCAL            contador                       182        4079      
+VARIABLE_LOCAL            contador                       183        4094      
+ASIGNACION                =                              183        4103      
+VARIABLE_LOCAL            contador                       183        4105      
+SUMA                      +                              183        4114      
+INTEGER                   1                              183        4116      
+END                       end                            184        4122      
+RETURN                    return                         185        4130      
+VARIABLE_LOCAL            resultado                      185        4137      
+END                       end                            186        4149      
+END                       end                            187        4153      
+COMENTARIO_LINEA          # Calcular factoriales (CORRECTO) 189        4158      
+VARIABLE_LOCAL            fact5                          190        4192      
+ASIGNACION                =                              190        4198      
+VARIABLE_LOCAL            factorial                      190        4200      
+PARENTESIS_IZQ            (                              190        4209      
+INTEGER                   5                              190        4210      
+PARENTESIS_DER            )                              190        4211      
+VARIABLE_LOCAL            fact7                          191        4213      
+ASIGNACION                =                              191        4219      
+VARIABLE_LOCAL            factorial                      191        4221      
+PARENTESIS_IZQ            (                              191        4230      
+INTEGER                   7                              191        4231      
+PARENTESIS_DER            )                              191        4232      
+VARIABLE_LOCAL            fact10                         192        4234      
+ASIGNACION                =                              192        4241      
+VARIABLE_LOCAL            factorial                      192        4243      
+PARENTESIS_IZQ            (                              192        4252      
+INTEGER                   10                             192        4253      
+PARENTESIS_DER            )                              192        4255      
+PUTS                      puts                           194        4258      
+VARIABLE_LOCAL            fact5                          194        4263      
+PUTS                      puts                           195        4269      
+VARIABLE_LOCAL            fact7                          195        4274      
+PUTS                      puts                           196        4280      
+VARIABLE_LOCAL            fact10                         196        4285      
+COMENTARIO_LINEA          # ========================================== 198        4293      
+COMENTARIO_LINEA          # ERROR 9: Asignación a palabra reservada  199        4338      
+COMENTARIO_LINEA          # ========================================== 200        4381      
+IF                        if                             201        4426      
+ASIGNACION                =                              201        4429      
+INTEGER                   25                             201        4431      
+COMENTARIO_LINEA          # Hash con configuraciones (CORRECTO) 203        4435      
+VARIABLE_LOCAL            configuracion                  204        4473      
+ASIGNACION                =                              204        4487      
+LLAVE_IZQ                 {                              204        4489      
+VARIABLE_LOCAL            modo                           205        4493      
+DOS_PUNTOS                :                              205        4497      
+STRING                    activo                         205        4499      
+COMA                      ,                              205        4507      
+VARIABLE_LOCAL            nivel                          206        4511      
+DOS_PUNTOS                :                              206        4516      
+INTEGER                   5                              206        4518      
+COMA                      ,                              206        4519      
+VARIABLE_LOCAL            habilitado                     207        4523      
+DOS_PUNTOS                :                              207        4533      
+TRUE                      true                           207        4535      
+LLAVE_DER                 }                              208        4540      
+COMENTARIO_LINEA          # Función de conversión de temperatura (CORRECTO) 210        4543      
+DEF                       def                            211        4593      
+VARIABLE_LOCAL            celsius_a_fahrenheit           211        4597      
+PARENTESIS_IZQ            (                              211        4617      
+VARIABLE_LOCAL            celsius                        211        4618      
+PARENTESIS_DER            )                              211        4625      
+VARIABLE_LOCAL            fahrenheit                     212        4629      
+ASIGNACION                =                              212        4640      
+VARIABLE_LOCAL            celsius                        212        4642      
+MULTIPLICACION            *                              212        4650      
+INTEGER                   9                              212        4652      
+DIVISION                  /                              212        4654      
+INTEGER                   5                              212        4656      
+SUMA                      +                              212        4658      
+INTEGER                   32                             212        4660      
+RETURN                    return                         213        4665      
+VARIABLE_LOCAL            fahrenheit                     213        4672      
+END                       end                            214        4683      
+COMENTARIO_LINEA          # Función de conversión inversa (CORRECTO) 216        4688      
+DEF                       def                            217        4731      
+VARIABLE_LOCAL            fahrenheit_a_celsius           217        4735      
+PARENTESIS_IZQ            (                              217        4755      
+VARIABLE_LOCAL            fahrenheit                     217        4756      
+PARENTESIS_DER            )                              217        4766      
+VARIABLE_LOCAL            celsius                        218        4770      
+ASIGNACION                =                              218        4778      
+VARIABLE_LOCAL            fahrenheit                     218        4780      
+RESTA                     -                              218        4791      
+INTEGER                   32                             218        4793      
+MULTIPLICACION            *                              218        4796      
+INTEGER                   5                              218        4798      
+DIVISION                  /                              218        4800      
+INTEGER                   9                              218        4802      
+RETURN                    return                         219        4806      
+VARIABLE_LOCAL            celsius                        219        4813      
+END                       end                            220        4821      
+COMENTARIO_LINEA          # Conversiones de temperatura (CORRECTO) 222        4826      
+VARIABLE_LOCAL            temp_celsius                   223        4867      
+ASIGNACION                =                              223        4880      
+INTEGER                   25                             223        4882      
+VARIABLE_LOCAL            temp_fahrenheit                224        4885      
+ASIGNACION                =                              224        4901      
+VARIABLE_LOCAL            celsius_a_fahrenheit           224        4903      
+PARENTESIS_IZQ            (                              224        4923      
+VARIABLE_LOCAL            temp_celsius                   224        4924      
+PARENTESIS_DER            )                              224        4936      
+VARIABLE_LOCAL            temp_celsius_nuevamente        225        4938      
+ASIGNACION                =                              225        4962      
+VARIABLE_LOCAL            fahrenheit_a_celsius           225        4964      
+PARENTESIS_IZQ            (                              225        4984      
+VARIABLE_LOCAL            temp_fahrenheit                225        4985      
+PARENTESIS_DER            )                              225        5000      
+PUTS                      puts                           227        5003      
+VARIABLE_LOCAL            temp_fahrenheit                227        5008      
+PUTS                      puts                           228        5024      
+VARIABLE_LOCAL            temp_celsius_nuevamente        228        5029      
+COMENTARIO_LINEA          # ========================================== 230        5054      
+COMENTARIO_LINEA          # ERROR 10: Operador incompatible string * float  231        5099      
+COMENTARIO_LINEA          # ========================================== 232        5149      
+VARIABLE_LOCAL            cadena                         233        5194      
+ASIGNACION                =                              233        5201      
+STRING                    Hola                           233        5203      
+VARIABLE_LOCAL            repeticiones                   234        5210      
+ASIGNACION                =                              234        5223      
+VARIABLE_LOCAL            cadena                         234        5225      
+MULTIPLICACION            *                              234        5232      
+FLOAT                     3.5                            234        5234      
+COMENTARIO_LINEA          # Crear secuencia de Fibonacci (CORRECTO) 236        5239      
+VARIABLE_LOCAL            fibonacci                      237        5281      
+ASIGNACION                =                              237        5291      
+CORCHETE_IZQ              [                              237        5293      
+INTEGER                   0                              237        5294      
+COMA                      ,                              237        5295      
+INTEGER                   1                              237        5297      
+CORCHETE_DER              ]                              237        5298      
+FOR                       for                            238        5300      
+VARIABLE_LOCAL            i                              238        5304      
+IN                        in                             238        5306      
+INTEGER                   2                              238        5309      
+PUNTO                     .                              238        5310      
+PUNTO                     .                              238        5311      
+INTEGER                   10                             238        5312      
+DO                        do                             238        5315      
+VARIABLE_LOCAL            siguiente                      239        5320      
+ASIGNACION                =                              239        5330      
+VARIABLE_LOCAL            fibonacci                      239        5332      
+CORCHETE_IZQ              [                              239        5341      
+INTEGER                   0                              239        5342      
+CORCHETE_DER              ]                              239        5343      
+SUMA                      +                              239        5345      
+VARIABLE_LOCAL            fibonacci                      239        5347      
+CORCHETE_IZQ              [                              239        5356      
+INTEGER                   1                              239        5357      
+CORCHETE_DER              ]                              239        5358      
+VARIABLE_LOCAL            fibonacci                      240        5362      
+ASIGNACION                =                              240        5372      
+VARIABLE_LOCAL            fibonacci                      240        5374      
+SUMA                      +                              240        5384      
+CORCHETE_IZQ              [                              240        5386      
+VARIABLE_LOCAL            siguiente                      240        5387      
+CORCHETE_DER              ]                              240        5396      
+END                       end                            241        5398      
+COMENTARIO_LINEA          # Cálculo de velocidad (CORRECTO) 243        5403      
+VARIABLE_LOCAL            distancia                      244        5437      
+ASIGNACION                =                              244        5447      
+INTEGER                   150                            244        5449      
+VARIABLE_LOCAL            tiempo                         245        5453      
+ASIGNACION                =                              245        5460      
+INTEGER                   3                              245        5462      
+VARIABLE_LOCAL            velocidad                      246        5464      
+ASIGNACION                =                              246        5474      
+VARIABLE_LOCAL            distancia                      246        5476      
+DIVISION                  /                              246        5486      
+VARIABLE_LOCAL            tiempo                         246        5488      
+PUTS                      puts                           248        5496      
+VARIABLE_LOCAL            velocidad                      248        5501      
+COMENTARIO_LINEA          # Cálculo de aceleración (CORRECTO) 250        5512      
+VARIABLE_LOCAL            velocidad_inicial              251        5548      
+ASIGNACION                =                              251        5566      
+INTEGER                   0                              251        5568      
+VARIABLE_LOCAL            velocidad_final                252        5570      
+ASIGNACION                =                              252        5586      
+INTEGER                   50                             252        5588      
+VARIABLE_LOCAL            tiempo_transcurrido            253        5591      
+ASIGNACION                =                              253        5611      
+INTEGER                   10                             253        5613      
+VARIABLE_LOCAL            aceleracion                    254        5616      
+ASIGNACION                =                              254        5628      
+VARIABLE_LOCAL            velocidad_final                254        5630      
+RESTA                     -                              254        5646      
+VARIABLE_LOCAL            velocidad_inicial              254        5648      
+DIVISION                  /                              254        5666      
+VARIABLE_LOCAL            tiempo_transcurrido            254        5668      
+PUTS                      puts                           256        5689      
+VARIABLE_LOCAL            aceleracion                    256        5694      
+COMENTARIO_LINEA          # Bucle until para contador (CORRECTO) 258        5707      
+VARIABLE_LOCAL            contador                       259        5746      
+ASIGNACION                =                              259        5755      
+INTEGER                   0                              259        5757      
+UNTIL                     until                          260        5759      
+VARIABLE_LOCAL            contador                       260        5765      
+MAYOR_IGUAL               >=                             260        5774      
+INTEGER                   10                             260        5777      
+DO                        do                             260        5780      
+VARIABLE_LOCAL            contador                       261        5785      
+ASIGNACION                =                              261        5794      
+VARIABLE_LOCAL            contador                       261        5796      
+SUMA                      +                              261        5805      
+INTEGER                   1                              261        5807      
+IF                        if                             262        5811      
+VARIABLE_LOCAL            contador                       262        5814      
+IGUAL                     ==                             262        5823      
+INTEGER                   5                              262        5826      
+THEN                      then                           262        5828      
+PUTS                      puts                           263        5837      
+STRING                    Mitad del proceso              263        5842      
+END                       end                            264        5864      
+END                       end                            265        5868      
+COMENTARIO_LINEA          # Función para verificar par o impar (CORRECTO) 267        5873      
+DEF                       def                            268        5921      
+VARIABLE_LOCAL            es_par                         268        5925      
+PARENTESIS_IZQ            (                              268        5931      
+VARIABLE_LOCAL            numero                         268        5932      
+PARENTESIS_DER            )                              268        5938      
+VARIABLE_LOCAL            resto                          269        5942      
+ASIGNACION                =                              269        5948      
+VARIABLE_LOCAL            numero                         269        5950      
+MODULO                    %                              269        5957      
+INTEGER                   2                              269        5959      
+IF                        if                             270        5963      
+VARIABLE_LOCAL            resto                          270        5966      
+IGUAL                     ==                             270        5972      
+INTEGER                   0                              270        5975      
+THEN                      then                           270        5977      
+RETURN                    return                         271        5986      
+TRUE                      true                           271        5993      
+ELSE                      else                           272        6000      
+RETURN                    return                         273        6009      
+FALSE                     false                          273        6016      
+END                       end                            274        6024      
+END                       end                            275        6028      
+COMENTARIO_LINEA          # Verificar números (CORRECTO) 277        6033      
+VARIABLE_LOCAL            numero1                        278        6064      
+ASIGNACION                =                              278        6072      
+INTEGER                   42                             278        6074      
+VARIABLE_LOCAL            numero2                        279        6077      
+ASIGNACION                =                              279        6085      
+INTEGER                   37                             279        6087      
+VARIABLE_LOCAL            numero3                        280        6090      
+ASIGNACION                =                              280        6098      
+INTEGER                   100                            280        6100      
+VARIABLE_LOCAL            resultado1                     282        6105      
+ASIGNACION                =                              282        6116      
+VARIABLE_LOCAL            es_par                         282        6118      
+PARENTESIS_IZQ            (                              282        6124      
+VARIABLE_LOCAL            numero1                        282        6125      
+PARENTESIS_DER            )                              282        6132      
+VARIABLE_LOCAL            resultado2                     283        6134      
+ASIGNACION                =                              283        6145      
+VARIABLE_LOCAL            es_par                         283        6147      
+PARENTESIS_IZQ            (                              283        6153      
+VARIABLE_LOCAL            numero2                        283        6154      
+PARENTESIS_DER            )                              283        6161      
+VARIABLE_LOCAL            resultado3                     284        6163      
+ASIGNACION                =                              284        6174      
+VARIABLE_LOCAL            es_par                         284        6176      
+PARENTESIS_IZQ            (                              284        6182      
+VARIABLE_LOCAL            numero3                        284        6183      
+PARENTESIS_DER            )                              284        6190      
+PUTS                      puts                           286        6193      
+VARIABLE_LOCAL            resultado1                     286        6198      
+PUTS                      puts                           287        6209      
+VARIABLE_LOCAL            resultado2                     287        6214      
+PUTS                      puts                           288        6225      
+VARIABLE_LOCAL            resultado3                     288        6230      
+COMENTARIO_LINEA          # Operaciones con cadenas (CORRECTO) 290        6242      
+VARIABLE_LOCAL            texto1                         291        6279      
+ASIGNACION                =                              291        6286      
+STRING                    Procesamiento                  291        6288      
+VARIABLE_LOCAL            texto2                         292        6304      
+ASIGNACION                =                              292        6311      
+STRING                    de                             292        6313      
+VARIABLE_LOCAL            texto3                         293        6318      
+ASIGNACION                =                              293        6325      
+STRING                    Datos                          293        6327      
+COMENTARIO_LINEA          # Concatenación correcta       295        6336      
+VARIABLE_LOCAL            texto_completo                 296        6361      
+ASIGNACION                =                              296        6376      
+VARIABLE_LOCAL            texto1                         296        6378      
+SUMA                      +                              296        6385      
+STRING                                                   296        6387      
+SUMA                      +                              296        6391      
+VARIABLE_LOCAL            texto2                         296        6393      
+SUMA                      +                              296        6400      
+STRING                                                   296        6402      
+SUMA                      +                              296        6406      
+VARIABLE_LOCAL            texto3                         296        6408      
+PUTS                      puts                           297        6415      
+VARIABLE_LOCAL            texto_completo                 297        6420      
+COMENTARIO_LINEA          # Cálculo de energía cinética (CORRECTO) 299        6436      
+VARIABLE_LOCAL            masa                           300        6477      
+ASIGNACION                =                              300        6482      
+INTEGER                   10                             300        6484      
+VARIABLE_LOCAL            velocidad_objeto               301        6487      
+ASIGNACION                =                              301        6504      
+INTEGER                   20                             301        6506      
+VARIABLE_LOCAL            energia_cinetica               302        6509      
+ASIGNACION                =                              302        6526      
+VARIABLE_LOCAL            masa                           302        6528      
+MULTIPLICACION            *                              302        6533      
+VARIABLE_LOCAL            velocidad_objeto               302        6535      
+MULTIPLICACION            *                              302        6552      
+VARIABLE_LOCAL            velocidad_objeto               302        6554      
+DIVISION                  /                              302        6571      
+INTEGER                   2                              302        6573      
+PUTS                      puts                           304        6576      
+VARIABLE_LOCAL            energia_cinetica               304        6581      
+COMENTARIO_LINEA          # Cálculo de energía potencial (CORRECTO) 306        6599      
+VARIABLE_LOCAL            altura                         307        6641      
+ASIGNACION                =                              307        6648      
+INTEGER                   50                             307        6650      
+VARIABLE_LOCAL            energia_potencial              308        6653      
+ASIGNACION                =                              308        6671      
+VARIABLE_LOCAL            masa                           308        6673      
+MULTIPLICACION            *                              308        6678      
+CONSTANTE                 GRAVEDAD                       308        6680      
+MULTIPLICACION            *                              308        6689      
+VARIABLE_LOCAL            altura                         308        6691      
+PUTS                      puts                           310        6699      
+VARIABLE_LOCAL            energia_potencial              310        6704      
+COMENTARIO_LINEA          # Resumen final (CORRECTO)     312        6723      
+PUTS                      puts                           313        6750      
+STRING                    Total de operaciones realizadas 313        6755      
+PUTS                      puts                           314        6789      
+STRING                    Areas calculadas: 3            314        6794      
+PUTS                      puts                           315        6816      
+STRING                    Volumenes calculados: 3        315        6821      
+PUTS                      puts                           316        6847      
+STRING                    Conversiones: 2                316        6852      
+PUTS                      puts                           317        6870      
+STRING                    Factoriales: 3                 317        6875      
+COMENTARIO_LINEA          # Fin del programa             319        6893      
+----------------------------------------------------------------------------------------------------
+Total de tokens: 796
+
+
+ ANÁLISIS COMPLETADO SIN ERRORES
+
+====================================================================================================

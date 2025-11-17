@@ -1,5 +1,5 @@
 # ============================================================================
-# ALGORITMO 3 - TEST DE ERRORES SINTÁCTICOS (adaptado a la gramática del parser)
+# ALGORITMO 2 - TEST DE ERRORES SINTÁCTICOS (adaptado a la gramática del parser)
 # Tester: Dhamar Quishpe (@dquishpe)
 # Descripción: Casos diseñados para que el parser detecte errores.
 # ============================================================================

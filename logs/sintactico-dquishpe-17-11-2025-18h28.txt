@@ -1,0 +1,270 @@
+====================================================================================================
+ANALIZADOR SINTÁCTICO PARA RUBY
+====================================================================================================
+
+Usuario: dquishpe
+Fecha: 17/11/2025 18:28:42
+Archivo analizado: Algorithms/Algorithm_DhamarQuishpe_Semantico.rb
+====================================================================================================
+
+[OK] ANÁLISIS SINTÁCTICO EXITOSO
+
+ESTRUCTURA DEL PROGRAMA:
+----------------------------------------------------------------------------------------------------
+('programa', [('valor', 25), '# Hash con configuraciones (CORRECTO)', ('asignacion', ('variable', 'configuracion'), '=', ('valor', ('hash', [('par_simbolo', 'modo', ('valor', 'activo')), ('par_simbolo', 'nivel', ('valor', 5)), ('par_simbolo', 'habilitado', ('valor', 'true'))]))), '# Función de conversión de temperatura (CORRECTO)', ('funcion', 'celsius_a_fahrenheit', [], [('parentesis', ('valor', ('variable', 'celsius'))), ('asignacion', ('variable', 'fahrenheit'), '=', ('operacion_binaria', '+', ('operacion_binaria', '/', ('operacion_binaria', '*', ('valor', ('variable', 'celsius')), ('valor', 9)), ('valor', 5)), ('valor', 32))), ('return_valor', ('valor', ('variable', 'fahrenheit')))]), '# Función de conversión inversa (CORRECTO)', ('funcion', 'fahrenheit_a_celsius', [], [('parentesis', ('valor', ('variable', 'fahrenheit'))), ('asignacion', ('variable', 'celsius'), '=', ('operacion_binaria', '-', ('valor', ('variable', 'fahrenheit')), ('operacion_binaria', '/', ('operacion_binaria', '*', ('valor', 32), ('valor', 5)), ('valor', 9)))), ('return_valor', ('valor', ('variable', 'celsius')))]), '# Conversiones de temperatura (CORRECTO)', ('asignacion', ('variable', 'temp_celsius'), '=', ('valor', 25)), ('asignacion', ('variable', 'temp_fahrenheit'), '=', ('llamada_funcion', 'celsius_a_fahrenheit', [('valor', ('variable', 'temp_celsius'))])), ('asignacion', ('variable', 'temp_celsius_nuevamente'), '=', ('llamada_funcion', 'fahrenheit_a_celsius', [('valor', ('variable', 'temp_fahrenheit'))])), ('impresion', 'puts', [('valor', ('variable', 'temp_fahrenheit'))]), ('impresion', 'puts', [('valor', ('variable', 'temp_celsius_nuevamente'))]), '# ==========================================', '# ERROR 10: Operador incompatible string * float ', '# ==========================================', ('asignacion', ('variable', 'cadena'), '=', ('valor', 'Hola')), ('asignacion', ('variable', 'repeticiones'), '=', ('operacion_binaria', '*', ('valor', ('variable', 'cadena')), ('valor', 3.5))), '# Crear secuencia de Fibonacci (CORRECTO)', ('asignacion', ('variable', 'fibonacci'), '=', ('valor', ('arreglo', [('valor', 0), ('valor', 1)]))), ('for', 'i', ('rango_inclusivo', ('valor', 2), ('valor', 10)), [('asignacion', ('variable', 'siguiente'), '=', ('valor', ('variable', 'fibonacci'))), ('operacion_binaria', '+', ('valor', ('arreglo', [('valor', 0)])), ('valor', ('variable', 'fibonacci'))), ('valor', ('arreglo', [('valor', 1)])), ('asignacion', ('variable', 'fibonacci'), '=', ('operacion_binaria', '+', ('valor', ('variable', 'fibonacci')), ('valor', ('arreglo', [('valor', ('variable', 'siguiente'))]))))]), '# Cálculo de velocidad (CORRECTO)', ('asignacion', ('variable', 'distancia'), '=', ('valor', 150)), ('asignacion', ('variable', 'tiempo'), '=', ('valor', 3)), ('asignacion', ('variable', 'velocidad'), '=', ('operacion_binaria', '/', ('valor', ('variable', 'distancia')), ('valor', ('variable', 'tiempo')))), ('impresion', 'puts', [('valor', ('variable', 'velocidad'))]), '# Cálculo de aceleración (CORRECTO)', ('asignacion', ('variable', 'velocidad_inicial'), '=', ('valor', 0)), ('asignacion', ('variable', 'velocidad_final'), '=', ('valor', 50)), ('asignacion', ('variable', 'tiempo_transcurrido'), '=', ('valor', 10)), ('asignacion', ('variable', 'aceleracion'), '=', ('operacion_binaria', '-', ('valor', ('variable', 'velocidad_final')), ('operacion_binaria', '/', ('valor', ('variable', 'velocidad_inicial')), ('valor', ('variable', 'tiempo_transcurrido'))))), ('impresion', 'puts', [('valor', ('variable', 'aceleracion'))]), '# Bucle until para contador (CORRECTO)', ('asignacion', ('variable', 'contador'), '=', ('valor', 0)), ('until', ('comparacion', '>=', ('valor', ('variable', 'contador')), ('valor', 10)), [('asignacion', ('variable', 'contador'), '=', ('operacion_binaria', '+', ('valor', ('variable', 'contador')), ('valor', 1))), ('if', ('comparacion', '==', ('valor', ('variable', 'contador')), ('valor', 5)), [('impresion', 'puts', [('valor', 'Mitad del proceso')])])]), '# Función para verificar par o impar (CORRECTO)', ('funcion', 'es_par', [], [('parentesis', ('valor', ('variable', 'numero'))), ('asignacion', ('variable', 'resto'), '=', ('operacion_binaria', '%', ('valor', ('variable', 'numero')), ('valor', 2))), ('if_else', ('comparacion', '==', ('valor', ('variable', 'resto')), ('valor', 0)), [('return_valor', ('valor', 'true'))], [('return_valor', ('valor', 'false'))])]), '# Verificar números (CORRECTO)', ('asignacion', ('variable', 'numero1'), '=', ('valor', 42)), ('asignacion', ('variable', 'numero2'), '=', ('valor', 37)), ('asignacion', ('variable', 'numero3'), '=', ('valor', 100)), ('asignacion', ('variable', 'resultado1'), '=', ('llamada_funcion', 'es_par', [('valor', ('variable', 'numero1'))])), ('asignacion', ('variable', 'resultado2'), '=', ('llamada_funcion', 'es_par', [('valor', ('variable', 'numero2'))])), ('asignacion', ('variable', 'resultado3'), '=', ('llamada_funcion', 'es_par', [('valor', ('variable', 'numero3'))])), ('impresion', 'puts', [('valor', ('variable', 'resultado1'))]), ('impresion', 'puts', [('valor', ('variable', 'resultado2'))]), ('impresion', 'puts', [('valor', ('variable', 'resultado3'))]), '# Operaciones con cadenas (CORRECTO)', ('asignacion', ('variable', 'texto1'), '=', ('valor', 'Procesamiento')), ('asignacion', ('variable', 'texto2'), '=', ('valor', 'de')), ('asignacion', ('variable', 'texto3'), '=', ('valor', 'Datos')), '# Concatenación correcta', ('asignacion', ('variable', 'texto_completo'), '=', ('operacion_binaria', '+', ('operacion_binaria', '+', ('operacion_binaria', '+', ('operacion_binaria', '+', ('valor', ('variable', 'texto1')), ('valor', ' ')), ('valor', ('variable', 'texto2'))), ('valor', ' ')), ('valor', ('variable', 'texto3')))), ('impresion', 'puts', [('valor', ('variable', 'texto_completo'))]), '# Cálculo de energía cinética (CORRECTO)', ('asignacion', ('variable', 'masa'), '=', ('valor', 10)), ('asignacion', ('variable', 'velocidad_objeto'), '=', ('valor', 20)), ('asignacion', ('variable', 'energia_cinetica'), '=', ('operacion_binaria', '/', ('operacion_binaria', '*', ('operacion_binaria', '*', ('valor', ('variable', 'masa')), ('valor', ('variable', 'velocidad_objeto'))), ('valor', ('variable', 'velocidad_objeto'))), ('valor', 2))), ('impresion', 'puts', [('valor', ('variable', 'energia_cinetica'))]), '# Cálculo de energía potencial (CORRECTO)', ('asignacion', ('variable', 'altura'), '=', ('valor', 50)), ('asignacion', ('variable', 'energia_potencial'), '=', ('operacion_binaria', '*', ('operacion_binaria', '*', ('valor', ('variable', 'masa')), ('valor', ('variable', 'GRAVEDAD'))), ('valor', ('variable', 'altura')))), ('impresion', 'puts', [('valor', ('variable', 'energia_potencial'))]), '# Resumen final (CORRECTO)', ('impresion', 'puts', [('valor', 'Total de operaciones realizadas')]), ('impresion', 'puts', [('valor', 'Areas calculadas: 3')]), ('impresion', 'puts', [('valor', 'Volumenes calculados: 3')]), ('impresion', 'puts', [('valor', 'Conversiones: 2')]), ('impresion', 'puts', [('valor', 'Factoriales: 3')]), '# Fin del programa'])
+----------------------------------------------------------------------------------------------------
+
+CONSTRUCCIONES SINTÁCTICAS RECONOCIDAS:
+----------------------------------------------------------------------------------------------------
+1. Asignación: ('variable', 'PI') = [expresión]
+2. Asignación: ('variable', 'E') = [expresión]
+3. Asignación: ('variable', 'GRAVEDAD') = [expresión]
+4. Asignación: ('variable', 'VELOCIDAD_LUZ') = [expresión]
+5. Asignación: ('variable', '$debug_mode') = [expresión]
+6. Asignación: ('variable', '$contador_operaciones') = [expresión]
+7. Asignación: ('variable', '$precision') = [expresión]
+8. Asignación: ('variable', 'PI') = [expresión]
+9. Operación aritmética: *
+10. Operación aritmética: *
+11. Asignación: ('variable', 'area') = [expresión]
+12. RETURN con valor
+13. Definición de función: area_circulo sin parámetros
+14. Operación aritmética: *
+15. Operación aritmética: *
+16. Operación aritmética: *
+17. Operación aritmética: *
+18. Operación aritmética: /
+19. Asignación: ('variable', 'volumen') = [expresión]
+20. RETURN con valor
+21. Definición de función: volumen_esfera sin parámetros
+22. Asignación: ('variable', 'radio1') = [expresión]
+23. Asignación: ('variable', 'radio2') = [expresión]
+24. Asignación: ('variable', 'radio3') = [expresión]
+25. Llamada a función: area_circulo con 1 argumento(s)
+26. Asignación: ('variable', 'area1') = [expresión]
+27. Llamada a función: area_circulo con 1 argumento(s)
+28. Asignación: ('variable', 'area2') = [expresión]
+29. Llamada a función: area_circulo con 1 argumento(s)
+30. Asignación: ('variable', 'area3') = [expresión]
+31. Instrucción de impresión: puts
+32. Instrucción de impresión: puts
+33. Instrucción de impresión: puts
+34. Instrucción de impresión: puts
+35. RETURN con valor
+36. Definición de función: mostrar_resultados sin parámetros
+37. Llamada a función: volumen_esfera con 1 argumento(s)
+38. Asignación: ('variable', 'vol1') = [expresión]
+39. Llamada a función: volumen_esfera con 1 argumento(s)
+40. Asignación: ('variable', 'vol2') = [expresión]
+41. Llamada a función: volumen_esfera con 1 argumento(s)
+42. Asignación: ('variable', 'vol3') = [expresión]
+43. Asignación: ('variable', 'texto_area') = [expresión]
+44. Operación aritmética: -
+45. Asignación: ('variable', 'resultado_invalido') = [expresión]
+46. Asignación: ('variable', 'total') = [expresión]
+47. Operación aritmética: +
+48. Asignación: ('variable', 'total') = [expresión]
+49. Estructura FOR con variable: elemento
+50. RETURN con valor
+51. Definición de función: sumar_elementos sin parámetros
+52. Arreglo con 5 elemento(s)
+53. Asignación: ('variable', 'numeros') = [expresión]
+54. Arreglo con 5 elemento(s)
+55. Asignación: ('variable', 'temperaturas') = [expresión]
+56. Arreglo con 5 elemento(s)
+57. Asignación: ('variable', 'distancias') = [expresión]
+58. Llamada a función: sumar_elementos con 1 argumento(s)
+59. Asignación: ('variable', 'suma_numeros') = [expresión]
+60. Llamada a función: sumar_elementos con 1 argumento(s)
+61. Asignación: ('variable', 'suma_temperaturas') = [expresión]
+62. Llamada a función: sumar_elementos con 1 argumento(s)
+63. Asignación: ('variable', 'suma_distancias') = [expresión]
+64. Instrucción de impresión: puts
+65. Instrucción de impresión: puts
+66. Instrucción de impresión: puts
+67. Operación aritmética: +
+68. Asignación: ('variable', 'mensaje') = [expresión]
+69. Operación aritmética: /
+70. Asignación: ('variable', 'promedio_numeros') = [expresión]
+71. Operación aritmética: /
+72. Asignación: ('variable', 'promedio_temperaturas') = [expresión]
+73. Operación aritmética: /
+74. Asignación: ('variable', 'promedio_distancias') = [expresión]
+75. Asignación: ('variable', 'promedio_numeros') = [expresión]
+76. Asignación: ('variable', 'max') = [expresión]
+77. Comparación: >
+78. Asignación: ('variable', 'max') = [expresión]
+79. Estructura IF completa
+80. Comparación: >
+81. Asignación: ('variable', 'max') = [expresión]
+82. Estructura IF completa
+83. RETURN con valor
+84. Definición de función: encontrar_maximo con 3 parámetro(s)
+85. Llamada a función: encontrar_maximo con 3 argumento(s)
+86. Asignación: ('variable', 'max_area') = [expresión]
+87. Llamada a función: encontrar_maximo con 3 argumento(s)
+88. Asignación: ('variable', 'max_volumen') = [expresión]
+89. Instrucción de impresión: puts
+90. Instrucción de impresión: puts
+91. Asignación: ('variable', 'valor') = [expresión]
+92. Control de flujo: break
+93. RETURN con valor
+94. Definición de función: procesar_datos sin parámetros
+95. Asignación: ('variable', 'base') = [expresión]
+96. Asignación: ('variable', 'exponente') = [expresión]
+97. Asignación: ('variable', 'resultado_potencia') = [expresión]
+98. Rango inclusivo (..)
+99. Operación aritmética: *
+100. Asignación: ('variable', 'resultado_potencia') = [expresión]
+101. Estructura FOR con variable: i
+102. Instrucción de impresión: puts
+103. Arreglo con 3 elemento(s)
+104. Arreglo con 3 elemento(s)
+105. Arreglo con 3 elemento(s)
+106. Arreglo con 3 elemento(s)
+107. Asignación: ('variable', 'matriz') = [expresión]
+108. Instrucción de impresión: puts
+109. Estructura IF completa
+110. Asignación: ('variable', 'suma_matriz') = [expresión]
+111. Operación aritmética: +
+112. Asignación: ('variable', 'suma_matriz') = [expresión]
+113. Estructura FOR con variable: elemento
+114. Estructura FOR con variable: fila
+115. Instrucción de impresión: puts
+116. RETURN con valor
+117. Comparación: <=
+118. RETURN con valor
+119. Asignación: ('variable', 'resultado') = [expresión]
+120. Asignación: ('variable', 'contador') = [expresión]
+121. Comparación: <=
+122. Operación aritmética: *
+123. Asignación: ('variable', 'resultado') = [expresión]
+124. Operación aritmética: +
+125. Asignación: ('variable', 'contador') = [expresión]
+126. Estructura WHILE
+127. RETURN con valor
+128. Estructura IF completa
+129. Definición de función: factorial sin parámetros
+130. Llamada a función: factorial con 1 argumento(s)
+131. Asignación: ('variable', 'fact5') = [expresión]
+132. Llamada a función: factorial con 1 argumento(s)
+133. Asignación: ('variable', 'fact7') = [expresión]
+134. Llamada a función: factorial con 1 argumento(s)
+135. Asignación: ('variable', 'fact10') = [expresión]
+136. Instrucción de impresión: puts
+137. Instrucción de impresión: puts
+138. Instrucción de impresión: puts
+139. Hash con 3 par(es) clave-valor
+140. Asignación: ('variable', 'configuracion') = [expresión]
+141. Operación aritmética: *
+142. Operación aritmética: /
+143. Operación aritmética: +
+144. Asignación: ('variable', 'fahrenheit') = [expresión]
+145. RETURN con valor
+146. Definición de función: celsius_a_fahrenheit sin parámetros
+147. Operación aritmética: *
+148. Operación aritmética: /
+149. Operación aritmética: -
+150. Asignación: ('variable', 'celsius') = [expresión]
+151. RETURN con valor
+152. Definición de función: fahrenheit_a_celsius sin parámetros
+153. Asignación: ('variable', 'temp_celsius') = [expresión]
+154. Llamada a función: celsius_a_fahrenheit con 1 argumento(s)
+155. Asignación: ('variable', 'temp_fahrenheit') = [expresión]
+156. Llamada a función: fahrenheit_a_celsius con 1 argumento(s)
+157. Asignación: ('variable', 'temp_celsius_nuevamente') = [expresión]
+158. Instrucción de impresión: puts
+159. Instrucción de impresión: puts
+160. Asignación: ('variable', 'cadena') = [expresión]
+161. Operación aritmética: *
+162. Asignación: ('variable', 'repeticiones') = [expresión]
+163. Arreglo con 2 elemento(s)
+164. Asignación: ('variable', 'fibonacci') = [expresión]
+165. Rango inclusivo (..)
+166. Asignación: ('variable', 'siguiente') = [expresión]
+167. Arreglo con 1 elemento(s)
+168. Operación aritmética: +
+169. Arreglo con 1 elemento(s)
+170. Arreglo con 1 elemento(s)
+171. Operación aritmética: +
+172. Asignación: ('variable', 'fibonacci') = [expresión]
+173. Estructura FOR con variable: i
+174. Asignación: ('variable', 'distancia') = [expresión]
+175. Asignación: ('variable', 'tiempo') = [expresión]
+176. Operación aritmética: /
+177. Asignación: ('variable', 'velocidad') = [expresión]
+178. Instrucción de impresión: puts
+179. Asignación: ('variable', 'velocidad_inicial') = [expresión]
+180. Asignación: ('variable', 'velocidad_final') = [expresión]
+181. Asignación: ('variable', 'tiempo_transcurrido') = [expresión]
+182. Operación aritmética: /
+183. Operación aritmética: -
+184. Asignación: ('variable', 'aceleracion') = [expresión]
+185. Instrucción de impresión: puts
+186. Asignación: ('variable', 'contador') = [expresión]
+187. Comparación: >=
+188. Operación aritmética: +
+189. Asignación: ('variable', 'contador') = [expresión]
+190. Comparación: ==
+191. Instrucción de impresión: puts
+192. Estructura IF completa
+193. Estructura UNTIL
+194. Operación aritmética: %
+195. Asignación: ('variable', 'resto') = [expresión]
+196. Comparación: ==
+197. RETURN con valor
+198. RETURN con valor
+199. Estructura IF completa
+200. Definición de función: es_par sin parámetros
+201. Asignación: ('variable', 'numero1') = [expresión]
+202. Asignación: ('variable', 'numero2') = [expresión]
+203. Asignación: ('variable', 'numero3') = [expresión]
+204. Llamada a función: es_par con 1 argumento(s)
+205. Asignación: ('variable', 'resultado1') = [expresión]
+206. Llamada a función: es_par con 1 argumento(s)
+207. Asignación: ('variable', 'resultado2') = [expresión]
+208. Llamada a función: es_par con 1 argumento(s)
+209. Asignación: ('variable', 'resultado3') = [expresión]
+210. Instrucción de impresión: puts
+211. Instrucción de impresión: puts
+212. Instrucción de impresión: puts
+213. Asignación: ('variable', 'texto1') = [expresión]
+214. Asignación: ('variable', 'texto2') = [expresión]
+215. Asignación: ('variable', 'texto3') = [expresión]
+216. Operación aritmética: +
+217. Operación aritmética: +
+218. Operación aritmética: +
+219. Operación aritmética: +
+220. Asignación: ('variable', 'texto_completo') = [expresión]
+221. Instrucción de impresión: puts
+222. Asignación: ('variable', 'masa') = [expresión]
+223. Asignación: ('variable', 'velocidad_objeto') = [expresión]
+224. Operación aritmética: *
+225. Operación aritmética: *
+226. Operación aritmética: /
+227. Asignación: ('variable', 'energia_cinetica') = [expresión]
+228. Instrucción de impresión: puts
+229. Asignación: ('variable', 'altura') = [expresión]
+230. Operación aritmética: *
+231. Operación aritmética: *
+232. Asignación: ('variable', 'energia_potencial') = [expresión]
+233. Instrucción de impresión: puts
+234. Instrucción de impresión: puts
+235. Instrucción de impresión: puts
+236. Instrucción de impresión: puts
+237. Instrucción de impresión: puts
+238. Instrucción de impresión: puts
+239. Programa reconocido con 70 sentencia(s)
+----------------------------------------------------------------------------------------------------
+Total de construcciones: 239
+
+ERRORES SINTÁCTICOS ENCONTRADOS:
+----------------------------------------------------------------------------------------------------
+1. Error sintáctico en línea 519: Token inesperado '=' (tipo: ASIGNACION)
+----------------------------------------------------------------------------------------------------
+Total de errores: 1
+
+
+[ERROR] ANÁLISIS COMPLETADO CON ERRORES SINTÁCTICOS
+
+====================================================================================================

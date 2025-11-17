@@ -1,0 +1,96 @@
+====================================================================================================
+ANALIZADOR SEMÁNTICO PARA RUBY
+====================================================================================================
+
+Usuario: dquishpe
+Fecha: 17/11/2025 18:28:42
+Archivo analizado: Algorithms/Algorithm_DhamarQuishpe_Semantico.rb
+====================================================================================================
+
+TABLA DE SÍMBOLOS:
+====================================================================================================
+
+VARIABLES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+configuracion                  hash                 1              
+fahrenheit                     any                  2              
+celsius                        any                  2              
+temp_celsius                   integer              1              
+temp_fahrenheit                any                  1              
+temp_celsius_nuevamente        any                  1              
+cadena                         string               1              
+repeticiones                   float                1              
+fibonacci                      any                  2              
+siguiente                      array                2              
+distancia                      integer              1              
+tiempo                         integer              1              
+velocidad                      integer              1              
+velocidad_inicial              integer              1              
+velocidad_final                integer              1              
+tiempo_transcurrido            integer              1              
+aceleracion                    integer              1              
+contador                       integer              2              
+resto                          any                  2              
+numero1                        integer              1              
+numero2                        integer              1              
+numero3                        integer              1              
+resultado1                     any                  1              
+resultado2                     any                  1              
+resultado3                     any                  1              
+texto1                         string               1              
+texto2                         string               1              
+texto3                         string               1              
+texto_completo                 string               1              
+masa                           integer              1              
+velocidad_objeto               integer              1              
+energia_cinetica               integer              1              
+altura                         integer              1              
+energia_potencial              any                  1              
+----------------------------------------------------------------------------------------------------
+Total de variables: 34
+
+FUNCIONES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Parámetros                          Línea          
+----------------------------------------------------------------------------------------------------
+celsius_a_fahrenheit           sin parámetros                      1              
+fahrenheit_a_celsius           sin parámetros                      1              
+es_par                         sin parámetros                      1              
+----------------------------------------------------------------------------------------------------
+Total de funciones: 3
+
+
+ERRORES SEMÁNTICOS ENCONTRADOS:
+====================================================================================================
+1. Error semántico en línea 2: Operador '+' incompatible entre tipos 'any' y 'integer'
+2. Error semántico en línea 2: Operador '/' incompatible entre tipos 'any' y 'integer'
+3. Error semántico en línea 2: Operador '*' incompatible entre tipos 'any' y 'integer'
+4. Error semántico en línea 2: Variable 'celsius' no declarada antes de su uso
+5. Error semántico en línea 2: Operador '-' incompatible entre tipos 'any' y 'integer'
+6. Error semántico en línea 1: Conversión implícita inválida entre 'string' y 'float'. Use conversión explícita
+7. Error semántico en línea 1: Operador '*' incompatible entre tipos 'string' y 'float'
+8. Error semántico en línea 2: Operador '+' incompatible entre tipos 'array' y 'array'
+9. Error semántico en línea 2: Operador '+' incompatible entre tipos 'any' y 'array'
+10. Error semántico en línea 2: Operador '%' incompatible entre tipos 'any' y 'integer'
+11. Error semántico en línea 2: Variable 'numero' no declarada antes de su uso
+12. Error semántico en línea 1: Operador '*' incompatible entre tipos 'any' y 'integer'
+13. Error semántico en línea 1: Operador '*' incompatible entre tipos 'integer' y 'any'
+14. Error semántico en línea 1: Variable 'GRAVEDAD' no declarada antes de su uso
+====================================================================================================
+Total de errores: 14
+
+
+RESUMEN DEL ANÁLISIS:
+====================================================================================================
+Variables declaradas:    34
+Constantes declaradas:   0
+Funciones declaradas:    3
+Errores encontrados:     14
+Advertencias:            0
+====================================================================================================
+
+[ERROR] ANÁLISIS SEMÁNTICO COMPLETADO CON ERRORES
+
+====================================================================================================
