@@ -1,0 +1,31 @@
+====================================================================================================
+ANALIZADOR SINTÁCTICO PARA RUBY
+====================================================================================================
+
+Usuario: Angelo
+Fecha: 26/11/2025 19:46:55
+Archivo analizado: temp_codigo.rb
+====================================================================================================
+
+[OK] ANÁLISIS SINTÁCTICO EXITOSO
+
+ESTRUCTURA DEL PROGRAMA:
+----------------------------------------------------------------------------------------------------
+('programa', [('asignacion', ('variable', 'nombre', 3), '=', ('valor', 'Ruby'), 3), ('asignacion', ('variable', 'edad', 4), '=', ('valor', 25), 4), ('if', ('comparacion', '>=', ('valor', ('variable', 'edad', 6)), ('valor', 18)), [('impresion', 'puts', [('valor', 'Mayor de edad')])])])
+----------------------------------------------------------------------------------------------------
+
+CONSTRUCCIONES SINTÁCTICAS RECONOCIDAS:
+----------------------------------------------------------------------------------------------------
+1. Asignación: ('variable', 'nombre', 3) = [expresión]
+2. Asignación: ('variable', 'edad', 4) = [expresión]
+3. Comparación: >=
+4. Instrucción de impresión: puts
+5. Estructura IF completa
+6. Programa reconocido con 3 sentencia(s)
+----------------------------------------------------------------------------------------------------
+Total de construcciones: 6
+
+
+[OK] ANÁLISIS COMPLETADO SIN ERRORES SINTÁCTICOS
+
+====================================================================================================

@@ -1,0 +1,96 @@
+====================================================================================================
+ANALIZADOR SEMÁNTICO PARA RUBY
+====================================================================================================
+
+Usuario: Dhamar
+Fecha: 26/11/2025 19:48:43
+Archivo analizado: temp_codigo.rb
+====================================================================================================
+
+TABLA DE SÍMBOLOS:
+====================================================================================================
+
+VARIABLES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+configuracion                  hash                 204            
+fahrenheit                     any                  212            
+celsius                        any                  218            
+temp_celsius                   integer              223            
+temp_fahrenheit                any                  224            
+temp_celsius_nuevamente        any                  225            
+cadena                         string               233            
+repeticiones                   float                234            
+fibonacci                      any                  240            
+siguiente                      array                239            
+distancia                      integer              244            
+tiempo                         integer              245            
+velocidad                      integer              246            
+velocidad_inicial              integer              251            
+velocidad_final                integer              252            
+tiempo_transcurrido            integer              253            
+aceleracion                    integer              254            
+contador                       integer              261            
+resto                          any                  269            
+numero1                        integer              278            
+numero2                        integer              279            
+numero3                        integer              280            
+resultado1                     any                  282            
+resultado2                     any                  283            
+resultado3                     any                  284            
+texto1                         string               291            
+texto2                         string               292            
+texto3                         string               293            
+texto_completo                 string               296            
+masa                           integer              300            
+velocidad_objeto               integer              301            
+energia_cinetica               integer              302            
+altura                         integer              307            
+energia_potencial              any                  308            
+----------------------------------------------------------------------------------------------------
+Total de variables: 34
+
+FUNCIONES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Parámetros                          Línea          
+----------------------------------------------------------------------------------------------------
+celsius_a_fahrenheit           sin parámetros                      1              
+fahrenheit_a_celsius           sin parámetros                      1              
+es_par                         sin parámetros                      1              
+----------------------------------------------------------------------------------------------------
+Total de funciones: 3
+
+
+ERRORES SEMÁNTICOS ENCONTRADOS:
+====================================================================================================
+1. Error semántico en línea 212: Operador '+' incompatible entre tipos 'any' y 'integer'
+2. Error semántico en línea 212: Operador '/' incompatible entre tipos 'any' y 'integer'
+3. Error semántico en línea 212: Operador '*' incompatible entre tipos 'any' y 'integer'
+4. Error semántico en línea 212: Variable 'celsius' no declarada antes de su uso
+5. Error semántico en línea 218: Operador '-' incompatible entre tipos 'any' y 'integer'
+6. Error semántico en línea 234: Conversión implícita inválida entre 'string' y 'float'. Use conversión explícita
+7. Error semántico en línea 234: Operador '*' incompatible entre tipos 'string' y 'float'
+8. Error semántico en línea 239: Operador '+' incompatible entre tipos 'array' y 'array'
+9. Error semántico en línea 240: Operador '+' incompatible entre tipos 'any' y 'array'
+10. Error semántico en línea 269: Operador '%' incompatible entre tipos 'any' y 'integer'
+11. Error semántico en línea 269: Variable 'numero' no declarada antes de su uso
+12. Error semántico en línea 308: Operador '*' incompatible entre tipos 'any' y 'integer'
+13. Error semántico en línea 308: Operador '*' incompatible entre tipos 'integer' y 'any'
+14. Error semántico en línea 308: Variable 'GRAVEDAD' no declarada antes de su uso
+====================================================================================================
+Total de errores: 14
+
+
+RESUMEN DEL ANÁLISIS:
+====================================================================================================
+Variables declaradas:    34
+Constantes declaradas:   0
+Funciones declaradas:    3
+Errores encontrados:     14
+Advertencias:            0
+====================================================================================================
+
+[ERROR] ANÁLISIS SEMÁNTICO COMPLETADO CON ERRORES
+
+====================================================================================================

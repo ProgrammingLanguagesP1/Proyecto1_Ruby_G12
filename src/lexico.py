@@ -87,10 +87,6 @@ tokens = [
     'DOS_PUNTOS',
     'PUNTO',
     'FLECHA',
-    
-    # Comentarios
-    'COMENTARIO_LINEA',
-    'COMENTARIO_MULTILINEA',
 ] + list(reserved.values())
 
 # ============================================
@@ -205,11 +201,11 @@ def t_VARIABLE_LOCAL(t):
 def t_COMENTARIO_MULTILINEA(t):
     r'=begin(.|\n)*?=end'
     t.lexer.lineno += t.value.count('\n')
-    return t #Se puede usar pass si no se quiere retornar el token (usado para ignorar comentarios)
+    # No retornar - los comentarios se ignoran en el análisis sintáctico
 
 def t_COMENTARIO_LINEA(t):
     r'\#.*'
-    return t
+    # No retornar - los comentarios se ignoran en el análisis sintáctico
 
 
 # ============================================

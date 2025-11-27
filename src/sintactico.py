@@ -51,9 +51,7 @@ def p_sentencia(p):
                 | definicion_clase
                 | definicion_modulo
                 | estructura_datos
-                | expresion
-                | COMENTARIO_LINEA
-                | COMENTARIO_MULTILINEA'''
+                | expresion'''
     if len(p) == 3:
         p[0] = p[1]
     else:
@@ -69,7 +67,9 @@ def p_asignacion(p):
                 | variable RESTA_ASIG expresion
                 | variable MULT_ASIG expresion
                 | variable DIV_ASIG expresion'''
-    p[0] = ('asignacion', p[1], p[2], p[3])
+    # Capturar número de línea del primer elemento (variable)
+    lineno = p.lineno(1) if hasattr(p.slice[1], 'lineno') else 1
+    p[0] = ('asignacion', p[1], p[2], p[3], lineno)
     tokens_parseados.append(f"Asignación: {p[1]} {p[2]} [expresión]")
 
 def p_variable(p):
@@ -78,7 +78,8 @@ def p_variable(p):
                 | VARIABLE_INSTANCIA
                 | VARIABLE_CLASE
                 | CONSTANTE'''
-    p[0] = ('variable', p[1])
+    lineno = p.lineno(1)
+    p[0] = ('variable', p[1], lineno)
 
 # ============================================
 # EXPRESIONES ARITMÉTICAS
@@ -90,7 +91,8 @@ def p_expresion_binaria(p):
                 | expresion MULTIPLICACION expresion
                 | expresion DIVISION expresion
                 | expresion MODULO expresion'''
-    p[0] = ('operacion_binaria', p[2], p[1], p[3])
+    lineno = p.lineno(2)  # Capturar número de línea del operador
+    p[0] = ('operacion_binaria', p[2], p[1], p[3], lineno)
     tokens_parseados.append(f"Operación aritmética: {p[2]}")
 
 def p_expresion_comparacion(p):
@@ -350,11 +352,12 @@ def p_control_flujo(p):
                  | REDO
                  | RETURN
                  | RETURN expresion'''
+    lineno = p.lineno(1)  # Capturar número de línea de la palabra clave
     if len(p) == 2:
-        p[0] = ('control_flujo', p[1])
+        p[0] = ('control_flujo', p[1], lineno)
         tokens_parseados.append(f"Control de flujo: {p[1]}")
     else:
-        p[0] = ('return_valor', p[2])
+        p[0] = ('return_valor', p[2], lineno)
         tokens_parseados.append("RETURN con valor")
 
 # ============================================================================
@@ -451,9 +454,7 @@ def p_sentencias_clase(p):
 
 def p_sentencia_clase(p):
     '''sentencia_clase : definicion_funcion
-                       | asignacion
-                       | COMENTARIO_LINEA
-                       | COMENTARIO_MULTILINEA'''
+                       | asignacion'''
     p[0] = p[1]
 
 # ============================================================================
@@ -580,11 +581,17 @@ def analizar_sintaxis(archivo_entrada, usuario_git):
     print("ANALIZANDO SINTAXIS...")
     print("-"*100)
     
-    # Construir el parser
-    parser = yacc.yacc()
-    
+    # Construir lexer
+    from lexico import analizar_archivo
+    import ply.lex as lex
+    import lexico as lexico_module
+    lexer = lex.lex(module=lexico_module)
+
+    # Construir el parser (forzar regeneración de tablas)
+    parser = yacc.yacc(debug=False, write_tables=True, outputdir=os.path.dirname(__file__))
+
     # Parsear el código
-    resultado = parser.parse(data, tracking=True)
+    resultado = parser.parse(data, lexer=lexer, tracking=True)
     
     print("-"*100)
     

@@ -243,6 +243,7 @@ def obtener_tipo(valor):
         if valor[0] == 'valor':
             return obtener_tipo(valor[1])
         elif valor[0] == 'variable':
+            # Puede ser ('variable', nombre) o ('variable', nombre, lineno)
             nombre = valor[1]
             if nombre in tabla_simbolos["variables"]:
                 return tabla_simbolos["variables"][nombre]["tipo"]
@@ -306,8 +307,19 @@ def analizar_nodo(nodo, linea=1):
         variable = nodo[1]
         operador = nodo[2]
         expresion = nodo[3]
-        
-        nombre_var = variable[1] if isinstance(variable, tuple) else variable
+        # Capturar línea real si está disponible en el nodo
+        if len(nodo) > 4 and isinstance(nodo[4], int):
+            linea = nodo[4]
+
+        # Extraer nombre de variable: puede ser ('variable', nombre, lineno) o string directo
+        if isinstance(variable, tuple) and variable[0] == 'variable':
+            nombre_var = variable[1]
+            # Si la variable tiene línea en su tupla, usarla
+            if len(variable) > 2 and isinstance(variable[2], int):
+                linea = variable[2]
+        else:
+            nombre_var = variable[1] if isinstance(variable, tuple) else variable
+
         verificar_asignacion_palabra_reservada(nombre_var, linea)
         
         tipo_expr = obtener_tipo(expresion)
@@ -336,7 +348,10 @@ def analizar_nodo(nodo, linea=1):
         operador = nodo[1]
         izq = nodo[2]
         der = nodo[3]
-        
+        # Capturar línea real si está disponible en el nodo
+        if len(nodo) > 4 and isinstance(nodo[4], int):
+            linea = nodo[4]
+
         tipo_izq = obtener_tipo(izq)
         tipo_der = obtener_tipo(der)
 
@@ -352,6 +367,9 @@ def analizar_nodo(nodo, linea=1):
     
     elif tipo_nodo == 'variable':
         nombre = nodo[1]
+        # Capturar línea si está disponible en el nodo
+        if len(nodo) > 2 and isinstance(nodo[2], int):
+            linea = nodo[2]
         verificar_variable_declarada(nombre, linea)
     
     elif tipo_nodo in ['if', 'if_else', 'if_elsif', 'if_elsif_else']:
@@ -388,6 +406,9 @@ def analizar_nodo(nodo, linea=1):
     
     elif tipo_nodo == 'control_flujo':
         palabra = nodo[1]
+        # Capturar línea real si está disponible en el nodo
+        if len(nodo) > 2 and isinstance(nodo[2], int):
+            linea = nodo[2]
         if palabra in ['break', 'next', 'redo']:
             verificar_break_en_loop(linea)
     
@@ -419,8 +440,11 @@ def analizar_nodo(nodo, linea=1):
         en_funcion = en_funcion_anterior
     
     elif tipo_nodo == 'return_valor':
-        verificar_retorno_valido('any', linea)
         expresion = nodo[1]
+        # Capturar línea real si está disponible en el nodo
+        if len(nodo) > 2 and isinstance(nodo[2], int):
+            linea = nodo[2]
+        verificar_retorno_valido('any', linea)
         tipo_ret = obtener_tipo(expresion)
         analizar_nodo(expresion, linea)
     
