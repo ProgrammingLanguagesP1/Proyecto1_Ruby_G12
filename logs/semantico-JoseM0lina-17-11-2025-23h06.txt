@@ -1,0 +1,51 @@
+====================================================================================================
+ANALIZADOR SEMÁNTICO PARA RUBY
+====================================================================================================
+
+Usuario: JoseM0lina
+Fecha: 17/11/2025 23:06:32
+Archivo analizado: Algorithms/Algorithm_JoseMarin_Semantico.rb
+====================================================================================================
+
+TABLA DE SÍMBOLOS:
+====================================================================================================
+
+VARIABLES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+porcentaje_aprobacion          any                  434            
+reporte_texto                  any                  438            
+meta_aprobacion                integer              451            
+diferencia                     any                  452            
+accion_requerida               boolean              462            
+----------------------------------------------------------------------------------------------------
+Total de variables: 5
+
+
+ERRORES SEMÁNTICOS ENCONTRADOS:
+====================================================================================================
+1. Error semántico en línea 419: 'break' usado fuera de un bucle
+2. Error semántico en línea 434: Operador '/' incompatible entre tipos 'any' y 'any'
+3. Error semántico en línea 434: Operador '*' incompatible entre tipos 'any' y 'integer'
+4. Error semántico en línea 434: Variable '$aprobados' no declarada antes de su uso
+5. Error semántico en línea 434: Variable 'total_estudiantes' no declarada antes de su uso
+6. Error semántico en línea 438: Conversión implícita inválida entre 'string' y 'integer'. Use conversión explícita
+7. Error semántico en línea 438: Operador '+' incompatible entre tipos 'string' y 'integer'
+8. Error semántico en línea 452: Operador '-' incompatible entre tipos 'integer' y 'any'
+====================================================================================================
+Total de errores: 8
+
+
+RESUMEN DEL ANÁLISIS:
+====================================================================================================
+Variables declaradas:    5
+Constantes declaradas:   0
+Funciones declaradas:    0
+Errores encontrados:     8
+Advertencias:            0
+====================================================================================================
+
+[ERROR] ANÁLISIS SEMÁNTICO COMPLETADO CON ERRORES
+
+====================================================================================================

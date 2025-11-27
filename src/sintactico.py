@@ -24,11 +24,14 @@ precedence = (
 errores_sintacticos = []
 tokens_parseados = []
 
-def agregar_lineno(p, nodo):
-    """Agrega información de línea al nodo del árbol sintáctico"""
-    if hasattr(p.slice[1], 'lineno'):
-        return nodo + (p.lineno(1),)
-    return nodo + (1,)
+def obtener_linea(p, indice=1):
+    """Función auxiliar para obtener el número de línea de forma segura"""
+    try:
+        if hasattr(p.slice[indice], 'lineno'):
+            return p.slice[indice].lineno
+    except:
+        pass
+    return 1
 
 # ============================================
 # REGLA INICIAL - PROGRAMA
@@ -36,7 +39,7 @@ def agregar_lineno(p, nodo):
 # ============================================
 def p_programa(p):
     '''programa : sentencias'''
-    p[0] = ('programa', p[1])
+    p[0] = ('programa', p[1], obtener_linea(p))
     tokens_parseados.append(f"Programa reconocido con {len(p[1]) if isinstance(p[1], list) else 1} sentencia(s)")
 
 def p_sentencias(p):
@@ -73,9 +76,8 @@ def p_asignacion(p):
                 | variable RESTA_ASIG expresion
                 | variable MULT_ASIG expresion
                 | variable DIV_ASIG expresion'''
-    # Capturar número de línea del primer elemento (variable)
-    lineno = p.lineno(1) if hasattr(p.slice[1], 'lineno') else 1
-    p[0] = ('asignacion', p[1], p[2], p[3], lineno)
+    linea = obtener_linea(p, 1)
+    p[0] = ('asignacion', p[1], p[2], p[3], linea)
     tokens_parseados.append(f"Asignación: {p[1]} {p[2]} [expresión]")
 
 def p_variable(p):
@@ -84,8 +86,8 @@ def p_variable(p):
                 | VARIABLE_INSTANCIA
                 | VARIABLE_CLASE
                 | CONSTANTE'''
-    lineno = p.lineno(1)
-    p[0] = ('variable', p[1], lineno)
+    linea = obtener_linea(p, 1)
+    p[0] = ('variable', p[1], linea)
 
 # ============================================
 # EXPRESIONES ARITMÉTICAS
@@ -97,8 +99,8 @@ def p_expresion_binaria(p):
                 | expresion MULTIPLICACION expresion
                 | expresion DIVISION expresion
                 | expresion MODULO expresion'''
-    lineno = p.lineno(2)  # Capturar número de línea del operador
-    p[0] = ('operacion_binaria', p[2], p[1], p[3], lineno)
+    linea = obtener_linea(p, 2)
+    p[0] = ('operacion_binaria', p[2], p[1], p[3], linea)
     tokens_parseados.append(f"Operación aritmética: {p[2]}")
 
 def p_expresion_comparacion(p):
@@ -108,27 +110,32 @@ def p_expresion_comparacion(p):
                 | expresion MENOR expresion
                 | expresion MAYOR_IGUAL expresion
                 | expresion MENOR_IGUAL expresion'''
-    p[0] = ('comparacion', p[2], p[1], p[3])
+    linea = obtener_linea(p, 2)
+    p[0] = ('comparacion', p[2], p[1], p[3], linea)
     tokens_parseados.append(f"Comparación: {p[2]}")
 
 def p_expresion_logica(p):
     '''expresion : expresion AND expresion
                 | expresion OR expresion'''
-    p[0] = ('operacion_logica', p[2], p[1], p[3])
+    linea = obtener_linea(p, 2)
+    p[0] = ('operacion_logica', p[2], p[1], p[3], linea)
     tokens_parseados.append(f"Operación lógica: {p[2]}")
 
 def p_expresion_not(p):
     '''expresion : NOT expresion'''
-    p[0] = ('not', p[2])
+    linea = obtener_linea(p, 1)
+    p[0] = ('not', p[2], linea)
     tokens_parseados.append("Operación lógica: NOT")
 
 def p_expresion_uminus(p):
     '''expresion : RESTA expresion %prec UMINUS'''
-    p[0] = ('uminus', p[2])
+    linea = obtener_linea(p, 1)
+    p[0] = ('uminus', p[2], linea)
 
 def p_expresion_parentesis(p):
     '''expresion : PARENTESIS_IZQ expresion PARENTESIS_DER'''
-    p[0] = ('parentesis', p[2])
+    linea = obtener_linea(p, 1)
+    p[0] = ('parentesis', p[2], linea)
 
 def p_expresion_valor(p):
     '''expresion : INTEGER
@@ -141,7 +148,8 @@ def p_expresion_valor(p):
                 | variable
                 | arreglo
                 | hash'''
-    p[0] = ('valor', p[1])
+    linea = obtener_linea(p, 1)
+    p[0] = ('valor', p[1], linea)
 
 # ============================================================================
 # IMPRESIÓN Y ENTRADA DE DATOS
@@ -150,7 +158,8 @@ def p_expresion_valor(p):
 def p_impresion(p):
     '''impresion : PUTS argumentos_impresion
                  | PRINT argumentos_impresion'''
-    p[0] = ('impresion', p[1], p[2])
+    linea = obtener_linea(p, 1)
+    p[0] = ('impresion', p[1], p[2], linea)
     tokens_parseados.append(f"Instrucción de impresión: {p[1]}")
 
 def p_argumentos_impresion(p):
@@ -167,10 +176,11 @@ def p_argumentos_impresion(p):
 def p_entrada_datos(p):
     '''entrada_datos : GETS
                      | variable ASIGNACION GETS'''
+    linea = obtener_linea(p, 1)
     if len(p) == 2:
-        p[0] = ('entrada', 'gets')
+        p[0] = ('entrada', 'gets', linea)
     else:
-        p[0] = ('entrada_asignacion', p[1], p[3])
+        p[0] = ('entrada_asignacion', p[1], p[3], linea)
     tokens_parseados.append("Instrucción de entrada de datos: gets")
 
 # ============================================
@@ -185,11 +195,12 @@ def p_estructura_datos(p):
 def p_arreglo(p):
     '''arreglo : CORCHETE_IZQ elementos CORCHETE_DER
             | CORCHETE_IZQ CORCHETE_DER'''
+    linea = obtener_linea(p, 1)
     if len(p) == 4:
-        p[0] = ('arreglo', p[2])
+        p[0] = ('arreglo', p[2], linea)
         tokens_parseados.append(f"Arreglo con {len(p[2])} elemento(s)")
     else:
-        p[0] = ('arreglo', [])
+        p[0] = ('arreglo', [], linea)
         tokens_parseados.append("Arreglo vacío")
 
 def p_elementos(p):
@@ -207,11 +218,13 @@ def p_elementos(p):
 def p_hash(p):
     '''hash : LLAVE_IZQ pares LLAVE_DER
             | LLAVE_IZQ LLAVE_DER'''
+    linea = obtener_linea(p, 1)
+    p[0] = ('arreglo', [], linea)
     if len(p) == 4:
-        p[0] = ('hash', p[2])
+        p[0] = ('hash', p[2], linea)
         tokens_parseados.append(f"Hash con {len(p[2])} par(es) clave-valor")
     else:
-        p[0] = ('hash', [])
+        p[0] = ('hash', [], linea)
         tokens_parseados.append("Hash vacío")
 
 def p_pares(p):
@@ -226,10 +239,11 @@ def p_par(p):
     '''par : VARIABLE_LOCAL DOS_PUNTOS expresion
            | STRING FLECHA expresion
            | expresion FLECHA expresion'''
+    linea = obtener_linea(p, 1)
     if p[2] == ':':
-        p[0] = ('par_simbolo', p[1], p[3])
+        p[0] = ('par_simbolo', p[1], p[3], linea)
     else:
-        p[0] = ('par', p[1], p[3])
+        p[0] = ('par', p[1], p[3], linea)
 
 # ============================================
 # ESTRUCTURA DE CONTROL IF
@@ -251,26 +265,26 @@ def p_if_statement(p):
                     | IF expresion THEN sentencias elsif_chain END
                     | IF expresion sentencias elsif_chain ELSE sentencias END
                     | IF expresion THEN sentencias elsif_chain ELSE sentencias END'''
-    lineno = p.lineno(1)  # Capturar línea del IF
+    linea = obtener_linea(p, 1)
     if len(p) == 5:
-        p[0] = ('if', p[2], p[3], lineno)
+        p[0] = ('if', p[2], p[3], linea)
     elif len(p) == 6:
         if p[3] == 'then':
-            p[0] = ('if', p[2], p[4], lineno)
+            p[0] = ('if', p[2], p[4], linea)
         else:
-            p[0] = ('if_elsif', p[2], p[3], p[4], lineno)
+            p[0] = ('if_elsif', p[2], p[3], p[4], linea)
     elif len(p) == 7:
         if p[3] == 'then':
-            p[0] = ('if_elsif', p[2], p[4], p[5], lineno)
+            p[0] = ('if_elsif', p[2], p[4], p[5], linea)
         else:
-            p[0] = ('if_else', p[2], p[3], p[5], lineno)
+            p[0] = ('if_else', p[2], p[3], p[5], linea)
     elif len(p) == 8:
         if p[3] == 'then':
-            p[0] = ('if_else', p[2], p[4], p[6], lineno)
+            p[0] = ('if_else', p[2], p[4], p[6], linea)
         else:
-            p[0] = ('if_elsif_else', p[2], p[3], p[4], p[6], lineno)
+            p[0] = ('if_elsif_else', p[2], p[3], p[4], p[6], linea)
     else:
-        p[0] = ('if_elsif_else', p[2], p[4], p[5], p[7], lineno)
+        p[0] = ('if_elsif_else', p[2], p[4], p[5], p[7], linea)
     tokens_parseados.append("Estructura IF completa")
 
 
@@ -286,10 +300,11 @@ def p_elsif_chain(p):
 def p_elsif_block(p):
     '''elsif_block : ELSIF expresion sentencias
                    | ELSIF expresion THEN sentencias'''
+    linea = obtener_linea(p, 1)
     if len(p) == 4:
-        p[0] = ('elsif', p[2], p[3])
+        p[0] = ('elsif', p[2], p[3], linea)
     else:
-        p[0] = ('elsif', p[2], p[4])
+        p[0] = ('elsif', p[2], p[4], linea)
 
 # ============================================================================
 # ESTRUCTURA DE CONTROL WHILE
@@ -298,11 +313,11 @@ def p_elsif_block(p):
 def p_while_loop(p):
     '''while_loop : WHILE expresion sentencias END
                   | WHILE expresion DO sentencias END'''
-    lineno = p.lineno(1)
+    linea = obtener_linea(p, 1)
     if len(p) == 5:
-        p[0] = ('while', p[2], p[3], lineno)
+        p[0] = ('while', p[2], p[3], linea)
     else:
-        p[0] = ('while', p[2], p[4], lineno)
+        p[0] = ('while', p[2], p[4], linea)
     tokens_parseados.append("Estructura WHILE")
 
 # ============================================================================
@@ -314,20 +329,21 @@ def p_for_loop(p):
                 | FOR VARIABLE_LOCAL IN rango DO sentencias END
                 | FOR VARIABLE_LOCAL IN expresion sentencias END
                 | FOR VARIABLE_LOCAL IN expresion DO sentencias END'''
-    lineno = p.lineno(1)
+    linea = obtener_linea(p, 1)
     if len(p) == 7:
-        p[0] = ('for', p[2], p[4], p[5], lineno)
+        p[0] = ('for', p[2], p[4], p[5], linea)
     else:
-        p[0] = ('for', p[2], p[4], p[6], lineno)
+        p[0] = ('for', p[2], p[4], p[6], linea)
     tokens_parseados.append(f"Estructura FOR con variable: {p[2]}")
 
 def p_until_loop(p):
     '''until_loop : UNTIL expresion sentencias END
                   | UNTIL expresion DO sentencias END'''
+    linea = obtener_linea(p, 1)
     if len(p) == 5:
-        p[0] = ('until', p[2], p[3])
+        p[0] = ('until', p[2], p[3], linea)
     else:
-        p[0] = ('until', p[2], p[4])
+        p[0] = ('until', p[2], p[4], linea)
     tokens_parseados.append("Estructura UNTIL")
 
 # ============================================================================
@@ -337,11 +353,12 @@ def p_until_loop(p):
 def p_rango(p):
     '''rango : expresion PUNTO PUNTO expresion
              | expresion PUNTO PUNTO PUNTO expresion'''
+    linea = obtener_linea(p, 2)
     if len(p) == 5:
-        p[0] = ('rango_inclusivo', p[1], p[4])
+        p[0] = ('rango_inclusivo', p[1], p[4], linea)
         tokens_parseados.append("Rango inclusivo (..)")
     else:
-        p[0] = ('rango_exclusivo', p[1], p[5])
+        p[0] = ('rango_exclusivo', p[1], p[5], linea)
         tokens_parseados.append("Rango exclusivo (...)")
 
 # ============================================================================
@@ -354,12 +371,12 @@ def p_control_flujo(p):
                  | REDO
                  | RETURN
                  | RETURN expresion'''
-    lineno = p.lineno(1)  # Capturar número de línea de la palabra clave
+    linea = obtener_linea(p, 1)
     if len(p) == 2:
-        p[0] = ('control_flujo', p[1], lineno)
+        p[0] = ('control_flujo', p[1], linea)
         tokens_parseados.append(f"Control de flujo: {p[1]}")
     else:
-        p[0] = ('return_valor', p[2], lineno)
+        p[0] = ('return_valor', p[2], linea)
         tokens_parseados.append("RETURN con valor")
 
 # ============================================================================
@@ -370,15 +387,15 @@ def p_definicion_funcion(p):
     '''definicion_funcion : DEF nombre_funcion sentencias END
                           | DEF nombre_funcion PARENTESIS_IZQ parametros PARENTESIS_DER sentencias END
                           | DEF nombre_funcion PARENTESIS_IZQ PARENTESIS_DER sentencias END'''
-    lineno = p.lineno(1)
+    linea = obtener_linea(p, 1)
     if len(p) == 5:
-        p[0] = ('funcion', p[2], [], p[3], lineno)
+        p[0] = ('funcion', p[2], [], p[3], linea)
         tokens_parseados.append(f"Definición de función: {p[2]} sin parámetros")
     elif len(p) == 7:
-        p[0] = ('funcion', p[2], [], p[5], lineno)
+        p[0] = ('funcion', p[2], [], p[5], linea)
         tokens_parseados.append(f"Definición de función: {p[2]} sin parámetros (con paréntesis)")
     else:
-        p[0] = ('funcion', p[2], p[4], p[6], lineno)
+        p[0] = ('funcion', p[2], p[4], p[6], linea)
         tokens_parseados.append(f"Definición de función: {p[2]} con {len(p[4])} parámetro(s)")
 
 def p_nombre_funcion(p):
@@ -406,19 +423,20 @@ def p_llamada_funcion(p):
                  | VARIABLE_LOCAL PARENTESIS_IZQ PARENTESIS_DER
                  | CONSTANTE PUNTO VARIABLE_LOCAL PARENTESIS_IZQ argumentos PARENTESIS_DER
                  | CONSTANTE PUNTO VARIABLE_LOCAL PARENTESIS_IZQ PARENTESIS_DER'''
+    linea = obtener_linea(p, 1)
     if len(p) == 5:
-        p[0] = ('llamada_funcion', p[1], p[3])
+        p[0] = ('llamada_funcion', p[1], p[3], linea)
         tokens_parseados.append(f"Llamada a función: {p[1]} con {len(p[3])} argumento(s)")
     elif len(p) == 4:
-        p[0] = ('llamada_funcion', p[1], [])
+        p[0] = ('llamada_funcion', p[1], [], linea)
         tokens_parseados.append(f"Llamada a función: {p[1]} sin argumentos")
     elif len(p) == 7:
         nombre = f"{p[1]}.{p[3]}"
-        p[0] = ('llamada_funcion', nombre, p[5])
+        p[0] = ('llamada_funcion', nombre, p[5], linea)
         tokens_parseados.append(f"Llamada a función: {nombre} con {len(p[5])} argumento(s)")
     else:
         nombre = f"{p[1]}.{p[3]}"
-        p[0] = ('llamada_funcion', nombre, [])
+        p[0] = ('llamada_funcion', nombre, [], linea)
         tokens_parseados.append(f"Llamada a función: {nombre} sin argumentos")
 
 # ============================================================================
@@ -440,11 +458,12 @@ def p_argumentos(p):
 def p_definicion_clase(p):
     '''definicion_clase : CLASS CONSTANTE sentencias_clase END
                         | CLASS CONSTANTE END'''
+    linea = obtener_linea(p, 1)
     if len(p) == 5:
-        p[0] = ('clase', p[2], p[3])
+        p[0] = ('clase', p[2], p[3], linea)
         tokens_parseados.append(f"Definición de clase: {p[2]} con contenido")
     else:
-        p[0] = ('clase', p[2], [])
+        p[0] = ('clase', p[2], [], linea)
         tokens_parseados.append(f"Definición de clase: {p[2]} vacía")
 
 def p_sentencias_clase(p):
@@ -467,11 +486,12 @@ def p_sentencia_clase(p):
 def p_definicion_modulo(p):
     '''definicion_modulo : MODULE CONSTANTE sentencias_clase END
                          | MODULE CONSTANTE END'''
+    linea = obtener_linea(p, 1)
     if len(p) == 5:
-        p[0] = ('modulo', p[2], p[3])
+        p[0] = ('modulo', p[2], p[3], linea)
         tokens_parseados.append(f"Definición de módulo: {p[2]} con contenido")
     else:
-        p[0] = ('modulo', p[2], [])
+        p[0] = ('modulo', p[2], [], linea)
         tokens_parseados.append(f"Definición de módulo: {p[2]} vacío")
 
 # ============================================================================
@@ -481,7 +501,8 @@ def p_definicion_modulo(p):
 def p_require(p):
     '''sentencia : REQUIRE STRING
                  | REQUIRE VARIABLE_LOCAL'''
-    p[0] = ('require', p[2])
+    linea = obtener_linea(p, 1)
+    p[0] = ('require', p[2], linea)
     tokens_parseados.append(f"Require: {p[2]}")
 
 # ============================================================================

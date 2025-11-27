@@ -234,6 +234,36 @@ def verificar_retorno_incompatible(nombre_funcion, tipo_retorno, linea=0):
 
 # ============================================
 # FUNCIONES AUXILIARES
+# José Marin (@JoseM0lina)
+# ============================================
+
+def extraer_linea(nodo):
+    """
+    Extrae el número de línea de un nodo del árbol sintáctico.
+    El número de línea siempre está al final de la tupla.
+    """
+    if not isinstance(nodo, tuple):
+        return 1
+    
+    # Buscar el último elemento que sea un entero
+    for i in range(len(nodo) - 1, -1, -1):
+        if isinstance(nodo[i], int) and nodo[i] > 0:
+            return nodo[i]
+    
+    return 1
+
+def extraer_linea_expresion(expresion):
+    """
+    Extrae el número de línea de una expresión que puede estar anidada
+    """
+    if isinstance(expresion, tuple):
+        return extraer_linea(expresion)
+    elif isinstance(expresion, list) and len(expresion) > 0:
+        return extraer_linea_expresion(expresion[0])
+    return 1
+
+# ============================================
+# FUNCIONES AUXILIARES
 # Angelo Zurita (@aszurita)
 # ============================================
 
@@ -303,7 +333,7 @@ def analizar_nodo(nodo, linea=1):
     
     tipo_nodo = nodo[0]
 
-    linea_nodo = linea
+    linea_nodo = extraer_linea(nodo)
     if len(nodo) > 0 and isinstance(nodo[-1], int) and nodo[-1] > 0:
         linea_nodo = nodo[-1]
     
@@ -311,20 +341,13 @@ def analizar_nodo(nodo, linea=1):
         variable = nodo[1]
         operador = nodo[2]
         expresion = nodo[3]
-        # Capturar línea real si está disponible en el nodo
-        if len(nodo) > 4 and isinstance(nodo[4], int):
-            linea = nodo[4]
-
-        # Extraer nombre de variable: puede ser ('variable', nombre, lineno) o string directo
+        linea_nodo = extraer_linea(nodo)
+        
         if isinstance(variable, tuple) and variable[0] == 'variable':
             nombre_var = variable[1]
-            # Si la variable tiene línea en su tupla, usarla
-            if len(variable) > 2 and isinstance(variable[2], int):
-                linea = variable[2]
         else:
-            nombre_var = variable[1] if isinstance(variable, tuple) else variable
-
-        verificar_asignacion_palabra_reservada(nombre_var, linea)
+            nombre_var = variable
+        verificar_asignacion_palabra_reservada(nombre_var, linea_nodo)
         
         tipo_expr = obtener_tipo(expresion)
         
@@ -352,10 +375,8 @@ def analizar_nodo(nodo, linea=1):
         operador = nodo[1]
         izq = nodo[2]
         der = nodo[3]
-        # Capturar línea real si está disponible en el nodo
-        if len(nodo) > 4 and isinstance(nodo[4], int):
-            linea = nodo[4]
-
+        linea_nodo = extraer_linea(nodo)
+        
         tipo_izq = obtener_tipo(izq)
         tipo_der = obtener_tipo(der)
 
@@ -371,14 +392,50 @@ def analizar_nodo(nodo, linea=1):
     
     elif tipo_nodo == 'variable':
         nombre = nodo[1]
-        # Capturar línea si está disponible en el nodo
-        if len(nodo) > 2 and isinstance(nodo[2], int):
-            linea = nodo[2]
-        verificar_variable_declarada(nombre, linea)
+        linea_nodo = extraer_linea(nodo)
+        verificar_variable_declarada(nombre, linea_nodo)
+
+    elif tipo_nodo == 'comparacion':
+        operador = nodo[1]
+        izq = nodo[2]
+        der = nodo[3]
+        linea_nodo = extraer_linea(nodo)
+        
+        analizar_nodo(izq, linea_nodo)
+        analizar_nodo(der, linea_nodo)
+
+    elif tipo_nodo == 'operacion_logica':
+        operador = nodo[1]
+        izq = nodo[2]
+        der = nodo[3]
+        linea_nodo = extraer_linea(nodo)
+        
+        analizar_nodo(izq, linea_nodo)
+        analizar_nodo(der, linea_nodo)
+
+    elif tipo_nodo == 'not':
+        expresion = nodo[1]
+        linea_nodo = extraer_linea(nodo)
+        analizar_nodo(expresion, linea_nodo)
+    
+    elif tipo_nodo == 'uminus':
+        expresion = nodo[1]
+        linea_nodo = extraer_linea(nodo)
+        analizar_nodo(expresion, linea_nodo)
+    
+    elif tipo_nodo == 'parentesis':
+        expresion = nodo[1]
+        linea_nodo = extraer_linea(nodo)
+        analizar_nodo(expresion, linea_nodo)
+    
+    elif tipo_nodo == 'valor':
+        valor_interno = nodo[1]
+        linea_nodo = extraer_linea(nodo)
+        if isinstance(valor_interno, tuple):
+            analizar_nodo(valor_interno, linea_nodo)
     
     elif tipo_nodo in ['if', 'if_else', 'if_elsif', 'if_elsif_else']:
-        if isinstance(nodo[-1], int):
-            linea_nodo = nodo[-1]
+        linea_nodo = extraer_linea(nodo)
 
         condicion = nodo[1]
         tipo_cond = obtener_tipo(condicion)
@@ -389,24 +446,58 @@ def analizar_nodo(nodo, linea=1):
             if isinstance(nodo[i], list):
                 for sentencia in nodo[i]:
                     analizar_nodo(sentencia, linea_nodo)
-            elif not isinstance(nodo[i], int):
+            elif not isinstance(nodo[i], tuple):
                 analizar_nodo(nodo[i], linea_nodo)
+
+    elif tipo_nodo == 'elsif':
+        linea_nodo = extraer_linea(nodo)
+        condicion = nodo[1]
+        sentencias = nodo[2]
+        
+        tipo_cond = obtener_tipo(condicion)
+        verificar_condicion_booleana(tipo_cond, linea_nodo)
+        analizar_nodo(condicion, linea_nodo)
+        
+        if isinstance(sentencias, list):
+            for sentencia in sentencias:
+                analizar_nodo(sentencia, linea_nodo)
                 
-    elif tipo_nodo in ['while', 'until', 'for']:
-        if isinstance(nodo[-1], int):
-            linea_nodo = nodo[-1]
+    elif tipo_nodo in ['while', 'until']:
+        linea_nodo = extraer_linea(nodo)
 
         en_loop_anterior = en_loop
         en_loop = True
         
-        if tipo_nodo in ['while', 'until']:
-            condicion = nodo[1]
-            sentencias = nodo[2]
-            tipo_cond = obtener_tipo(condicion)
-            verificar_condicion_booleana(tipo_cond, linea_nodo)
-            analizar_nodo(condicion, linea_nodo)
-        else:  
-            sentencias = nodo[3] if len(nodo) > 3 else nodo[2]
+        condicion = nodo[1]
+        sentencias = nodo[2]
+        
+        tipo_cond = obtener_tipo(condicion)
+        verificar_condicion_booleana(tipo_cond, linea_nodo)
+        analizar_nodo(condicion, linea_nodo)
+        
+        if isinstance(sentencias, list):
+            for sentencia in sentencias:
+                analizar_nodo(sentencia, linea_nodo)
+
+        en_loop = en_loop_anterior
+
+    elif tipo_nodo == 'for':
+        linea_nodo = extraer_linea(nodo)
+        
+        en_loop_anterior = en_loop
+        en_loop = True
+        
+        variable = nodo[1]
+        rango = nodo[2]
+        sentencias = nodo[3]
+        
+        tabla_simbolos["variables"][variable] = {
+            "tipo": 'integer',
+            "linea": linea_nodo,
+            "valor": None
+        }
+        
+        analizar_nodo(rango, linea_nodo)
         
         if isinstance(sentencias, list):
             for sentencia in sentencias:
@@ -414,20 +505,34 @@ def analizar_nodo(nodo, linea=1):
         
         en_loop = en_loop_anterior
     
+    elif tipo_nodo in ['rango_inclusivo', 'rango_exclusivo']:
+        linea_nodo = extraer_linea(nodo)
+        inicio = nodo[1]
+        fin = nodo[2]
+        
+        analizar_nodo(inicio, linea_nodo)
+        analizar_nodo(fin, linea_nodo)
+    
     elif tipo_nodo == 'control_flujo':
         palabra = nodo[1]
-        # Capturar línea real si está disponible en el nodo
-        if len(nodo) > 2 and isinstance(nodo[2], int):
-            linea = nodo[2]
+        linea_nodo = extraer_linea(nodo)
+        
         if palabra in ['break', 'next', 'redo']:
             verificar_break_en_loop(linea_nodo)
+    
+    elif tipo_nodo == 'return_valor':
+        linea_nodo = extraer_linea(nodo)
+        expresion = nodo[1]
+        
+        verificar_retorno_valido('any', linea_nodo)
+        tipo_ret = obtener_tipo(expresion)
+        analizar_nodo(expresion, linea_nodo)
     
     elif tipo_nodo == 'funcion':
         nombre = nodo[1]
         parametros = nodo[2]
         cuerpo = nodo[3]
-        if len(nodo) > 4 and isinstance(nodo[4], int):
-            linea_nodo = nodo[4]
+        linea_nodo = extraer_linea(nodo)
         
         en_funcion_anterior = en_funcion
         en_funcion = True
@@ -451,25 +556,84 @@ def analizar_nodo(nodo, linea=1):
         
         en_funcion = en_funcion_anterior
     
-    elif tipo_nodo == 'return_valor':
-        expresion = nodo[1]
-        # Capturar línea real si está disponible en el nodo
-        if len(nodo) > 2 and isinstance(nodo[2], int):
-            linea = nodo[2]
-        verificar_retorno_valido('any', linea)
-        tipo_ret = obtener_tipo(expresion)
-        analizar_nodo(expresion, linea_nodo)
+    elif tipo_nodo == 'llamada_funcion':
+        nombre = nodo[1]
+        argumentos = nodo[2]
+        linea_nodo = extraer_linea(nodo)
+        
+        if isinstance(argumentos, list):
+            for arg in argumentos:
+                analizar_nodo(arg, linea_nodo)
+    
+    elif tipo_nodo == 'impresion':
+        tipo_imp = nodo[1]
+        argumentos = nodo[2]
+        linea_nodo = extraer_linea(nodo)
+        
+        if isinstance(argumentos, list):
+            for arg in argumentos:
+                analizar_nodo(arg, linea_nodo)
+    
+    elif tipo_nodo in ['entrada', 'entrada_asignacion']:
+        linea_nodo = extraer_linea(nodo)
+        if tipo_nodo == 'entrada_asignacion':
+            variable = nodo[1]
+            analizar_nodo(variable, linea_nodo)
+    
+    elif tipo_nodo == 'arreglo':
+        elementos = nodo[1]
+        linea_nodo = extraer_linea(nodo)
+        
+        if isinstance(elementos, list):
+            for elem in elementos:
+                analizar_nodo(elem, linea_nodo)
+    
+    elif tipo_nodo == 'hash':
+        pares = nodo[1]
+        linea_nodo = extraer_linea(nodo)
+        
+        if isinstance(pares, list):
+            for par in pares:
+                analizar_nodo(par, linea_nodo)
+    
+    elif tipo_nodo in ['par', 'par_simbolo']:
+        clave = nodo[1]
+        valor = nodo[2]
+        linea_nodo = extraer_linea(nodo)
+        
+        analizar_nodo(clave, linea_nodo)
+        analizar_nodo(valor, linea_nodo)
+    
+    elif tipo_nodo == 'clase':
+        nombre = nodo[1]
+        contenido = nodo[2]
+        linea_nodo = extraer_linea(nodo)
+        
+        if isinstance(contenido, list):
+            for sentencia in contenido:
+                analizar_nodo(sentencia, linea_nodo)
+    
+    elif tipo_nodo == 'modulo':
+        nombre = nodo[1]
+        contenido = nodo[2]
+        linea_nodo = extraer_linea(nodo)
+        
+        if isinstance(contenido, list):
+            for sentencia in contenido:
+                analizar_nodo(sentencia, linea_nodo)
+    
+    elif tipo_nodo == 'require':
+        linea_nodo = extraer_linea(nodo)
+        pass
     
     # PROGRAMA
     elif tipo_nodo == 'programa':
         sentencias = nodo[1]
+        linea_nodo = extraer_linea(nodo)
+        
         if isinstance(sentencias, list):
             for sentencia in sentencias:
                 analizar_nodo(sentencia, linea_nodo)
-    
-    elif tipo_nodo == 'valor':
-        valor_interno = nodo[1]
-        analizar_nodo(valor_interno, linea_nodo)
         
 # ============================================
 # CREAR LOG SEMÁNTICO

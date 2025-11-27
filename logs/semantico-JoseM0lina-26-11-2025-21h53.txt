@@ -1,0 +1,75 @@
+====================================================================================================
+ANALIZADOR SEMÁNTICO PARA RUBY
+====================================================================================================
+
+Usuario: JoseM0lina
+Fecha: 26/11/2025 21:53:30
+Archivo analizado: Algorithms/Algorithm_AngeloZurita_Semantico.rb
+====================================================================================================
+
+TABLA DE SÍMBOLOS:
+====================================================================================================
+
+VARIABLES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+impuesto_total                 float                271            
+costo_operativo                integer              274            
+ingresos                       any                  275            
+utilidad                       any                  276            
+margen_ganancia                any                  279            
+libros_criticos                integer              285            
+cantidad                       integer              283            
+proyeccion_trimestre           any                  297            
+meta_anual                     any                  299            
+----------------------------------------------------------------------------------------------------
+Total de variables: 9
+
+CONSTANTES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+TASA_IMPUESTO                  float                267            
+----------------------------------------------------------------------------------------------------
+Total de constantes: 1
+
+
+ERRORES SEMÁNTICOS ENCONTRADOS:
+====================================================================================================
+1. Error semántico en línea 269: Constante 'TASA_IMPUESTO' no puede ser modificada (ya fue declarada en línea 267)
+2. Error semántico en línea 271: Operador '*' incompatible entre tipos 'any' y 'float'
+3. Error semántico en línea 271: Variable '$total_ventas' no declarada antes de su uso
+4. Error semántico en línea 275: Variable '$total_ventas' no declarada antes de su uso
+5. Error semántico en línea 276: Operador '-' incompatible entre tipos 'any' y 'integer'
+6. Error semántico en línea 279: Operador '*' incompatible entre tipos 'any' y 'integer'
+7. Error semántico en línea 279: Operador '/' incompatible entre tipos 'any' y 'any'
+8. Error semántico en línea 279: Variable 'ventas_proyectadas' no declarada antes de su uso
+9. Error semántico en línea 283: Variable 'cantidades' no declarada antes de su uso
+10. Error semántico en línea 293: 'break' usado fuera de un bucle
+11. Error semántico en línea 297: Operador '*' incompatible entre tipos 'any' y 'integer'
+12. Error semántico en línea 297: Variable '$total_ventas' no declarada antes de su uso
+13. Error semántico en línea 299: Operador '+' incompatible entre tipos 'string' y 'any'
+14. Error semántico en línea 306: Variable 'total_libros' no declarada antes de su uso
+15. Error semántico en línea 308: Variable '$total_ventas' no declarada antes de su uso
+16. Error semántico en línea 310: Variable 'promedio_ventas' no declarada antes de su uso
+17. Error semántico en línea 312: Variable '$libros_vendidos' no declarada antes de su uso
+18. Error semántico en línea 314: Variable 'meta_cumplida' no declarada antes de su uso
+19. Error semántico en línea 314: Variable 'necesita_promocion' no declarada antes de su uso
+20. Error semántico en línea 316: Variable 'meta_cumplida' no declarada antes de su uso
+====================================================================================================
+Total de errores: 20
+
+
+RESUMEN DEL ANÁLISIS:
+====================================================================================================
+Variables declaradas:    9
+Constantes declaradas:   1
+Funciones declaradas:    0
+Errores encontrados:     20
+Advertencias:            0
+====================================================================================================
+
+[ERROR] ANÁLISIS SEMÁNTICO COMPLETADO CON ERRORES
+
+====================================================================================================
