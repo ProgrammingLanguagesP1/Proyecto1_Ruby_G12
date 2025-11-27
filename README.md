@@ -42,21 +42,30 @@ Para ejecutar el analizador sintáctico:
 ```bash
 python src/sintactico.py <archivo_ruby> <usuario_git>
 ```
+Para ejecutar el analizador semántico:
+
+```bash
+python src/semantico.py <archivo_ruby> <usuario_git>
+```
 
 ### Ejemplos:
 
 ```bash
 # Analizar Algorithm1 con usuario aszurita
-python src/lexico.py Algorithms/Algorithm1_AngeloZurita.rb aszurita
+python src/lexico.py Algorithms/Algorithm_AngeloZurita_Lexico.rb aszurita
 
 # Analizar Algorithm2 con usuario dquishpe
-python src/lexico.py Algorithms/Algorithm2_DhamarQuishpe.rb dquishpe
+python src/lexico.py Algorithms/Algorithm_DhamarQuishpe_Lexico.rb dquishpe
 
 # Analizar Algorithm3 con usuario JoseM0lina
-python src/lexico.py Algorithms/Algorithm3_JoseMarin.rb JoseM0lina
+python src/lexico.py Algorithms/Algorithm_JoseMarin_Lexico.rb JoseM0lina
 
-# Analizar Algorithm1 con Errores con usuario dquishpe
-python src/sintactico.py Algorithms/Algorithm3_DhamarQuishpe_conErrores.rb dquishpe
+# Analizar Algorithm2 con Errores Sintácticos con usuario dquishpe
+python src/sintactico.py Algorithms/Algorithm_DhamarQuishpe_Sintactico.rb dquishpe
+
+# Analizar Algorithm3 con Errores Semánticos con usuario JoseM0lina
+python src/sintactico.py Algorithms/Algorithm_JoseMarin_Semantico.rb dquishpe
+
 ```
 
 ## 📂 Estructura del Proyecto
@@ -66,13 +75,17 @@ Proyecto1_Ruby_G12/
 ├── src/
 │   └── lexico.py           # Analizador léxico principal
 │   └── sintactico.py           # Analizador sintáctico principal
+│   └── semantico.py           # Analizador semantico principal
 ├── Algorithms/
-│   ├── Algorithm1_AngeloZurita.rb
-│   ├── Algorithm2_DhamarQuishpe.rb
-│   └── Algorithm3_JoseMarin.rb
-│   ├── Algorithm1_AngeloZurita_conErrores.rb
-│   ├── Algorithm2_DhamarQuishpe_conErrores.rb
-│   └── Algorithm3_JoseMarin_conErrores.rb
+│   ├── Algorithm_AngeloZurita_Lexico.rb
+│   ├── Algorithm_AngeloZurita_Sintactico.rb
+│   ├── Algorithm_AngeloZurita_Semantico.rb
+│   ├── Algorithm_DhamarQuishpe_Lexico.rb
+│   ├── Algorithm_DhamarQuishpe_Sintactico.rb
+│   ├── Algorithm_DhamarQuishpe_Semantico.rb
+│   ├── Algorithm_JoseMarin_Lexico.rb
+│   ├── Algorithm_JoseMarin_Sintactico.rb
+│   ├── Algorithm_JoseMarin_Semantico.rb
 ├── logs/                    # Logs generados automáticamente
 └── README.md
 ```
@@ -115,7 +128,7 @@ El analizador reconoce los siguientes tipos de tokens:
 
 El programa genera:
 1. **Salida en consola**: Tabla formateada con todos los tokens encontrados
-2. **Archivo log**: Guardado en `logs/` con formato `lexico-{usuario}-{fecha}.txt` o `sintactico-{usuario}-{fecha}.txt`
+2. **Archivo log**: Guardado en `logs/` con formato `lexico-{usuario}-{fecha}.txt` o `sintactico-{usuario}-{fecha}.txt` o  `semantico-{usuario}-{fecha}.txt`
 
 Cada log contiene respectivamente:
 - Información del análisis (usuario, fecha, archivo)
@@ -124,6 +137,8 @@ Cada log contiene respectivamente:
 - Total de tokens reconocidos
 - Total de construcciones
 - Total de errores sintácticos
+- Total de errores semánticos
+- Mensajes de errores
 
 ## 📝 Ejemplo de Salida (Analizador léxico)
 
@@ -185,9 +200,64 @@ ERRORES SINTÁCTICOS ENCONTRADOS:
 ...
 ----------------------------------------------------------------------------------------------------
 Total de errores: 15
-
-
 [ERROR] ANÁLISIS COMPLETADO CON ERRORES SINTÁCTICOS
+
+====================================================================================================
+
+```
+## 📝 Ejemplo de Salida (Analizador semantico)
+
+```
+====================================================================================================
+ANALIZADOR SEMÁNTICO PARA RUBY
+====================================================================================================
+
+Usuario: dquishpe
+Fecha: 17/11/2025 23:10:08
+Archivo analizado: Algorithms/Algorithm_DhamarQuishpe_Semantico.rb
+====================================================================================================
+
+TABLA DE SÍMBOLOS:
+====================================================================================================
+
+VARIABLES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+configuracion                  hash                 204            
+fahrenheit                     any                  212            
+...     
+----------------------------------------------------------------------------------------------------
+Total de variables: 34
+
+FUNCIONES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Parámetros                          Línea          
+----------------------------------------------------------------------------------------------------
+celsius_a_fahrenheit           sin parámetros                      211            
+...     
+----------------------------------------------------------------------------------------------------
+Total de funciones: 3
+
+
+ERRORES SEMÁNTICOS ENCONTRADOS:
+====================================================================================================
+1. Error semántico en línea 212: Operador '+' incompatible entre tipos 'any' y 'integer'
+...
+====================================================================================================
+Total de errores: 14
+
+
+RESUMEN DEL ANÁLISIS:
+====================================================================================================
+Variables declaradas:    34
+Constantes declaradas:   0
+Funciones declaradas:    3
+Errores encontrados:     14
+Advertencias:            0
+====================================================================================================
+
+[ERROR] ANÁLISIS SEMÁNTICO COMPLETADO CON ERRORES
 
 ====================================================================================================
 

@@ -24,6 +24,12 @@ precedence = (
 errores_sintacticos = []
 tokens_parseados = []
 
+def agregar_lineno(p, nodo):
+    """Agrega información de línea al nodo del árbol sintáctico"""
+    if hasattr(p.slice[1], 'lineno'):
+        return nodo + (p.lineno(1),)
+    return nodo + (1,)
+
 # ============================================
 # REGLA INICIAL - PROGRAMA
 # Angelo Zurita (@aszurita)
@@ -245,32 +251,26 @@ def p_if_statement(p):
                     | IF expresion THEN sentencias elsif_chain END
                     | IF expresion sentencias elsif_chain ELSE sentencias END
                     | IF expresion THEN sentencias elsif_chain ELSE sentencias END'''
+    lineno = p.lineno(1)  # Capturar línea del IF
     if len(p) == 5:
-        p[0] = ('if', p[2], p[3])
+        p[0] = ('if', p[2], p[3], lineno)
     elif len(p) == 6:
-        # IF expresion THEN sentencias END
-        # IF expresion sentencias elsif_chain END
         if p[3] == 'then':
-            p[0] = ('if', p[2], p[4])
+            p[0] = ('if', p[2], p[4], lineno)
         else:
-            p[0] = ('if_elsif', p[2], p[3], p[4])
+            p[0] = ('if_elsif', p[2], p[3], p[4], lineno)
     elif len(p) == 7:
-        # IF expresion sentencias ELSE sentencias END
-        # IF expresion THEN sentencias elsif_chain END
         if p[3] == 'then':
-            p[0] = ('if_elsif', p[2], p[4], p[5])
+            p[0] = ('if_elsif', p[2], p[4], p[5], lineno)
         else:
-            p[0] = ('if_else', p[2], p[3], p[5])
+            p[0] = ('if_else', p[2], p[3], p[5], lineno)
     elif len(p) == 8:
-        # IF expresion sentencias elsif_chain ELSE sentencias END
-        # IF expresion THEN sentencias ELSE sentencias END
         if p[3] == 'then':
-            p[0] = ('if_else', p[2], p[4], p[6])
+            p[0] = ('if_else', p[2], p[4], p[6], lineno)
         else:
-            p[0] = ('if_elsif_else', p[2], p[3], p[4], p[6])
+            p[0] = ('if_elsif_else', p[2], p[3], p[4], p[6], lineno)
     else:
-        # IF expresion THEN sentencias elsif_chain ELSE sentencias END
-        p[0] = ('if_elsif_else', p[2], p[4], p[5], p[7])
+        p[0] = ('if_elsif_else', p[2], p[4], p[5], p[7], lineno)
     tokens_parseados.append("Estructura IF completa")
 
 
@@ -298,10 +298,11 @@ def p_elsif_block(p):
 def p_while_loop(p):
     '''while_loop : WHILE expresion sentencias END
                   | WHILE expresion DO sentencias END'''
+    lineno = p.lineno(1)
     if len(p) == 5:
-        p[0] = ('while', p[2], p[3])
+        p[0] = ('while', p[2], p[3], lineno)
     else:
-        p[0] = ('while', p[2], p[4])
+        p[0] = ('while', p[2], p[4], lineno)
     tokens_parseados.append("Estructura WHILE")
 
 # ============================================================================
@@ -313,10 +314,11 @@ def p_for_loop(p):
                 | FOR VARIABLE_LOCAL IN rango DO sentencias END
                 | FOR VARIABLE_LOCAL IN expresion sentencias END
                 | FOR VARIABLE_LOCAL IN expresion DO sentencias END'''
+    lineno = p.lineno(1)
     if len(p) == 7:
-        p[0] = ('for', p[2], p[4], p[5])
+        p[0] = ('for', p[2], p[4], p[5], lineno)
     else:
-        p[0] = ('for', p[2], p[4], p[6])
+        p[0] = ('for', p[2], p[4], p[6], lineno)
     tokens_parseados.append(f"Estructura FOR con variable: {p[2]}")
 
 def p_until_loop(p):
@@ -368,14 +370,15 @@ def p_definicion_funcion(p):
     '''definicion_funcion : DEF nombre_funcion sentencias END
                           | DEF nombre_funcion PARENTESIS_IZQ parametros PARENTESIS_DER sentencias END
                           | DEF nombre_funcion PARENTESIS_IZQ PARENTESIS_DER sentencias END'''
+    lineno = p.lineno(1)
     if len(p) == 5:
-        p[0] = ('funcion', p[2], [], p[3])
+        p[0] = ('funcion', p[2], [], p[3], lineno)
         tokens_parseados.append(f"Definición de función: {p[2]} sin parámetros")
     elif len(p) == 7:
-        p[0] = ('funcion', p[2], [], p[5])
+        p[0] = ('funcion', p[2], [], p[5], lineno)
         tokens_parseados.append(f"Definición de función: {p[2]} sin parámetros (con paréntesis)")
     else:
-        p[0] = ('funcion', p[2], p[4], p[6])
+        p[0] = ('funcion', p[2], p[4], p[6], lineno)
         tokens_parseados.append(f"Definición de función: {p[2]} con {len(p[4])} parámetro(s)")
 
 def p_nombre_funcion(p):
@@ -569,7 +572,7 @@ def analizar_sintaxis(archivo_entrada, usuario_git):
             data = f.read()
     except FileNotFoundError:
         print(f"[ERROR] No se encontró el archivo '{archivo_entrada}'")
-        return
+        return None, []
     
     print("\n" + "="*100)
     print(f"{'ANALIZADOR SINTÁCTICO PARA RUBY':^100}")

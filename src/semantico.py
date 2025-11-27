@@ -302,6 +302,10 @@ def analizar_nodo(nodo, linea=1):
         return
     
     tipo_nodo = nodo[0]
+
+    linea_nodo = linea
+    if len(nodo) > 0 and isinstance(nodo[-1], int) and nodo[-1] > 0:
+        linea_nodo = nodo[-1]
     
     if tipo_nodo == 'asignacion':
         variable = nodo[1]
@@ -327,22 +331,22 @@ def analizar_nodo(nodo, linea=1):
         es_constante = nombre_var[0].isupper() if nombre_var else False
         
         if es_constante:
-            if verificar_constante_modificada(nombre_var, linea):
+            if verificar_constante_modificada(nombre_var, linea_nodo):
                 tabla_simbolos["constantes"][nombre_var] = {
                     "tipo": tipo_expr,
-                    "linea": linea,
+                    "linea": linea_nodo,
                     "valor": None
                 }
         else:
-            verificar_asignacion_incompatible(nombre_var, tipo_expr, linea)
+            verificar_asignacion_incompatible(nombre_var, tipo_expr, linea_nodo)
             
             tabla_simbolos["variables"][nombre_var] = {
                 "tipo": tipo_expr,
-                "linea": linea,
+                "linea": linea_nodo,
                 "valor": None
             }
         
-        analizar_nodo(expresion, linea)
+        analizar_nodo(expresion, linea_nodo)
     
     elif tipo_nodo == 'operacion_binaria':
         operador = nodo[1]
@@ -355,15 +359,15 @@ def analizar_nodo(nodo, linea=1):
         tipo_izq = obtener_tipo(izq)
         tipo_der = obtener_tipo(der)
 
-        verificar_conversion_implicita(tipo_izq, tipo_der, operador, linea)
+        verificar_conversion_implicita(tipo_izq, tipo_der, operador, linea_nodo)
         
-        verificar_operador_incompatible(operador, tipo_izq, tipo_der, linea)
+        verificar_operador_incompatible(operador, tipo_izq, tipo_der, linea_nodo)
         
         if operador == '/' and isinstance(der, int) and der == 0:
-            verificar_division_por_cero(0, linea)
+            verificar_division_por_cero(0, linea_nodo)
         
-        analizar_nodo(izq, linea)
-        analizar_nodo(der, linea)
+        analizar_nodo(izq, linea_nodo)
+        analizar_nodo(der, linea_nodo)
     
     elif tipo_nodo == 'variable':
         nombre = nodo[1]
@@ -373,19 +377,25 @@ def analizar_nodo(nodo, linea=1):
         verificar_variable_declarada(nombre, linea)
     
     elif tipo_nodo in ['if', 'if_else', 'if_elsif', 'if_elsif_else']:
+        if isinstance(nodo[-1], int):
+            linea_nodo = nodo[-1]
+
         condicion = nodo[1]
         tipo_cond = obtener_tipo(condicion)
-        verificar_condicion_booleana(tipo_cond, linea)
+        verificar_condicion_booleana(tipo_cond, linea_nodo)
         
-        analizar_nodo(condicion, linea)
+        analizar_nodo(condicion, linea_nodo)
         for i in range(2, len(nodo)):
             if isinstance(nodo[i], list):
                 for sentencia in nodo[i]:
-                    analizar_nodo(sentencia, linea + 1)
-            else:
-                analizar_nodo(nodo[i], linea + 1)
+                    analizar_nodo(sentencia, linea_nodo)
+            elif not isinstance(nodo[i], int):
+                analizar_nodo(nodo[i], linea_nodo)
                 
     elif tipo_nodo in ['while', 'until', 'for']:
+        if isinstance(nodo[-1], int):
+            linea_nodo = nodo[-1]
+
         en_loop_anterior = en_loop
         en_loop = True
         
@@ -393,14 +403,14 @@ def analizar_nodo(nodo, linea=1):
             condicion = nodo[1]
             sentencias = nodo[2]
             tipo_cond = obtener_tipo(condicion)
-            verificar_condicion_booleana(tipo_cond, linea)
-            analizar_nodo(condicion, linea)
+            verificar_condicion_booleana(tipo_cond, linea_nodo)
+            analizar_nodo(condicion, linea_nodo)
         else:  
             sentencias = nodo[3] if len(nodo) > 3 else nodo[2]
         
         if isinstance(sentencias, list):
             for sentencia in sentencias:
-                analizar_nodo(sentencia, linea + 1)
+                analizar_nodo(sentencia, linea_nodo)
         
         en_loop = en_loop_anterior
     
@@ -410,32 +420,34 @@ def analizar_nodo(nodo, linea=1):
         if len(nodo) > 2 and isinstance(nodo[2], int):
             linea = nodo[2]
         if palabra in ['break', 'next', 'redo']:
-            verificar_break_en_loop(linea)
+            verificar_break_en_loop(linea_nodo)
     
     elif tipo_nodo == 'funcion':
         nombre = nodo[1]
         parametros = nodo[2]
         cuerpo = nodo[3]
+        if len(nodo) > 4 and isinstance(nodo[4], int):
+            linea_nodo = nodo[4]
         
         en_funcion_anterior = en_funcion
         en_funcion = True
         
         tabla_simbolos["funciones"][nombre] = {
             "parametros": parametros,
-            "linea": linea
+            "linea": linea_nodo
         }
         
         for param in parametros:
             if param not in tabla_simbolos["variables"]:
                 tabla_simbolos["variables"][param] = {
                     "tipo": 'any',
-                    "linea": linea,
+                    "linea": linea_nodo,
                     "valor": None
                 }
         
         if isinstance(cuerpo, list):
             for sentencia in cuerpo:
-                analizar_nodo(sentencia, linea + 1)
+                analizar_nodo(sentencia, linea_nodo)
         
         en_funcion = en_funcion_anterior
     
@@ -446,18 +458,18 @@ def analizar_nodo(nodo, linea=1):
             linea = nodo[2]
         verificar_retorno_valido('any', linea)
         tipo_ret = obtener_tipo(expresion)
-        analizar_nodo(expresion, linea)
+        analizar_nodo(expresion, linea_nodo)
     
     # PROGRAMA
     elif tipo_nodo == 'programa':
         sentencias = nodo[1]
         if isinstance(sentencias, list):
             for sentencia in sentencias:
-                analizar_nodo(sentencia, linea)
+                analizar_nodo(sentencia, linea_nodo)
     
     elif tipo_nodo == 'valor':
         valor_interno = nodo[1]
-        analizar_nodo(valor_interno, linea)
+        analizar_nodo(valor_interno, linea_nodo)
         
 # ============================================
 # CREAR LOG SEMÁNTICO
