@@ -62,7 +62,8 @@ def verificar_variable_declarada(nombre, linea=0):
     """
     if nombre not in tabla_simbolos["variables"] and nombre not in tabla_simbolos["constantes"]:
         error = f"Error semántico en línea {linea}: Variable '{nombre}' no declarada antes de su uso"
-        errores_semanticos.append(error)
+        if error not in errores_semanticos:
+            errores_semanticos.append(error)
         return False
     return True
 
@@ -72,9 +73,13 @@ def verificar_constante_modificada(nombre, linea=0):
     Asegura que las constantes no puedan ser reasignadas
     """
     if nombre in tabla_simbolos["constantes"]:
-        error = f"Error semántico en línea {linea}: Constante '{nombre}' no puede ser modificada (ya fue declarada en línea {tabla_simbolos['constantes'][nombre]['linea']})"
-        errores_semanticos.append(error)
-        return False
+        # Solo es error si la línea es diferente a la línea de declaración original
+        linea_declaracion = tabla_simbolos['constantes'][nombre]['linea']
+        if linea != linea_declaracion:
+            error = f"Error semántico en línea {linea}: Constante '{nombre}' no puede ser modificada (ya fue declarada en línea {linea_declaracion})"
+            if error not in errores_semanticos:
+                errores_semanticos.append(error)
+            return False
     return True
 
 # ============================================
@@ -99,13 +104,14 @@ def verificar_asignacion_palabra_reservada(nombre, linea=0):
     Regla 4: Asignación a palabra reservada
     Impide la asignación a valores literales o palabras reservadas
     """
-    palabras_reservadas = ['true', 'false', 'nil', 'if', 'else', 'elsif', 'while', 
+    palabras_reservadas = ['true', 'false', 'nil', 'if', 'else', 'elsif', 'while',
                            'for', 'until', 'def', 'class', 'module', 'end', 'return',
                            'break', 'next', 'redo', 'puts', 'print', 'gets']
-    
+
     if nombre.lower() in palabras_reservadas:
         error = f"Error semántico en línea {linea}: No se puede asignar valor a palabra reservada '{nombre}'"
-        errores_semanticos.append(error)
+        if error not in errores_semanticos:
+            errores_semanticos.append(error)
         return False
     return True
 
@@ -329,14 +335,18 @@ def analizar_nodo(nodo, linea=1):
         tipo_expr = obtener_tipo(expresion)
         
         es_constante = nombre_var[0].isupper() if nombre_var else False
-        
+
         if es_constante:
-            if verificar_constante_modificada(nombre_var, linea_nodo):
+            # Solo procesar si no fue registrada en la Fase 1 (análisis de tokens)
+            if nombre_var not in tabla_simbolos["constantes"]:
                 tabla_simbolos["constantes"][nombre_var] = {
                     "tipo": tipo_expr,
                     "linea": linea_nodo,
                     "valor": None
                 }
+            else:
+                # Ya existe (registrada en Fase 1), verificar si es modificación
+                verificar_constante_modificada(nombre_var, linea_nodo)
         else:
             verificar_asignacion_incompatible(nombre_var, tipo_expr, linea_nodo)
             
@@ -577,13 +587,125 @@ def crear_log_semantico(errores, warnings, tabla, usuario, archivo_entrada):
 # José Marin @JoseM0lina
 # ============================================
 
+def analizar_tokens_semanticamente(archivo_entrada):
+    """
+    Analiza semánticamente el código línea por línea usando tokens léxicos.
+    Esto captura errores semánticos incluso en código con errores sintácticos.
+    """
+    import ply.lex as lex
+    import lexico as lexico_module
+
+    # Obtener tokens del archivo
+    try:
+        with open(archivo_entrada, 'r', encoding='utf-8') as f:
+            codigo = f.read()
+    except FileNotFoundError:
+        return
+
+    # Crear lexer
+    lexer = lex.lex(module=lexico_module)
+    lexer.input(codigo)
+
+    # Analizar tokens línea por línea
+    tokens_list = []
+    for tok in lexer:
+        tokens_list.append(tok)
+
+    # Variables locales para rastrear contexto
+    en_loop_local = False
+    en_funcion_local = False
+    nivel_loop = 0
+    nivel_funcion = 0
+
+    # Procesar tokens para encontrar patrones semánticos
+    i = 0
+    while i < len(tokens_list):
+        tok = tokens_list[i]
+
+        # Rastrear contextos de loops
+        if tok.type in ['WHILE', 'FOR', 'UNTIL']:
+            nivel_loop += 1
+            en_loop_local = True
+        elif tok.type == 'DEF':
+            nivel_funcion += 1
+            en_funcion_local = True
+        elif tok.type == 'END':
+            if nivel_loop > 0:
+                nivel_loop -= 1
+                if nivel_loop == 0:
+                    en_loop_local = False
+            elif nivel_funcion > 0:
+                nivel_funcion -= 1
+                if nivel_funcion == 0:
+                    en_funcion_local = False
+
+        # Detectar asignaciones a palabras reservadas
+        if tok.type in ['VARIABLE_LOCAL', 'CONSTANTE'] and i + 1 < len(tokens_list):
+            if tokens_list[i + 1].type in ['ASIGNACION', 'SUMA_ASIG', 'RESTA_ASIG', 'MULT_ASIG', 'DIV_ASIG']:
+                nombre_var = tok.value
+                linea = tok.lineno
+
+                # Regla 4: Asignación a palabra reservada
+                verificar_asignacion_palabra_reservada(nombre_var, linea)
+
+                # Si es constante, verificar modificación
+                if tok.type == 'CONSTANTE':
+                    # Solo registrar si es la primera vez que se declara
+                    if nombre_var not in tabla_simbolos["constantes"]:
+                        tabla_simbolos["constantes"][nombre_var] = {
+                            "tipo": 'any',
+                            "linea": linea,
+                            "valor": None
+                        }
+                    else:
+                        # Ya existe, entonces es una modificación (error)
+                        verificar_constante_modificada(nombre_var, linea)
+                else:
+                    # Registrar variable
+                    if nombre_var not in tabla_simbolos["variables"]:
+                        tabla_simbolos["variables"][nombre_var] = {
+                            "tipo": 'any',
+                            "linea": linea,
+                            "valor": None
+                        }
+
+        # Detectar uso de variables no declaradas
+        elif tok.type in ['VARIABLE_LOCAL', 'VARIABLE_GLOBAL', 'VARIABLE_INSTANCIA', 'VARIABLE_CLASE']:
+            # Solo verificar si no está siendo declarada (siguiente token no es asignación)
+            nombre_var = tok.value
+            linea = tok.lineno
+
+            if i + 1 < len(tokens_list) and tokens_list[i + 1].type not in ['ASIGNACION', 'SUMA_ASIG', 'RESTA_ASIG', 'MULT_ASIG', 'DIV_ASIG']:
+                # Regla 1: Variable no declarada
+                verificar_variable_declarada(nombre_var, linea)
+
+        # Detectar break/next/redo fuera de loop
+        elif tok.type in ['BREAK', 'NEXT', 'REDO']:
+            linea = tok.lineno
+            if not en_loop_local:
+                # Regla 7: break fuera de loop
+                error = f"Error semántico en línea {linea}: '{tok.value}' usado fuera de un bucle"
+                if error not in errores_semanticos:
+                    errores_semanticos.append(error)
+
+        # Detectar return fuera de función
+        elif tok.type == 'RETURN':
+            linea = tok.lineno
+            if not en_funcion_local:
+                # Regla 11: return fuera de función
+                error = f"Error semántico en línea {linea}: 'return' usado fuera de una función"
+                if error not in errores_semanticos:
+                    errores_semanticos.append(error)
+
+        i += 1
+
 def analizar_semantica(archivo_entrada, usuario_git, mostrar_sintactico=True):
     """
     Realiza el análisis semántico completo de un archivo Ruby
     utilizando el árbol sintáctico generado por sintactico.py
     """
     reiniciar_analisis()
-    
+
     print("\n" + "="*100)
     print(f"{'ANALIZADOR SEMÁNTICO PARA RUBY':^100}")
     print("="*100)
@@ -591,26 +713,39 @@ def analizar_semantica(archivo_entrada, usuario_git, mostrar_sintactico=True):
     print(f"{'Archivo analizado:':<20} {archivo_entrada}")
     print(f"{'Fecha:':<20} {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}")
     print("\n" + "="*100)
+    print("REALIZANDO ANÁLISIS SEMÁNTICO BASADO EN TOKENS...")
+    print("-"*100)
+
+    # FASE 1: Análisis basado en tokens (cubre TODO el código, incluso con errores sintácticos)
+    analizar_tokens_semanticamente(archivo_entrada)
+
+    print("\n[OK] Análisis de tokens completado")
+    print("="*100)
     print("OBTENIENDO ÁRBOL SINTÁCTICO...")
     print("-"*100)
-    
+
     # Obtener el árbol sintáctico del analizador sintáctico
     resultado_sintactico, errores_sint = analizar_sintaxis(archivo_entrada, usuario_git)
-    
+
     if errores_sint:
         print("\n[ADVERTENCIA] Errores sintácticos encontrados, pero continuando con análisis semántico...")
         print("="*100)
         # NO retornar, continuar con lo que se pudo parsear
-    
+
     print("\n[OK] Árbol sintáctico obtenido correctamente")
     print("="*100)
-    print("\nREALIZANDO ANÁLISIS SEMÁNTICO...")
+    print("\nREALIZANDO ANÁLISIS SEMÁNTICO PROFUNDO (BASADO EN ÁRBOL)...")
     print("-"*100)
-    
-    # Analizar el árbol sintáctico
+
+    # FASE 2: Analizar el árbol sintáctico (validaciones más complejas)
     if resultado_sintactico:
         analizar_nodo(resultado_sintactico)
-    
+
+    # Eliminar errores duplicados (pueden aparecer tanto en análisis de tokens como de árbol)
+    global errores_semanticos, warnings_semanticos
+    errores_semanticos = list(dict.fromkeys(errores_semanticos))  # Mantiene orden y elimina duplicados
+    warnings_semanticos = list(dict.fromkeys(warnings_semanticos))
+
     print("-"*100)
     
     # Mostrar tabla de símbolos

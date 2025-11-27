@@ -485,7 +485,7 @@ def p_require(p):
     tokens_parseados.append(f"Require: {p[2]}")
 
 # ============================================================================
-# MANEJO DE ERRORES SINTÁCTICOS
+# MANEJO DE ERRORES SINTÁCTICOS CON RECUPERACIÓN
 # Jose Marín (@JoseM0lina)
 # ============================================================================
 def p_error(p):
@@ -498,6 +498,13 @@ def p_error(p):
         error_msg = "Error sintáctico: fin de archivo inesperado"
         errores_sintacticos.append(error_msg)
         print(f"  [ERROR] {error_msg}")
+
+# Regla especial para recuperación de errores sintácticos
+def p_sentencia_error(p):
+    '''sentencia : error'''
+    # Esta regla permite que el parser se recupere de errores
+    # Continúa parseando después de encontrar un error
+    pass
 
 # ============================================================================
 # CREAR LOG DE ANÁLISIS SINTÁCTICO
