@@ -1,0 +1,430 @@
+# ============================================
+
+# Declaración de constantes del sistema
+MAX_LIBROS = 1000
+DIAS_PRESTAMO = 14
+MULTA_DIARIA = 0.50
+
+puts "=== SISTEMA DE BIBLIOTECA ==="
+puts "Inicializando sistema..."
+
+# ============================================
+# ERROR 1: Variable no declarada (Línea 29)
+# Regla Semántica: Verificar que variables sean declaradas antes de uso
+# ============================================
+total_libros = cantidad_inicial + 50  # cantidad_inicial NO fue declarada
+
+# Ahora sí declaramos las variables correctamente
+cantidad_inicial = 100
+inventario_actual = 100
+libros_prestados = 0
+
+titulo_libro = "Cien Años de Soledad"
+autor_libro = "Gabriel García Márquez"
+isbn = "978-0307474728"
+anio_publicacion = 1967
+precio_libro = 45.99
+disponible = true
+
+puts "Registrando libro: " + titulo_libro
+puts "Autor: " + autor_libro
+puts "ISBN: " + isbn
+
+# ============================================
+# ERROR 2: Constante modificada (Líneas 55-56)
+# Regla Semántica: Las constantes no pueden ser reasignadas
+# ============================================
+MAX_LIBROS = 1000
+MAX_LIBROS = 2000  # Intentando modificar constante
+
+# Datos de usuario
+nombre_usuario = "María González"
+cedula = "1234567890"
+edad_usuario = 25
+tipo_usuario = "estudiante"
+activo = true
+
+puts "Registrando usuario: " + nombre_usuario
+puts "Edad: "
+puts edad_usuario
+
+# ============================================
+# ERROR 3: Asignación incompatible (Líneas 76-77)
+# Regla Semántica: Coherencia en tipos de datos
+# ============================================
+saldo_usuario = 100
+saldo_usuario = "deuda pendiente"  # Cambio de tipo integer a string
+
+
+# ============================================
+# ERROR 4: Asignación a palabra reservada (Línea 89)
+# Regla Semántica: No se puede asignar a palabras reservadas
+# ============================================
+true = 1  # Intentando asignar a palabra reservada
+
+# Verificación de mayoría de edad
+if edad_usuario >= 18
+  puts "Usuario mayor de edad - Puede solicitar préstamos"
+  limite_prestamos = 5
+else
+  puts "Usuario menor de edad - Préstamos limitados"
+  limite_prestamos = 2
+end
+
+# Cálculo de descuentos
+precio_base = 50
+descuento_porcentaje = 15
+precio_con_descuento = precio_base - (precio_base * descuento_porcentaje / 100)
+
+puts "Precio base: "
+puts precio_base
+puts "Precio con descuento: "
+puts precio_con_descuento
+
+# ============================================
+# ERROR 5: Operador incompatible (Línea 118)
+# Regla Semántica: Operadores deben ser compatibles con tipos
+# ============================================
+codigo_libro = "LIB" - 100  # String - Integer no es compatible
+
+# Más cálculos correctos
+total_multa = 0
+dias_retraso = 0
+multa_acumulada = dias_retraso * MULTA_DIARIA
+
+# ============================================
+# ERROR 6: División por cero (Línea 131)
+# Regla Semántica: Prevenir división por cero
+# ============================================
+promedio_prestamos = total_libros / 0  # División por cero
+
+
+# Arrays de datos
+libros_disponibles = ["Don Quijote", "El Principito", "1984", "Rayuela"]
+autores = ["Cervantes", "Saint-Exupéry", "Orwell", "Cortázar"]
+anios = [1605, 1943, 1949, 1963]
+
+# Hash de información
+info_biblioteca = {
+  "nombre" => "Biblioteca Central",
+  "direccion" => "Av. Principal 123",
+  "telefono" => "02-2345678",
+  "email" => "info@biblioteca.edu.ec"
+}
+
+puts "Biblioteca: "
+puts info_biblioteca["nombre"]
+
+# ============================================
+# ERROR 7: Conversión implícita inválida (Línea 159)
+# Regla Semántica: Conversión entre tipos incompatibles
+# ============================================
+codigo_numerico = "ABC123" + 456  # String + Integer sin conversión explícita
+
+# Conversión correcta
+numero_texto = "100"
+numero_convertido = numero_texto.to_i
+resultado_suma = numero_convertido + 50
+
+puts "Resultado de conversión correcta: "
+puts resultado_suma
+
+# ============================================
+# ERROR 8: Conversión con pérdida de datos (Líneas 174-175)
+# Regla Semántica: Advertir sobre pérdida de precisión
+# ============================================
+precio_exacto = 45.99
+precio_entero = precio_exacto  # Float a Integer - pérdida de decimales
+
+
+# ============================================
+# ERROR 9: Return fuera de función (Línea 187)
+# Regla Semántica: Return solo dentro de funciones
+# ============================================
+return "valor de retorno incorrecto"  # Return fuera de función
+
+# Función para calcular multa
+def calcular_multa(dias_atraso)
+  multa_total = dias_atraso * MULTA_DIARIA
+  return multa_total
+end
+
+# ============================================
+# ERROR 10: Retorno incompatible (Líneas 199-201)
+# Regla Semántica: Tipo de retorno debe ser coherente
+# ============================================
+def calcular_total_libros(disponibles, prestados)
+  return "Total de libros en sistema"  # Debería retornar número
+end
+
+# Función correcta para buscar libro
+def buscar_libro(titulo)
+  encontrado = false
+  if titulo == "Don Quijote"
+    encontrado = true
+  end
+  return encontrado
+end
+
+# Función para registrar préstamo
+def registrar_prestamo(usuario, libro, fecha)
+  registro = {
+    usuario: usuario,
+    libro: libro,
+    fecha: fecha
+  }
+  puts "Préstamo registrado para: " + usuario
+  return registro
+end
+
+# Llamadas a funciones
+resultado_busqueda = buscar_libro("1984")
+puts resultado_busqueda
+
+multa_calculada = calcular_multa(5)
+puts "Multa por 5 días de retraso: "
+puts multa_calculada
+
+# ============================================
+# ERROR 11: Break fuera de loop (Línea 244)
+# Regla Semántica: Break solo dentro de bucles
+# ============================================
+break  # Break usado fuera de bucle
+
+# Loop while correcto
+contador = 0
+puts "Listando primeros 5 libros..."
+while contador < 5
+  puts "Libro número: "
+  puts contador + 1
+  contador += 1
+end
+
+# Loop for con break correcto
+puts "Buscando libro específico..."
+for i in 1..10
+  puts "Revisando posición: "
+  puts i
+  if i == 5
+    puts "Libro encontrado!"
+    break  # Break correcto dentro de loop
+  end
+end
+
+# ============================================
+# ERROR 12: Condición no booleana (Líneas 271-273)
+# Regla Semántica: Condiciones deben ser booleanas
+# ============================================
+if "texto en condición"  # String en lugar de booleano
+  puts "Esta condición no debería usar string"
+end
+
+# Condiciones correctas
+if edad_usuario >= 18
+  puts "Puede solicitar préstamo avanzado"
+end
+
+if libros_disponibles.length > 0
+  puts "Hay libros disponibles"
+end
+
+# Loop until
+dias_transcurridos = 0
+until dias_transcurridos >= 7
+  puts "Día: "
+  puts dias_transcurridos
+  dias_transcurridos += 1
+end
+
+
+class Libro
+  def initialize(titulo, autor, isbn)
+    @titulo = titulo
+    @autor = autor
+    @isbn = isbn
+    @disponible = true
+  end
+  
+  def prestar
+    if @disponible
+      @disponible = false
+      puts "Libro prestado: " + @titulo
+    else
+      puts "Libro no disponible"
+    end
+  end
+  
+  def devolver
+    @disponible = true
+    puts "Libro devuelto: " + @titulo
+  end
+  
+  def mostrar_info
+    puts "Título: " + @titulo
+    puts "Autor: " + @autor
+    puts "ISBN: " + @isbn
+  end
+end
+
+# Definición de clase Usuario
+class Usuario
+  def initialize(nombre, cedula)
+    @nombre = nombre
+    @cedula = cedula
+    @libros_prestados = []
+  end
+  
+  def agregar_prestamo(libro)
+    @libros_prestados.push(libro)
+    puts "Préstamo agregado para: " + @nombre
+  end
+  
+  def cantidad_prestamos
+    return @libros_prestados.length
+  end
+end
+
+# Crear objetos
+libro1 = Libro.new("Don Quijote", "Cervantes", "ISBN-001")
+libro2 = Libro.new("Cien Años de Soledad", "García Márquez", "ISBN-002")
+
+usuario1 = Usuario.new("Carlos López", "0987654321")
+
+# Operaciones con objetos
+libro1.mostrar_info
+libro1.prestar
+usuario1.agregar_prestamo("Don Quijote")
+
+
+# Módulo de estadísticas
+module Estadisticas
+  def self.libros_mas_prestados
+    return ["Don Quijote", "El Principito", "1984"]
+  end
+  
+  def self.promedio_prestamos_mes
+    total = 150
+    meses = 12
+    return total / meses
+  end
+end
+
+# Usar módulo
+libros_populares = Estadisticas.libros_mas_prestados
+promedio = Estadisticas.promedio_prestamos_mes
+
+puts "Libros más prestados:"
+for libro in libros_populares
+  puts "- " + libro
+end
+
+puts "Promedio de préstamos mensual: "
+puts promedio
+
+puts ""
+puts "=== RESUMEN DEL SISTEMA ==="
+puts "Total de libros en inventario: "
+puts inventario_actual
+
+puts "Libros actualmente prestados: "
+puts libros_prestados
+
+puts "Usuarios activos: "
+puts 1
+
+# Cálculo de ingresos por multas
+total_multas = 0
+for dia in 1..30
+  if dia % 5 == 0
+    total_multas += MULTA_DIARIA * 2
+  end
+end
+
+puts "Total recaudado en multas este mes: $"
+puts total_multas
+
+# Array de géneros literarios
+generos = ["Ficción", "No Ficción", "Ciencia", "Historia", "Arte"]
+
+puts ""
+puts "Géneros disponibles en la biblioteca:"
+for genero in generos
+  puts "• " + genero
+end
+
+# Hash con horarios de atención
+horarios = {
+  lunes: "8:00 - 18:00",
+  martes: "8:00 - 18:00",
+  miercoles: "8:00 - 18:00",
+  jueves: "8:00 - 18:00",
+  viernes: "8:00 - 16:00",
+  sabado: "9:00 - 13:00"
+}
+
+puts ""
+puts "Horarios de atención:"
+puts "Lunes a Jueves: " + horarios[:lunes]
+puts "Viernes: " + horarios[:viernes]
+puts "Sábado: " + horarios[:sabado]
+
+# Función para validar ISBN
+def validar_isbn(codigo_isbn)
+  longitud = codigo_isbn.length
+  if longitud == 10 or longitud == 13
+    return true
+  else
+    return false
+  end
+end
+
+# Función para calcular fecha de devolución
+def calcular_fecha_devolucion(dias_prestamo)
+  fecha_actual = 15  # Simplificado: día del mes
+  fecha_devolucion = fecha_actual + dias_prestamo
+  return fecha_devolucion
+end
+
+# Validaciones
+isbn_valido = validar_isbn("978-0307474728")
+if isbn_valido
+  puts "ISBN válido"
+else
+  puts "ISBN inválido"
+end
+
+fecha_devolucion = calcular_fecha_devolucion(DIAS_PRESTAMO)
+puts "Fecha de devolución (día del mes): "
+puts fecha_devolucion
+
+# ============================================
+# FINALIZACIÓN DEL SISTEMA
+# ============================================
+
+puts ""
+puts "=== FIN DEL PROCESAMIENTO ==="
+puts "Sistema de biblioteca finalizado correctamente"
+puts "Gracias por usar nuestro sistema"
+puts ""
+
+# ============================================
+# RESUMEN DE ERRORES PARA SUSTENTACIÓN:
+# ============================================
+# ERROR 1 (Línea 29): Variable 'cantidad_inicial' no declarada
+# ERROR 2 (Líneas 55-56): Constante 'MAX_LIBROS' modificada
+# ERROR 3 (Líneas 76-77): Asignación incompatible (integer a string)
+# ERROR 4 (Línea 89): Asignación a palabra reservada 'true'
+# ERROR 5 (Línea 118): Operador incompatible (string - integer)
+# ERROR 6 (Línea 131): División por cero
+# ERROR 7 (Línea 159): Conversión implícita inválida (string + integer)
+# ERROR 8 (Líneas 174-175): Conversión con pérdida de datos (float a int)
+# ERROR 9 (Línea 187): Return fuera de función
+# ERROR 10 (Líneas 199-201): Retorno incompatible (string en lugar de número)
+# ERROR 11 (Línea 244): Break fuera de loop
+# ERROR 12 (Líneas 271-273): Condición no booleana (string en if)
+# ============================================
+# RESULTADO ESPERADO:
+# Léxico: 0 errores (sintaxis correcta)
+# Sintáctico: 3-5 errores (algunos también son sintácticos)
+# Semántico: 12 errores detectados
+# ============================================

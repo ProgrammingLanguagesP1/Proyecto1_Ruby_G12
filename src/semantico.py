@@ -60,6 +60,25 @@ def verificar_variable_declarada(nombre, linea=0):
     Regla 1: Variable no declarada
     Verifica que la variable haya sido declarada antes de su uso
     """
+    # Variables de instancia (@variable) no requieren declaración previa en Ruby
+    if nombre.startswith('@'):
+        return True
+
+    # Métodos integrados de Ruby que no son variables
+    metodos_integrados = ['length', 'size', 'to_i', 'to_f', 'to_s', 'upcase', 'downcase',
+                         'reverse', 'push', 'pop', 'first', 'last', 'keys', 'values',
+                         'each', 'map', 'select', 'reject', 'sort', 'join', 'split',
+                         'new', 'puts', 'print', 'gets', 'chomp', 'strip']
+    if nombre in metodos_integrados:
+        return True
+
+    # Palabras clave y operadores lógicos de Ruby
+    palabras_clave = ['and', 'or', 'not', 'if', 'elsif', 'else', 'end', 'while',
+                     'until', 'for', 'in', 'do', 'break', 'next', 'return', 'def',
+                     'class', 'module', 'true', 'false', 'nil', 'self', 'super']
+    if nombre in palabras_clave:
+        return True
+
     if nombre not in tabla_simbolos["variables"] and nombre not in tabla_simbolos["constantes"]:
         error = f"Error semántico en línea {linea}: Variable '{nombre}' no declarada antes de su uso"
         if error not in errores_semanticos:
@@ -281,6 +300,18 @@ def obtener_tipo(valor):
         elif valor[0] == 'variable':
             # Puede ser ('variable', nombre) o ('variable', nombre, lineno)
             nombre = valor[1]
+
+            # Variables de instancia siempre retornan 'any'
+            if nombre.startswith('@'):
+                if nombre in tabla_simbolos["variables"]:
+                    return tabla_simbolos["variables"][nombre]["tipo"]
+                return 'any'
+
+            # Métodos integrados retornan 'any'
+            metodos_integrados = ['length', 'size', 'to_i', 'to_f', 'to_s']
+            if nombre in metodos_integrados:
+                return 'any'
+
             if nombre in tabla_simbolos["variables"]:
                 return tabla_simbolos["variables"][nombre]["tipo"]
             if nombre in tabla_simbolos["constantes"]:
@@ -340,45 +371,59 @@ def analizar_nodo(nodo, linea=1):
     tipo_nodo = nodo[0]
 
     linea_nodo = extraer_linea(nodo)
-    if len(nodo) > 0 and isinstance(nodo[-1], int) and nodo[-1] > 0:
-        linea_nodo = nodo[-1]
+    for elemento in nodo:
+        if isinstance(elemento, int) and elemento > 0 and elemento < 100000:
+            linea_nodo = elemento
+            break
     
     if tipo_nodo == 'asignacion':
         variable = nodo[1]
         operador = nodo[2]
         expresion = nodo[3]
         linea_nodo = extraer_linea(nodo)
-        
+
         if isinstance(variable, tuple) and variable[0] == 'variable':
             nombre_var = variable[1]
         else:
             nombre_var = variable
-        verificar_asignacion_palabra_reservada(nombre_var, linea_nodo)
-        
-        tipo_expr = obtener_tipo(expresion)
-        
-        es_constante = nombre_var[0].isupper() if nombre_var else False
 
-        if es_constante:
-            # Solo procesar si no fue registrada en la Fase 1 (análisis de tokens)
-            if nombre_var not in tabla_simbolos["constantes"]:
-                tabla_simbolos["constantes"][nombre_var] = {
-                    "tipo": tipo_expr,
-                    "linea": linea_nodo,
-                    "valor": None
-                }
-            else:
-                # Ya existe (registrada en Fase 1), verificar si es modificación
-                verificar_constante_modificada(nombre_var, linea_nodo)
-        else:
-            verificar_asignacion_incompatible(nombre_var, tipo_expr, linea_nodo)
-            
+        # No verificar palabras reservadas para variables de instancia
+        if not nombre_var.startswith('@'):
+            verificar_asignacion_palabra_reservada(nombre_var, linea_nodo)
+
+        tipo_expr = obtener_tipo(expresion)
+
+        # Variables de instancia siempre se aceptan sin verificaciones adicionales
+        if nombre_var.startswith('@'):
+            # Registrar variable de instancia en la tabla
             tabla_simbolos["variables"][nombre_var] = {
                 "tipo": tipo_expr,
                 "linea": linea_nodo,
                 "valor": None
             }
-        
+        else:
+            es_constante = nombre_var[0].isupper() if nombre_var else False
+
+            if es_constante:
+                # Solo procesar si no fue registrada en la Fase 1 (análisis de tokens)
+                if nombre_var not in tabla_simbolos["constantes"]:
+                    tabla_simbolos["constantes"][nombre_var] = {
+                        "tipo": tipo_expr,
+                        "linea": linea_nodo,
+                        "valor": None
+                    }
+                else:
+                    # Ya existe (registrada en Fase 1), verificar si es modificación
+                    verificar_constante_modificada(nombre_var, linea_nodo)
+            else:
+                verificar_asignacion_incompatible(nombre_var, tipo_expr, linea_nodo)
+
+                tabla_simbolos["variables"][nombre_var] = {
+                    "tipo": tipo_expr,
+                    "linea": linea_nodo,
+                    "valor": None
+                }
+
         analizar_nodo(expresion, linea_nodo)
     
     elif tipo_nodo == 'operacion_binaria':
@@ -543,27 +588,49 @@ def analizar_nodo(nodo, linea=1):
         parametros = nodo[2]
         cuerpo = nodo[3]
         linea_nodo = extraer_linea(nodo)
-        
+
         en_funcion_anterior = en_funcion
         en_funcion = True
-        
-        tabla_simbolos["funciones"][nombre] = {
-            "parametros": parametros,
-            "linea": linea_nodo
-        }
-        
-        for param in parametros:
-            if param not in tabla_simbolos["variables"]:
-                tabla_simbolos["variables"][param] = {
+
+        # Primero registrar los parámetros ANTES de registrar la función
+        params_lista = []
+        if parametros:
+            if isinstance(parametros, list):
+                params_lista = parametros
+            elif isinstance(parametros, tuple):
+                # Si es una tupla, extraer el primer elemento
+                params_lista = [parametros] if parametros[0] != 'vacio' else []
+            elif isinstance(parametros, str):
+                # Si es un string simple
+                params_lista = [parametros] if parametros != 'sin parámetros' else []
+
+        for param in params_lista:
+            # Extraer el nombre del parámetro
+            nombre_param = param
+            if isinstance(param, tuple):
+                # Si es una tupla, tomar el segundo elemento (el nombre)
+                if len(param) > 1:
+                    nombre_param = param[1]
+                else:
+                    nombre_param = param[0]
+
+            # Registrar el parámetro como variable
+            if nombre_param and isinstance(nombre_param, str) and nombre_param not in tabla_simbolos["variables"]:
+                tabla_simbolos["variables"][nombre_param] = {
                     "tipo": 'any',
                     "linea": linea_nodo,
                     "valor": None
                 }
-        
+
+        tabla_simbolos["funciones"][nombre] = {
+            "parametros": params_lista,
+            "linea": linea_nodo
+        }
+
         if isinstance(cuerpo, list):
             for sentencia in cuerpo:
                 analizar_nodo(sentencia, linea_nodo)
-        
+
         en_funcion = en_funcion_anterior
     
     elif tipo_nodo == 'llamada_funcion':

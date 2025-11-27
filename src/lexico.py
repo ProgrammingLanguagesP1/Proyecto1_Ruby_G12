@@ -229,6 +229,7 @@ def t_error(t):
 def crear_log(tokens, errores, usuario, archivo_entrada):
     """
     Crea un archivo log
+    Según especificación del profesor: solo mostrar errores o mensaje de éxito
     """
     fecha = datetime.now().strftime("%d-%m-%Y-%Hh%M")
 
@@ -246,34 +247,19 @@ def crear_log(tokens, errores, usuario, archivo_entrada):
         f.write(f"Archivo analizado: {archivo_entrada}\n")
         f.write("="*100 + "\n\n")
         
-        if tokens:
-            f.write("TOKENS RECONOCIDOS:\n")
-            f.write("-"*100 + "\n")
-            f.write(f"{'Tipo':<25} {'Valor':<30} {'Línea':<10} {'Posición':<10}\n")
-            f.write("-"*100 + "\n")
-            for tok in tokens:
-                tipo = tok.type
-                valor = str(tok.value)
-                linea = tok.lineno
-                pos = tok.lexpos
-                if len(valor) > 30 and tipo == 'COMENTARIO_MULTILINEA':
-                    valor = valor.replace('\n', ' ')
-                f.write(f"{tipo:<25} {valor:<30} {linea:<10} {pos:<10}\n")
-            f.write("-"*100 + "\n")
-            f.write(f"Total de tokens: {len(tokens)}\n\n")
-        
         if errores:
+            # Si hay errores, mostrarlos
             f.write("ERRORES LÉXICOS ENCONTRADOS:\n")
             f.write("-"*100 + "\n")
-            for error in errores:
-                f.write(f"{error}\n")
+            for i, error in enumerate(errores, 1):
+                f.write(f"{i}. {error}\n")
             f.write("-"*100 + "\n")
             f.write(f"Total de errores: {len(errores)}\n\n")
-        
-        if not errores:
-            f.write("\n ANÁLISIS COMPLETADO SIN ERRORES\n")
+            f.write("\n[ERROR] ANÁLISIS LÉXICO COMPLETADO CON ERRORES\n")
         else:
-            f.write("\n ANÁLISIS COMPLETADO CON ERRORES\n")
+            # Si no hay errores, solo mensaje de éxito
+            f.write("[OK] ANÁLISIS LÉXICO COMPLETADO SIN ERRORES\n\n")
+            f.write(f"Total de tokens reconocidos: {len(tokens)}\n")
         
         f.write("\n" + "="*100 + "\n")
     

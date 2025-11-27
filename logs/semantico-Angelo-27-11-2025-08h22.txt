@@ -1,0 +1,96 @@
+====================================================================================================
+ANALIZADOR SEMÁNTICO PARA RUBY
+====================================================================================================
+
+Usuario: Angelo
+Fecha: 27/11/2025 08:22:08
+Archivo analizado: temp_codigo.rb
+====================================================================================================
+
+TABLA DE SÍMBOLOS:
+====================================================================================================
+
+VARIABLES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+nombre                         string               8              
+edad                           integer              9              
+precio                         float                10             
+activo                         boolean              11             
+resultado                      nil                  12             
+suma                           integer              19             
+resta                          integer              20             
+multiplicacion                 integer              21             
+division                       integer              22             
+combinacion                    any                  23             
+es_mayor                       boolean              26             
+es_igual                       boolean              27             
+condicion_compuesta            boolean              28             
+contador                       integer              41             
+numero                         integer              52             
+numeros                        array                56             
+nombres                        array                57             
+persona                        hash                 60             
+estudiante                     hash                 61             
+resultado_suma                 any                  65             
+total                          any                  70             
+mensaje                        string               75             
+i                              integer              45             
+a                              any                  64             
+b                              any                  64             
+@nombre                        string               85             
+@edad                          integer              86             
+j                              integer              103            
+k                              integer              111            
+----------------------------------------------------------------------------------------------------
+Total de variables: 29
+
+CONSTANTES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+PI                             any                  15             
+TASA_IVA                       any                  16             
+----------------------------------------------------------------------------------------------------
+Total de constantes: 2
+
+FUNCIONES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Parámetros                          Línea          
+----------------------------------------------------------------------------------------------------
+suma                           a, b                                64             
+saludo                         sin parámetros                      74             
+initialize                     nombre, edad                        84             
+mostrar_info                   sin parámetros                      89             
+self.cuadrado                  sin parámetros                      97             
+----------------------------------------------------------------------------------------------------
+Total de funciones: 5
+
+
+ERRORES SEMÁNTICOS ENCONTRADOS:
+====================================================================================================
+1. Error semántico en línea 90: Variable '@nombre' no declarada antes de su uso
+2. Error semántico en línea 91: Variable '@edad' no declarada antes de su uso
+3. Error semántico en línea 23: Operador '-' incompatible entre tipos 'any' y 'integer'
+4. Error semántico en línea 23: Operador '*' incompatible entre tipos 'any' y 'integer'
+5. Error semántico en línea 65: Operador '+' incompatible entre tipos 'any' y 'any'
+6. Error semántico en línea 97: Variable 'x' no declarada antes de su uso
+7. Error semántico en línea 98: Operador '*' incompatible entre tipos 'any' y 'any'
+8. Error semántico en línea 98: Variable 'x' no declarada antes de su uso
+====================================================================================================
+Total de errores: 8
+
+
+RESUMEN DEL ANÁLISIS:
+====================================================================================================
+Variables declaradas:    29
+Constantes declaradas:   2
+Funciones declaradas:    5
+Errores encontrados:     8
+Advertencias:            0
+====================================================================================================
+
+[ERROR] ANÁLISIS SEMÁNTICO COMPLETADO CON ERRORES
+
+====================================================================================================

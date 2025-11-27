@@ -534,6 +534,7 @@ def p_sentencia_error(p):
 def crear_log_sintactico(tokens_reconocidos, errores, usuario, archivo_entrada, resultado_parser):
     """
     Crea un archivo log del análisis sintáctico
+    Según especificación del profesor: solo mostrar errores o mensaje de éxito
     """
     fecha = datetime.now().strftime("%d-%m-%Y-%Hh%M")
     
@@ -551,33 +552,19 @@ def crear_log_sintactico(tokens_reconocidos, errores, usuario, archivo_entrada, 
         f.write(f"Archivo analizado: {archivo_entrada}\n")
         f.write("="*100 + "\n\n")
         
-        if resultado_parser:
-            f.write("[OK] ANÁLISIS SINTÁCTICO EXITOSO\n\n")
-            f.write("ESTRUCTURA DEL PROGRAMA:\n")
-            f.write("-"*100 + "\n")
-            f.write(f"{resultado_parser}\n")
-            f.write("-"*100 + "\n\n")
-        
-        if tokens_reconocidos:
-            f.write("CONSTRUCCIONES SINTÁCTICAS RECONOCIDAS:\n")
-            f.write("-"*100 + "\n")
-            for i, token in enumerate(tokens_reconocidos, 1):
-                f.write(f"{i}. {token}\n")
-            f.write("-"*100 + "\n")
-            f.write(f"Total de construcciones: {len(tokens_reconocidos)}\n\n")
-        
         if errores:
+            # Si hay errores, mostrarlos
             f.write("ERRORES SINTÁCTICOS ENCONTRADOS:\n")
             f.write("-"*100 + "\n")
             for i, error in enumerate(errores, 1):
                 f.write(f"{i}. {error}\n")
             f.write("-"*100 + "\n")
             f.write(f"Total de errores: {len(errores)}\n\n")
-        
-        if not errores:
-            f.write("\n[OK] ANÁLISIS COMPLETADO SIN ERRORES SINTÁCTICOS\n")
+            f.write("\n[ERROR] ANÁLISIS SINTÁCTICO COMPLETADO CON ERRORES\n")
         else:
-            f.write("\n[ERROR] ANÁLISIS COMPLETADO CON ERRORES SINTÁCTICOS\n")
+            # Si no hay errores, solo mensaje de éxito
+            f.write("[OK] ANÁLISIS SINTÁCTICO COMPLETADO SIN ERRORES\n\n")
+            f.write(f"Total de construcciones sintácticas reconocidas: {len(tokens_reconocidos)}\n")
         
         f.write("\n" + "="*100 + "\n")
     

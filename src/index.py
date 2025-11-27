@@ -105,8 +105,8 @@ class AnalizadorRubyGUI:
         # Frame para el texto con números de línea
         text_frame = tk.Frame(editor_frame, bg='#2d2d44')
         text_frame.pack(fill='both', expand=True, padx=10, pady=10)
-        
-        # Números de línea
+
+        # Números de línea (sin scrollbar propio)
         self.line_numbers = tk.Text(
             text_frame,
             width=4,
@@ -116,12 +116,16 @@ class AnalizadorRubyGUI:
             bg='#252535',
             fg='#6272a4',
             state='disabled',
-            relief='flat'
+            relief='flat',
+            takefocus=0,
+            borderwidth=0,
+            highlightthickness=0,
+            cursor='arrow'
         )
         self.line_numbers.pack(side='left', fill='y')
-        
-        # Editor de código
-        self.editor = scrolledtext.ScrolledText(
+
+        # Editor de código (sin scrollbar automático)
+        self.editor = tk.Text(
             text_frame,
             wrap='none',
             font=('Consolas', 10),
@@ -131,9 +135,18 @@ class AnalizadorRubyGUI:
             selectbackground='#44475a',
             relief='flat',
             padx=10,
-            pady=5
+            pady=5,
+            undo=True,
+            maxundo=-1
         )
         self.editor.pack(side='left', fill='both', expand=True)
+
+        # Scrollbar vertical personalizado
+        vsb = tk.Scrollbar(text_frame, orient='vertical', command=self.on_scrollbar)
+        vsb.pack(side='right', fill='y')
+
+        # Configurar el scrollbar con el editor
+        self.editor.config(yscrollcommand=self.on_text_scroll)
         
         # Código de ejemplo
         codigo_ejemplo = '''# Escriba o pegue su código Ruby aquí...
@@ -146,22 +159,31 @@ if edad >= 18
 end'''
         self.editor.insert('1.0', codigo_ejemplo)
         
-        # Bind para actualizar números de línea - múltiples eventos para mantenerlo dinámico
+        # Bind para actualizar números de línea y sincronizar scroll
         self.editor.bind('<KeyRelease>', self.actualizar_numeros_linea)
-        self.editor.bind('<Return>', self.actualizar_numeros_linea)
-        self.editor.bind('<BackSpace>', self.actualizar_numeros_linea)
-        self.editor.bind('<Delete>', self.actualizar_numeros_linea)
-        self.editor.bind('<MouseWheel>', self.actualizar_numeros_linea)
-        self.editor.bind('<Button-1>', self.actualizar_numeros_linea)
-        self.editor.bind('<<Modified>>', self.actualizar_numeros_linea)
-        self.editor.bind('<<Change>>', self.actualizar_numeros_linea)
-        self.editor.bind('<<Paste>>', self.actualizar_numeros_linea)
+        self.editor.bind('<ButtonRelease-1>', self.actualizar_numeros_linea)
         self.actualizar_numeros_linea()
-        
+
+    def on_scrollbar(self, *args):
+        """Manejar el scroll desde la scrollbar"""
+        self.editor.yview(*args)
+        self.line_numbers.yview(*args)
+
+    def on_text_scroll(self, *args):
+        """Sincronizar el scroll del editor con los números de línea"""
+        self.line_numbers.yview_moveto(args[0])
+        vsb = None
+        for child in self.editor.master.winfo_children():
+            if isinstance(child, tk.Scrollbar):
+                vsb = child
+                break
+        if vsb:
+            vsb.set(*args)
+
     def actualizar_numeros_linea(self, event=None):
-        """Actualizar los números de línea dinámicamente"""
+        """Actualizar los números de línea"""
         try:
-            # Obtener el número total de líneas del editor
+            # Obtener el número de líneas del editor
             num_lines = int(self.editor.index('end-1c').split('.')[0])
 
             # Generar los números de línea
@@ -173,21 +195,10 @@ end'''
             self.line_numbers.insert('1.0', line_numbers_content)
             self.line_numbers.config(state='disabled')
 
-            # Sincronizar el scroll del editor con los números de línea
-            self.sincronizar_scroll()
+            # Sincronizar el scroll
+            self.line_numbers.yview_moveto(self.editor.yview()[0])
         except Exception as e:
             print(f"Error actualizando números de línea: {e}")
-
-    def sincronizar_scroll(self):
-        """Sincronizar el scroll entre números de línea y editor"""
-        try:
-            # Obtener la posición de scroll del editor
-            first_visible = self.editor.yview()[0]
-
-            # Aplicar el mismo scroll a los números de línea
-            self.line_numbers.yview_moveto(first_visible)
-        except Exception as e:
-            print(f"Error sincronizando scroll: {e}")
         
     def crear_panel_resultados(self, parent):
         """Crear el panel de resultados"""
