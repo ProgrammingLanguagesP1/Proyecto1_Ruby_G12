@@ -1,0 +1,404 @@
+====================================================================================================
+ANALIZADOR SINTÁCTICO PARA RUBY
+====================================================================================================
+
+Usuario: JoseM0lina
+Fecha: 17/11/2025 23:06:32
+Archivo analizado: Algorithms/Algorithm_JoseMarin_Semantico.rb
+====================================================================================================
+
+[OK] ANÁLISIS SINTÁCTICO EXITOSO
+
+ESTRUCTURA DEL PROGRAMA:
+----------------------------------------------------------------------------------------------------
+('programa', ['# ERROR: Break fuera de loop (segunda instancia)', ('if', ('comparacion', '<', ('valor', ('variable', 'porcentaje_asistencia')), ('valor', 80)), [('impresion', 'puts', [('valor', 'Alerta de asistencia')]), ('control_flujo', 'break', 419)], 417), '# Generación de reportes finales', ('impresion', 'puts', [('valor', '===================================')]), ('impresion', 'puts', [('valor', 'REPORTE ACADÉMICO FINAL')]), ('impresion', 'puts', [('valor', '===================================')]), ('impresion', 'print', [('valor', 'Estudiantes evaluados: ')]), ('impresion', 'puts', [('valor', ('variable', 'total_estudiantes'))]), ('impresion', 'print', [('valor', 'Estudiantes aprobados: ')]), ('impresion', 'puts', [('valor', ('variable', '$aprobados'))]), ('impresion', 'print', [('valor', 'Tasa de aprobación: ')]), ('asignacion', ('variable', 'porcentaje_aprobacion'), '=', ('operacion_binaria', '/', ('operacion_binaria', '*', ('valor', ('variable', '$aprobados')), ('valor', 100), 434), ('valor', ('variable', 'total_estudiantes')), 434), 434), ('impresion', 'puts', [('valor', ('variable', 'porcentaje_aprobacion'))]), '# ERROR: Conversión implícita inválida (otra instancia)', ('asignacion', ('variable', 'reporte_texto'), '=', ('operacion_binaria', '+', ('valor', 'Resumen del período '), ('valor', 2024), 438), 438), ('impresion', 'puts', [('valor', '===================================')]), ('impresion', 'puts', [('valor', 'Distribución de calificaciones:')]), ('impresion', 'print', [('valor', 'Excelentes: ')]), ('impresion', 'puts', [('valor', ('variable', 'estudiantes_excelentes'))]), ('impresion', 'print', [('valor', 'Buenos: ')]), ('impresion', 'puts', [('valor', ('variable', 'estudiantes_buenos'))]), ('impresion', 'print', [('valor', 'Regulares: ')]), ('impresion', 'puts', [('valor', ('variable', 'estudiantes_regulares'))]), ('impresion', 'puts', [('valor', '===================================')]), '# Proyección para siguiente período', ('asignacion', ('variable', 'meta_aprobacion'), '=', ('valor', 85), 451), ('asignacion', ('variable', 'diferencia'), '=', ('operacion_binaria', '-', ('valor', ('variable', 'meta_aprobacion')), ('valor', ('variable', 'porcentaje_aprobacion')), 452), 452), ('if_elsif_else', ('comparacion', '>', ('valor', ('variable', 'diferencia')), ('valor', 0)), [('impresion', 'puts', [('valor', 'Se requiere mejorar el rendimiento')]), ('asignacion', ('variable', 'accion_requerida'), '=', ('valor', 'true'), 456)], [('elsif', ('comparacion', '==', ('valor', ('variable', 'diferencia')), ('valor', 0)), [('impresion', 'puts', [('valor', 'Meta alcanzada exactamente')]), ('asignacion', ('variable', 'accion_requerida'), '=', ('valor', 'false'), 459)])], [('impresion', 'puts', [('valor', 'Meta superada')]), ('asignacion', ('variable', 'accion_requerida'), '=', ('valor', 'false'), 462)], 454)])
+----------------------------------------------------------------------------------------------------
+
+CONSTRUCCIONES SINTÁCTICAS RECONOCIDAS:
+----------------------------------------------------------------------------------------------------
+1. Asignación: ('variable', 'NOTA_MAXIMA') = [expresión]
+2. Asignación: ('variable', 'NOTA_MINIMA') = [expresión]
+3. Asignación: ('variable', 'NOTA_APROBATORIA') = [expresión]
+4. Asignación: ('variable', 'CREDITOS_CARRERA') = [expresión]
+5. Asignación: ('variable', '$total_estudiantes') = [expresión]
+6. Asignación: ('variable', '$promedio_general') = [expresión]
+7. Asignación: ('variable', '$aprobados') = [expresión]
+8. Asignación: ('variable', 'NOTA_MAXIMA') = [expresión]
+9. Asignación: ('variable', 'suma') = [expresión]
+10. Asignación: ('variable', 'cantidad') = [expresión]
+11. Operación aritmética: +
+12. Asignación: ('variable', 'suma') = [expresión]
+13. Operación aritmética: +
+14. Asignación: ('variable', 'cantidad') = [expresión]
+15. Estructura FOR con variable: nota
+16. Operación aritmética: /
+17. Asignación: ('variable', 'promedio') = [expresión]
+18. RETURN con valor
+19. Definición de función: calcular_promedio sin parámetros
+20. Asignación: ('variable', 'suma_cuadrados') = [expresión]
+21. Asignación: ('variable', 'cantidad') = [expresión]
+22. Operación aritmética: -
+23. Asignación: ('variable', 'diferencia') = [expresión]
+24. Operación aritmética: *
+25. Operación aritmética: +
+26. Asignación: ('variable', 'suma_cuadrados') = [expresión]
+27. Operación aritmética: +
+28. Asignación: ('variable', 'cantidad') = [expresión]
+29. Estructura FOR con variable: nota
+30. Operación aritmética: /
+31. Asignación: ('variable', 'varianza') = [expresión]
+32. RETURN con valor
+33. Definición de función: calcular_desviacion con 2 parámetro(s)
+34. Definición de módulo: Estadisticas con contenido
+35. Asignación: ('variable', '@nombre') = [expresión]
+36. Asignación: ('variable', '@codigo') = [expresión]
+37. Asignación: ('variable', '@carrera') = [expresión]
+38. Arreglo vacío
+39. Asignación: ('variable', '@calificaciones') = [expresión]
+40. Asignación: ('variable', '@creditos_acumulados') = [expresión]
+41. Definición de función: initialize con 3 parámetro(s)
+42. Comparación: >=
+43. Comparación: <=
+44. Operación lógica: &&
+45. Hash con 3 par(es) clave-valor
+46. Asignación: ('variable', 'calificacion') = [expresión]
+47. Arreglo con 1 elemento(s)
+48. Operación aritmética: +
+49. Asignación: ('variable', '@calificaciones') = [expresión]
+50. Operación aritmética: +
+51. Asignación: ('variable', '@creditos_acumulados') = [expresión]
+52. RETURN con valor
+53. RETURN con valor
+54. Estructura IF completa
+55. Definición de función: agregar_calificacion con 3 parámetro(s)
+56. Asignación: ('variable', 'suma_ponderada') = [expresión]
+57. Asignación: ('variable', 'suma_creditos') = [expresión]
+58. Operación aritmética: +
+59. Asignación: ('variable', 'suma_ponderada') = [expresión]
+60. Operación aritmética: +
+61. Asignación: ('variable', 'suma_creditos') = [expresión]
+62. Estructura FOR con variable: cal
+63. Comparación: >
+64. Operación aritmética: /
+65. Asignación: ('variable', 'promedio') = [expresión]
+66. RETURN con valor
+67. RETURN con valor
+68. Estructura IF completa
+69. Definición de función: calcular_promedio_ponderado sin parámetros (con paréntesis)
+70. Llamada a función: calcular_promedio_ponderado sin argumentos
+71. Asignación: ('variable', 'promedio') = [expresión]
+72. Comparación: <
+73. RETURN con valor
+74. Estructura IF completa
+75. RETURN con valor
+76. Definición de función: esta_en_riesgo sin parámetros (con paréntesis)
+77. Definición de clase: Estudiante con contenido
+78. RETURN con valor
+79. Comparación: >=
+80. Comparación: <=
+81. Operación lógica: &&
+82. Asignación: ('variable', 'rango_valido') = [expresión]
+83. RETURN con valor
+84. Definición de función: validar_nota sin parámetros
+85. Comparación: >=
+86. Asignación: ('variable', 'categoria') = [expresión]
+87. Comparación: >=
+88. Asignación: ('variable', 'categoria') = [expresión]
+89. Comparación: >=
+90. Asignación: ('variable', 'categoria') = [expresión]
+91. Comparación: >=
+92. Asignación: ('variable', 'categoria') = [expresión]
+93. Asignación: ('variable', 'categoria') = [expresión]
+94. Estructura IF completa
+95. RETURN con valor
+96. Definición de función: clasificar_estudiante sin parámetros
+97. Asignación: ('variable', 'suma_actual') = [expresión]
+98. Asignación: ('variable', 'cantidad') = [expresión]
+99. Operación aritmética: +
+100. Asignación: ('variable', 'suma_actual') = [expresión]
+101. Operación aritmética: +
+102. Asignación: ('variable', 'cantidad') = [expresión]
+103. Estructura FOR con variable: nota
+104. Asignación: ('variable', 'texto_cantidad') = [expresión]
+105. Operación aritmética: +
+106. Asignación: ('variable', 'total') = [expresión]
+107. Asignación: ('variable', 'examenes_restantes') = [expresión]
+108. Operación aritmética: +
+109. Operación aritmética: *
+110. Operación aritmética: -
+111. Asignación: ('variable', 'nota_requerida') = [expresión]
+112. RETURN con valor
+113. Definición de función: calcular_nota_necesaria con 2 parámetro(s)
+114. Arreglo vacío
+115. Comparación: ==
+116. RETURN con valor
+117. Estructura IF completa
+118. Asignación: ('variable', 'suma') = [expresión]
+119. Asignación: ('variable', 'maximo') = [expresión]
+120. Asignación: ('variable', 'minimo') = [expresión]
+121. Asignación: ('variable', 'aprobados') = [expresión]
+122. Asignación: ('variable', 'reprobados') = [expresión]
+123. Operación aritmética: +
+124. Asignación: ('variable', 'suma') = [expresión]
+125. Comparación: >
+126. Asignación: ('variable', 'maximo') = [expresión]
+127. Estructura IF completa
+128. Comparación: <
+129. Asignación: ('variable', 'minimo') = [expresión]
+130. Estructura IF completa
+131. Comparación: >=
+132. Operación aritmética: +
+133. Asignación: ('variable', 'aprobados') = [expresión]
+134. Operación aritmética: +
+135. Asignación: ('variable', 'reprobados') = [expresión]
+136. Estructura IF completa
+137. Estructura FOR con variable: nota
+138. Operación aritmética: +
+139. Asignación: ('variable', 'cantidad_estudiantes') = [expresión]
+140. Operación aritmética: /
+141. Asignación: ('variable', 'promedio') = [expresión]
+142. Hash con 5 par(es) clave-valor
+143. Asignación: ('variable', 'estadisticas') = [expresión]
+144. RETURN con valor
+145. Definición de función: estadisticas_curso sin parámetros
+146. Instrucción de impresión: puts
+147. Instrucción de impresión: puts
+148. Instrucción de impresión: puts
+149. Arreglo con 5 elemento(s)
+150. Asignación: ('variable', 'nombres') = [expresión]
+151. Arreglo con 5 elemento(s)
+152. Asignación: ('variable', 'codigos') = [expresión]
+153. Arreglo con 5 elemento(s)
+154. Asignación: ('variable', 'carreras') = [expresión]
+155. Arreglo con 5 elemento(s)
+156. Asignación: ('variable', 'notas_parcial1') = [expresión]
+157. Arreglo con 5 elemento(s)
+158. Asignación: ('variable', 'notas_parcial2') = [expresión]
+159. Arreglo con 5 elemento(s)
+160. Asignación: ('variable', 'notas_parcial3') = [expresión]
+161. Asignación: ('variable', 'total_estudiantes') = [expresión]
+162. Asignación: ('variable', 'suma_promedios') = [expresión]
+163. Rango inclusivo (..)
+164. Asignación: ('variable', 'nombre') = [expresión]
+165. Asignación: ('variable', 'nota1') = [expresión]
+166. Asignación: ('variable', 'nota2') = [expresión]
+167. Asignación: ('variable', 'nota3') = [expresión]
+168. Operación aritmética: +
+169. Operación aritmética: /
+170. Operación aritmética: +
+171. Asignación: ('variable', 'promedio_estudiante') = [expresión]
+172. Operación aritmética: +
+173. Asignación: ('variable', 'suma_promedios') = [expresión]
+174. Comparación: >=
+175. Operación aritmética: +
+176. Asignación: ('variable', '$aprobados') = [expresión]
+177. Asignación: ('variable', 'total_estudiantes') = [expresión]
+178. Estructura IF completa
+179. Operación aritmética: +
+180. Asignación: ('variable', 'total_estudiantes') = [expresión]
+181. Estructura FOR con variable: i
+182. Asignación: ('variable', 'NOTA_APROBATORIA') = [expresión]
+183. Llamada a función: estadisticas_curso con 1 argumento(s)
+184. Asignación: ('variable', 'stats_parcial1') = [expresión]
+185. Llamada a función: estadisticas_curso con 1 argumento(s)
+186. Asignación: ('variable', 'stats_parcial2') = [expresión]
+187. Llamada a función: estadisticas_curso con 1 argumento(s)
+188. Asignación: ('variable', 'stats_parcial3') = [expresión]
+189. Asignación: ('variable', 'contador') = [expresión]
+190. Asignación: ('variable', 'suma_maximas') = [expresión]
+191. Comparación: <
+192. Comparación: ==
+193. Operación aritmética: +
+194. Asignación: ('variable', 'suma_maximas') = [expresión]
+195. Comparación: ==
+196. Operación aritmética: +
+197. Asignación: ('variable', 'suma_maximas') = [expresión]
+198. Operación aritmética: +
+199. Asignación: ('variable', 'suma_maximas') = [expresión]
+200. Estructura IF completa
+201. Operación aritmética: +
+202. Asignación: ('variable', 'contador') = [expresión]
+203. Estructura WHILE
+204. Comparación: >
+205. Instrucción de impresión: puts
+206. Control de flujo: break
+207. Estructura IF completa
+208. Asignación: ('variable', 'progreso') = [expresión]
+209. Asignación: ('variable', 'creditos_simulados') = [expresión]
+210. Operación aritmética: +
+211. Asignación: ('variable', 'progreso') = [expresión]
+212. Operación aritmética: +
+213. Asignación: ('variable', 'creditos_simulados') = [expresión]
+214. Comparación: >=
+215. Control de flujo: next
+216. Estructura IF completa
+217. Estructura UNTIL
+218. Asignación: ('variable', 'suma_producto') = [expresión]
+219. Asignación: ('variable', 'suma_creditos') = [expresión]
+220. Asignación: ('variable', 'contador') = [expresión]
+221. Asignación: ('variable', 'credito') = [expresión]
+222. Operación aritmética: *
+223. Operación aritmética: +
+224. Asignación: ('variable', 'suma_producto') = [expresión]
+225. Operación aritmética: +
+226. Asignación: ('variable', 'suma_creditos') = [expresión]
+227. Operación aritmética: +
+228. Asignación: ('variable', 'contador') = [expresión]
+229. Estructura FOR con variable: nota
+230. Comparación: ==
+231. Control de flujo: next
+232. Estructura IF completa
+233. Operación aritmética: /
+234. Asignación: ('variable', 'indice') = [expresión]
+235. RETURN con valor
+236. Definición de función: calcular_indice con 2 parámetro(s)
+237. Arreglo con 5 elemento(s)
+238. Asignación: ('variable', 'creditos_materias') = [expresión]
+239. Arreglo con 5 elemento(s)
+240. Asignación: ('variable', 'materias') = [expresión]
+241. Asignación: ('variable', 'contador_rango') = [expresión]
+242. Asignación: ('variable', 'estudiantes_excelentes') = [expresión]
+243. Asignación: ('variable', 'estudiantes_buenos') = [expresión]
+244. Asignación: ('variable', 'estudiantes_regulares') = [expresión]
+245. Comparación: >=
+246. Operación aritmética: +
+247. Asignación: ('variable', 'estudiantes_excelentes') = [expresión]
+248. Comparación: >=
+249. Operación aritmética: +
+250. Asignación: ('variable', 'estudiantes_buenos') = [expresión]
+251. Operación aritmética: +
+252. Asignación: ('variable', 'estudiantes_regulares') = [expresión]
+253. Estructura IF completa
+254. Operación aritmética: +
+255. Asignación: ('variable', 'contador_rango') = [expresión]
+256. Estructura FOR con variable: nota
+257. Asignación: ('variable', 'texto_nota') = [expresión]
+258. Operación aritmética: -
+259. Asignación: ('variable', 'resultado_erroneo') = [expresión]
+260. Operación aritmética: +
+261. Operación aritmética: +
+262. Asignación: ('variable', 'total_evaluados') = [expresión]
+263. Comparación: >
+264. Operación aritmética: *
+265. Operación aritmética: /
+266. Asignación: ('variable', 'porcentaje_excelentes') = [expresión]
+267. Operación aritmética: *
+268. Operación aritmética: /
+269. Asignación: ('variable', 'porcentaje_buenos') = [expresión]
+270. Operación aritmética: *
+271. Operación aritmética: /
+272. Asignación: ('variable', 'porcentaje_regulares') = [expresión]
+273. Estructura IF completa
+274. Arreglo con 5 elemento(s)
+275. Asignación: ('variable', 'notas_historicas') = [expresión]
+276. Asignación: ('variable', 'tendencia_positiva') = [expresión]
+277. Rango inclusivo (..)
+278. Asignación: ('variable', 'nota_actual') = [expresión]
+279. Asignación: ('variable', 'nota_siguiente') = [expresión]
+280. Operación aritmética: *
+281. Asignación: ('variable', 'mensaje') = [expresión]
+282. Comparación: <
+283. Asignación: ('variable', 'tendencia_positiva') = [expresión]
+284. Estructura IF completa
+285. Estructura FOR con variable: i
+286. Comparación: >=
+287. Asignación: ('variable', 'requisito_promedio') = [expresión]
+288. Comparación: >=
+289. Asignación: ('variable', 'requisito_creditos') = [expresión]
+290. Operación lógica: &&
+291. Operación lógica: &&
+292. Asignación: ('variable', 'requisito_completo') = [expresión]
+293. RETURN con valor
+294. RETURN con valor
+295. Estructura IF completa
+296. Definición de función: elegible_beca con 3 parámetro(s)
+297. Asignación: ('variable', 'estudiantes_con_beca') = [expresión]
+298. Asignación: ('variable', 'promedio_becarios') = [expresión]
+299. Asignación: ('variable', 'contador_beca') = [expresión]
+300. Comparación: <
+301. Operación aritmética: +
+302. Operación aritmética: /
+303. Operación aritmética: +
+304. Asignación: ('variable', 'promedio_est') = [expresión]
+305. Asignación: ('variable', 'creditos_est') = [expresión]
+306. Comparación: >=
+307. Operación aritmética: +
+308. Asignación: ('variable', 'estudiantes_con_beca') = [expresión]
+309. Operación aritmética: +
+310. Asignación: ('variable', 'promedio_becarios') = [expresión]
+311. Estructura IF completa
+312. Operación aritmética: +
+313. Asignación: ('variable', 'contador_beca') = [expresión]
+314. Estructura WHILE
+315. Comparación: >
+316. Operación aritmética: -
+317. Operación aritmética: /
+318. Asignación: ('variable', 'promedio_final_becarios') = [expresión]
+319. Estructura IF completa
+320. Arreglo con 5 elemento(s)
+321. Asignación: ('variable', 'asistencias_totales') = [expresión]
+322. Asignación: ('variable', 'clases_totales') = [expresión]
+323. Operación aritmética: *
+324. Operación aritmética: /
+325. Asignación: ('variable', 'porcentaje_asistencia') = [expresión]
+326. Operación aritmética: *
+327. Asignación: ('variable', 'porcentaje_float') = [expresión]
+328. Comparación: <
+329. Instrucción de impresión: puts
+330. Estructura IF completa
+331. Comparación: <
+332. Instrucción de impresión: puts
+333. Control de flujo: break
+334. Estructura IF completa
+335. Instrucción de impresión: puts
+336. Instrucción de impresión: puts
+337. Instrucción de impresión: puts
+338. Instrucción de impresión: print
+339. Instrucción de impresión: puts
+340. Instrucción de impresión: print
+341. Instrucción de impresión: puts
+342. Instrucción de impresión: print
+343. Operación aritmética: *
+344. Operación aritmética: /
+345. Asignación: ('variable', 'porcentaje_aprobacion') = [expresión]
+346. Instrucción de impresión: puts
+347. Operación aritmética: +
+348. Asignación: ('variable', 'reporte_texto') = [expresión]
+349. Instrucción de impresión: puts
+350. Instrucción de impresión: puts
+351. Instrucción de impresión: print
+352. Instrucción de impresión: puts
+353. Instrucción de impresión: print
+354. Instrucción de impresión: puts
+355. Instrucción de impresión: print
+356. Instrucción de impresión: puts
+357. Instrucción de impresión: puts
+358. Asignación: ('variable', 'meta_aprobacion') = [expresión]
+359. Operación aritmética: -
+360. Asignación: ('variable', 'diferencia') = [expresión]
+361. Comparación: >
+362. Instrucción de impresión: puts
+363. Asignación: ('variable', 'accion_requerida') = [expresión]
+364. Comparación: ==
+365. Instrucción de impresión: puts
+366. Asignación: ('variable', 'accion_requerida') = [expresión]
+367. Instrucción de impresión: puts
+368. Asignación: ('variable', 'accion_requerida') = [expresión]
+369. Estructura IF completa
+370. Programa reconocido con 28 sentencia(s)
+----------------------------------------------------------------------------------------------------
+Total de construcciones: 370
+
+ERRORES SINTÁCTICOS ENCONTRADOS:
+----------------------------------------------------------------------------------------------------
+1. Error sintáctico en línea 215: Token inesperado '=' (tipo: ASIGNACION)
+2. Error sintáctico en línea 345: Token inesperado '=' (tipo: ASIGNACION)
+3. Error sintáctico en línea 409: Token inesperado '.' (tipo: PUNTO)
+4. Error sintáctico en línea 414: Token inesperado 'end' (tipo: END)
+----------------------------------------------------------------------------------------------------
+Total de errores: 4
+
+
+[ERROR] ANÁLISIS COMPLETADO CON ERRORES SINTÁCTICOS
+
+====================================================================================================
