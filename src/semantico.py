@@ -257,6 +257,49 @@ def verificar_retorno_incompatible(nombre_funcion, tipo_retorno, linea=0):
         warnings_semanticos.append(warning)
     return True
 
+def verificar_funcion_declarada(nombre, linea=0):
+    """
+    Regla 13: Función no declarada
+    Verifica que la función haya sido declarada antes de su uso
+    """
+    # Métodos integrados de Ruby que no requieren declaración
+    metodos_integrados = ['puts', 'print', 'gets', 'chomp', 'strip', 'length', 
+                         'size', 'to_i', 'to_f', 'to_s', 'upcase', 'downcase',
+                         'reverse', 'push', 'pop', 'first', 'last', 'keys', 
+                         'values', 'each', 'map', 'select', 'new']
+    
+    if nombre in metodos_integrados:
+        return True
+    
+    if nombre not in tabla_simbolos["funciones"]:
+        error = f"Error semántico en línea {linea}: Función '{nombre}' no declarada antes de su uso"
+        if error not in errores_semanticos:
+            errores_semanticos.append(error)
+        return False
+    return True
+
+def verificar_numero_argumentos(nombre_funcion, argumentos_dados, linea=0):
+    """
+    Regla 14: Número incorrecto de argumentos
+    Verifica que la llamada a función tenga el número correcto de parámetros
+    """
+    # Métodos integrados pueden tener argumentos variables
+    metodos_integrados = ['puts', 'print', 'gets', 'chomp', 'strip', 'new']
+    
+    if nombre_funcion in metodos_integrados:
+        return True
+    
+    if nombre_funcion in tabla_simbolos["funciones"]:
+        params_esperados = len(tabla_simbolos["funciones"][nombre_funcion]["parametros"])
+        args_dados = len(argumentos_dados) if isinstance(argumentos_dados, list) else 0
+        
+        if params_esperados != args_dados:
+            error = f"Error semántico en línea {linea}: Función '{nombre_funcion}' espera {params_esperados} argumento(s), pero recibió {args_dados}"
+            if error not in errores_semanticos:
+                errores_semanticos.append(error)
+            return False
+    return True
+
 # ============================================
 # FUNCIONES AUXILIARES
 # José Marin (@JoseM0lina)
@@ -638,6 +681,12 @@ def analizar_nodo(nodo, linea=1):
         argumentos = nodo[2]
         linea_nodo = extraer_linea(nodo)
         
+        # NUEVA VERIFICACIÓN: Función declarada
+        verificar_funcion_declarada(nombre, linea_nodo)
+        
+        # NUEVA VERIFICACIÓN: Número de argumentos
+        verificar_numero_argumentos(nombre, argumentos, linea_nodo)
+        
         if isinstance(argumentos, list):
             for arg in argumentos:
                 analizar_nodo(arg, linea_nodo)
@@ -700,8 +749,26 @@ def analizar_nodo(nodo, linea=1):
                 analizar_nodo(sentencia, linea_nodo)
     
     elif tipo_nodo == 'require':
+        archivo = nodo[1]
         linea_nodo = extraer_linea(nodo)
-        pass
+        
+        # Verificar que el archivo tenga un formato válido
+        if isinstance(archivo, str):
+            # Advertir si no tiene extensión .rb y no es una ruta de gema
+            if not (archivo.endswith('.rb') or '/' in archivo or archivo.isidentifier()):
+                warning = f"Advertencia semántica en línea {linea_nodo}: Se recomienda usar nombres de archivo válidos (.rb) o identificadores de gema en require"
+                if warning not in warnings_semanticos:
+                    warnings_semanticos.append(warning)
+            
+            # Registrar el require en una estructura (opcional)
+            # Esto es útil para futuros análisis de dependencias
+            if "requires" not in tabla_simbolos:
+                tabla_simbolos["requires"] = []
+            
+            tabla_simbolos["requires"].append({
+                "archivo": archivo,
+                "linea": linea_nodo
+            })
     
     # PROGRAMA
     elif tipo_nodo == 'programa':
