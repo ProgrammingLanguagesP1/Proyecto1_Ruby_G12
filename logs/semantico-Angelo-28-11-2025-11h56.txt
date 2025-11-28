@@ -1,0 +1,229 @@
+====================================================================================================
+ANALIZADOR SEMÁNTICO PARA RUBY
+====================================================================================================
+
+Usuario: Angelo
+Fecha: 28/11/2025 11:56:43
+Archivo analizado: temp_codigo.rb
+====================================================================================================
+
+TABLA DE SÍMBOLOS:
+====================================================================================================
+
+VARIABLES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+suma                           any                  143            
+promedio                       any                  156            
+aprobados                      integer              349            
+contador                       integer              372            
+mayor                          any                  146            
+menor                          any                  150            
+i                              integer              377            
+nota_actual                    any                  142            
+estudiante1                    any                  170            
+estudiante2                    any                  171            
+estudiante3                    any                  172            
+estudiante4                    any                  173            
+estudiante5                    any                  174            
+nombre1                        string               177            
+edad1                          integer              178            
+carrera1                       string               179            
+nota1_est1                     integer              187            
+nota2_est1                     integer              188            
+nota3_est1                     integer              189            
+promedio1                      any                  193            
+clasificacion1                 any                  194            
+nombre2                        string               204            
+edad2                          integer              205            
+carrera2                       string               206            
+nota1_est2                     integer              214            
+nota2_est2                     integer              215            
+nota3_est2                     integer              216            
+promedio2                      any                  220            
+clasificacion2                 any                  221            
+nombre3                        string               231            
+edad3                          integer              232            
+carrera3                       string               233            
+nota1_est3                     integer              241            
+nota2_est3                     integer              242            
+nota3_est3                     integer              243            
+promedio3                      any                  247            
+clasificacion3                 any                  248            
+nombre4                        string               258            
+edad4                          integer              259            
+carrera4                       string               260            
+nota1_est4                     integer              268            
+nota2_est4                     integer              269            
+nota3_est4                     integer              270            
+promedio4                      any                  274            
+clasificacion4                 any                  275            
+nombre5                        string               285            
+edad5                          integer              286            
+carrera5                       string               287            
+nota1_est5                     integer              295            
+nota2_est5                     integer              296            
+nota3_est5                     integer              297            
+promedio5                      any                  301            
+clasificacion5                 any                  302            
+suma_promedios                 any                  321            
+reprobados                     integer              355            
+numero                         integer              386            
+a                              integer              398            
+b                              integer              399            
+c                              integer              400            
+resultado_suma                 integer              403            
+resultado_resta                integer              408            
+resultado_mult                 integer              413            
+resultado_div                  integer              418            
+resultado_mod                  integer              423            
+resultado_combinado            integer              428            
+notas_parcial                  array                441            
+promedio_parcial               any                  446            
+total_aprobados                any                  451            
+tiene_beca                     boolean              464            
+asistencia_completa            boolean              465            
+promedio_alto                  boolean              466            
+suspenso                       boolean              479            
+numero_fact                    integer              498            
+resultado_fact                 any                  499            
+numero_fact2                   integer              504            
+resultado_fact2                any                  505            
+suma_1_10                      any                  518            
+suma_1_100                     any                  523            
+nota_test                      integer              535            
+limite_bajo                    integer              536            
+limite_alto                    integer              537            
+$total_estudiantes             integer              291            
+$promedio_general              any                  322            
+nombre                         any                  22             
+edad                           any                  22             
+carrera                        any                  22             
+@nombre                        any                  23             
+@edad                          any                  24             
+@carrera                       any                  25             
+@nota1                         any                  33             
+@nota2                         any                  34             
+@nota3                         any                  35             
+@promedio                      any                  38             
+n1                             any                  32             
+n2                             any                  32             
+n3                             any                  32             
+inicio                         any                  113            
+fin                            any                  113            
+----------------------------------------------------------------------------------------------------
+Total de variables: 98
+
+CONSTANTES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+MAX_ESTUDIANTES                any                  8              
+NOTA_MINIMA                    any                  9              
+NOTA_MAXIMA                    any                  10             
+APROBACION                     any                  11             
+----------------------------------------------------------------------------------------------------
+Total de constantes: 4
+
+FUNCIONES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Parámetros                          Línea          
+----------------------------------------------------------------------------------------------------
+inicializar                    nombre, edad, carrera               22             
+asignar_notas                  n1, n2, n3                          32             
+obtener_estado                 sin parámetros                      43             
+mostrar_info                   sin parámetros                      51             
+validar_edad                   sin parámetros                      68             
+validar_nota                   sin parámetros                      76             
+calcular_promedio              n1, n2, n3                          85             
+clasificar_promedio            sin parámetros                      91             
+factorial                      sin parámetros                      105            
+suma_rango                     inicio, fin                         113            
+buscar_aprobados               sin parámetros                      121            
+procesar_notas                 sin parámetros                      135            
+----------------------------------------------------------------------------------------------------
+Total de funciones: 12
+
+
+ERRORES SEMÁNTICOS ENCONTRADOS:
+====================================================================================================
+1. Error semántico en línea 132: 'return' usado fuera de una función
+2. Error semántico en línea 158: 'return' usado fuera de una función
+3. Error semántico en línea 183: Variable '$total_estudiantes' no declarada antes de su uso
+4. Error semántico en línea 210: Variable '$total_estudiantes' no declarada antes de su uso
+5. Error semántico en línea 237: Variable '$total_estudiantes' no declarada antes de su uso
+6. Error semántico en línea 264: Variable '$total_estudiantes' no declarada antes de su uso
+7. Error semántico en línea 291: Variable '$total_estudiantes' no declarada antes de su uso
+8. Error semántico en línea 322: Variable '$total_estudiantes' no declarada antes de su uso
+9. Error semántico en línea 325: Variable '$total_estudiantes' no declarada antes de su uso
+10. Error semántico en línea 327: Variable '$promedio_general' no declarada antes de su uso
+11. Error semántico en línea 355: Variable '$total_estudiantes' no declarada antes de su uso
+12. Error semántico en línea 577: Variable '$total_estudiantes' no declarada antes de su uso
+13. Error semántico en línea 579: Variable '$promedio_general' no declarada antes de su uso
+14. Error semántico en línea 37: Operador '+' incompatible entre tipos 'any' y 'any'
+15. Error semántico en línea 38: Operador '/' incompatible entre tipos 'any' y 'integer'
+16. Error semántico en línea 76: Variable 'nota' no declarada antes de su uso
+17. Error semántico en línea 77: Variable 'nota' no declarada antes de su uso
+18. Error semántico en línea 86: Operador '+' incompatible entre tipos 'any' y 'any'
+19. Error semántico en línea 87: Operador '/' incompatible entre tipos 'any' y 'integer'
+20. Error semántico en línea 105: Variable 'n' no declarada antes de su uso
+21. Error semántico en línea 106: Variable 'n' no declarada antes de su uso
+22. Error semántico en línea 109: Operador '*' incompatible entre tipos 'any' y 'any'
+23. Error semántico en línea 109: Variable 'n' no declarada antes de su uso
+24. Error semántico en línea 109: Función 'factorial' espera 0 argumento(s), pero recibió 1
+25. Error semántico en línea 109: Operador '-' incompatible entre tipos 'any' y 'integer'
+26. Error semántico en línea 121: Variable 'notas' no declarada antes de su uso
+27. Error semántico en línea 126: Variable 'notas' no declarada antes de su uso
+28. Error semántico en línea 135: Variable 'notas' no declarada antes de su uso
+29. Error semántico en línea 142: Variable 'notas' no declarada antes de su uso
+30. Error semántico en línea 143: Operador '+' incompatible entre tipos 'any' y 'any'
+31. Error semántico en línea 156: Operador '/' incompatible entre tipos 'any' y 'integer'
+32. Error semántico en línea 170: Variable 'Estudiante' no declarada antes de su uso
+33. Error semántico en línea 171: Variable 'Estudiante' no declarada antes de su uso
+34. Error semántico en línea 172: Variable 'Estudiante' no declarada antes de su uso
+35. Error semántico en línea 173: Variable 'Estudiante' no declarada antes de su uso
+36. Error semántico en línea 174: Variable 'Estudiante' no declarada antes de su uso
+37. Error semántico en línea 181: Función 'validar_edad' espera 0 argumento(s), pero recibió 1
+38. Error semántico en línea 191: Función 'validar_nota' espera 0 argumento(s), pero recibió 1
+39. Error semántico en línea 192: Función 'validar_nota' espera 0 argumento(s), pero recibió 1
+40. Error semántico en línea 194: Función 'clasificar_promedio' espera 0 argumento(s), pero recibió 1
+41. Error semántico en línea 208: Función 'validar_edad' espera 0 argumento(s), pero recibió 1
+42. Error semántico en línea 218: Función 'validar_nota' espera 0 argumento(s), pero recibió 1
+43. Error semántico en línea 219: Función 'validar_nota' espera 0 argumento(s), pero recibió 1
+44. Error semántico en línea 221: Función 'clasificar_promedio' espera 0 argumento(s), pero recibió 1
+45. Error semántico en línea 235: Función 'validar_edad' espera 0 argumento(s), pero recibió 1
+46. Error semántico en línea 245: Función 'validar_nota' espera 0 argumento(s), pero recibió 1
+47. Error semántico en línea 246: Función 'validar_nota' espera 0 argumento(s), pero recibió 1
+48. Error semántico en línea 248: Función 'clasificar_promedio' espera 0 argumento(s), pero recibió 1
+49. Error semántico en línea 262: Función 'validar_edad' espera 0 argumento(s), pero recibió 1
+50. Error semántico en línea 272: Función 'validar_nota' espera 0 argumento(s), pero recibió 1
+51. Error semántico en línea 273: Función 'validar_nota' espera 0 argumento(s), pero recibió 1
+52. Error semántico en línea 275: Función 'clasificar_promedio' espera 0 argumento(s), pero recibió 1
+53. Error semántico en línea 289: Función 'validar_edad' espera 0 argumento(s), pero recibió 1
+54. Error semántico en línea 299: Función 'validar_nota' espera 0 argumento(s), pero recibió 1
+55. Error semántico en línea 300: Función 'validar_nota' espera 0 argumento(s), pero recibió 1
+56. Error semántico en línea 302: Función 'clasificar_promedio' espera 0 argumento(s), pero recibió 1
+57. Error semántico en línea 320: Operador '+' incompatible entre tipos 'any' y 'any'
+58. Error semántico en línea 321: Operador '+' incompatible entre tipos 'any' y 'any'
+59. Error semántico en línea 322: Operador '/' incompatible entre tipos 'any' y 'integer'
+60. Error semántico en línea 446: Función 'procesar_notas' espera 0 argumento(s), pero recibió 1
+61. Error semántico en línea 451: Función 'buscar_aprobados' espera 0 argumento(s), pero recibió 1
+62. Error semántico en línea 499: Función 'factorial' espera 0 argumento(s), pero recibió 1
+63. Error semántico en línea 505: Función 'factorial' espera 0 argumento(s), pero recibió 1
+====================================================================================================
+Total de errores: 63
+
+
+RESUMEN DEL ANÁLISIS:
+====================================================================================================
+Variables declaradas:    98
+Constantes declaradas:   4
+Funciones declaradas:    12
+Errores encontrados:     63
+Advertencias:            0
+====================================================================================================
+
+[ERROR] ANÁLISIS SEMÁNTICO COMPLETADO CON ERRORES
+
+====================================================================================================

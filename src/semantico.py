@@ -1083,4 +1083,90 @@ def analizar_semantica(archivo_entrada, usuario_git, mostrar_sintactico=True):
     
     # Mostrar errores
     if errores_semanticos:
-      
+        print("\nERRORES SEMÁNTICOS:")
+        print("="*100)
+        for i, error in enumerate(errores_semanticos, 1):
+            print(f"{i}. {error}")
+        print("="*100)
+    
+    # Mostrar advertencias
+    if warnings_semanticos:
+        print("\nADVERTENCIAS:")
+        print("="*100)
+        for i, warning in enumerate(warnings_semanticos, 1):
+            print(f"{i}. {warning}")
+        print("="*100)
+    
+    # Resumen
+    print("\nRESUMEN:")
+    print("="*100)
+    print(f"Variables declaradas:    {len(tabla_simbolos['variables'])}")
+    print(f"Constantes declaradas:   {len(tabla_simbolos['constantes'])}")
+    print(f"Funciones declaradas:    {len(tabla_simbolos['funciones'])}")
+    print(f"Errores encontrados:     {len(errores_semanticos)}")
+    print(f"Advertencias:            {len(warnings_semanticos)}")
+    print("="*100)
+    
+    if not errores_semanticos:
+        print("\n[OK] ANÁLISIS SEMÁNTICO COMPLETADO SIN ERRORES")
+    else:
+        print(f"\n[ERROR] ANÁLISIS SEMÁNTICO COMPLETADO CON {len(errores_semanticos)} ERROR(ES)")
+    
+    print("="*100)
+    
+    # Crear log
+    try:
+        nombre_log = crear_log_semantico(errores_semanticos, warnings_semanticos, 
+                                         tabla_simbolos, usuario_git, archivo_entrada)
+        print(f"\n[LOG] Archivo guardado en: {nombre_log}")
+    except Exception as e:
+        print(f"\n[ERROR] No se pudo crear el log: {e}")
+        print(f"Carpeta actual: {os.getcwd()}")
+        print(f"Intentando crear en: {os.path.join(os.path.dirname(__file__), '../logs')}")
+    
+    print("="*100 + "\n")
+    
+    return resultado_sintactico, errores_semanticos
+
+# ============================================
+# MAIN
+# José Marin (@JoseM0lina)
+# ============================================
+
+if __name__ == '__main__':
+    if len(sys.argv) > 2:
+        archivo = sys.argv[1]
+        usuario = sys.argv[2]
+        
+        print("\n" + "="*100)
+        print(f"{'COMPILADOR RUBY - ANÁLISIS COMPLETO':^100}")
+        print("="*100)
+        
+        print("\n[FASE 1] ANÁLISIS LÉXICO")
+        print("="*100)
+        try:
+            tokens_lex, errores_lex = analizar_archivo(archivo, usuario)
+        except Exception as e:
+            print(f"[ERROR] Error en análisis léxico: {e}")
+            errores_lex = [str(e)]
+        
+        # Continuar aunque haya errores léxicos
+        print("\n[FASE 2] ANÁLISIS SINTÁCTICO")
+        print("="*100)
+        
+        print("\n[FASE 3] ANÁLISIS SEMÁNTICO")
+        print("="*100)
+        try:
+            analizar_semantica(archivo, usuario)
+        except Exception as e:
+            print(f"[ERROR] Error en análisis semántico: {e}")
+            print(f"Detalles: {type(e).__name__}")
+            import traceback
+            traceback.print_exc()
+    else:
+        print("\n" + "="*100)
+        print("[ERROR] Uso incorrecto del programa")
+        print("="*100)
+        print("\n   Uso: python semantico.py <archivo_ruby> <usuario_git>")
+        print("   Ejemplo: python semantico.py test.rb dquishpe\n")
+        print("="*100)

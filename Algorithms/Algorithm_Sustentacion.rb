@@ -1,461 +1,581 @@
 # ============================================
-# SISTEMA DE GESTIÓN DE BIBLIOTECA
-# ============================================
-# Proyecto: Analizador Ruby - Grupo 12
-# Integrantes: Angelo Zurita, Dhamar Quishpe, José Marín
-# 
-# Este algoritmo implementa un sistema completo de gestión
-# de biblioteca con TODOS los tipos de errores semánticos
-# para demostrar las capacidades del analizador.
+# ALGORITMO DE PRUEBA COMPLETO
+# Sistema de Gestión de Estudiantes
+# Grupo 12 - Lenguajes de Programación
 # ============================================
 
-# ============================================
-# MÓDULO 1: GESTIÓN DE LIBROS
-# ============================================
+# CONSTANTES DEL SISTEMA
+MAX_ESTUDIANTES = 100
+NOTA_MINIMA = 0
+NOTA_MAXIMA = 20
+APROBACION = 14
 
-# Declaración de constantes del sistema
-MAX_LIBROS = 1000
-DIAS_PRESTAMO = 14
-MULTA_DIARIA = 0.50
-
-puts "=== SISTEMA DE BIBLIOTECA ==="
-puts "Inicializando sistema..."
+# Variables globales
+$total_estudiantes = 0
+$promedio_general = 0
 
 # ============================================
-# ERROR 1: Variable no declarada (Línea 29)
-# Regla Semántica: Verificar que variables sean declaradas antes de uso
+# CLASE ESTUDIANTE
 # ============================================
-total_libros = cantidad_inicial + 50  # cantidad_inicial NO fue declarada
-
-# Ahora sí declaramos las variables correctamente
-cantidad_inicial = 100
-inventario_actual = 100
-libros_prestados = 0
-
-# ============================================
-# SECCIÓN: Registro de nuevo libro
-# ============================================
-titulo_libro = "Cien Años de Soledad"
-autor_libro = "Gabriel García Márquez"
-isbn = "978-0307474728"
-anio_publicacion = 1967
-precio_libro = 45.99
-disponible = true
-
-puts "Registrando libro: " + titulo_libro
-puts "Autor: " + autor_libro
-puts "ISBN: " + isbn
-
-# ============================================
-# ERROR 2: Constante modificada (Líneas 55-56)
-# Regla Semántica: Las constantes no pueden ser reasignadas
-# ============================================
-MAX_LIBROS = 1000
-MAX_LIBROS = 2000  # Intentando modificar constante
-
-# ============================================
-# MÓDULO 2: GESTIÓN DE USUARIOS
-# ============================================
-
-# Datos de usuario
-nombre_usuario = "María González"
-cedula = "1234567890"
-edad_usuario = 25
-tipo_usuario = "estudiante"
-activo = true
-
-puts "Registrando usuario: " + nombre_usuario
-puts "Edad: "
-puts edad_usuario
-
-# ============================================
-# ERROR 3: Asignación incompatible (Líneas 76-77)
-# Regla Semántica: Coherencia en tipos de datos
-# ============================================
-saldo_usuario = 100
-saldo_usuario = "deuda pendiente"  # Cambio de tipo integer a string
-
-# ============================================
-# SECCIÓN: Validación de edad
-# ============================================
-
-# ============================================
-# ERROR 4: Asignación a palabra reservada (Línea 89)
-# Regla Semántica: No se puede asignar a palabras reservadas
-# ============================================
-true = 1  # Intentando asignar a palabra reservada
-
-# Verificación de mayoría de edad
-if edad_usuario >= 18
-  puts "Usuario mayor de edad - Puede solicitar préstamos"
-  limite_prestamos = 5
-else
-  puts "Usuario menor de edad - Préstamos limitados"
-  limite_prestamos = 2
-end
-
-# ============================================
-# MÓDULO 3: CÁLCULOS Y OPERACIONES
-# ============================================
-
-# Cálculo de descuentos
-precio_base = 50
-descuento_porcentaje = 15
-precio_con_descuento = precio_base - (precio_base * descuento_porcentaje / 100)
-
-puts "Precio base: "
-puts precio_base
-puts "Precio con descuento: "
-puts precio_con_descuento
-
-# ============================================
-# ERROR 5: Operador incompatible (Línea 118)
-# Regla Semántica: Operadores deben ser compatibles con tipos
-# ============================================
-codigo_libro = "LIB" - 100  # String - Integer no es compatible
-
-# Más cálculos correctos
-total_multa = 0
-dias_retraso = 0
-multa_acumulada = dias_retraso * MULTA_DIARIA
-
-# ============================================
-# ERROR 6: División por cero (Línea 131)
-# Regla Semántica: Prevenir división por cero
-# ============================================
-promedio_prestamos = total_libros / 0  # División por cero
-
-# ============================================
-# MÓDULO 4: PROCESAMIENTO DE DATOS
-# ============================================
-
-# Arrays de datos
-libros_disponibles = ["Don Quijote", "El Principito", "1984", "Rayuela"]
-autores = ["Cervantes", "Saint-Exupéry", "Orwell", "Cortázar"]
-anios = [1605, 1943, 1949, 1963]
-
-# Hash de información
-info_biblioteca = {
-  "nombre" => "Biblioteca Central",
-  "direccion" => "Av. Principal 123",
-  "telefono" => "02-2345678",
-  "email" => "info@biblioteca.edu.ec"
-}
-
-puts "Biblioteca: "
-puts info_biblioteca["nombre"]
-
-# ============================================
-# ERROR 7: Conversión implícita inválida (Línea 159)
-# Regla Semántica: Conversión entre tipos incompatibles
-# ============================================
-codigo_numerico = "ABC123" + 456  # String + Integer sin conversión explícita
-
-# Conversión correcta
-numero_texto = "100"
-numero_convertido = numero_texto.to_i
-resultado_suma = numero_convertido + 50
-
-puts "Resultado de conversión correcta: "
-puts resultado_suma
-
-# ============================================
-# ERROR 8: Conversión con pérdida de datos (Líneas 174-175)
-# Regla Semántica: Advertir sobre pérdida de precisión
-# ============================================
-precio_exacto = 45.99
-precio_entero = precio_exacto  # Float a Integer - pérdida de decimales
-
-# ============================================
-# MÓDULO 5: FUNCIONES DEL SISTEMA
-# ============================================
-
-# ============================================
-# ERROR 9: Return fuera de función (Línea 187)
-# Regla Semántica: Return solo dentro de funciones
-# ============================================
-return "valor de retorno incorrecto"  # Return fuera de función
-
-# Función para calcular multa
-def calcular_multa(dias_atraso)
-  multa_total = dias_atraso * MULTA_DIARIA
-  return multa_total
-end
-
-# ============================================
-# ERROR 10: Retorno incompatible (Líneas 199-201)
-# Regla Semántica: Tipo de retorno debe ser coherente
-# ============================================
-def calcular_total_libros(disponibles, prestados)
-  return "Total de libros en sistema"  # Debería retornar número
-end
-
-# Función correcta para buscar libro
-def buscar_libro(titulo)
-  encontrado = false
-  if titulo == "Don Quijote"
-    encontrado = true
-  end
-  return encontrado
-end
-
-# Función para registrar préstamo
-def registrar_prestamo(usuario, libro, fecha)
-  registro = {
-    usuario: usuario,
-    libro: libro,
-    fecha: fecha
-  }
-  puts "Préstamo registrado para: " + usuario
-  return registro
-end
-
-# Llamadas a funciones
-resultado_busqueda = buscar_libro("1984")
-puts resultado_busqueda
-
-multa_calculada = calcular_multa(5)
-puts "Multa por 5 días de retraso: "
-puts multa_calculada
-
-# ============================================
-# MÓDULO 6: ESTRUCTURAS DE CONTROL
-# ============================================
-
-# ============================================
-# ERROR 11: Break fuera de loop (Línea 244)
-# Regla Semántica: Break solo dentro de bucles
-# ============================================
-break  # Break usado fuera de bucle
-
-# Loop while correcto
-contador = 0
-puts "Listando primeros 5 libros..."
-while contador < 5
-  puts "Libro número: "
-  puts contador + 1
-  contador += 1
-end
-
-# Loop for con break correcto
-puts "Buscando libro específico..."
-for i in 1..10
-  puts "Revisando posición: "
-  puts i
-  if i == 5
-    puts "Libro encontrado!"
-    break  # Break correcto dentro de loop
-  end
-end
-
-# ============================================
-# ERROR 12: Condición no booleana (Líneas 271-273)
-# Regla Semántica: Condiciones deben ser booleanas
-# ============================================
-if "texto en condición"  # String en lugar de booleano
-  puts "Esta condición no debería usar string"
-end
-
-# Condiciones correctas
-if edad_usuario >= 18
-  puts "Puede solicitar préstamo avanzado"
-end
-
-if libros_disponibles.length > 0
-  puts "Hay libros disponibles"
-end
-
-# Loop until
-dias_transcurridos = 0
-until dias_transcurridos >= 7
-  puts "Día: "
-  puts dias_transcurridos
-  dias_transcurridos += 1
-end
-
-# ============================================
-# MÓDULO 7: CLASES Y OBJETOS
-# ============================================
-
-# Definición de clase Libro
-class Libro
-  def initialize(titulo, autor, isbn)
-    @titulo = titulo
-    @autor = autor
-    @isbn = isbn
-    @disponible = true
+class Estudiante
+  
+  def inicializar(nombre, edad, carrera)
+    @nombre = nombre
+    @edad = edad
+    @carrera = carrera
+    @nota1 = 0
+    @nota2 = 0
+    @nota3 = 0
+    @promedio = 0
   end
   
-  def prestar
-    if @disponible
-      @disponible = false
-      puts "Libro prestado: " + @titulo
+  def asignar_notas(n1, n2, n3)
+    @nota1 = n1
+    @nota2 = n2
+    @nota3 = n3
+    
+    suma = @nota1 + @nota2 + @nota3
+    @promedio = suma / 3
+    
+    return @promedio
+  end
+  
+  def obtener_estado()
+    if @promedio >= APROBACION
+      return true
     else
-      puts "Libro no disponible"
+      return false
     end
   end
   
-  def devolver
-    @disponible = true
-    puts "Libro devuelto: " + @titulo
+  def mostrar_info()
+    puts "Nombre: "
+    puts @nombre
+    puts "Edad: "
+    puts @edad
+    puts "Carrera: "
+    puts @carrera
+    puts "Promedio: "
+    puts @promedio
   end
   
-  def mostrar_info
-    puts "Título: " + @titulo
-    puts "Autor: " + @autor
-    puts "ISBN: " + @isbn
-  end
 end
 
-# Definición de clase Usuario
-class Usuario
-  def initialize(nombre, cedula)
-    @nombre = nombre
-    @cedula = cedula
-    @libros_prestados = []
-  end
-  
-  def agregar_prestamo(libro)
-    @libros_prestados.push(libro)
-    puts "Préstamo agregado para: " + @nombre
-  end
-  
-  def cantidad_prestamos
-    return @libros_prestados.length
-  end
-end
-
-# Crear objetos
-libro1 = Libro.new("Don Quijote", "Cervantes", "ISBN-001")
-libro2 = Libro.new("Cien Años de Soledad", "García Márquez", "ISBN-002")
-
-usuario1 = Usuario.new("Carlos López", "0987654321")
-
-# Operaciones con objetos
-libro1.mostrar_info
-libro1.prestar
-usuario1.agregar_prestamo("Don Quijote")
-
 # ============================================
-# MÓDULO 8: MÓDULOS Y ORGANIZACIÓN
+# FUNCIONES AUXILIARES
 # ============================================
 
-# Módulo de estadísticas
-module Estadisticas
-  def self.libros_mas_prestados
-    return ["Don Quijote", "El Principito", "1984"]
-  end
-  
-  def self.promedio_prestamos_mes
-    total = 150
-    meses = 12
-    return total / meses
-  end
-end
-
-# Usar módulo
-libros_populares = Estadisticas.libros_mas_prestados
-promedio = Estadisticas.promedio_prestamos_mes
-
-puts "Libros más prestados:"
-for libro in libros_populares
-  puts "- " + libro
-end
-
-puts "Promedio de préstamos mensual: "
-puts promedio
-
-# ============================================
-# MÓDULO 9: REPORTES Y RESUMEN
-# ============================================
-
-puts ""
-puts "=== RESUMEN DEL SISTEMA ==="
-puts "Total de libros en inventario: "
-puts inventario_actual
-
-puts "Libros actualmente prestados: "
-puts libros_prestados
-
-puts "Usuarios activos: "
-puts 1
-
-# Cálculo de ingresos por multas
-total_multas = 0
-for dia in 1..30
-  if dia % 5 == 0
-    total_multas += MULTA_DIARIA * 2
-  end
-end
-
-puts "Total recaudado en multas este mes: $"
-puts total_multas
-
-# Array de géneros literarios
-generos = ["Ficción", "No Ficción", "Ciencia", "Historia", "Arte"]
-
-puts ""
-puts "Géneros disponibles en la biblioteca:"
-for genero in generos
-  puts "• " + genero
-end
-
-# Hash con horarios de atención
-horarios = {
-  lunes: "8:00 - 18:00",
-  martes: "8:00 - 18:00",
-  miercoles: "8:00 - 18:00",
-  jueves: "8:00 - 18:00",
-  viernes: "8:00 - 16:00",
-  sabado: "9:00 - 13:00"
-}
-
-puts ""
-puts "Horarios de atención:"
-puts "Lunes a Jueves: " + horarios[:lunes]
-puts "Viernes: " + horarios[:viernes]
-puts "Sábado: " + horarios[:sabado]
-
-# ============================================
-# MÓDULO 10: FUNCIONALIDADES ADICIONALES
-# ============================================
-
-# Función para validar ISBN
-def validar_isbn(codigo_isbn)
-  longitud = codigo_isbn.length
-  if longitud == 10 or longitud == 13
+def validar_edad(edad)
+  if edad >= 16 and edad <= 100
     return true
   else
     return false
   end
 end
 
-# Función para calcular fecha de devolución
-def calcular_fecha_devolucion(dias_prestamo)
-  fecha_actual = 15  # Simplificado: día del mes
-  fecha_devolucion = fecha_actual + dias_prestamo
-  return fecha_devolucion
+def validar_nota(nota)
+  if nota >= NOTA_MINIMA and nota <= NOTA_MAXIMA
+    return true
+  else
+    puts "Error: Nota fuera de rango"
+    return false
+  end
 end
 
-# Validaciones
-isbn_valido = validar_isbn("978-0307474728")
-if isbn_valido
-  puts "ISBN válido"
-else
-  puts "ISBN inválido"
+def calcular_promedio(n1, n2, n3)
+  suma = n1 + n2 + n3
+  promedio = suma / 3
+  return promedio
 end
 
-fecha_devolucion = calcular_fecha_devolucion(DIAS_PRESTAMO)
-puts "Fecha de devolución (día del mes): "
-puts fecha_devolucion
+def clasificar_promedio(promedio)
+  if promedio >= 18
+    return "EXCELENTE"
+  elsif promedio >= 16
+    return "MUY BUENO"
+  elsif promedio >= 14
+    return "BUENO"
+  elsif promedio >= 10
+    return "REGULAR"
+  else
+    return "INSUFICIENTE"
+  end
+end
+
+def factorial(n)
+  if n <= 1
+    return 1
+  else
+    return n * factorial(n - 1)
+  end
+end
+
+def suma_rango(inicio, fin)
+  suma = 0
+  for i in inicio..fin
+    suma = suma + i
+  end
+  return suma
+end
+
+def buscar_aprobados(notas)
+  aprobados = 0
+  contador = 0
+  
+  while contador < 10
+    if notas[contador] >= APROBACION
+      aprobados = aprobados + 1
+    end
+    contador = contador + 1
+  end
+  
+  return aprobados
+end
+
+def procesar_notas(notas)
+  suma = 0
+  mayor = 0
+  menor = 20
+  
+  i = 0
+  until i >= 10
+    nota_actual = notas[i]
+    suma = suma + nota_actual
+    
+    if nota_actual > mayor
+      mayor = nota_actual
+    end
+    
+    if nota_actual < menor
+      menor = nota_actual
+    end
+    
+    i = i + 1
+  end
+  
+  promedio = suma / 10
+  
+  return promedio
+end
 
 # ============================================
-# FINALIZACIÓN DEL SISTEMA
+# PROGRAMA PRINCIPAL
 # ============================================
 
-puts ""
-puts "=== FIN DEL PROCESAMIENTO ==="
-puts "Sistema de biblioteca finalizado correctamente"
-puts "Gracias por usar nuestro sistema"
-puts ""
+puts "============================================"
+puts "SISTEMA DE GESTION DE ESTUDIANTES"
+puts "============================================"
 
+# Crear estudiantes
+estudiante1 = Estudiante
+estudiante2 = Estudiante
+estudiante3 = Estudiante
+estudiante4 = Estudiante
+estudiante5 = Estudiante
+
+# Datos del estudiante 1
+nombre1 = "Juan Perez"
+edad1 = 20
+carrera1 = "Computacion"
+
+if validar_edad(edad1)
+  puts "Registrando estudiante 1..."
+  $total_estudiantes = $total_estudiantes + 1
+end
+
+# Asignar notas al estudiante 1
+nota1_est1 = 18
+nota2_est1 = 17
+nota3_est1 = 19
+
+if validar_nota(nota1_est1) and validar_nota(nota2_est1)
+  if validar_nota(nota3_est1)
+    promedio1 = calcular_promedio(nota1_est1, nota2_est1, nota3_est1)
+    clasificacion1 = clasificar_promedio(promedio1)
+    
+    puts "Promedio: "
+    puts promedio1
+    puts "Clasificacion: "
+    puts clasificacion1
+  end
+end
+
+# Datos del estudiante 2
+nombre2 = "Maria Garcia"
+edad2 = 21
+carrera2 = "Electronica"
+
+if validar_edad(edad2)
+  puts "Registrando estudiante 2..."
+  $total_estudiantes = $total_estudiantes + 1
+end
+
+# Asignar notas al estudiante 2
+nota1_est2 = 16
+nota2_est2 = 15
+nota3_est2 = 17
+
+if validar_nota(nota1_est2) and validar_nota(nota2_est2)
+  if validar_nota(nota3_est2)
+    promedio2 = calcular_promedio(nota1_est2, nota2_est2, nota3_est2)
+    clasificacion2 = clasificar_promedio(promedio2)
+    
+    puts "Promedio: "
+    puts promedio2
+    puts "Clasificacion: "
+    puts clasificacion2
+  end
+end
+
+# Datos del estudiante 3
+nombre3 = "Carlos Lopez"
+edad3 = 19
+carrera3 = "Mecanica"
+
+if validar_edad(edad3)
+  puts "Registrando estudiante 3..."
+  $total_estudiantes = $total_estudiantes + 1
+end
+
+# Asignar notas al estudiante 3
+nota1_est3 = 14
+nota2_est3 = 13
+nota3_est3 = 15
+
+if validar_nota(nota1_est3) and validar_nota(nota2_est3)
+  if validar_nota(nota3_est3)
+    promedio3 = calcular_promedio(nota1_est3, nota2_est3, nota3_est3)
+    clasificacion3 = clasificar_promedio(promedio3)
+    
+    puts "Promedio: "
+    puts promedio3
+    puts "Clasificacion: "
+    puts clasificacion3
+  end
+end
+
+# Datos del estudiante 4
+nombre4 = "Ana Martinez"
+edad4 = 22
+carrera4 = "Civil"
+
+if validar_edad(edad4)
+  puts "Registrando estudiante 4..."
+  $total_estudiantes = $total_estudiantes + 1
+end
+
+# Asignar notas al estudiante 4
+nota1_est4 = 12
+nota2_est4 = 11
+nota3_est4 = 13
+
+if validar_nota(nota1_est4) and validar_nota(nota2_est4)
+  if validar_nota(nota3_est4)
+    promedio4 = calcular_promedio(nota1_est4, nota2_est4, nota3_est4)
+    clasificacion4 = clasificar_promedio(promedio4)
+    
+    puts "Promedio: "
+    puts promedio4
+    puts "Clasificacion: "
+    puts clasificacion4
+  end
+end
+
+# Datos del estudiante 5
+nombre5 = "Luis Rodriguez"
+edad5 = 20
+carrera5 = "Industrial"
+
+if validar_edad(edad5)
+  puts "Registrando estudiante 5..."
+  $total_estudiantes = $total_estudiantes + 1
+end
+
+# Asignar notas al estudiante 5
+nota1_est5 = 15
+nota2_est5 = 14
+nota3_est5 = 16
+
+if validar_nota(nota1_est5) and validar_nota(nota2_est5)
+  if validar_nota(nota3_est5)
+    promedio5 = calcular_promedio(nota1_est5, nota2_est5, nota3_est5)
+    clasificacion5 = clasificar_promedio(promedio5)
+    
+    puts "Promedio: "
+    puts promedio5
+    puts "Clasificacion: "
+    puts clasificacion5
+  end
+end
+
+# ============================================
+# ESTADISTICAS GENERALES
+# ============================================
+
+puts "============================================"
+puts "ESTADISTICAS GENERALES"
+puts "============================================"
+
+# Calcular promedio general
+suma_promedios = promedio1 + promedio2 + promedio3
+suma_promedios = suma_promedios + promedio4 + promedio5
+$promedio_general = suma_promedios / $total_estudiantes
+
+puts "Total de estudiantes: "
+puts $total_estudiantes
+puts "Promedio general: "
+puts $promedio_general
+
+# Contar aprobados
+aprobados = 0
+
+if promedio1 >= APROBACION
+  aprobados = aprobados + 1
+end
+
+if promedio2 >= APROBACION
+  aprobados = aprobados + 1
+end
+
+if promedio3 >= APROBACION
+  aprobados = aprobados + 1
+end
+
+if promedio4 >= APROBACION
+  aprobados = aprobados + 1
+end
+
+if promedio5 >= APROBACION
+  aprobados = aprobados + 1
+end
+
+puts "Estudiantes aprobados: "
+puts aprobados
+
+reprobados = $total_estudiantes - aprobados
+puts "Estudiantes reprobados: "
+puts reprobados
+
+# ============================================
+# PRUEBAS DE BUCLES
+# ============================================
+
+puts "============================================"
+puts "PRUEBAS DE BUCLES"
+puts "============================================"
+
+# Bucle while
+puts "Conteo con WHILE:"
+contador = 1
+while contador <= 5
+  puts contador
+  contador = contador + 1
+end
+
+# Bucle for
+puts "Conteo con FOR:"
+for i in 1..10
+  puts i
+end
+
+# Bucle until
+puts "Conteo descendente con UNTIL:"
+numero = 5
+until numero <= 0
+  puts numero
+  numero = numero - 1
+end
+
+# ============================================
+# OPERACIONES MATEMATICAS
+# ============================================
+
+puts "============================================"
+puts "OPERACIONES MATEMATICAS"
+puts "============================================"
+
+# Variables para operaciones
+a = 100
+b = 25
+c = 5
+
+# Suma
+resultado_suma = a + b
+puts "Suma: "
+puts resultado_suma
+
+# Resta
+resultado_resta = a - b
+puts "Resta: "
+puts resultado_resta
+
+# Multiplicación
+resultado_mult = b * c
+puts "Multiplicacion: "
+puts resultado_mult
+
+# División
+resultado_div = a / c
+puts "Division: "
+puts resultado_div
+
+# Módulo
+resultado_mod = a % 30
+puts "Modulo: "
+puts resultado_mod
+
+# Operaciones combinadas
+resultado_combinado = a + b * c - 10
+puts "Operacion combinada: "
+puts resultado_combinado
+
+# ============================================
+# PRUEBAS CON ARREGLOS
+# ============================================
+
+puts "============================================"
+puts "PRUEBAS CON ARREGLOS"
+puts "============================================"
+
+# Crear arreglo de notas
+notas_parcial = [18, 16, 14, 12, 15, 17, 13, 19, 11, 16]
+
+puts "Arreglo de notas creado"
+
+# Procesar notas
+promedio_parcial = procesar_notas(notas_parcial)
+puts "Promedio del parcial: "
+puts promedio_parcial
+
+# Contar aprobados
+total_aprobados = buscar_aprobados(notas_parcial)
+puts "Aprobados en parcial: "
+puts total_aprobados
+
+# ============================================
+# OPERACIONES LOGICAS
+# ============================================
+
+puts "============================================"
+puts "OPERACIONES LOGICAS"
+puts "============================================"
+
+# Variables booleanas
+tiene_beca = true
+asistencia_completa = true
+promedio_alto = false
+
+# AND
+if tiene_beca and asistencia_completa
+  puts "Estudiante cumple requisitos"
+end
+
+# OR
+if promedio_alto or tiene_beca
+  puts "Estudiante tiene beneficio"
+end
+
+# NOT
+suspenso = false
+if not suspenso
+  puts "Estudiante en buen estado"
+end
+
+# Combinaciones
+if tiene_beca and asistencia_completa and not suspenso
+  puts "Estudiante destacado"
+end
+
+# ============================================
+# FUNCIONES RECURSIVAS
+# ============================================
+
+puts "============================================"
+puts "FUNCIONES RECURSIVAS"
+puts "============================================"
+
+# Factorial de 5
+numero_fact = 5
+resultado_fact = factorial(numero_fact)
+puts "Factorial de 5: "
+puts resultado_fact
+
+# Factorial de 7
+numero_fact2 = 7
+resultado_fact2 = factorial(numero_fact2)
+puts "Factorial de 7: "
+puts resultado_fact2
+
+# ============================================
+# PRUEBAS CON RANGOS
+# ============================================
+
+puts "============================================"
+puts "PRUEBAS CON RANGOS"
+puts "============================================"
+
+# Suma de 1 a 10
+suma_1_10 = suma_rango(1, 10)
+puts "Suma de 1 a 10: "
+puts suma_1_10
+
+# Suma de 1 a 100
+suma_1_100 = suma_rango(1, 100)
+puts "Suma de 1 a 100: "
+puts suma_1_100
+
+# ============================================
+# COMPARACIONES
+# ============================================
+
+puts "============================================"
+puts "COMPARACIONES"
+puts "============================================"
+
+nota_test = 15
+limite_bajo = 14
+limite_alto = 18
+
+# Mayor que
+if nota_test > limite_bajo
+  puts "Nota superior al limite bajo"
+end
+
+# Menor que
+if nota_test < limite_alto
+  puts "Nota inferior al limite alto"
+end
+
+# Igual
+if nota_test == 15
+  puts "Nota igual a 15"
+end
+
+# Diferente
+if nota_test != 20
+  puts "Nota diferente de 20"
+end
+
+# Mayor o igual
+if nota_test >= 14
+  puts "Nota mayor o igual a 14"
+end
+
+# Menor o igual
+if nota_test <= 16
+  puts "Nota menor o igual a 16"
+end
+
+# ============================================
+# FINALIZACION
+# ============================================
+
+puts "============================================"
+puts "SISTEMA FINALIZADO EXITOSAMENTE"
+puts "============================================"
+puts "Total de estudiantes procesados: "
+puts $total_estudiantes
+puts "Promedio general del curso: "
+puts $promedio_general
+puts "Estado del sistema: ACTIVO"
+puts "============================================"
