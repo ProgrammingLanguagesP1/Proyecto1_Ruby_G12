@@ -1,0 +1,44 @@
+====================================================================================================
+ANALIZADOR SEMÁNTICO PARA RUBY
+====================================================================================================
+
+Usuario: Angelo
+Fecha: 28/11/2025 12:21:11
+Archivo analizado: temp_codigo.rb
+====================================================================================================
+
+TABLA DE SÍMBOLOS:
+====================================================================================================
+
+FUNCIONES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Parámetros                          Línea          
+----------------------------------------------------------------------------------------------------
+validar_nota                   sin parámetros                      1              
+----------------------------------------------------------------------------------------------------
+Total de funciones: 1
+
+
+ERRORES SEMÁNTICOS ENCONTRADOS:
+====================================================================================================
+1. Error semántico en línea 1: Variable 'nota' no declarada antes de su uso
+2. Error semántico en línea 2: Variable 'nota' no declarada antes de su uso
+3. Error semántico en línea 2: Variable 'NOTA_MINIMA' no declarada antes de su uso
+4. Error semántico en línea 2: Variable 'NOTA_MAXIMA' no declarada antes de su uso
+====================================================================================================
+Total de errores: 4
+
+
+RESUMEN DEL ANÁLISIS:
+====================================================================================================
+Variables declaradas:    0
+Constantes declaradas:   0
+Funciones declaradas:    1
+Clases declaradas:       0
+Errores encontrados:     4
+Advertencias:            0
+====================================================================================================
+
+[ERROR] ANÁLISIS SEMÁNTICO COMPLETADO CON ERRORES
+
+====================================================================================================

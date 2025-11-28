@@ -12,6 +12,7 @@ tabla_simbolos = {
     "variables": {},
     "constantes": {},
     "funciones": {},
+    "clases": {},
     "tipos": {
         "str-funciones": ["length", "upcase", "downcase", "reverse", "to_i", "to_f"],
         "int-funciones": ["to_s", "to_f"],
@@ -26,16 +27,18 @@ warnings_semanticos = []
 contexto_actual = 'global'
 en_loop = False
 en_funcion = False
+en_clase = False
 
 def reiniciar_analisis():
     """Reinicia las estructuras para un nuevo análisis"""
     global tabla_simbolos, errores_semanticos, warnings_semanticos
-    global contexto_actual, en_loop, en_funcion
+    global contexto_actual, en_loop, en_funcion, en_clase
     
     tabla_simbolos = {
         "variables": {},
         "constantes": {},
         "funciones": {},
+        "clases": {},
         "tipos": {
             "str-funciones": ["length", "upcase", "downcase", "reverse", "to_i", "to_f"],
             "int-funciones": ["to_s", "to_f"],
@@ -49,6 +52,7 @@ def reiniciar_analisis():
     contexto_actual = 'global'
     en_loop = False
     en_funcion = False
+    en_clase = False
 
 # ============================================
 # REGLAS SEMÁNTICAS - IDENTIFICADORES
@@ -60,8 +64,8 @@ def verificar_variable_declarada(nombre, linea=0):
     Regla 1: Variable no declarada
     Verifica que la variable haya sido declarada antes de su uso
     """
-    # Variables de instancia (@variable) no requieren declaración previa en Ruby
-    if nombre.startswith('@'):
+    # Variables de instancia (@variable) y globales ($variable) no requieren declaración previa en Ruby
+    if nombre.startswith('@') or nombre.startswith('$'):
         return True
 
     # Métodos integrados de Ruby que no son variables
@@ -77,6 +81,10 @@ def verificar_variable_declarada(nombre, linea=0):
                      'until', 'for', 'in', 'do', 'break', 'next', 'return', 'def',
                      'class', 'module', 'true', 'false', 'nil', 'self', 'super']
     if nombre in palabras_clave:
+        return True
+
+    # Verificar si es una clase declarada
+    if nombre in tabla_simbolos.get("clases", {}):
         return True
 
     if nombre not in tabla_simbolos["variables"] and nombre not in tabla_simbolos["constantes"]:
@@ -144,16 +152,20 @@ def verificar_operador_incompatible(operador, tipo_izq, tipo_der, linea=0):
     Regla 5: Operador incompatible
     Verifica que los operadores sean compatibles con los tipos de datos
     """
+    # Si alguno de los tipos es 'any', no reportar error (tipo desconocido/dinámico)
+    if tipo_izq == 'any' or tipo_der == 'any':
+        return True
+
     operaciones_validas = {
-        '+': [('integer', 'integer'), ('float', 'float'), ('integer', 'float'), 
+        '+': [('integer', 'integer'), ('float', 'float'), ('integer', 'float'),
               ('float', 'integer'), ('string', 'string')],
         '-': [('integer', 'integer'), ('float', 'float'), ('integer', 'float'), ('float', 'integer')],
-        '*': [('integer', 'integer'), ('float', 'float'), ('integer', 'float'), 
+        '*': [('integer', 'integer'), ('float', 'float'), ('integer', 'float'),
               ('float', 'integer'), ('string', 'integer')],
         '/': [('integer', 'integer'), ('float', 'float'), ('integer', 'float'), ('float', 'integer')],
         '%': [('integer', 'integer')]
     }
-    
+
     if operador in operaciones_validas:
         combinaciones = operaciones_validas[operador]
         if (tipo_izq, tipo_der) not in combinaciones:
@@ -240,8 +252,9 @@ def verificar_retorno_valido(tipo_retorno, linea=0):
     Regla 11: Retorno válido
     Verifica que la función devuelva un valor coherente
     """
-    global en_funcion
-    if not en_funcion:
+    global en_funcion, en_clase
+    # Permitir return dentro de funciones o dentro de clases (métodos de clase)
+    if not en_funcion and not en_clase:
         error = f"Error semántico en línea {linea}: 'return' usado fuera de una función"
         errores_semanticos.append(error)
         return False
@@ -344,8 +357,8 @@ def obtener_tipo(valor):
             # Puede ser ('variable', nombre) o ('variable', nombre, lineno)
             nombre = valor[1]
 
-            # Variables de instancia siempre retornan 'any'
-            if nombre.startswith('@'):
+            # Variables de instancia y globales siempre retornan 'any'
+            if nombre.startswith('@') or nombre.startswith('$'):
                 if nombre in tabla_simbolos["variables"]:
                     return tabla_simbolos["variables"][nombre]["tipo"]
                 return 'any'
@@ -406,7 +419,7 @@ def analizar_nodo(nodo, linea=1):
     Recorre el árbol sintáctico generado por sintactico.py
     y aplica las reglas semánticas
     """
-    global en_loop, en_funcion, contexto_actual
+    global en_loop, en_funcion, en_clase, contexto_actual
     
     if not isinstance(nodo, tuple):
         return
@@ -430,15 +443,15 @@ def analizar_nodo(nodo, linea=1):
         else:
             nombre_var = variable
 
-        # No verificar palabras reservadas para variables de instancia
-        if not nombre_var.startswith('@'):
+        # No verificar palabras reservadas para variables de instancia y globales
+        if not nombre_var.startswith('@') and not nombre_var.startswith('$'):
             verificar_asignacion_palabra_reservada(nombre_var, linea_nodo)
 
         tipo_expr = obtener_tipo(expresion)
 
-        # Variables de instancia siempre se aceptan sin verificaciones adicionales
-        if nombre_var.startswith('@'):
-            # Registrar variable de instancia en la tabla
+        # Variables de instancia y globales siempre se aceptan sin verificaciones adicionales
+        if nombre_var.startswith('@') or nombre_var.startswith('$'):
+            # Registrar variable de instancia/global en la tabla
             tabla_simbolos["variables"][nombre_var] = {
                 "tipo": tipo_expr,
                 "linea": linea_nodo,
@@ -635,7 +648,7 @@ def analizar_nodo(nodo, linea=1):
         en_funcion_anterior = en_funcion
         en_funcion = True
 
-        # Primero registrar los parámetros ANTES de registrar la función
+        # Primero registrar la función en la tabla
         params_lista = []
         if parametros:
             if isinstance(parametros, list):
@@ -647,29 +660,34 @@ def analizar_nodo(nodo, linea=1):
                 # Si es un string simple
                 params_lista = [parametros] if parametros != 'sin parámetros' else []
 
+        # Extraer nombres de parámetros para la tabla de funciones
+        nombres_params = []
         for param in params_lista:
-            # Extraer el nombre del parámetro
-            nombre_param = param
             if isinstance(param, tuple):
-                # Si es una tupla, tomar el segundo elemento (el nombre)
+                # Parámetro puede ser ('parametro', 'nombre') o similar
                 if len(param) > 1:
-                    nombre_param = param[1]
+                    nombres_params.append(param[1])
                 else:
-                    nombre_param = param[0]
+                    nombres_params.append(param[0])
+            elif isinstance(param, str):
+                nombres_params.append(param)
 
-            # Registrar el parámetro como variable
-            if nombre_param and isinstance(nombre_param, str) and nombre_param not in tabla_simbolos["variables"]:
+        # Registrar la función antes de analizar su cuerpo
+        tabla_simbolos["funciones"][nombre] = {
+            "parametros": nombres_params,
+            "linea": linea_nodo
+        }
+
+        # Registrar parámetros como variables disponibles dentro de la función
+        for nombre_param in nombres_params:
+            if nombre_param and isinstance(nombre_param, str):
                 tabla_simbolos["variables"][nombre_param] = {
                     "tipo": 'any',
                     "linea": linea_nodo,
                     "valor": None
                 }
 
-        tabla_simbolos["funciones"][nombre] = {
-            "parametros": params_lista,
-            "linea": linea_nodo
-        }
-
+        # Analizar el cuerpo de la función
         if isinstance(cuerpo, list):
             for sentencia in cuerpo:
                 analizar_nodo(sentencia, linea_nodo)
@@ -734,10 +752,21 @@ def analizar_nodo(nodo, linea=1):
         nombre = nodo[1]
         contenido = nodo[2]
         linea_nodo = extraer_linea(nodo)
-        
+
+        # Registrar la clase en la tabla de símbolos
+        tabla_simbolos["clases"][nombre] = {
+            "linea": linea_nodo,
+            "metodos": []
+        }
+
+        en_clase_anterior = en_clase
+        en_clase = True
+
         if isinstance(contenido, list):
             for sentencia in contenido:
                 analizar_nodo(sentencia, linea_nodo)
+
+        en_clase = en_clase_anterior
     
     elif tipo_nodo == 'modulo':
         nombre = nodo[1]
@@ -841,7 +870,18 @@ def crear_log_semantico(errores, warnings, tabla, usuario, archivo_entrada):
                 f.write(f"{nombre:<30} {params:<35} {info['linea']:<15}\n")
             f.write("-"*100 + "\n")
             f.write(f"Total de funciones: {len(tabla['funciones'])}\n\n")
-        
+
+        # Clases
+        if tabla.get("clases"):
+            f.write("CLASES:\n")
+            f.write("-"*100 + "\n")
+            f.write(f"{'Nombre':<30} {'Línea':<15}\n")
+            f.write("-"*100 + "\n")
+            for nombre, info in tabla["clases"].items():
+                f.write(f"{nombre:<30} {info['linea']:<15}\n")
+            f.write("-"*100 + "\n")
+            f.write(f"Total de clases: {len(tabla['clases'])}\n\n")
+
         # Errores semánticos
         if errores:
             f.write("\nERRORES SEMÁNTICOS ENCONTRADOS:\n")
@@ -866,6 +906,7 @@ def crear_log_semantico(errores, warnings, tabla, usuario, archivo_entrada):
         f.write(f"Variables declaradas:    {len(tabla['variables'])}\n")
         f.write(f"Constantes declaradas:   {len(tabla['constantes'])}\n")
         f.write(f"Funciones declaradas:    {len(tabla['funciones'])}\n")
+        f.write(f"Clases declaradas:       {len(tabla.get('clases', {}))}\n")
         f.write(f"Errores encontrados:     {len(errores)}\n")
         f.write(f"Advertencias:            {len(warnings)}\n")
         f.write("="*100 + "\n")
@@ -910,32 +951,32 @@ def analizar_tokens_semanticamente(archivo_entrada):
         tokens_list.append(tok)
 
     # Variables locales para rastrear contexto
-    en_loop_local = False
-    en_funcion_local = False
-    nivel_loop = 0
-    nivel_funcion = 0
+    # Stack para rastrear el tipo de contexto que cada END cierra
+    contexto_stack = []
 
     # Procesar tokens para encontrar patrones semánticos
     i = 0
     while i < len(tokens_list):
         tok = tokens_list[i]
 
-        # Rastrear contextos de loops
+        # Rastrear contextos de loops, funciones y clases usando un stack
         if tok.type in ['WHILE', 'FOR', 'UNTIL']:
-            nivel_loop += 1
-            en_loop_local = True
+            contexto_stack.append('loop')
         elif tok.type == 'DEF':
-            nivel_funcion += 1
-            en_funcion_local = True
+            contexto_stack.append('funcion')
+        elif tok.type == 'CLASS':
+            contexto_stack.append('clase')
+        elif tok.type == 'IF':
+            contexto_stack.append('if')
         elif tok.type == 'END':
-            if nivel_loop > 0:
-                nivel_loop -= 1
-                if nivel_loop == 0:
-                    en_loop_local = False
-            elif nivel_funcion > 0:
-                nivel_funcion -= 1
-                if nivel_funcion == 0:
-                    en_funcion_local = False
+            # Sacar del stack el último contexto
+            if contexto_stack:
+                contexto_stack.pop()
+
+        # Determinar estado actual basado en el stack
+        en_loop_local = 'loop' in contexto_stack
+        en_funcion_local = 'funcion' in contexto_stack
+        en_clase_local = 'clase' in contexto_stack
 
         # Detectar asignaciones a palabras reservadas
         if tok.type in ['VARIABLE_LOCAL', 'CONSTANTE'] and i + 1 < len(tokens_list):
@@ -986,10 +1027,11 @@ def analizar_tokens_semanticamente(archivo_entrada):
                 if error not in errores_semanticos:
                     errores_semanticos.append(error)
 
-        # Detectar return fuera de función
+        # Detectar return fuera de función/clase
         elif tok.type == 'RETURN':
             linea = tok.lineno
-            if not en_funcion_local:
+            # Permitir return dentro de funciones o dentro de clases (métodos)
+            if not en_funcion_local and not en_clase_local:
                 # Regla 11: return fuera de función
                 error = f"Error semántico en línea {linea}: 'return' usado fuera de una función"
                 if error not in errores_semanticos:
@@ -1080,7 +1122,17 @@ def analizar_semantica(archivo_entrada, usuario_git, mostrar_sintactico=True):
             print(f"{nombre:<30} {params:<35} {info['linea']:<15}")
         print("-"*100)
         print(f"Total: {len(tabla_simbolos['funciones'])}\n")
-    
+
+    if tabla_simbolos.get("clases"):
+        print("CLASES:")
+        print("-"*100)
+        print(f"{'Nombre':<30} {'Línea':<15}")
+        print("-"*100)
+        for nombre, info in tabla_simbolos["clases"].items():
+            print(f"{nombre:<30} {info['linea']:<15}")
+        print("-"*100)
+        print(f"Total: {len(tabla_simbolos['clases'])}\n")
+
     # Mostrar errores
     if errores_semanticos:
         print("\nERRORES SEMÁNTICOS:")
@@ -1103,6 +1155,7 @@ def analizar_semantica(archivo_entrada, usuario_git, mostrar_sintactico=True):
     print(f"Variables declaradas:    {len(tabla_simbolos['variables'])}")
     print(f"Constantes declaradas:   {len(tabla_simbolos['constantes'])}")
     print(f"Funciones declaradas:    {len(tabla_simbolos['funciones'])}")
+    print(f"Clases declaradas:       {len(tabla_simbolos.get('clases', {}))}")
     print(f"Errores encontrados:     {len(errores_semanticos)}")
     print(f"Advertencias:            {len(warnings_semanticos)}")
     print("="*100)
