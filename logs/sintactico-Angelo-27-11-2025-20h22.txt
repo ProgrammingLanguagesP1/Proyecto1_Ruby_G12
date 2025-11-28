@@ -1,0 +1,27 @@
+====================================================================================================
+ANALIZADOR SINTÁCTICO PARA RUBY
+====================================================================================================
+
+Usuario: Angelo
+Fecha: 27/11/2025 20:22:29
+Archivo analizado: temp_codigo.rb
+====================================================================================================
+
+ERRORES SINTÁCTICOS ENCONTRADOS:
+----------------------------------------------------------------------------------------------------
+1. Error sintáctico en línea 86: Token inesperado '=' (tipo: ASIGNACION)
+2. Error sintáctico en línea 156: Token inesperado '.' (tipo: PUNTO)
+3. Error sintáctico en línea 264: Token inesperado '.' (tipo: PUNTO)
+4. Error sintáctico en línea 319: Token inesperado '.' (tipo: PUNTO)
+5. Error sintáctico en línea 324: Token inesperado '.' (tipo: PUNTO)
+6. Error sintáctico en línea 335: Token inesperado '.' (tipo: PUNTO)
+7. Error sintáctico en línea 358: Token inesperado 'promedio' (tipo: VARIABLE_LOCAL)
+8. Error sintáctico en línea 360: Token inesperado 'puts' (tipo: PUTS)
+9. Error sintáctico en línea 425: Token inesperado '.' (tipo: PUNTO)
+----------------------------------------------------------------------------------------------------
+Total de errores: 9
+
+
+[ERROR] ANÁLISIS SINTÁCTICO COMPLETADO CON ERRORES
+
+====================================================================================================

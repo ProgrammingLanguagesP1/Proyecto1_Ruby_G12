@@ -1,0 +1,203 @@
+====================================================================================================
+ANALIZADOR SEMÁNTICO PARA RUBY
+====================================================================================================
+
+Usuario: Angelo
+Fecha: 27/11/2025 20:22:29
+Archivo analizado: temp_codigo.rb
+====================================================================================================
+
+TABLA DE SÍMBOLOS:
+====================================================================================================
+
+VARIABLES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+total_libros                   any                  28             
+cantidad_inicial               integer              31             
+inventario_actual              integer              32             
+libros_prestados               integer              33             
+titulo_libro                   string               38             
+autor_libro                    string               39             
+isbn                           string               40             
+anio_publicacion               integer              41             
+precio_libro                   float                42             
+disponible                     boolean              43             
+nombre_usuario                 string               61             
+cedula                         string               62             
+edad_usuario                   integer              63             
+tipo_usuario                   string               64             
+activo                         boolean              65             
+saldo_usuario                  string               76             
+limite_prestamos               integer              94             
+precio_base                    integer              102            
+descuento_porcentaje           integer              103            
+precio_con_descuento           any                  104            
+codigo_libro                   any                  115            
+total_multa                    integer              118            
+dias_retraso                   integer              119            
+multa_acumulada                any                  120            
+promedio_prestamos             any                  126            
+libros_disponibles             array                133            
+autores                        array                134            
+anios                          array                135            
+info_biblioteca                hash                 138            
+codigo_numerico                any                  152            
+numero_texto                   string               155            
+numero_convertido              string               156            
+resultado_suma                 any                  157            
+precio_exacto                  float                166            
+precio_entero                  float                167            
+multa_total                    any                  181            
+encontrado                     boolean              197            
+registro                       hash                 204            
+resultado_busqueda             any                  214            
+multa_calculada                any                  217            
+contador                       integer              237            
+dias_transcurridos             integer              273            
+libro1                         any                  329            
+libro2                         any                  330            
+usuario1                       any                  332            
+total                          integer              350            
+meses                          integer              351            
+libros_populares               any                  357            
+promedio                       any                  358            
+total_multas                   any                  387            
+generos                        array                395            
+horarios                       hash                 404            
+longitud                       any                  425            
+fecha_actual                   integer              435            
+fecha_devolucion               any                  448            
+isbn_valido                    any                  441            
+disponibles                    any                  189            
+prestados                      any                  189            
+usuario                        any                  203            
+libro                          integer              361            
+fecha                          any                  203            
+i                              integer              242            
+titulo                         any                  282            
+autor                          any                  282            
+@titulo                        any                  283            
+@autor                         any                  284            
+@isbn                          string               285            
+@disponible                    boolean              299            
+nombre                         any                  312            
+@nombre                        any                  313            
+@cedula                        string               314            
+@libros_prestados              array                315            
+dia                            integer              385            
+genero                         integer              399            
+----------------------------------------------------------------------------------------------------
+Total de variables: 74
+
+CONSTANTES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Tipo                 Línea          
+----------------------------------------------------------------------------------------------------
+MAX_LIBROS                     any                  17             
+DIAS_PRESTAMO                  any                  18             
+MULTA_DIARIA                   any                  19             
+----------------------------------------------------------------------------------------------------
+Total de constantes: 3
+
+FUNCIONES:
+----------------------------------------------------------------------------------------------------
+Nombre                         Parámetros                          Línea          
+----------------------------------------------------------------------------------------------------
+calcular_multa                 sin parámetros                      180            
+calcular_total_libros          disponibles, prestados              189            
+buscar_libro                   sin parámetros                      194            
+registrar_prestamo             usuario, libro, fecha               203            
+initialize                     nombre, cedula                      312            
+prestar                        sin parámetros                      289            
+devolver                       sin parámetros                      298            
+mostrar_info                   sin parámetros                      303            
+agregar_prestamo               sin parámetros                      318            
+cantidad_prestamos             sin parámetros                      323            
+self.libros_mas_prestados      sin parámetros                      345            
+self.promedio_prestamos_mes    sin parámetros                      349            
+validar_isbn                   sin parámetros                      424            
+calcular_fecha_devolucion      sin parámetros                      434            
+----------------------------------------------------------------------------------------------------
+Total de funciones: 14
+
+
+ERRORES SEMÁNTICOS ENCONTRADOS:
+====================================================================================================
+1. Error semántico en línea 53: Constante 'MAX_LIBROS' no puede ser modificada (ya fue declarada en línea 17)
+2. Error semántico en línea 54: Constante 'MAX_LIBROS' no puede ser modificada (ya fue declarada en línea 17)
+3. Error semántico en línea 177: 'return' usado fuera de una función
+4. Error semántico en línea 199: 'return' usado fuera de una función
+5. Error semántico en línea 229: 'break' usado fuera de un bucle
+6. Error semántico en línea 28: Operador '+' incompatible entre tipos 'any' y 'integer'
+7. Error semántico en línea 104: Operador '-' incompatible entre tipos 'integer' y 'any'
+8. Error semántico en línea 115: Conversión implícita inválida entre 'string' y 'integer'. Use conversión explícita
+9. Error semántico en línea 115: Operador '-' incompatible entre tipos 'string' y 'integer'
+10. Error semántico en línea 120: Operador '*' incompatible entre tipos 'integer' y 'any'
+11. Error semántico en línea 126: Operador '/' incompatible entre tipos 'any' y 'integer'
+12. Error semántico en línea 152: Conversión implícita inválida entre 'string' y 'integer'. Use conversión explícita
+13. Error semántico en línea 152: Operador '+' incompatible entre tipos 'string' y 'integer'
+14. Error semántico en línea 157: Conversión implícita inválida entre 'string' y 'integer'. Use conversión explícita
+15. Error semántico en línea 157: Operador '+' incompatible entre tipos 'string' y 'integer'
+16. Error semántico en línea 180: Variable 'dias_atraso' no declarada antes de su uso
+17. Error semántico en línea 181: Operador '*' incompatible entre tipos 'any' y 'any'
+18. Error semántico en línea 181: Variable 'dias_atraso' no declarada antes de su uso
+19. Error semántico en línea 194: Variable 'titulo' no declarada antes de su uso
+20. Error semántico en línea 196: Variable 'titulo' no declarada antes de su uso
+21. Error semántico en línea 209: Operador '+' incompatible entre tipos 'string' y 'any'
+22. Error semántico en línea 214: Función 'buscar_libro' espera 0 argumento(s), pero recibió 1
+23. Error semántico en línea 217: Función 'calcular_multa' espera 0 argumento(s), pero recibió 1
+24. Error semántico en línea 292: Operador '+' incompatible entre tipos 'string' y 'any'
+25. Error semántico en línea 300: Operador '+' incompatible entre tipos 'string' y 'any'
+26. Error semántico en línea 304: Operador '+' incompatible entre tipos 'string' y 'any'
+27. Error semántico en línea 305: Operador '+' incompatible entre tipos 'string' y 'any'
+28. Error semántico en línea 320: Operador '+' incompatible entre tipos 'string' y 'any'
+29. Error semántico en línea 329: Función 'Libro.new' no declarada antes de su uso
+30. Error semántico en línea 330: Función 'Libro.new' no declarada antes de su uso
+31. Error semántico en línea 332: Función 'Usuario.new' no declarada antes de su uso
+32. Error semántico en línea 335: Variable 'mostrar_info' no declarada antes de su uso
+33. Error semántico en línea 336: Variable 'prestar' no declarada antes de su uso
+34. Error semántico en línea 337: Función 'agregar_prestamo' espera 0 argumento(s), pero recibió 1
+35. Error semántico en línea 357: Variable 'Estadisticas' no declarada antes de su uso
+36. Error semántico en línea 358: Variable 'Estadisticas' no declarada antes de su uso
+37. Error semántico en línea 362: Conversión implícita inválida entre 'string' y 'integer'. Use conversión explícita
+38. Error semántico en línea 362: Operador '+' incompatible entre tipos 'string' y 'integer'
+39. Error semántico en línea 387: Operador '*' incompatible entre tipos 'any' y 'integer'
+40. Error semántico en línea 400: Conversión implícita inválida entre 'string' y 'integer'. Use conversión explícita
+41. Error semántico en línea 400: Operador '+' incompatible entre tipos 'string' y 'integer'
+42. Error semántico en línea 415: Operador '+' incompatible entre tipos 'string' y 'hash'
+43. Error semántico en línea 416: Operador '+' incompatible entre tipos 'string' y 'hash'
+44. Error semántico en línea 417: Operador '+' incompatible entre tipos 'string' y 'hash'
+45. Error semántico en línea 424: Variable 'codigo_isbn' no declarada antes de su uso
+46. Error semántico en línea 425: Variable 'codigo_isbn' no declarada antes de su uso
+47. Error semántico en línea 434: Variable 'dias_prestamo' no declarada antes de su uso
+48. Error semántico en línea 436: Operador '+' incompatible entre tipos 'integer' y 'any'
+49. Error semántico en línea 436: Variable 'dias_prestamo' no declarada antes de su uso
+50. Error semántico en línea 441: Función 'validar_isbn' espera 0 argumento(s), pero recibió 1
+51. Error semántico en línea 448: Función 'calcular_fecha_devolucion' espera 0 argumento(s), pero recibió 1
+====================================================================================================
+Total de errores: 51
+
+
+ADVERTENCIAS SEMÁNTICAS:
+====================================================================================================
+1. Advertencia semántica en línea 76: Variable 'saldo_usuario' cambia de tipo 'integer' a 'string'
+2. Advertencia semántica en línea 255: Condición de tipo 'string' podría no ser intencional
+3. Advertencia semántica en línea 264: Condición de tipo 'array' podría no ser intencional
+====================================================================================================
+Total de advertencias: 3
+
+
+RESUMEN DEL ANÁLISIS:
+====================================================================================================
+Variables declaradas:    74
+Constantes declaradas:   3
+Funciones declaradas:    14
+Errores encontrados:     51
+Advertencias:            3
+====================================================================================================
+
+[ERROR] ANÁLISIS SEMÁNTICO COMPLETADO CON ERRORES
+
+====================================================================================================

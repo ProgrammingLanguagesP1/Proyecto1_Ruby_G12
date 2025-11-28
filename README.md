@@ -5,7 +5,7 @@ Analizador Léxico, Sintáctico y Semántico para Ruby
 ## 👥 Integrantes - Grupo 12
 
 - **Angelo Zurita** (@aszurita)
-- **Dhamar Quishpe** (@dquishpe)  
+- **Dhamar Quishpe** (@dquishpe)
 - **José Marín** (@JoseM0lina)
 
 ## 📝 Descripción
@@ -20,28 +20,38 @@ Proyecto de análisis léxico para el lenguaje Ruby desarrollado con Python y PL
 ## 📦 Instalación
 
 1. Clonar el repositorio:
+
 ```bash
 git clone <url-del-repositorio>
 cd Proyecto1_Ruby_G12
 ```
 
 2. Instalar dependencias:
+
 ```bash
 pip install ply
 ```
 
 ## 🚀 Uso
 
+Para ejecutar intefaz gráfica:
+
+```bash
+python src/index.py
+```
+
 Para ejecutar el analizador léxico:
 
 ```bash
 python src/lexico.py <archivo_ruby> <usuario_git>
 ```
+
 Para ejecutar el analizador sintáctico:
 
 ```bash
 python src/sintactico.py <archivo_ruby> <usuario_git>
 ```
+
 Para ejecutar el analizador semántico:
 
 ```bash
@@ -95,6 +105,7 @@ Proyecto1_Ruby_G12/
 El analizador reconoce los siguientes tipos de tokens:
 
 ### Variables y Constantes
+
 - Variables locales: `nombre`, `edad`, `contador`
 - Variables globales: `$contador`, `$total`
 - Variables de instancia: `@nombre`, `@valor`
@@ -102,6 +113,7 @@ El analizador reconoce los siguientes tipos de tokens:
 - Constantes: `PI`, `DESCUENTO`
 
 ### Tipos de Datos
+
 - Enteros: `42`, `100`
 - Flotantes: `3.14`, `0.5`
 - Strings: `"texto"`, `'texto'`
@@ -109,28 +121,34 @@ El analizador reconoce los siguientes tipos de tokens:
 - Nil: `nil`
 
 ### Operadores
+
 - Aritméticos: `+`, `-`, `*`, `/`, `%`
 - Asignación: `=`, `+=`, `-=`, `*=`, `/=`
 - Comparación: `==`, `!=`, `>`, `<`, `>=`, `<=`
 - Lógicos: `&&`, `||`, `!`
 
 ### Palabras Reservadas
+
 `if`, `else`, `elsif`, `while`, `for`, `until`, `def`, `return`, `end`, `class`, `module`, `break`, `next`, `redo`, `puts`, `print`, `gets`, `require`, `then`, `do`, `in`
 
 ### Delimitadores
+
 `(`, `)`, `{`, `}`, `[`, `]`, `,`, `;`, `:`, `.`, `=>`
 
 ### Comentarios
+
 - Línea: `# comentario`
 - Multilínea: `=begin ... =end`
 
 ## 📊 Salida
 
 El programa genera:
+
 1. **Salida en consola**: Tabla formateada con todos los tokens encontrados
-2. **Archivo log**: Guardado en `logs/` con formato `lexico-{usuario}-{fecha}.txt` o `sintactico-{usuario}-{fecha}.txt` o  `semantico-{usuario}-{fecha}.txt`
+2. **Archivo log**: Guardado en `logs/` con formato `lexico-{usuario}-{fecha}.txt` o `sintactico-{usuario}-{fecha}.txt` o `semantico-{usuario}-{fecha}.txt`
 
 Cada log contiene respectivamente:
+
 - Información del análisis (usuario, fecha, archivo)
 - Lista completa de tokens con tipo, valor, línea y posición
 - Resumen de errores (si los hay)
@@ -153,11 +171,11 @@ Archivo analizado: Algorithms/Algorithm1_AngeloZurita.rb
 
 TOKENS RECONOCIDOS:
 ----------------------------------------------------------------------------------------------------
-Tipo                      Valor                          Línea      Posición  
+Tipo                      Valor                          Línea      Posición
 ----------------------------------------------------------------------------------------------------
-VARIABLE_LOCAL            nombre                         5          71        
-ASIGNACION                =                              5          78        
-STRING                    Juan                           5          80        
+VARIABLE_LOCAL            nombre                         5          71
+ASIGNACION                =                              5          78
+STRING                    Juan                           5          80
 ...
 ----------------------------------------------------------------------------------------------------
 Total de tokens: 131
@@ -165,6 +183,7 @@ Total de tokens: 131
  ANÁLISIS COMPLETADO SIN ERRORES
 ====================================================================================================
 ```
+
 ## 📝 Ejemplo de Salida (Analizador sintáctico)
 
 ```
@@ -205,6 +224,7 @@ Total de errores: 15
 ====================================================================================================
 
 ```
+
 ## 📝 Ejemplo de Salida (Analizador semantico)
 
 ```
@@ -222,20 +242,20 @@ TABLA DE SÍMBOLOS:
 
 VARIABLES:
 ----------------------------------------------------------------------------------------------------
-Nombre                         Tipo                 Línea          
+Nombre                         Tipo                 Línea
 ----------------------------------------------------------------------------------------------------
-configuracion                  hash                 204            
-fahrenheit                     any                  212            
-...     
+configuracion                  hash                 204
+fahrenheit                     any                  212
+...
 ----------------------------------------------------------------------------------------------------
 Total de variables: 34
 
 FUNCIONES:
 ----------------------------------------------------------------------------------------------------
-Nombre                         Parámetros                          Línea          
+Nombre                         Parámetros                          Línea
 ----------------------------------------------------------------------------------------------------
-celsius_a_fahrenheit           sin parámetros                      211            
-...     
+celsius_a_fahrenheit           sin parámetros                      211
+...
 ----------------------------------------------------------------------------------------------------
 Total de funciones: 3
 
