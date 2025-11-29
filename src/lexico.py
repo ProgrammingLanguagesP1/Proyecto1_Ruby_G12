@@ -145,6 +145,8 @@ t_PUNTO = r'\.'
 # ============================================
 t_ignore = ' \t'
 
+errores_lexicos = []
+
 # ============================================
 # Tipos de datos  Jose Marin (@JoseM0lina)
 # ============================================
@@ -219,7 +221,10 @@ def t_newline(t):
 # Manejo de errores léxicos Angelo Zurita (@aszurita)
 # ============================================
 def t_error(t):
-    print(f"Caracter ilegal '{t.value[0]}'")
+    global errores_lexicos
+    error_msg = f"Caracter ilegal '{t.value[0]}' en línea {t.lineno}"
+    print(error_msg)
+    errores_lexicos.append(error_msg)  # GUARDAR ERROR
     t.lexer.skip(1)
 
 
@@ -272,6 +277,9 @@ def analizar_archivo(archivo_entrada, usuario_git):
     """
     Analiza un archivo Ruby y genera el log correspondiente
     """
+    global errores_lexicos
+    errores_lexicos = []  # ✅ REINICIAR al inicio
+    
     try:
         with open(archivo_entrada, 'r', encoding='utf-8') as f:
             data = f.read()
@@ -285,7 +293,6 @@ def analizar_archivo(archivo_entrada, usuario_git):
     
     # Tokenizar
     tokens = []
-    errores = []
     
     print("\n" + "="*100)
     print(f"{'ANALIZADOR LÉXICO PARA RUBY':^100}")
@@ -300,29 +307,25 @@ def analizar_archivo(archivo_entrada, usuario_git):
     print("-"*100)
     
     while True:
-        try:
-            tok = lexer.token()
-            if not tok:
-                break
-            tokens.append(tok)
-            tipo = tok.type
-            valor = str(tok.value)
-            # Textos largos
-            if len(valor) > 32:
-                valor = valor[:29] + "..."
-            linea = tok.lineno
-            pos = tok.lexpos
-            print(f"{tipo:<30} {valor:<35} {linea:<10} {pos:<10}")
-        except Exception as e:
-            error_msg = f"Error en línea {lexer.lineno}: {str(e)}"
-            errores.append(error_msg)
-            print(f"\n{error_msg}\n")
+        tok = lexer.token()
+        if not tok:
+            break
+        tokens.append(tok)
+        tipo = tok.type
+        valor = str(tok.value)
+        # Textos largos
+        if len(valor) > 32:
+            valor = valor[:29] + "..."
+        linea = tok.lineno
+        pos = tok.lexpos
+        print(f"{tipo:<30} {valor:<35} {linea:<10} {pos:<10}")
     
-    if errores:
+    # ✅ USAR errores_lexicos en lugar de errores local
+    if errores_lexicos:
         print("\n" + "="*100)
         print("ERRORES LÉXICOS ENCONTRADOS:")
         print("-"*100)
-        for i, error in enumerate(errores, 1):
+        for i, error in enumerate(errores_lexicos, 1):
             print(f"{i}. {error}")
         print("-"*100)
         print("\n ANÁLISIS COMPLETADO CON ERRORES")
@@ -332,11 +335,11 @@ def analizar_archivo(archivo_entrada, usuario_git):
     print("="*100)
     
     # Crear log
-    nombre_log = crear_log(tokens, errores, usuario_git, archivo_entrada)
+    nombre_log = crear_log(tokens, errores_lexicos, usuario_git, archivo_entrada)
     print(f"\n Log guardado en: {nombre_log}")
     print("="*100 + "\n")
     
-    return tokens, errores
+    return tokens, errores_lexicos
 
 # ============================================
 # Main Inicial  Jose Marin (@JoseM0lina)
